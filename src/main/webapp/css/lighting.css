@@ -1,1 +1,8 @@
 @charset "UTF-8";
+
+body{
+	background-color: #f9f7ff;
+	font-family: "Pretendard";
+	width: 1920px;
+	height: auto;
+}
