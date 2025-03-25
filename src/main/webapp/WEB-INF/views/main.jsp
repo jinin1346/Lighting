@@ -17,7 +17,7 @@ body {
 	box-sizing: border-box;
 }
 
-.bod
+.body
 	width: 1300px;
 	height: 1700px;
 	background-color: #f9f7ff;
