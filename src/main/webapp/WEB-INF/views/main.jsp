@@ -17,15 +17,17 @@ body {
 	box-sizing: border-box;
 }
 
-.body {
+.bod
 	width: 1300px;
 	height: 1700px;
 	background-color: #f9f7ff;
 	margin: 0 auto;
+	position : relative;
+	
 }
 
 #logo {
-	position: absolute;
+	position: relative;
 	left: 330px;
 	top: 22px;
 	width: 250px;
@@ -89,7 +91,7 @@ body {
 
 .category .dropdown {
 	display: none;
-	position: fixed;
+	position: absolute;
 	top: 330px; 
 	left: 50%;
 	transform: translateX(-50%);

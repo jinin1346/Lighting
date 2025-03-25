@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+--haha 메롱
+--test
+=======
 --DDL
 drop table tblRejectionReason cascade constraints;
 drop table tblEvaluation cascade constraints;
@@ -708,3 +712,4 @@ ALTER TABLE tblEvaluation
 		REFERENCES tblMeeting (
 			tblMeetingSeq
 		);		
+>>>>>>> origin/main
