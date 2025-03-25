@@ -95,7 +95,7 @@
 		}
 		
 		progress::-webkit-progress-value {
-		    background-color: #369bbc; /* change to your desired fill color */
+		    background-color: #1e62c8; /* change to your desired fill color */
 		    border-radius: 10px 0 0 10px; /* rounds only the left side; adjust if you want full rounding when 100% */
 		}
 		
@@ -111,11 +111,22 @@
             gap: 20px;
         }
         
+		        
+        
         /* 라벨 & 인풋 구역 */
         .form-group {
+            width : 700px;
+            border : 1px solid black;
             display: flex;
             flex-direction: column;
         }
+
+        .input-group {
+		    display: flex;
+		    align-items: center;
+		    gap: 10px; /* 간격 조절 */
+		}
+
         .form-group label {
             margin-bottom: 6px;
             font-weight: 500;
@@ -123,7 +134,7 @@
         .form-group input, 
         .form-group select {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #1e62c8;
             border-radius: 4px;
             font-size: 14px;
         }
@@ -133,7 +144,7 @@
             margin-top: 6px;
             width: 120px;
             padding: 8px;
-            background-color: #0d6efd;
+            background-color: #1e62c8;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -144,7 +155,7 @@
         .btn-submit {
             width: 100%;
             padding: 15px;
-            background-color: #0d6efd;
+            background-color: #1e62c8;
             color: #fff;
             font-size: 16px;
             font-weight: bold;
@@ -185,10 +196,13 @@
             </div>
             
             <div class="form-group">
-                <label for="userid">아이디</label>
-                <input type="text" id="userid" name="userid" placeholder="영문, 숫자, 특수문자 4~20자" required>
-                <button type="button" class="btn-idcheck">중복체크</button>
-            </div>
+			    <label for="userid">아이디</label>
+			    <div class="input-group">
+			         <input type="text" id="userid" name="userid" placeholder="영문, 숫자, 특수문자 4~20자" required>
+			         <button type="button" class="btn-idcheck">중복체크</button>
+			    </div>
+			</div>
+            
             
             <div class="form-group">
                 <label for="password">비밀번호</label>
