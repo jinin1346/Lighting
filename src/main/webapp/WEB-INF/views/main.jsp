@@ -18,14 +18,14 @@ body {
 
 .body {
 	width: 1300px;
-	height: auto;
+	height: 1700px;
 	background-color: #f9f7ff;
 	margin: 0 auto;
 }
 
 #logo {
 	position: absolute;
-	left: 280px;
+	left: 330px;
 	top: 22px;
 	width: 250px;
 	height: auto;
@@ -37,7 +37,7 @@ body {
 	color: rgb(13, 1, 67);
 	line-height: 1.2;
 	position: absolute;
-	left: 1563.562px;
+	left: 1500px;
 	top: 27px;
 }
 
@@ -46,7 +46,7 @@ body {
 	color: rgb(13, 1, 67);
 	line-height: 1.2;
 	position: absolute;
-	left: 1487.026px;
+	left: 1425px;
 	top: 27px;
 }
 
@@ -55,7 +55,7 @@ body {
 	color: rgb(13, 1, 67);
 	line-height: 1.2;
 	position: absolute;
-	left: 1400px;
+	left: 1340px;
 	top: 27px;
 }
 
@@ -79,22 +79,23 @@ body {
 	height: auto;
 }
 
+
 .category .dropdown {
 	display: none;
 	position: fixed;
-	top: 320px; /* 아이콘 아래 5px */
-	left: 50%; /* 중앙 정렬 */
-	transform: translateX(-50%); /* 정확한 중앙 정렬 */
-	background-color: #0d0143;
+	top: 330px; 
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #fff;
 	border-radius: 15px;
 	padding: 10px;
 	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
-	opacity: 0.7; /* 약간 투명 */
+	opacity: 0.9; /* 약간 투명 */
 	z-index: 10;
 	width: 1280px; /* 드롭다운 박스 너비 */
-	height: 30px;
+	height: 24px;
 	font-size: 18px;
-	text-align: c
+	text-align: center;
 }
 
 /* 리스트 스타일 */
@@ -114,7 +115,7 @@ body {
 }
 
 .category .dropdown li a {
-	color: #fff;
+	color: #00255c;
 	text-decoration: none; /* 밑줄 제거 */
 	display: block;
 	text-align: top;
@@ -142,9 +143,9 @@ body {
 .search-box {
 	width: 700px;
 	height: 50px;
-	padding: 10px 40px 10px 20px; /* 여백 조정 */
+	padding: 7px 35px 7px 15px; /* 여백 조정 */
 	border: none; /* 테두리 없음 */
-	border-radius: 25px; /* 모서리 둥글게 */
+	border-radius: 30px; /* 모서리 둥글게 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -170,9 +171,10 @@ body {
     height: 400px;  
     overflow: hidden;  
     position: absolute;  
-    left: 195px;  
-    top: 320px;  
+    left: 302px;  
+    top: 330px;  
 }  
+
 
 .slides {  
     display: flex;
@@ -202,15 +204,15 @@ body {
 h2{
 color: #0d0143;
 position: absolute;
-top: 740px;
-left: 250px;
+top: 745px;
+left: 350px;
 }
 
 p{
 color: #000;
 position: absolute;
-top: 740px;
-left: 1400px;
+top: 745px;
+left: 1500px;
 }
 
 body {  
@@ -222,55 +224,59 @@ body {
 .metting {
 position: absolute;  
     top: 830px;  
-    left: 245px;  
-    display: grid; /* Grid 레이아웃 사용 */  
-    grid-template-columns: repeat(4, 1fr); /* 4열로 설정 */  
-    gap: 80px; /* 각 item 간의 간격 설정 */  
-    width: 300px; /* 전체 폭을 100%로 설정 */  
-    max-width: 1200px; /* 최대 폭 설정 */  
-    margin: auto; /* 중앙 정렬 */  
+    left: 21%;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 50px;
+    width: 300px; 
+    max-width: 1200px;
+    margin: auto; 
 }  
 
 .item {  
-    border-radius: 15px; /* 모서리 둥글게 */  
-    padding: 10px; /* 패딩 추가 */  
-    display: flex; /* Flexbox 사용 */  
-    flex-direction: column; /* 세로 방향 정렬 */  
-    align-items: center; /* 가운데 정렬 */  
-    text-align: center; /* 텍스트 가운데 정렬 */  
+    border-radius: 15px; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
 }  
 
 .metting #chicken {  
     width: 220px; 
-    border-radius: 15px; /* 이미지의 모서리 둥글게 */  
+    border-radius: 15px;
 }  
 
 .metting span {
   	font-size: 24px;  
     font-weight: bold;  
     color: #0d0143;  
-    margin: 8px 0; /* 텍스트 사이의 여백 */  
-}  
+    margin: 8px 0; /* 텍스트 사이의 여백 */
+} 
+
+div .text1{
+font-size: 15px;  
+    color: #000;
+    font-weight: normal;  
+position: relative;
+bottom: 5px;
+right: 5px;
+}
 
 .metting #icon {  
     width: 23px;  
     height: 23px;
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
  #copylight {
  		background : #fff;
-        width: 1400px; /* 전체 폭 */  
-        height: auto; /* 자동 높이 */  
+        width: auto; /* 전체 폭 */  
+        height: auto; /* 자동 높이 */ 
+        align-items:center;
         position: absolute; /* 고정 위치 */
-        top:1700px;
-        left: 400px;
-    }  
-    
-  #copylight img {  
-        max-width: 800px; /* 반응형 이미지 */  
-        height: auto; /* 비율 유지 */  
-    }  
+        top:1650px;
+    } 
 
 }  
 
@@ -317,7 +323,8 @@ position: absolute;
 							<li><a href="">스포츠</a></li>&ensp;
 							<li><a href="">퍼즐</a></li>&ensp;
 							<li><a href="">아케이드</a></li>&ensp;
-							<li><a href="">슈팅</a></li>
+							<li><a href="">슈팅</a></li>&ensp;
+							<li><a href="">기타</a></li>
 						</ul>
 					</div>
 				</div>
@@ -401,56 +408,53 @@ position: absolute;
 	</div>
 			<h2>만들어진 모임 LIST</h2>
 			<p>더보기 ></p>
-			<hr>
 			
 	<div class="metting">  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-       		<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>   
-        	<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
            	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-        	<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div> 
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-      		<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+      		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>
     	  	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-       		<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>   
-        	<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
            	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-        	<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div> 
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-      		<div><img id="icon" src="images/icon.png" alt="Icon">&ensp; 치킨중독자&ensp; 3명 모집중</div>
+      		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div> 
 	</div>
 	
 	<div  id="copylight">
-	<img src="images/카피라이트.jpg">
+	<img src="images/카피라이트.png">
 	</div>
-
-
 		</div><!-- 메인 -->
 	</main>
 
