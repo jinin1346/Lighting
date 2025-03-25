@@ -7,7 +7,12 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
 	<style>
-		
+	body {
+	    width: 1300px;
+	    height: 1700px;
+	    background-color: #f9f7ff;
+	    margin: 0 auto;
+	}
 	</style>
 </head>
 <body>
