@@ -89,7 +89,7 @@ body {
 
 .category .dropdown {
 	display: none;
-	position: fixed;
+	position: absolute;
 	top: 330px; 
 	left: 50%;
 	transform: translateX(-50%);
