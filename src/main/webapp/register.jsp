@@ -102,9 +102,7 @@
 
         /* 회원가입 폼 */
         .signup-form {
-            max-width: 600px;
-            margin: 0 auto;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -115,8 +113,7 @@
         
         /* 라벨 & 인풋 구역 */
         .form-group {
-            width : 700px;
-            border : 1px solid black;
+            width : 100%;
             display: flex;
             flex-direction: column;
         }
@@ -124,7 +121,24 @@
         .input-group {
 		    display: flex;
 		    align-items: center;
-		    gap: 10px; /* 간격 조절 */
+		    gap: 0px; /* 간격 조절 */
+		}
+		
+		input:focus,
+		textarea:focus,
+		select:focus {
+		    outline: none;
+		    box-shadow: none;
+		}
+		
+		
+		.input-group .btn-idcheck {
+		    border: 1px solid #1e62c8;
+		    border-left: none; /* 왼쪽 테두리 제거 */
+		    border-radius: 0 4px 4px 0; /* 오른쪽만 둥글게 */
+		    background-color: #1e62c8;
+		    color: #fff;
+		    padding: 10px 16px;
 		}
 
         .form-group label {
@@ -139,21 +153,17 @@
             font-size: 14px;
         }
 
-        /* 아이디 중복체크 버튼 */
-        .btn-idcheck {
-            margin-top: 6px;
-            width: 120px;
-            padding: 8px;
-            background-color: #1e62c8;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .input-group input {
+            border: 1px solid #1e62c8;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            flex: 1;
         }
 
         /* 회원가입 완료 버튼 */
         .btn-submit {
             width: 100%;
+            margin: 50px auto 50px;
             padding: 15px;
             background-color: #1e62c8;
             color: #fff;
@@ -202,6 +212,7 @@
 			         <button type="button" class="btn-idcheck">중복체크</button>
 			    </div>
 			</div>
+
             
             
             <div class="form-group">
@@ -225,33 +236,48 @@
             </div>
             
             <div class="form-group">
-                <label for="city">주소(시/도)</label>
-                <select id="city" name="city">
-                    <option value="">시/도 선택</option>
-                    <option value="서울">서울</option>
-                    <option value="부산">부산</option>
-                    <option value="대구">대구</option>
-                    <option value="인천">인천</option>
-                    <option value="광주">광주</option>
-                    <option value="대전">대전</option>
-                    <option value="울산">울산</option>
-                    <option value="세종">세종</option>
-                    <option value="경기도">경기도</option>
-                    <option value="강원도">강원도</option>
-                    <option value="충청북도">충청북도</option>
-                    <option value="충청남도">충청남도</option>
-                    <option value="전라북도">전라북도</option>
-                    <option value="전라남도">전라남도</option>
-                    <option value="경상북도">경상북도</option>
-                    <option value="경상남도">경상남도</option>
-                    <option value="제주도">제주도</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="district">주소(구/군)</label>
-                <input type="text" id="district" name="district" placeholder="구/군 입력">
-            </div>
+    <label>주소</label>
+    <div style="display: flex; gap: 10px;">
+        <select id="city" name="city" style="flex: 1;">
+            <option value="">시/도 선택</option>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="인천">인천</option>
+            <option value="경기도">경기도</option>
+        </select>
+        <select id="district" name="district" style="flex: 1;">
+            <option value="">구/군 선택</option>
+            <option value="종로구">종로구</option>
+			<option value="중구">중구</option>
+			<option value="용산구">용산구</option>
+			<option value="성동구">성동구</option>
+			<option value="광진구">광진구</option>
+			<option value="동대문구">동대문구</option>
+			<option value="중랑구">중랑구</option>
+			<option value="성북구">성북구</option>
+			<option value="강북구">강북구</option>
+			<option value="도봉구">도봉구</option>
+			<option value="노원구">노원구</option>
+			<option value="은평구">은평구</option>
+			<option value="서대문구">서대문구</option>
+			<option value="마포구">마포구</option>
+			<option value="양천구">양천구</option>
+			<option value="강서구">강서구</option>
+			<option value="구로구">구로구</option>
+			<option value="금천구">금천구</option>
+			<option value="영등포구">영등포구</option>
+			<option value="동작구">동작구</option>
+			<option value="관악구">관악구</option>
+			<option value="서초구">서초구</option>
+			<option value="강남구">강남구</option>
+			<option value="송파구">송파구</option>
+			<option value="강동구">강동구</option>
+
+        </select>
+    </div>
+</div>
+
             
             <!-- 회원가입 버튼 -->
             <button type="submit" class="btn-submit">회원가입 완료</button>
