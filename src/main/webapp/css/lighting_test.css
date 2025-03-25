@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+
+/* 전체 페이지 배경은 흰색 */
+body {
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* 가운데 컨테이너 영역 설정 */
+.container {
+    width: 1300px;
+    min-height: 100vh; /* 콘텐츠가 부족해도 화면 전체 높이를 채움 */
+    background-color: #f9f7ff;
+    margin: 0 auto;
+    padding: 20px; /* 여백 추가 (옵션) */
+}
