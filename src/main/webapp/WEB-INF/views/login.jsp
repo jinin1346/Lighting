@@ -19,12 +19,12 @@ request.setCharacterEncoding("UTF-8");
 }
 
 #logo2 {
-	width: 200px;
+	width: 250px;
+	padding: 10px;
 }
 
 #div1 { /*  border: 1px solid black; */
 	height: 10vh;  
-	
 }
 
 .div2 {
@@ -67,8 +67,6 @@ h3 {
 	margin-left: 15px;
 	padding: 4px;
 }
-
-
 </style>
 </head>
 <body>
