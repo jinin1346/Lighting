@@ -264,6 +264,7 @@ position: absolute;
         height: auto; /* 자동 높이 */  
         position: absolute; /* 고정 위치 */
         top:1700px;
+        left: 400px;
     }  
     
   #copylight img {  
