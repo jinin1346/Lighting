@@ -13,6 +13,8 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="css/lighting.css">
 
 <style>
+
+
 #logo1 {
 	width: 150px;
 	
