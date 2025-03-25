@@ -1,8 +1,21 @@
 @charset "UTF-8";
 
-body{
-	background-color: #f9f7ff;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 	font-family: "Pretendard";
-	width: 1920px;
-	height: auto;
+}
+
+body {
+	background-color: #fff;
+	box-sizing: border-box;
+	font-family: "Pretendard";
+}
+
+.body {
+	width: 1400px;
+	height: 1080px;
+	background-color: #f9f7ff;
+	margin: 0 auto;
 }
