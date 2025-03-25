@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/login.do")
-public class Login extends HttpServlet {
+@WebServlet("/registerrole.do")
+public class RegisterRole extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //Login.java
+        //RegisterRole.java
         
 
-        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/registerrole.jsp").forward(req, resp);
     }
 
 }
