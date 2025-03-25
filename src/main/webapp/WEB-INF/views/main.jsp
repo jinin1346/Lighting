@@ -22,10 +22,12 @@ body {
 	height: 1700px;
 	background-color: #f9f7ff;
 	margin: 0 auto;
+	position : relative;
+	
 }
 
 #logo {
-	position: absolute;
+	position: relative;
 	left: 330px;
 	top: 22px;
 	width: 250px;
