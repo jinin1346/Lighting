@@ -150,9 +150,14 @@
 	</div>
 	
 	<div class="btn1">
-    <a id="btn1" href="registerok.do">
+	<form method="POST" action="/login/register.jsp">
+	<button value="회원가입">
+	
+	</button>
+    <!-- <a id="btn1" href="/login/registerok.do">
         회원가입
-    </a>
+    </a> -->
+    </form>
 	</div>
 	    
     
@@ -171,7 +176,7 @@
                 event.preventDefault(); // 폼 제출을 막음
             } else {
                 // 체크되었으면 register_sw.do로 이동
-                window.location.href = "register_sw.jsp"; // 페이지 이동
+                //window.location.href = "register_sw.jsp"; // 페이지 이동
             }
         }
     </script>
