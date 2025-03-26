@@ -8,17 +8,29 @@
 <link rel="stylesheet" href="css/lighting.css">
 <title>Insert title here</title>
 
-<style></style>
+<style>
+/* container를 flex로 구성하여 footer가 항상 하단에 위치하도록 함 */
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* content 영역은 flex-grow: 1로 설정하여 여유 공간을 채움 */
+    .content {
+      flex: 1;
+    }
+    
+</style>
 
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/inc/header.jsp"%>
-	
-	<%@ include file="/WEB-INF/views/inc/body.jsp"%>
-
-<%-- 	 <%@ include file="/WEB-INF/views/inc/footer_sw.jsp"%> --%>
-
-
+	<div class="container">
+    <%@ include file="/WEB-INF/views/inc/header.jsp" %>
+    <div class="content">
+      <%@ include file="/WEB-INF/views/inc/body.jsp" %>
+    </div>
+    <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
+  </div>
 
 <script></script>
 

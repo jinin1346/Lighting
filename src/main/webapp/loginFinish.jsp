@@ -14,11 +14,12 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
+            position : relative;
         }
 
         #logo {
 	    position: absolute;
-	    left: 330px;
+	    left: 30px;
 	    top: 22px;
 	    width: 250px;
 	    height: auto;

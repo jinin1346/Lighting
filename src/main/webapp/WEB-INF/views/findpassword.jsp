@@ -14,16 +14,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Pretendard-Regular';
+            
         }
 
         body {
-            background-color: #fff;
+            background-color: #fff; 
             box-sizing: border-box;
         }
 
         /* 모달창 기본 스타일 */
         .modal {
-            display: none; /* 기본적으로 숨김 */
+            display: block; /* 기본적으로 모달창을 보이게 설정 */
             position: fixed;
             z-index: 1; /* 화면 맨 위에 */
             left: 0;
@@ -46,7 +47,7 @@
             
         }
 
-		 /* 닫기 버튼 오른쪽 상단 고정 */
+        /* 닫기 버튼 오른쪽 상단 고정 */
         .close-button {
         	position: absolute; /* ✅ 위치 고정 */
             top: 5px;
@@ -75,40 +76,35 @@
             padding: 8px;
             margin-top: 3px;
             margin-bottom: 2px;
- 		border: 1px solid #1e62c8; /* ✅ 테두리 색 고정 */
-        border-radius: 4px;
-        outline: none; /* ✅ 클릭해도 파란 아웃라인 제거 */
+            border: 1px solid #1e62c8; /* ✅ 테두리 색 고정 */
+            border-radius: 4px;
+            outline: none; /* ✅ 클릭해도 파란 아웃라인 제거 */
         }
         
-           /* focus(클릭)했을 때도 테두리 색 고정 */
-    	form input:focus {
-        border: 1px solid #1e62c8;
-    	}
+        /* focus(클릭)했을 때도 테두리 색 고정 */
+        form input:focus {
+            border: 1px solid #1e62c8;
+        }
 
-form button, #openModalButton {
-    width: 100%;
-    padding: 10px;
-    background-color: #1e62c8; /* ✅ 항상 이 색상으로 고정 */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px; /* ✅ 글씨 크기 키움 */
-    margin-top: 10px; /* ✅ 버튼과 텍스트 박스 사이에 간격 추가 */
-}
+        form button, #openModalButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #1e62c8; /* ✅ 항상 이 색상으로 고정 */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px; /* ✅ 글씨 크기 키움 */
+            margin-top: 10px; /* ✅ 버튼과 텍스트 박스 사이에 간격 추가 */
+        }
 
-/* ✅ hover 시에도 색상 변화 없도록 동일하게 test*/
-form button:hover, #openModalButton:hover {
-    background-color:#1e62c8;
-}
-
-
+        /* ✅ hover 시에도 색상 변화 없도록 동일하게 */
+        form button:hover, #openModalButton:hover {
+            background-color:#1e62c8;
+        }
     </style>
 </head>
 <body>
-    <!-- 모달창을 여는 버튼 -->
-    <button id="openModalButton">비밀번호 찾기</button>
-
     <!-- 모달창 내용 -->
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -128,23 +124,18 @@ form button:hover, #openModalButton:hover {
     </div>
 
     <script>
-        // 모달창 열기와 닫기 기능
-        var modal = document.getElementById("modal");
-        var openModalButton = document.getElementById("openModalButton");
+        // 모달창 닫기 기능
         var closeButton = document.getElementsByClassName("close-button")[0];
-
-        // 모달창 열기
-        openModalButton.onclick = function() {
-            modal.style.display = "block";
-        }
 
         // 모달창 닫기
         closeButton.onclick = function() {
+            var modal = document.getElementById("modal");
             modal.style.display = "none";
-        }
+        };
 
         // 모달창 바깥 클릭 시 닫기
         window.onclick = function(event) {
+            var modal = document.getElementById("modal");
             if (event.target == modal) {
                 modal.style.display = "none";
             }
