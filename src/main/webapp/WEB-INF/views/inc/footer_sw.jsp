@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<style>
-
-</style>
-
 <footer style=" padding: 40px 0;margin : 20px auto 100px; font-family: 'Pretendard-Regular', sans-serif;">
   <!-- 푸터 컨테이너 -->
   <div style="width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
