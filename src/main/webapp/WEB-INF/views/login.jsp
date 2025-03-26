@@ -17,9 +17,13 @@ request.setCharacterEncoding("UTF-8");
  body {
 /*     height: 100%; /* 전체 화면 높이를 사용 */
     margin: 0;
-    display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
-    align-items: center; /* 세로 중앙 정렬 */ */
+    /* display: flex; */
+    /* justify-content: center; */ /* 가로 중앙 정렬 */
+    /* align-items: center; */ /* 세로 중앙 정렬 */ */
+}
+
+.body {
+    margin: 0 auto;
 }
 
 #logo1 {
@@ -62,10 +66,13 @@ button {
     border-radius: 5px;
     width: 300px;
     height: 30px;
-    background: rgb(29, 99, 202);
     border: none;
     margin-top: 10px;
     color: #FFF;
+    background: rgb(29, 99, 202);
+    
+    
+   
 }
 
 form {
@@ -122,9 +129,11 @@ h3 {
             </div>
         </div>
     </div>
+
+    <%@include file="/WEB-INF/views/inc/footer.jsp"%>	
 </body>
 
-<%@include file="/WEB-INF/views/inc/footer.jsp"%>
+
 <script>
 </script>
 </body>
