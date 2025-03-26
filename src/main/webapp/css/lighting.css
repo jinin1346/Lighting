@@ -20,6 +20,6 @@ body {
 
 .body {
     width: 1300px;  
-   height:100%;
+   height:auto;
     background-color: #f9f7ff; /* 바탕색 지정 */  
 }

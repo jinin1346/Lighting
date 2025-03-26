@@ -24,10 +24,10 @@
         font-size: 15px;  
         color: #888;  
         cursor: pointer;  
-        line-height: 1.2;  
         display: flex; /* 수평으로 나열하기 위해 flex 사용 */  
         justify-content: flex-end; /* 오른쪽 정렬 */  
         width: calc(100% - 40px);
+        text-decoration: none;
     }  
 
     #userinfo {  
@@ -35,7 +35,7 @@
         gap: 20px; /* 링크 간의 간격 */ 
         position: relative;
         bottom: 50px;
-        
+        text-decoration: none;
     }  
 
     .search-container {  
