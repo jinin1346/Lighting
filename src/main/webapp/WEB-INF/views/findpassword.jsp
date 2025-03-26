@@ -97,7 +97,7 @@ form button, #openModalButton {
     margin-top: 10px; /* ✅ 버튼과 텍스트 박스 사이에 간격 추가 */
 }
 
-/* ✅ hover 시에도 색상 변화 없도록 동일하게 */
+/* ✅ hover 시에도 색상 변화 없도록 동일하게 test*/
 form button:hover, #openModalButton:hover {
     background-color:#1e62c8;
 }
