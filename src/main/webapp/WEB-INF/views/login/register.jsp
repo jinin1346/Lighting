@@ -28,22 +28,7 @@
       padding: 40px 20px;
       position: relative;
     }
-    /* 로고/타이틀 영역 */
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #0d6efd;
-      margin-bottom: 30px;
-    }
-    #logo {
-      position: absolute;
-      left: 30px;
-      top: 22px;
-      width: 250px;
-      height: auto;
-      cursor: pointer;
-      margin-bottom: 30px;
-    }
+
     /* 안내 문구 */
     .signup-title {
       font-size: 18px;
@@ -188,11 +173,8 @@
 </head>
 <body>
   <div class="container">
-    <!-- 로고 영역 -->
-    <div class="logo">
-      <img alt="로고" src="images/logo_가로.png" id="logo">
-    </div>
-    
+    <%@ include file="/WEB-INF/views/inc/header.jsp" %>
+
     <!-- 안내 문구 -->
     <div class="signup-title">
       회원가입을 위해<br>아래 <b>정보를 입력</b>해주세요.
@@ -207,7 +189,7 @@
     <progress id="progress" value="60" min="10" max="100"></progress>
     
     <!-- 회원가입 폼 -->
-    <form class="signup-form" action="yourSignupAction.do" method="post">
+    <form class="signup-form" action="/lighting/login/registerok.do" method="post">
       <!-- 아이디 -->
       <div class="form-group">
         <label for="userid">아이디</label>
