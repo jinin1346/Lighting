@@ -2,17 +2,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head>  
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
+	<link rel="stylesheet" href="css/lighting_test.css">
 	<style>
-	body {
-	    width: 1300px;
-	    height: 1700px;
-	    background-color: #f9f7ff;
-	    margin: 0 auto;
-	}
+
 	</style>
 </head>
 <body>

@@ -10,7 +10,9 @@
 
 html, body {  
     height: 100%; /* 전체 페이지 높이를 100%로 설정 */  
-    font-family: 'Pretendard-Regular';  
+    font-family: 'Pretendard-Regular';
+    margin: 0;
+    padding: 0;  
 }  
 
 body {  
@@ -20,6 +22,6 @@ body {
 
 .body {
     width: 1300px;  
-   height:100%;
+   height:auto;
     background-color: #f9f7ff; /* 바탕색 지정 */  
 }
