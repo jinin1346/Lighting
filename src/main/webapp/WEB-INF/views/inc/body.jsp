@@ -227,11 +227,6 @@ left: 1380px;
 			<p>더보기 ></p>
 
 
-
-
-
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 

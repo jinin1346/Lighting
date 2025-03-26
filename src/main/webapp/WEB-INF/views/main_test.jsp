@@ -8,19 +8,10 @@
 <link rel="stylesheet" href="css/lighting.css">
 <title>Insert title here</title>
 
-<style></style>
-
 </head>
-<body>
 	<%@ include file="/WEB-INF/views/inc/header.jsp"%>
 	
 	<%@ include file="/WEB-INF/views/inc/body.jsp"%>
 
-	<%@ include file="/WEB-INF/views/inc/footer.jsp"%>
-
-
-
-<script></script>
-
-</body>
+	<%-- <%@ include file="/WEB-INF/views/inc/footer.jsp"%> --%>
 </html>
