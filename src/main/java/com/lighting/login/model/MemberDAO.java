@@ -40,7 +40,7 @@ public class MemberDAO {
             
             String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,"
                     + "tel,email,gender,photoFileName,registrationDate,status) "
-                    + "values ( default,?, ?, ?, ?,?, ?, ?, ?,'basicProfile.png',default, default)";
+                    + "values ( tblMemberSeq_nextVal,?, ?, ?, ?, ?, ?, ?, ?,'basicProfile.png',default, default)";
             
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, dto.getId());
