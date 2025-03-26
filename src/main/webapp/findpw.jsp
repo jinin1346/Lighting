@@ -21,28 +21,27 @@
         }
 
         .modal-overlay {
-            display: none;
+            width: 100%;
+            height: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5); 
+            display: none;
+            justify-content: center;
+            align-items: center;
             z-index: 1000;
         }
 
 
         .modal-window {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: white;
-            padding: 30px;
-            text-align: center;
             border-radius: 10px;
-            width: 350px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 500px; 
+            text-align: center; 
+            position: relative;
         }
 
         .close-btn {
@@ -56,7 +55,7 @@
         }
 
         #loginBtn {
-            width: 100%;
+            width: 400px;
             background-color: #1e62c8;
             color: white;
             font-size: 1.2rem;

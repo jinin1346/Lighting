@@ -38,11 +38,12 @@
         }
         
         p {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
         
         span {
             font-weight: bold;
+            color: #2765c7;
         }
         
         #move {

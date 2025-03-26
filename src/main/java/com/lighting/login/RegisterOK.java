@@ -23,12 +23,12 @@ public class RegisterOK extends HttpServlet {
         //RegisterOK.java
 
         
-        String id = request.getParameter("id");
-        String pw = multi.getParameter("pw");
-        String name = multi.getParameter("name");
-        String email = multi.getParameter("email");
+        String id = req.getParameter("id");
+        String pw = req.getParameter("pw");
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
         String pic = multi.getFilesystemName("pic");
-        String intro = multi.getParameter("intro");
+        String intro = req.getParameter("intro");
         
         MemberDAO dao = new MemberDAO();
         
