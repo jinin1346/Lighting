@@ -304,6 +304,8 @@
       });
     });
   </script>
-</body>
+  
 <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
+
+</body>
 </html>
