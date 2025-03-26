@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
   <meta charset="UTF-8">
+<head>
   <title>회원가입</title>
   <style>
     /* 공통 스타일 초기화 */
+    @font-face {  
+    font-family: 'Pretendard-Regular';  
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');  
+    font-weight: 400;  
+    font-style: normal;  
+}  
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Pretendard-Regular', sans-serif;
+      font-family: 'Pretendard-Regular';
     }
     ul {
       list-style: none;
@@ -28,6 +34,22 @@
       padding: 40px 20px;
       position: relative;
     }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0d6efd;
+      margin-bottom: 30px;
+    }
+    #logo {
+      position: absolute;
+      left: 30px;
+      top: 22px;
+      width: 250px;
+      height: auto;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
 
     /* 안내 문구 */
     .signup-title {
@@ -36,39 +58,19 @@
       text-align: center;
       margin: 60px auto 50px;
     }
-    /* 단계 표시 */
-    .step-indicator {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 5px;
-      font-size: 14px;
-      color: #888;
-    }
-    .step-indicator span {
-      padding: 5px 10px;
-      text-align: center;
-      margin: auto 50px;
-    }
+
     /* 진행 바 */
-    #progress {
+     #stepBox{
       width: 550px;
-      height: 7px;
+      height: auto;
       display: block;
       margin: 0 auto 50px auto;
-      border-radius: 10px;
-      overflow: hidden;
-      -webkit-appearance: none;
-      appearance: none;
+    } 
+    #step{
+        width: 550px;
+      height: auto;
     }
-    #progress::-webkit-progress-bar {
-      background-color: white;
-      border-radius: 10px;
-    }
-    progress::-webkit-progress-value {
-      background-color: #1e62c8;
-      border-radius: 10px 0 0 10px;
-    }
+
     /* 회원가입 폼 */
     .signup-form {
       max-width: 500px;
@@ -173,7 +175,10 @@
 </head>
 <body>
   <div class="container">
-    <%@ include file="/WEB-INF/views/inc/header.jsp" %>
+    <!-- 로고 영역 -->
+    <div class="logo">
+      <img alt="로고" src="/lighting/images/logo_세로.png" id="logo">
+    </div>
 
     <!-- 안내 문구 -->
     <div class="signup-title">
@@ -181,12 +186,9 @@
     </div>
     
     <!-- 단계 표시 -->
-    <div class="step-indicator">
-      <span>이용약관 동의<br>01</span>
-      <span>회원정보 입력<br>02</span>
-      <span>회원가입 완료<br>03</span>
+    <div id="stepBox">
+      <img alt="단계" src="/lighting/images/약관동의_02.png"id="step">  
     </div>
-    <progress id="progress" value="60" min="10" max="100"></progress>
     
     <!-- 회원가입 폼 -->
     <form class="signup-form" action="/lighting/login/registerok.do" method="post">

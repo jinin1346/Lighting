@@ -12,6 +12,7 @@
     }
 
 #logo {  
+        border : 1px solid black;
         width: 220px;  
         height: auto;  
         margin-bottom: 20px; /* 로고와 다음 요소 사이의 간격 */  
@@ -41,12 +42,13 @@
     .search-container {  
         display: flex;  
         justify-content: center;  
-        align-items: center;  
+        align-items: center;
+        padding-top : 50px;  
     }  
 
     .search-box {  
         width: 700px;  
-        height: 30px;  
+        height: 50px;  
         padding: 7px 35px 7px 15px;   
         border: none;   
         border-radius: 30px;   
@@ -68,7 +70,7 @@
 </style>  
 
 <header class="body">  
-    <img alt="로고" src="images/logo_가로.png" id="logo">  
+    <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">  
     <div class="header">  
         <div id="userinfo">  
             <a id="login" href="">LOGIN</a>  
@@ -80,7 +82,7 @@
     <div class="search-container">  
         <input type="text" class="search-box" placeholder="&ensp;&ensp;모임을 검색해 보세요." />  
         <button class="search-button" onclick="performSearch()">  
-            <img src="images/search.png" alt="Search">
+            <img src="/lighting/images/search.png" alt="Search">
         </button>  
     </div>  
 </header>
