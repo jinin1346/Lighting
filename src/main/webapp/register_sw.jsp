@@ -305,5 +305,5 @@
     });
   </script>
 </body>
-<%@ include file="footer_sw.jsp" %>
+<%@ include file="/WEB-INF/views/inc/footer_sw.jsp"%>
 </html>

@@ -2,11 +2,10 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>  
 <style>
 body {
-    margin: 0;
-    overflow-x: hidden;
+margin: 0;
 }
 .category {  
-    display: flex;   
+    display: flex;
     justify-content: center;   
     gap: 90px;  
     z-index: 10;  
@@ -79,10 +78,11 @@ body {
 
 .slides {  
     display: flex;
-    width: 400%;
+    width: 100%;
     height: 100%; 
     max-width: 100vw; /* 추가 */
     animation: slide 40s infinite;
+    overflow-x: hidden;
 }
 
 .slides div {  
@@ -97,14 +97,14 @@ body {
 h2{
 color: #0d0143;
 position: relative;
-top: 355px;
+top: 365px;
 left: 470px;
 }
 
 p{
 color: #0d0143;
 position: relative;
-top: 305px;
+top: 315px;
 left: 1380px;
 }
 
@@ -115,12 +115,60 @@ left: 1380px;
     75%, 99.9% { transform: translateX(-300%); }  /* 네 번째 이미지 정지 */
     100% { transform: translateX(0%); }  /* 다시 첫 번째 이미지 */
 }
+
+.metting {
+position: absolute;
+    top: 0px;  
+    left: 50%;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px;
+    width: 280px; 
+    max-width: 1000px;
+margin-bottom: 0px;
+}  
+
+.item {  
+    border-radius: 15px; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    
+}  
+
+.metting #chicken {  
+    width: 200px; 
+    border-radius: 15px;
+}  
+
+.metting span {
+  	font-size: 22px;  
+    font-weight: bold;  
+    color: #0d0143;  
+    margin: 8px 0; /* 텍스트 사이의 여백 */
+} 
+
+div .text1{
+font-size: 15px;  
+    color: #505050;
+    font-weight: normal;  
+position: relative;
+bottom: 6px;
+right: 5px;
+}
+
+.metting #icon {  
+    width: 23px;  
+    height: 23px;
+}
 </style>
 <body>
 <!-- 카테고리 -->
 <div class="category">
 				<div class="icon-container">
-					<img src="images/맛집.png" id="car_1">
+					<img src="images/맛집아이콘.png" id="car_1">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">식사</a></li>&ensp;
@@ -133,7 +181,7 @@ left: 1380px;
 					</div>
 				</div>
 				<div class="icon-container">
-					<img src="images/게임.png" id="car_2">
+					<img src="images/게임아이콘.png" id="car_2">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">액션</a></li>&ensp;
@@ -150,7 +198,7 @@ left: 1380px;
 					</div>
 				</div>
 				<div class="icon-container">
-					<img src="images/문화.png" id="car_3">
+					<img src="images/문화아이콘.png" id="car_3">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">영화</a></li>&ensp;
@@ -166,7 +214,7 @@ left: 1380px;
 					</div>
 				</div>
 				<div class="icon-container">
-					<img src="images/스포츠.png" id="car_4">
+					<img src="images/스포츠아이콘.png" id="car_4">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">유산소</a></li>&ensp;
@@ -180,7 +228,7 @@ left: 1380px;
 					</div>
 				</div>
 				<div class="icon-container">
-					<img src="images/자기계발.png" id="car_5">
+					<img src="images/자기계발아이콘.png" id="car_5">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">여행</a></li>&ensp;
@@ -196,7 +244,7 @@ left: 1380px;
 					</div>
 				</div>
 				<div class="icon-container">
-					<img src="images/힐링.png" id="car_6">
+					<img src="images/힐링아이콘.png" id="car_6">
 					<div class="dropdown">
 						<ul>
 							<li><a href="">스터디</a></li>&ensp;
@@ -225,6 +273,34 @@ left: 1380px;
 
 			<h2>만들어진 모임 LIST</h2>
 			<p>더보기 ></p>
+			
+<div class="metting">  
+    	<div class="item">  
+        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
+        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
+    	</div>  
+    	<div class="item">  
+        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
+        	<span>4월 5일 강남에서 치킨드실 3명 모집합니다!!!!</span>   
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
+    	</div>  
+    	<div class="item">  
+        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
+           	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
+    	</div>
+    	<div class="item">  
+        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
+        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+      		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
+    	</div>
+    		<div class="item">  
+        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
+        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+      		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
+    	</div>
+    	</div>
 
 
 </body>
