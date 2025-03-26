@@ -9,7 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.test.java.user.model.UserDTO;
 
 public class MemberDAO {
     
@@ -39,15 +38,20 @@ public class MemberDAO {
         
         try {
             
-            String sql = "insert into tblUser (id, pw, name, email, pic, intro, regdate, ing) values (?, ?, ?, ?, ?, ?, default, default)";
+            String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,"
+                    + "tel,email,gender,photoFileName,registrationDate,status) "
+                    + "values ( default,?, ?, ?, ?,?, ?, ?, ?,'basicProfile.png',default, default)";
             
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, dto.getId());
             pstat.setString(2, dto.getPw());
             pstat.setString(3, dto.getName());
-            pstat.setString(4, dto.getEmail());
-            pstat.setString(5, dto.getPic());
-            pstat.setString(6, dto.getIng());
+            pstat.setString(4, dto.getNickname());
+            pstat.setString(5, dto.getBirthday());
+            pstat.setString(6, dto.getTel());
+            pstat.setString(7, dto.getEmail());
+            pstat.setString(8, dto.getGender());
+            
             
             return pstat.executeUpdate();
             
@@ -58,6 +62,14 @@ public class MemberDAO {
         return 0;
     }
     
+    
+    public void close() {
+        try {
+            this.conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 
 }
