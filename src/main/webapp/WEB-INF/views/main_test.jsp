@@ -24,13 +24,9 @@
 
 </head>
 <body>
-	<div class="container">
     <%@ include file="/WEB-INF/views/inc/header.jsp" %>
-    <div class="content">
-      <%@ include file="/WEB-INF/views/inc/body.jsp" %>
-    </div>
+    <%@ include file="/WEB-INF/views/inc/body.jsp" %>
     <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
-  </div>
 
 <script></script>
 

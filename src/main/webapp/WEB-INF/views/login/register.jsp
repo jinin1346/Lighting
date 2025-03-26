@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +11,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Pretendard-Regular', sans-serif;
     }
     ul {
       list-style: none;
@@ -172,8 +172,8 @@
   </style>
 </head>
 <body>
-  <div class="container">
     <%@ include file="/WEB-INF/views/inc/header.jsp" %>
+  <div class="container">
 
     <!-- 안내 문구 -->
     <div class="signup-title">

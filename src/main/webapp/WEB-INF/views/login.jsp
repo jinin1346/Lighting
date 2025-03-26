@@ -9,7 +9,6 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<%@include file="/WEB-INF/views/inc/asset.jsp"%>
 <link rel="stylesheet" href="css/lighting.css">
 
 <style>
