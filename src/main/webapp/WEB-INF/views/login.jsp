@@ -92,11 +92,11 @@ h3 {
 						</div>
 		
 						<div class="a">
-							<a>회원가입</a>
+							<a href="register.jsp">회원가입</a>
 							 | 
-							 <a>아이디 찾기</a>
+							 <a href="findid.do">아이디 찾기</a>
 							 | 
-							  <a>비밀번호 찾기</a>
+							  <a href="findpassword.do">비밀번호 찾기</a>
 						</div>
 						<button>로그인</button>
 					</form>

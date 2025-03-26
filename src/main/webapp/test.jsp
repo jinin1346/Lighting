@@ -5,19 +5,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
+	<link rel="stylesheet" href="css/lighting_test.css">
 	<style>
-	body {
-	    width: 1300px;
-	    height: 1700px;
-	    background-color: #f9f7ff;
-	    margin: 0 auto;
-	}
+
 	</style>
 </head>
 <body>
 	<!-- 메롱 -->
 	<!-- test -->
+	
+	
+	<header>헤더 테스트</header>
+	<main>
+	    <div id="logo"><img src="/images/logo_가로.png"></div>
+	    <div class="basicContainer">배경 색 사이즈 테스트</div>
+	</main>
+    
 	
 				
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
