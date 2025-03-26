@@ -57,7 +57,7 @@ margin: 0;
 }  
 
 .category .dropdown li:hover {  
-    font-size: 20px;  
+    font-size: 20px;
     font-weight: bold;  
 }
 
@@ -82,7 +82,6 @@ margin: 0;
     height: 100%; 
     max-width: 100vw; /* 추가 */
     animation: slide 40s infinite;
-    overflow-x: hidden;
 }
 
 .slides div {  
@@ -118,8 +117,8 @@ left: 1380px;
 
 .metting {
 position: absolute;
-    top: 0px;  
-    left: 50%;
+    top: 800px;  
+    left: 450px;
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
     gap: 40px;
