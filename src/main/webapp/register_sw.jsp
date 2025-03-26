@@ -137,27 +137,40 @@
       border-radius: 4px 0 0 4px;
       flex: 1;
     }
+    
+    #gender{
+        border : 1px solid #1e62c8;
+        border-radius: 4px;
+        font-size: 14px;
+        padding: 10px;
+        text-align: center;
+        background-color:  #fff;
+    }
+    
+    #gender #female{
+        margin-left : 15px;
+    }
+    
+    
     /* 라디오 버튼 및 체크박스 기본 간격 조정 */
     .form-group div {
       margin-top: 6px;
+      text-align: center;
     }
     .form-group div label {
-      margin-right: 15px;
+      margin-right: 7px;
     }
-    /* 관심 태그 영역 스타일 */
-    .interest-tags {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      margin-top: 6px;
+
+    .interest-tags{
+      border : 1px solid #1e62c8;
+      border-radius: 4px;
+        font-size: 14px;
+        padding: 10px;
+        text-align: center;
+        background-color:  #fff;
+    
     }
-    .interest-row {
-      display: flex;
-      gap: 10px;
-    }
-    .interest-row input {
-      margin-right: 5px;
-    }
+
     /* 회원가입 완료 버튼 */
     .btn-submit {
       width: 100%;
@@ -246,7 +259,7 @@
       <!-- 성별 선택 -->
       <div class="form-group">
         <label>성별</label>
-        <div>
+        <div id = "gender">
           <input type="radio" id="male" name="gender" value="남성" required>
           <label for="male">남성</label>
           <input type="radio" id="female" name="gender" value="여성" required>
@@ -258,22 +271,18 @@
       <div class="form-group">
         <label>관심 태그 (최대 2개 선택 가능)</label>
         <div class="interest-tags">
-          <div class="interest-row">
             <input type="checkbox" id="food" name="interest" value="맛집">
             <label for="food">맛집</label>
             <input type="checkbox" id="game" name="interest" value="게임">
             <label for="game">게임</label>
             <input type="checkbox" id="culture" name="interest" value="문화">
             <label for="culture">문화</label>
-          </div>
-          <div class="interest-row">
             <input type="checkbox" id="sports" name="interest" value="스포츠">
             <label for="sports">스포츠</label>
             <input type="checkbox" id="self" name="interest" value="자기계발">
             <label for="self">자기계발</label>
             <input type="checkbox" id="healing" name="interest" value="힐링">
             <label for="healing">힐링</label>
-          </div>
         </div>
       </div>
       
