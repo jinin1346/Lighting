@@ -63,5 +63,13 @@ public class MemberDAO {
     }
     
     
+    public void close() {
+        try {
+            this.conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 
 }
