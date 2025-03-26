@@ -444,26 +444,7 @@ button img {
         	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>
-    	  	<div class="item">  
-        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
-        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
-    	</div>  
-    	<div class="item">  
-        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
-        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>   
-        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
-    	</div>  
-    	<div class="item">  
-        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
-           	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-        	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
-    	</div>
-    	<div class="item">  
-        	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
-        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-      		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
-    	</div> 
+
 	</div>
 	<button>
 	<img alt="추가" src="images/add.png">
