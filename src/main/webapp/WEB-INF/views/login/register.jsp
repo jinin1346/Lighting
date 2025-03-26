@@ -157,7 +157,7 @@
     }
 
     /* 회원가입 완료 버튼 */
-    .btn-submit {
+    #btnSubmit {
       width: 100%;
       margin: 50px auto;
       padding: 15px;
@@ -269,7 +269,7 @@
       </div>
       
       <!-- 회원가입 버튼 -->
-      <button type="submit" class="btn-submit">회원가입 완료</button>
+      <button type="submit" id="btnSubmit">회원가입 완료</button>
     </form>
   </div>
   
@@ -284,6 +284,11 @@
           alert("최대 2개까지 선택 가능합니다.");
         }
       });
+    });
+    
+    
+    $('#logo', '#btnSubmit').click(()=>{ 
+        window.location.href='/main.do'//메인페이지로 이동
     });
   </script>
   

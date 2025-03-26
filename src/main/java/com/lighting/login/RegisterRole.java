@@ -15,7 +15,7 @@ public class RegisterRole extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //RegisterRole.java
-        
+
 
         req.getRequestDispatcher("/WEB-INF/views/registerrole.jsp").forward(req, resp);
     }

@@ -74,23 +74,32 @@
     }
     
     #label1 {
-        float: right;
+      margin-right: 280px;
+	  float: right;
+ 	  margin-top: 10px; 
         
     }
     
-    #btn1 {
+.btn1 {
+    display: flex;
+    justify-content: center; /* 버튼을 가로로 중앙 정렬 */
+    align-items: center;     /* 버튼을 세로로 중앙 정렬 (선택 사항) */
+    height: 100px;            /* 원하는 높이를 설정 */
+}
+
+
+        #btn1 {
         border: solid 0px black;
         background-color: #1e62c8;
         text-align: center;
         bottom: 100px;
         width: 250px;
         height: 40px;
-        color: #FFF;
+        color: #FFF;  
+        
     }
     
-    
-    
-       
+
     </style>
 </head>
 <body class="body">
