@@ -19,5 +19,4 @@ public class FindPassword extends HttpServlet {
 
 		req.getRequestDispatcher("/WEB-INF/views/findpassword.jsp").forward(req, resp);
 	}
-
 }

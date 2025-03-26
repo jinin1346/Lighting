@@ -302,11 +302,6 @@ right: 5px;
     	</div>
 
 
-
-
-
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
