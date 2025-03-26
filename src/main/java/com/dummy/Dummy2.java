@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -28,12 +31,235 @@ public class Dummy2 {
             //insertTblFriendRequest();
             //insertTblFriendList();
             //insertTblPhotoPost();
-            insertTblAttachedPhoto();
+            //insertTblAttachedPhoto();
+            //insertTblMeetingPost();
+            insertTblLocationCoordinate();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         
     }
+    
+    private static void insertTblLocationCoordinate() throws IOException, SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        BufferedWriter writer = null;
+
+        try {
+            // 1. JDBC 드라이버 로딩
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // 2. 데이터베이스 연결
+            conn = DriverManager.getConnection(URL, ID, PW);
+            conn.setAutoCommit(false);
+
+            writer = new BufferedWriter(new FileWriter("output2.txt", true)); // 파일 생성 및 BufferedWriter 연결 (append 모드)
+
+            // 장소 정보 배열 (수정됨)
+            String[][] locations = {
+                    {"강남역 근처", "37.498008", "127.028024"},
+                    {"역삼역 근처", "37.500404", "127.035669"},
+                    {"신논현역 근처", "37.504468", "127.024859"}
+            };
+
+            // tblMeetingPost 테이블에서 location 가져오기
+            String selectSql = "SELECT tblMeetingPostSeq, location FROM tblMeetingPost WHERE tblMeetingPostSeq = ?";
+            pstmt = conn.prepareStatement(selectSql);
+
+            // tblLocationCoordinate 더미 데이터 생성
+            for (int meetingPostSeq = 1; meetingPostSeq <= 500; meetingPostSeq++) {
+                pstmt.setInt(1, meetingPostSeq);
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    String location = rs.getString("location");
+                    String latitude = "";
+                    String longitude = "";
+
+                    // location에 따라 latitude, longitude 설정 (수정됨)
+                    for (String[] loc : locations) {
+                        if (loc[0].equals(location)) {
+                            latitude = loc[1];
+                            longitude = loc[2];
+                            break;
+                        }
+                    }
+
+                    // INSERT 문 생성
+                    String sql = String.format("INSERT INTO tblLocationCoordinate (tblMeetingPostSeq, latitude, longitude) " +
+                            "VALUES (%d, %s, %s);", meetingPostSeq, latitude, longitude);
+                    writer.write(sql);
+                    writer.newLine();
+                }
+            }
+            conn.commit();
+
+            System.out.println("output2.txt 파일에 tblLocationCoordinate 더미 데이터 추가 완료");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback(); // 트랜잭션 롤백
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } finally {
+            // 5. 자원 해제
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+                if (writer != null) writer.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+    private static void insertTblMeetingPost() throws IOException, SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        BufferedWriter writer = null;
+
+        try {
+            // 1. JDBC 드라이버 로딩
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // 2. 데이터베이스 연결
+            conn = DriverManager.getConnection(URL, ID, PW);
+            conn.setAutoCommit(false);
+
+            writer = new BufferedWriter(new FileWriter("output2.txt", true)); // 파일 생성 및 BufferedWriter 연결 (append 모드)
+
+            Random random = new Random();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            // 내용 생성 (lorem ipsum)
+            String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+            // tblCategorySub 테이블에서 categoryName 가져오기
+            String[] categorySubNames = new String[51];
+            String selectSubSql = "SELECT categoryName FROM tblCategorySub WHERE tblCategorySubSeq = ?";
+            pstmt = conn.prepareStatement(selectSubSql);
+            for (int i = 1; i <= 50; i++) {
+                pstmt.setInt(1, i);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    categorySubNames[i] = rs.getString("categoryName");
+                }
+            }
+
+            // tblCategoryMain 테이블에서 categoryName 가져오기
+            String[] categoryMainNames = new String[7];
+            String selectMainSql = "SELECT categoryName FROM tblCategoryMain WHERE tblCategoryMainSeq = ?";
+            pstmt = conn.prepareStatement(selectMainSql);
+            for (int i = 1; i <= 6; i++) {
+                pstmt.setInt(1, i);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    categoryMainNames[i] = rs.getString("categoryName");
+                }
+            }
+
+            // tblMeetingPost 더미 데이터 생성
+            int postCountPerCategory = 10; // tblCategorySubSeq 당 생성할 게시글 수
+            int cnt = 1;
+            for (int categorySubSeq = 1; categorySubSeq <= 50; categorySubSeq++) {
+                for (int i = 0; i < postCountPerCategory; i++) {
+                    // 제목 생성 (tblCategorySub.categoryName 포함)
+                    String categorySubName = categorySubNames[categorySubSeq];
+                    String title = String.format("%s 모임", categorySubName);
+
+                    // 게시일 생성 (현재 시점 ~ 3일 전)
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DATE, -random.nextInt(4)); // 0 ~ 3일 전
+                    Date postDate = calendar.getTime();
+                    String postDateStr = dateFormat.format(postDate);
+
+                    // 장소 생성
+                    String[] locations = {"역삼역 근처", "강남역 근처", "신논현역 근처"};
+                    String location = locations[random.nextInt(locations.length)];
+
+                    // 정원 생성 (3 ~ 6)
+                    int capacity = random.nextInt(4) + 3; // 3 ~ 6
+
+                    // 시작 시간 생성 (9시간 이후 ~ 33시간 이후)
+                    calendar = Calendar.getInstance();
+                    calendar.add(Calendar.HOUR_OF_DAY, random.nextInt(25) + 9); // 9 ~ 33시간 이후
+                    Date startTime = calendar.getTime();
+                    String startTimeStr = dateFormat.format(startTime);
+
+                    // 종료 시간 생성 (시작 시간으로부터 2시간 이후)
+                    calendar.add(Calendar.HOUR_OF_DAY, 2);
+                    Date endTime = calendar.getTime();
+                    String endTimeStr = dateFormat.format(endTime);
+
+                    // 사진 파일명 생성 (basic + tblCategoryMain.categoryName + tblCategorySub.categoryName)
+                    int categoryMainSeq = 0;
+                    if (categorySubSeq >= 1 && categorySubSeq <= 7) {
+                        categoryMainSeq = 1;
+                    } else if (categorySubSeq >= 8 && categorySubSeq <= 17) {
+                        categoryMainSeq = 2;
+                    } else if (categorySubSeq >= 18 && categorySubSeq <= 23) {
+                        categoryMainSeq = 3;
+                    } else if (categorySubSeq >= 24 && categorySubSeq <= 32) {
+                        categoryMainSeq = 4;
+                    } else if (categorySubSeq >= 33 && categorySubSeq <= 41) {
+                        categoryMainSeq = 5;
+                    } else if (categorySubSeq >= 42 && categorySubSeq <= 50) {
+                        categoryMainSeq = 6;
+                    }
+                    String categoryMainName = categoryMainNames[categoryMainSeq];
+                    String photoFileName = "basic" + categoryMainName + categorySubName + ".png";
+
+                    // 회원 번호 랜덤 생성 (1 ~ 1000)
+                    int memberSeq = random.nextInt(1000) + 1;
+
+                    String sql = String.format(
+                            "INSERT INTO tblMeetingPost (tblMeetingPostSeq, title, content, postDate, location, capacity, startTime, endTime, photoFileName, tblMemberSeq, tblCategorySubSeq) " +
+                                    "VALUES (%d, '%s', '%s', TO_DATE('%s', 'YYYY-MM-DD HH24:MI:SS'), '%s', %d, TO_DATE('%s', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('%s', 'YYYY-MM-DD HH24:MI:SS'), '%s', %d, %d);",
+                            cnt, title, loremIpsum, postDateStr, location, capacity, startTimeStr, endTimeStr, photoFileName, memberSeq, categorySubSeq
+                    );
+                    writer.write(sql);
+                    writer.newLine();
+                    cnt++;
+                }
+            }
+            conn.commit();
+
+            System.out.println("output2.txt 파일에 tblMeetingPost 더미 데이터 추가 완료");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback(); // 트랜잭션 롤백
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } finally {
+            // 5. 자원 해제
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+                if (writer != null) writer.close();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 
     private static void insertTblAttachedPhoto() throws IOException, SQLException {
         Connection conn = null;
