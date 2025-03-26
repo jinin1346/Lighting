@@ -73,8 +73,8 @@
         form input {
             width: 100%;
             padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
+            margin-top: 3px;
+            margin-bottom: 2px;
  		border: 1px solid #1e62c8; /* ✅ 테두리 색 고정 */
         border-radius: 4px;
         outline: none; /* ✅ 클릭해도 파란 아웃라인 제거 */
@@ -94,6 +94,7 @@ form button, #openModalButton {
     border-radius: 4px;
     cursor: pointer;
     font-size: 18px; /* ✅ 글씨 크기 키움 */
+    margin-top: 10px; /* ✅ 버튼과 텍스트 박스 사이에 간격 추가 */
 }
 
 /* ✅ hover 시에도 색상 변화 없도록 동일하게 */
