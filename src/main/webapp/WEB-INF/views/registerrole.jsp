@@ -74,9 +74,9 @@
     }
     
     #label1 {
-      margin-right: 280px;
-	  float: right;
+    text-align: right; /* 오른쪽 정렬 */
  	  margin-top: 10px; 
+ 	  float: right;
         
     }
     
@@ -85,19 +85,21 @@
     justify-content: center; /* 버튼을 가로로 중앙 정렬 */
     align-items: center;     /* 버튼을 세로로 중앙 정렬 (선택 사항) */
     height: 100px;            /* 원하는 높이를 설정 */
+
 }
 
 
         #btn1 {
-        border: solid 0px black;
-        background-color: #1e62c8;
-        text-align: center;
-        bottom: 100px;
-        width: 250px;
-        height: 40px;
-        color: #FFF;  
-        
-    }
+	        border: solid 0px black;
+	        background-color: #1e62c8;
+	        text-align: center;
+	        bottom: 100px;
+	        width: 250px;
+	        height: 40px;
+	        color: white;
+	        text-decoration: none;
+	     	line-height: 40px;   
+	    }
     
 
     </style>
@@ -107,9 +109,13 @@
     <div id="div1"><img alt="" id="logo1" src="/lighting/asset/images/a.webp"></div>
     <div id="tx">회원가입을 위해 <br>아래 서비스<b>이용약관에 동의</b>해주세요.</div> 
     
-    <div id="pic"><button id="button">이용약관동의<br>01</button> <button id="button">회원정보 입력<br>02</button> <button id="button">회원가입 완료<br>03</button></div>
+    <div id="pic">
+    	<button id="button">
+    		이용약관동의<br>01<br><img src="/lighting/images/bar.png">
+    	</button> 
+    	<button id="button">회원정보 입력<br>02</button> <button id="button">회원가입 완료<br>03</button></div>
     
-    <div id="role1">이용약관</div>
+    <div id="role1" >이용약관</div>
     <div id="role2">
 		제 1 장 총칙 <br>
 		<br>
@@ -143,13 +149,32 @@
 		</label>
 	</div>
 	
-	<div class="btn1"><button id="btn1">회원가입</button></div>
+	<div class="btn1">
+    <a id="btn1" href="registerok.do">
+        회원가입
+    </a>
+	</div>
 	    
     
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://bit.ly/4cMuheh"></script>
+
     <script>
-       
+        // 회원가입 버튼 클릭 시 실행되는 함수
+        document.getElementById("btn1").onclick = function(event) {
+            // 체크박스를 선택했는지 확인
+            var checkbox = document.getElementsByName("agree")[0];
+            
+            // 체크되지 않은 경우
+            if (!checkbox.checked) {
+                alert("이용약관에 동의해주세요.");
+                event.preventDefault(); // 폼 제출을 막음
+            } else {
+                // 체크되었으면 register_sw.do로 이동
+                window.location.href = "register_sw.jsp"; // 페이지 이동
+            }
+        }
+    </script>
     </script>
 </body>
 </html>
