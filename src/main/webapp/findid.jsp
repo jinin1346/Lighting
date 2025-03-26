@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>아이디 찾기 결과</title>
-    <link rel="stylesheet" href="/css/lightning.css">
+    <link rel="stylesheet" href="/css/lighting.css">
     <style>
         body {
             display: flex;
@@ -55,24 +55,24 @@
         .modal-overlay {
             width: 100%;
             height: 100%;
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.5); 
-            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
         
         .modal-window {
+            position: relative;
             background: white;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 500px; 
             text-align: center; 
-            position: relative;
         }
 
         .close-btn {

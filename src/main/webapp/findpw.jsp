@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
-    <link rel="stylesheet" href="/css/lightning.css">
+    <link rel="stylesheet" href="/css/lighting.css">
     <style>
         body {
             display: flex;
@@ -23,11 +23,11 @@
         .modal-overlay {
             width: 100%;
             height: 100%;
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.5); 
-            display: none;
+            background: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -42,6 +42,7 @@
             width: 500px; 
             text-align: center; 
             position: relative;
+
         }
 
         .close-btn {
@@ -59,7 +60,7 @@
             background-color: #1e62c8;
             color: white;
             font-size: 1.2rem;
-            padding: 10px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
