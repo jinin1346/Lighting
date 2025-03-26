@@ -6,30 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Project</title>
-<link rel="stylesheet" href="/css/lighting.css">
+<link rel="stylesheet" href="css/lighting.css">
+
 <style>
+
 body {
 	margin: 0;
 	padding: 0;
 	background-color: #fff;
 	box-sizing: border-box;
-	font-family: "Pretendard";
 }
 
-.body {
+.bod
 	width: 1300px;
 	height: 1700px;
 	background-color: #f9f7ff;
 	margin: 0 auto;
+	position : relative;
+	
 }
 
 #logo {
-	position: absolute;
+	position: relative;
 	left: 330px;
 	top: 22px;
 	width: 250px;
 	height: auto;
-	z-index: 3;
+	cursor: pointer;
+
 }
 
 #mypage {
@@ -39,6 +43,7 @@ body {
 	position: absolute;
 	left: 1500px;
 	top: 27px;
+	cursor: pointer;
 }
 
 #join {
@@ -48,6 +53,7 @@ body {
 	position: absolute;
 	left: 1425px;
 	top: 27px;
+	cursor: pointer;
 }
 
 #login {
@@ -57,14 +63,15 @@ body {
 	position: absolute;
 	left: 1340px;
 	top: 27px;
+	cursor: pointer;
 }
 
 .category {
-	display: flex; /* 가로 정렬 */
-	justify-content: center; /* 중앙 정렬 */
-	gap: 90px; /* 이미지 간 간격 */
-	align-items: center; /* 세로 중앙 정렬 */
-	height: 57vh; /* 화면 전체 높이 기준 */
+	display: flex; 
+	justify-content: center; 
+	gap: 85px; 
+	align-items: center; 
+	height: 57vh; 
 }
 
 .category .icon-container {
@@ -72,28 +79,30 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+		z-index: 10;
 }
+
 
 .category img {
-	width: 100px;
+	width: 105px;
 	height: auto;
+		z-index: 10;
 }
-
 
 .category .dropdown {
 	display: none;
-	position: fixed;
+	position: absolute;
 	top: 330px; 
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: #fff;
-	border-radius: 15px;
+	border-radius: 10px;
 	padding: 10px;
-	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
-	opacity: 0.9; /* 약간 투명 */
+	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+	opacity: 0.9;
 	z-index: 10;
-	width: 1280px; /* 드롭다운 박스 너비 */
-	height: 24px;
+	width: 1100px;
+	height: 40px;
 	font-size: 18px;
 	text-align: center;
 }
@@ -122,7 +131,7 @@ body {
 }
 
 .category .dropdown li:hover {
-	font-size: 21px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -151,11 +160,11 @@ body {
 
 .search-button {
 	position: absolute;
-	right: 20px;
-	top: 50%;
+	right: 15px;
+	top: 28%;
 	transform: translateY(-50%);
 	background: none;
-	border: none; /* 버튼 테두리 없음 */
+	border: none;
 	cursor: pointer;
 }
 
@@ -166,30 +175,28 @@ body {
 }
 
 .slider {  
-    width: 1300px;  
-    max-width: 1300px;
-    height: 400px;  
+    width: 1100px;  
+    max-width: 1100px;
+    height: 350px;  
     overflow: hidden;  
     position: absolute;  
-    left: 302px;  
-    top: 330px;  
+    left: 403px;  
+    top: 330px;
 }  
-
 
 .slides {  
     display: flex;
-    width: 400%; /* 4장의 이미지가 한 줄로 정렬됨 */ 
+    width: 400%;
     height: 100%; 
-    animation: slide 40s infinite; /* 4장 x 10초 = 40초 */
-}  
+    animation: slide 40s infinite;
+}
 
 .slides div {  
     width: 100%;  
-    flex-shrink: 0; /* 각 이미지가 100%의 크기를 유지하도록 설정 */
+    flex-shrink: 0;
 }  
 
 .slides img {  
-
     object-fit: cover;
 }  
 
@@ -204,15 +211,15 @@ body {
 h2{
 color: #0d0143;
 position: absolute;
-top: 745px;
-left: 350px;
+top: 705px;
+left: 410px;
 }
 
 p{
 color: #000;
 position: absolute;
-top: 745px;
-left: 1500px;
+top: 710px;
+left: 1420px;
 }
 
 body {  
@@ -223,14 +230,14 @@ body {
 
 .metting {
 position: absolute;  
-    top: 830px;  
-    left: 21%;
+    top: 760px;  
+    left: 420px;
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
-    gap: 50px;
+    gap: 40px;
     width: 300px; 
     max-width: 1200px;
-    margin: auto; 
+margin-bottom: 0px;
 }  
 
 .item {  
@@ -240,6 +247,7 @@ position: absolute;
     flex-direction: column; 
     align-items: center; 
     text-align: center; 
+    
 }  
 
 .metting #chicken {  
@@ -248,7 +256,7 @@ position: absolute;
 }  
 
 .metting span {
-  	font-size: 24px;  
+  	font-size: 22px;  
     font-weight: bold;  
     color: #0d0143;  
     margin: 8px 0; /* 텍스트 사이의 여백 */
@@ -256,17 +264,30 @@ position: absolute;
 
 div .text1{
 font-size: 15px;  
-    color: #000;
+    color: #505050;
     font-weight: normal;  
 position: relative;
-bottom: 5px;
+bottom: 6px;
 right: 5px;
 }
 
 .metting #icon {  
     width: 23px;  
     height: 23px;
-    margin-top: 3px;
+}
+
+button {
+    border: none;
+    background: #fff;
+    position: fixed; /* 화면에 고정 */
+    bottom: 25px; /* 아래에서 20px 떨어짐 */
+    right: 25px; /* 오른쪽에서 20px 떨어짐 */
+    cursor: pointer; /* 클릭 가능 표시 */
+}
+
+button img {
+    width: 70px;
+    height: auto;
 }
 
  #copylight {
@@ -292,7 +313,7 @@ right: 5px;
 			<div id="mypage">MY PAGE</div>
 
 			<div class="search-container">
-				<input type="text" class="search-box" placeholder="모임을 검색해 보세요." />
+				<input type="text" class="search-box" placeholder="&ensp;&ensp;모임을 검색해 보세요." />
 				<button class="search-button">
 					<img src="images/search.png" onclick="performSearch()">
 				</button>
@@ -348,19 +369,12 @@ right: 5px;
 					<img src="images/스포츠.png" id="car_4">
 					<div class="dropdown">
 						<ul>
-							<li><a href="">배드민턴</a></li>&ensp;
-							<li><a href="">탁구</a></li>&ensp;
-							<li><a href="">헬스</a></li>&ensp;
-							<li><a href="">주짓수</a></li>&ensp;
-							<li><a href="">자전거</a></li>&ensp;
-							<li><a href="">러닝</a></li>&ensp;
-							<li><a href="">복싱</a></li>&ensp;
-							<li><a href="">풋살</a></li>&ensp;
-							<li><a href="">골프(스크린)</a></li>&ensp;
-							<li><a href="">필라테스/요가</a></li>&ensp;
-							<li><a href="">크로스핏</a></li>&ensp;
-							<li><a href="">볼링</a></li>&ensp;
-							<li><a href="">클라이밍</a></li>&ensp;
+							<li><a href="">유산소</a></li>&ensp;
+							<li><a href="">웨이트(무산소) </a></li>&ensp;
+							<li><a href="">격투</a></li>&ensp;
+							<li><a href="">코어&밸런스</a></li>&ensp;
+							<li><a href="">기능성</a></li>&ensp;
+							<li><a href="">다이어트</a></li>&ensp;
 							<li><a href="">기타</a></li>
 						</ul>
 					</div>
@@ -388,9 +402,9 @@ right: 5px;
 							<li><a href="">스터디</a></li>&ensp;
 							<li><a href="">취업준비</a></li>&ensp;
 							<li><a href="">모의면접</a></li>&ensp;
-							<li><a href="">멘토멘티</a></li>&ensp;
+							<li><a href="">멘토/멘티</a></li>&ensp;
 							<li><a href="">독서</a></li>&ensp;
-							<li><a href="">제테크</a></li>&ensp;
+							<li><a href="">재테크</a></li>&ensp;
 							<li><a href="">비즈니스</a></li>&ensp;
 							<li><a href="">코딩</a></li>&ensp;
 							<li><a href="">기타</a></li>
@@ -417,7 +431,7 @@ right: 5px;
     	</div>  
     	<div class="item">  
         	<img id="chicken" src="images/치킨.jpg" alt="Chicken">  
-        	<span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>   
+        	<span>4월 5일 강남에서 치킨드실 3명 모집합니다!!!!</span>   
         	<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div>  
     	<div class="item">  
@@ -451,6 +465,9 @@ right: 5px;
       		<div><img id="icon" src="images/icon.png" alt="Icon"><span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span></div>
     	</div> 
 	</div>
+	<button>
+	<img alt="추가" src="images/add.png">
+	</button>
 	
 	<div  id="copylight">
 	<img src="images/카피라이트.png">
