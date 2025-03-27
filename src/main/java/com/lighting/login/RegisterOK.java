@@ -2,14 +2,17 @@ package com.lighting.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.lighting.login.model.ActivityRegionDAO;
+import com.lighting.login.model.ActivityRegionDTO;
 import com.lighting.login.model.MemberDAO;
 import com.lighting.login.model.MemberDTO;
-
 @WebServlet("/login/registerok.do")
 public class RegisterOK extends HttpServlet {
 
@@ -20,7 +23,7 @@ public class RegisterOK extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
         try {
-            // 폼에서 전달된 파라미터 읽기 
+            // 회원 정보 파라미터 읽기
             String id = req.getParameter("id");
             String pw = req.getParameter("pw");
             String name = req.getParameter("name");
@@ -29,32 +32,53 @@ public class RegisterOK extends HttpServlet {
             String tel = req.getParameter("tel");
             String email = req.getParameter("email");
             String gender = req.getParameter("gender");
+            String city = req.getParameter("city");
+            String district = req.getParameter("district");
+            
 
+            System.out.println(birthday);
+            
+            // 회원 정보 DTO에 값 설정
+            MemberDTO memberDto = new MemberDTO();
+            memberDto.setId(id);
+            memberDto.setPw(pw);
+            memberDto.setName(name);
+            memberDto.setNickname(nickname);
+            memberDto.setBirthday(birthday);
+            memberDto.setTel(tel);
+            memberDto.setEmail(email);
+            memberDto.setGender(gender);
+            memberDto.setSido(city);
+            memberDto.setGugun(district);
 
-            // DTO 객체에 값 설정
-            MemberDTO dto = new MemberDTO();
-            dto.setId(id);
-            dto.setPw(pw);
-            dto.setName(name);
-            dto.setNickname(nickname);
-            dto.setNickname(birthday);
-            dto.setTel(tel);
-            dto.setEmail(email);
-            dto.setGender(gender);
-
-            // DAO를 통한 회원 가입 처리
-            MemberDAO dao = new MemberDAO();
-            int result = dao.addMember(dto);
-            dao.close();
-
-            // 처리 결과에 따른 리다이렉트 및 응답
-            if (result == 1) {
-                resp.sendRedirect("/project/index.do");
-            } else {
-                PrintWriter writer = resp.getWriter();
-                writer.print("<script>alert('회원가입에 실패했습니다.'); history.back();</script>");
-                writer.close();
-            }
+            // DAO를 통해 회원정보 저장 및 회원 시퀀스 반환 받기
+            MemberDAO mdao = new MemberDAO(); 
+            int memberSeq = mdao.addMember(memberDto);
+            
+            // 회원가입 후, 선택한 주소에 해당하는 활동지역 시퀀스 가져오기
+//            int regionSeq = mdao.addActivityRegionCoordinate(memberDto);
+//            
+//            
+//            
+//            ActivityRegionDTO arDto = new ActivityRegionDTO();
+//            arDto.setTblMemberSeq(memberSeq);
+//            arDto.setTblActivityRegionCoordinateSeq(regionSeq);
+//            
+//            ActivityRegionDAO ardao = new ActivityRegionDAO();
+//            int insertResult = ardao.insertActivityRegion(arDto);
+//            
+//            // DAO 자원 해제
+//            mdao.close();
+//            ardao.close();
+//
+//            // 회원가입 성공 여부에 따른 처리
+//            if (memberSeq >0 && regionSeq >0 && insertResult == 1) {
+//                resp.sendRedirect("/lighting/main.do");
+//            } else {
+//                PrintWriter writer = resp.getWriter();
+//                writer.print("<script>alert('회원가입에 실패했습니다.'); history.back();</script>");
+//                writer.close();
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             PrintWriter writer = resp.getWriter();

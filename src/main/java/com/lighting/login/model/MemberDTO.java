@@ -21,6 +21,9 @@ public class MemberDTO {
     private String photoFileName;
     private String registrationDate;
     private String status;
+    private String sido;
+    private String gugun;
+    
 }
 
 
