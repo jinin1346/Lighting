@@ -40,7 +40,7 @@ public class MemberDAO {
         System.out.println("check");
         try {
             
-            String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,tel,email,gender,photoFileName,registrationDate,status) values ( 1001,?, ?, ?, ?, ?, ?, ?, ?,'basicProfile.png',default, default)";
+            String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,tel,email,gender,photoFileName,registrationDate,status) values (seqMember.nextVal,?, ?, ?, ?, ?, ?, ?, ?,'basicProfile.png',default, default)";
             
             String birthday = dto.getBirthday();
             

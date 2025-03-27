@@ -186,7 +186,7 @@
       <div class="formGroup">
         <label for="userid">아이디</label>
         <div class="inputGroup">
-          <input type="text" id="userid" name="userid" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
+          <input type="text" id="id" name="id" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
           <button type="button" class="btnIdCheck">중복체크</button>
         </div>
       </div>
@@ -194,7 +194,7 @@
       <!-- 비밀번호 -->
       <div class="formGroup">
         <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
+        <input type="password" id="pw" name="pw" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
       </div>
       
       <!-- 이름 -->
@@ -212,13 +212,13 @@
       <!-- 생년월일 -->
       <div class="formGroup">
         <label for="birthdate">생년월일</label>
-        <input type="text" id="birthdate" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
+        <input type="text" id="birthday" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
       </div>
       
       <!-- 연락처 -->
       <div class="formGroup">
         <label for="phone">연락처</label>
-        <input type="text" id="phone" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
+        <input type="text" id="tel" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
       </div>
       
       <!-- 이메일 -->
@@ -234,9 +234,9 @@
       <div class="formGroup">
         <label>성별</label>
         <div id="gender">
-          <input type="radio" id="male" name="gender" value="남성" required>
+          <input type="radio" id="male" name="gender" value="m" required>
           <label for="male">남성</label>
-          <input type="radio" id="female" name="gender" value="여성" required>
+          <input type="radio" id="female" name="gender" value="f" required>
           <label for="female">여성</label>
         </div>
       </div>
