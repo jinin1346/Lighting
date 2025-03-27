@@ -11,37 +11,39 @@ import javax.sql.DataSource;
 
 
 public class MemberDAO {
-    
+
     private Connection conn;
     private Statement stat;
     private PreparedStatement pstat;
     private ResultSet rs;
-    
+
     public MemberDAO() {
-        
+
         try {
-            
+
             Context ctx = new InitialContext();
             Context env = (Context)ctx.lookup("java:comp/env");
             DataSource ds = (DataSource)env.lookup("jdbc/pool");
-            
+
             conn = ds.getConnection();
             stat = conn.createStatement();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public int addMember(MemberDTO dto) {
-        
+
         try {
-            
+
             String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,"
                     + "tel,email,gender,photoFileName,registrationDate,status) "
+                    + "values ( default,?, ?, ?, ?,?, ?, ?, ?,?,default, default)";
                     + "values ( default,?, ?, ?, ?,?, ?, ?, ?,'basicProfile.png',default, default)";
             
+
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, dto.getId());
             pstat.setString(2, dto.getPw());
@@ -51,25 +53,52 @@ public class MemberDAO {
             pstat.setString(6, dto.getTel());
             pstat.setString(7, dto.getEmail());
             pstat.setString(8, dto.getGender());
-            
-            
+            pstat.setString(9, dto.getPhotoFileName());
+            pstat.setString(10, dto.getRegistrationDate());
+
+
             return pstat.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public MemberDTO login(MemberDTO dto) {
+
+        try {
+            
+            String sql = "select * from tblMember where id =? and pw = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getId());
+            pstat.setString(2, dto.getPw());
+            
+            rs = pstat.executeQuery();
+            
+            if (rs.next()) {
+                //로그인 성공
+                MemberDTO result = new MemberDTO();
+                
+                result.setId(rs.getString("id"));
+                result.setId(rs.getString("name"));
+                result.setId(rs.getString("id"));
+                
+                return result;
+                
+            } else {
+                //로그인 실패
+            }
             
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        return 0;
+        return null;
     }
-    
-    
-    public void close() {
-        try {
-            this.conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+
+
 
 }
