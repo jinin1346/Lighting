@@ -1,7 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <style>
     body {
     	margin: 0;
@@ -68,7 +67,9 @@
     .category .icon-container:hover .dropdown {
         display: block;  
     }
-    
+</style>
+
+<style>
     #slider { 
         margin: 0 auto;
         width: 1100px;
@@ -195,6 +196,7 @@
     }
 
     .capBox {
+    	display: block;
         text-align: right;
     }
     
@@ -203,94 +205,94 @@
     <!-- 카테고리 -->
     <div class="category">
         <div class="icon-container">
-            <img src="images/맛집아이콘.png" id="car_1">
+            <img src="/lighting/images/맛집아이콘.png" id="car_1">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">식사</a></li>&ensp;
-                    <li><a href="">카페</a></li>&ensp;
-                    <li><a href="">디저트</a></li>&ensp;
-                    <li><a href="">술</a></li>&ensp;
-                    <li><a href="">비건</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>식사</a></li>&ensp;
+                    <li><a>카페</a></li>&ensp;
+                    <li><a>디저트</a></li>&ensp;
+                    <li><a>술</a></li>&ensp;
+                    <li><a>비건</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
         <div class="icon-container">
-            <img src="images/게임아이콘.png" id="car_2">
+            <img src="/lighting/images/게임아이콘.png" id="car_2">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">액션</a></li>&ensp;
-                    <li><a href="">어드벤처</a></li>&ensp;
-                    <li><a href="">롤플레잉(RPG)</a></li>&ensp;
-                    <li><a href="">시뮬레이션</a></li>&ensp;
-                    <li><a href="">전략</a></li>&ensp;
-                    <li><a href="">스포츠</a></li>&ensp;
-                    <li><a href="">퍼즐</a></li>&ensp;
-                    <li><a href="">아케이드</a></li>&ensp;
-                    <li><a href="">슈팅</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>액션</a></li>&ensp;
+                    <li><a>어드벤처</a></li>&ensp;
+                    <li><a>롤플레잉(RPG)</a></li>&ensp;
+                    <li><a>시뮬레이션</a></li>&ensp;
+                    <li><a>전략</a></li>&ensp;
+                    <li><a>스포츠</a></li>&ensp;
+                    <li><a>퍼즐</a></li>&ensp;
+                    <li><a>아케이드</a></li>&ensp;
+                    <li><a>슈팅</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
         <div class="icon-container">
-            <img src="images/문화아이콘.png" id="car_3">
+            <img src="/lighting/images/문화아이콘.png" id="car_3">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">영화</a></li>&ensp;
-                    <li><a href="">공연</a></li>&ensp;
-                    <li><a href="">전시회/미술</a></li>&ensp;
-                    <li><a href="">노래/춤</a></li>&ensp;
-                    <li><a href="">언어교환</a></li>&ensp;
-                    <li><a href="">애니메이션</a></li>&ensp;
-                    <li><a href="">쇼핑</a></li>&ensp;
-                    <li><a href="">악기연주</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>영화</a></li>&ensp;
+                    <li><a>공연</a></li>&ensp;
+                    <li><a>전시회/미술</a></li>&ensp;
+                    <li><a>노래/춤</a></li>&ensp;
+                    <li><a>언어교환</a></li>&ensp;
+                    <li><a>애니메이션</a></li>&ensp;
+                    <li><a>쇼핑</a></li>&ensp;
+                    <li><a>악기연주</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
         <div class="icon-container">
-            <img src="images/스포츠아이콘.png" id="car_4">
+            <img src="/lighting/images/스포츠아이콘.png" id="car_4">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">유산소</a></li>&ensp;
-                    <li><a href="">웨이트(무산소) </a></li>&ensp;
-                    <li><a href="">격투</a></li>&ensp;
-                    <li><a href="">코어&밸런스</a></li>&ensp;
-                    <li><a href="">기능성</a></li>&ensp;
-                    <li><a href="">다이어트</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>유산소</a></li>&ensp;
+                    <li><a>웨이트(무산소) </a></li>&ensp;
+                    <li><a>격투</a></li>&ensp;
+                    <li><a>코어&밸런스</a></li>&ensp;
+                    <li><a>기능성</a></li>&ensp;
+                    <li><a>다이어트</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
         <div class="icon-container">
-            <img src="images/자기계발아이콘.png" id="car_5">
+            <img src="/lighting/images/자기계발아이콘.png" id="car_5">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">여행</a></li>&ensp;
-                    <li><a href="">드라이브</a></li>&ensp;
-                    <li><a href="">캠핑</a></li>&ensp;
-                    <li><a href="">등산</a></li>&ensp;
-                    <li><a href="">명상</a></li>&ensp;
-                    <li><a href="">반려동물</a></li>&ensp;
-                    <li><a href="">꽃꽃이</a></li>&ensp;
-                    <li><a href="">독서</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>여행</a></li>&ensp;
+                    <li><a>드라이브</a></li>&ensp;
+                    <li><a>캠핑</a></li>&ensp;
+                    <li><a>등산</a></li>&ensp;
+                    <li><a>명상</a></li>&ensp;
+                    <li><a>반려동물</a></li>&ensp;
+                    <li><a>꽃꽃이</a></li>&ensp;
+                    <li><a>독서</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
         <div class="icon-container">
-            <img src="images/힐링아이콘.png" id="car_6">
+            <img src="/lighting/images/힐링아이콘.png" id="car_6">
             <div class="dropdown">
                 <ul>
-                    <li><a href="">스터디</a></li>&ensp;
-                    <li><a href="">취업준비</a></li>&ensp;
-                    <li><a href="">모의면접</a></li>&ensp;
-                    <li><a href="">멘토/멘티</a></li>&ensp;
-                    <li><a href="">독서</a></li>&ensp;
-                    <li><a href="">재테크</a></li>&ensp;
-                    <li><a href="">비즈니스</a></li>&ensp;
-                    <li><a href="">코딩</a></li>&ensp;
-                    <li><a href="">기타</a></li>
+                    <li><a>스터디</a></li>&ensp;
+                    <li><a>취업준비</a></li>&ensp;
+                    <li><a>모의면접</a></li>&ensp;
+                    <li><a>멘토/멘티</a></li>&ensp;
+                    <li><a>독서</a></li>&ensp;
+                    <li><a>재테크</a></li>&ensp;
+                    <li><a>비즈니스</a></li>&ensp;
+                    <li><a>코딩</a></li>&ensp;
+                    <li><a>기타</a></li>
                 </ul>
             </div>
         </div>
@@ -298,23 +300,40 @@
     
     <!-- 모임 추천 -->
     <div id="slider">
+    
         <div id="slides">
+        
             <div id="event1">
-                <img alt="event 1" src="/lighting/images/event_1.jpg">
+            	<!--
+            		1. 오늘의 추천으로 날씨, 요일에 맞는 중분류 카테고리를 4개 가져오기
+            	 -->
+                <!-- event_1.jpg >> 첫번째 사진 변수명 -->
+                <!-- 예시) src="/lighting/images/${변수명}" -->
+                
+                <!-- data-tblCategorySubSeq >> 중분류 pk -->
+                <!-- 예시) data-tblCategorySubSeq="${변수명}" -->
+                
+                <img alt="event1" src="/lighting/images/event_1.jpg" data-tblCategorySubSeq="">
             </div>
             <div id="event2">
-                <img alt="event 2" src="/lighting/images/event_2.jpg">
+            	<!-- event_2.jpg >> 두번째 변수명 -->
+                <img alt="event2" src="/lighting/images/event_2.jpg" data-tblCategorySubSeq="">
             </div>
             <div id="event3">
-                <img alt="event 3" src="/lighting/images/event_3.jpg">
+            	<!-- event_3.jpg >> 세번째 변수명 -->
+                <img alt="event3" src="/lighting/images/event_3.jpg" data-tblCategorySubSeq="">
             </div>
             <div id="event4">
-                <img alt="event 4" src="/lighting/images/event_4.jpg">
+            	<!-- event_4.jpg >> 네번째 변수명 -->
+                <img alt="event4" src="/lighting/images/event_4.jpg" data-tblCategorySubSeq="">
             </div>
             <div id="event5">
-                <img alt="event 1" src="/lighting/images/event_1.jpg">
+            	<!-- event_1.jpg >> 첫번째 변수명 -->
+                <img alt="event1" src="/lighting/images/event_1.jpg" data-tblCategorySubSeq="">
             </div>
+            
         </div>
+        
     </div>
 
     <div class="extra">
@@ -324,7 +343,7 @@
     
     <div id="meetingBox">	
         
-        <!-- for문 시작작 -->
+        <!-- for문 시작 -->
         <div class="item">  
             <div>
                 <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
@@ -344,12 +363,13 @@
                     <span class="name">
                         작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
                     </span>
-                    <div class="capBox">
+                    <br>
+                    <span class="capBox">
                         <span class="capacity">
                             3<!-- 게시글의 capacity -->
                         </span>
                         명 모집중
-                    </div>
+                    </span>
                 </span>
             </div>
         </div>

@@ -58,8 +58,6 @@ public class RegisterOK extends HttpServlet {
             // 회원가입 후, 선택한 주소에 해당하는 활동지역 시퀀스 가져오기
 //            int regionSeq = mdao.addActivityRegionCoordinate(memberDto);
 //            
-//            
-//            
 //            ActivityRegionDTO arDto = new ActivityRegionDTO();
 //            arDto.setTblMemberSeq(memberSeq);
 //            arDto.setTblActivityRegionCoordinateSeq(regionSeq);
