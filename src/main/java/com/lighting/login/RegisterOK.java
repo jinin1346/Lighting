@@ -54,31 +54,32 @@ public class RegisterOK extends HttpServlet {
             // DAO를 통해 회원정보 저장 및 회원 시퀀스 반환 받기
             MemberDAO mdao = new MemberDAO(); 
             int memberSeq = mdao.addMember(memberDto);
-            
+            System.out.println(memberSeq);
             // 회원가입 후, 선택한 주소에 해당하는 활동지역 시퀀스 가져오기
-//            int regionSeq = mdao.addActivityRegionCoordinate(memberDto);
-//            
-//            
-//            
-//            ActivityRegionDTO arDto = new ActivityRegionDTO();
-//            arDto.setTblMemberSeq(memberSeq);
-//            arDto.setTblActivityRegionCoordinateSeq(regionSeq);
-//            
-//            ActivityRegionDAO ardao = new ActivityRegionDAO();
-//            int insertResult = ardao.insertActivityRegion(arDto);
-//            
-//            // DAO 자원 해제
-//            mdao.close();
-//            ardao.close();
-//
-//            // 회원가입 성공 여부에 따른 처리
-//            if (memberSeq >0 && regionSeq >0 && insertResult == 1) {
-//                resp.sendRedirect("/lighting/main.do");
-//            } else {
-//                PrintWriter writer = resp.getWriter();
-//                writer.print("<script>alert('회원가입에 실패했습니다.'); history.back();</script>");
-//                writer.close();
-//            }
+            int regionSeq = mdao.addActivityRegionCoordinate(memberDto);
+            System.out.println(regionSeq);
+            
+            
+            
+            ActivityRegionDTO arDto = new ActivityRegionDTO();
+            arDto.setTblMemberSeq(memberSeq);
+            arDto.setTblActivityRegionCoordinateSeq(regionSeq);
+            
+            ActivityRegionDAO ardao = new ActivityRegionDAO();
+            int insertResult = ardao.insertActivityRegion(arDto);
+            
+            // DAO 자원 해제
+            mdao.close();
+            ardao.close();
+
+            // 회원가입 성공 여부에 따른 처리
+            if (memberSeq >0 && regionSeq >0 && insertResult == 1) {
+                resp.sendRedirect("/lighting/main_test.do");
+            } else {
+                PrintWriter writer = resp.getWriter();
+                writer.print("<script>alert('회원가입에 실패했습니다.'); history.back();</script>");
+                writer.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             PrintWriter writer = resp.getWriter();
