@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <style>
     body {
     margin: 0;
@@ -67,7 +68,7 @@
     }
     
     .slider { 
-        margin: 60px auto 0 auto;
+        margin: 0 auto;
         width: 1100px;
         height: 350px;
         overflow: hidden; /* 슬라이드 영역을 벗어나는 이미지 숨김 */
@@ -76,7 +77,7 @@
     
     .slides { 
         display: flex; /* 이미지를 가로로 나열 */
-        animation: slide 12s linear infinite; /* 애니메이션 적용 */
+        animation: slide 16s linear infinite; /* 애니메이션 적용 */
         height: 100%;
     }
     
@@ -93,24 +94,24 @@
     }
 
     @keyframes slide {
-        0%, 12.4% {
+        0%, 12.499999% {
             transform: translateX(0);
         }
-        12.5%, 37.5% {
+        12.5%, 37.499999% {
             transform: translateX(-100%);
         }
-        37.6%, 62.5% {
+        37.5%, 62.499999% {
             transform: translateX(-200%);
         }
-        62.6%, 87.5% {
+        62.5%, 87.499999% {
             transform: translateX(-300%);
         }
-        87.6%, 100% {
+        87.5%, 100% {
             transform: translateX(-400%);
         }
     }
     .extra {
-        margin: 30px auto;
+        margin: 0 auto;
         width: 1100px;
         height: auto;
         position: relative;
@@ -178,7 +179,103 @@
 
     
 </style>
-	<div>
+
+    <!-- 카테고리 -->
+    <div class="category">
+        <div class="icon-container">
+            <img src="images/맛집아이콘.png" id="car_1">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">식사</a></li>&ensp;
+                    <li><a href="">카페</a></li>&ensp;
+                    <li><a href="">디저트</a></li>&ensp;
+                    <li><a href="">술</a></li>&ensp;
+                    <li><a href="">비건</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-container">
+            <img src="images/게임아이콘.png" id="car_2">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">액션</a></li>&ensp;
+                    <li><a href="">어드벤처</a></li>&ensp;
+                    <li><a href="">롤플레잉(RPG)</a></li>&ensp;
+                    <li><a href="">시뮬레이션</a></li>&ensp;
+                    <li><a href="">전략</a></li>&ensp;
+                    <li><a href="">스포츠</a></li>&ensp;
+                    <li><a href="">퍼즐</a></li>&ensp;
+                    <li><a href="">아케이드</a></li>&ensp;
+                    <li><a href="">슈팅</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-container">
+            <img src="images/문화아이콘.png" id="car_3">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">영화</a></li>&ensp;
+                    <li><a href="">공연</a></li>&ensp;
+                    <li><a href="">전시회/미술</a></li>&ensp;
+                    <li><a href="">노래/춤</a></li>&ensp;
+                    <li><a href="">언어교환</a></li>&ensp;
+                    <li><a href="">애니메이션</a></li>&ensp;
+                    <li><a href="">쇼핑</a></li>&ensp;
+                    <li><a href="">악기연주</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-container">
+            <img src="images/스포츠아이콘.png" id="car_4">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">유산소</a></li>&ensp;
+                    <li><a href="">웨이트(무산소) </a></li>&ensp;
+                    <li><a href="">격투</a></li>&ensp;
+                    <li><a href="">코어&밸런스</a></li>&ensp;
+                    <li><a href="">기능성</a></li>&ensp;
+                    <li><a href="">다이어트</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-container">
+            <img src="images/자기계발아이콘.png" id="car_5">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">여행</a></li>&ensp;
+                    <li><a href="">드라이브</a></li>&ensp;
+                    <li><a href="">캠핑</a></li>&ensp;
+                    <li><a href="">등산</a></li>&ensp;
+                    <li><a href="">명상</a></li>&ensp;
+                    <li><a href="">반려동물</a></li>&ensp;
+                    <li><a href="">꽃꽃이</a></li>&ensp;
+                    <li><a href="">독서</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-container">
+            <img src="images/힐링아이콘.png" id="car_6">
+            <div class="dropdown">
+                <ul>
+                    <li><a href="">스터디</a></li>&ensp;
+                    <li><a href="">취업준비</a></li>&ensp;
+                    <li><a href="">모의면접</a></li>&ensp;
+                    <li><a href="">멘토/멘티</a></li>&ensp;
+                    <li><a href="">독서</a></li>&ensp;
+                    <li><a href="">재테크</a></li>&ensp;
+                    <li><a href="">비즈니스</a></li>&ensp;
+                    <li><a href="">코딩</a></li>&ensp;
+                    <li><a href="">기타</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <!-- 모임 추천 -->
     <div class="slider">
         <div class="slides">
@@ -269,4 +366,3 @@
             </div>
         </div>
     </div>
-	</div>
