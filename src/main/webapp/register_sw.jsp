@@ -37,19 +37,25 @@
     
 
     #logo {
-      display: block;
-      width: 200px;
+      /* display: block; */
+      /* width: 200px;
       margin: 0 auto;
       cursor: pointer;
-      margin-bottom: 30px;
+      margin-bottom: 30px; */
+      position: absolute;
+      left: 0; 
+      top: 0;
+      width: 250px;
+      margin: 15px 0 0 15px;
     }
 
     /* 안내 문구 */
     .signup-title {
-      font-size: 18px;
-      line-height: 1.4;
-      text-align: center;
-      margin: 60px auto 50px;
+        font-size: 30px;
+        text-align: center;
+        display: block;
+        position: relative;
+        top: 50px;
     }
 
     /* 진행 바 */
@@ -60,8 +66,12 @@
       margin: 0 auto 50px auto;
     } 
     #step{
-        width: 550px;
-      height: auto;
+      margin-top: 10px;
+      text-align: center;
+      margin-bottom: 10px;
+      position: relative;
+      left: -136px;
+      top: 48px;
     }
 
     /* 회원가입 폼 */
@@ -89,6 +99,17 @@
       outline: none;
       box-shadow: none;
     }
+    
+    input[type="text"], 
+    button {
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1;
+    padding: 8px;
+    vertical-align: middle;
+    }
+    
     /* 아이디 중복체크 및 이메일 인증 버튼 스타일 */
     .input-group .btn-idcheck,
     .input-group .btn-emailcheck {
@@ -170,7 +191,7 @@
   <div class="container">
     <!-- 로고 영역 -->
     <a href="/lighting/main_test.do">
-  <img alt="로고" src="/lighting/images/logo_세로.png" id="logo">
+  <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
     </a>
 
 
@@ -181,7 +202,7 @@
     
     <!-- 단계 표시 -->
     <div id="stepBox">
-      <img alt="단계" src="/lighting/images/약관동의_02.png"id="step">  
+      <img alt="단계" src="/lighting/images/약관동의_02.png" id="step">  
     </div>
     
     <!-- 회원가입 폼 -->

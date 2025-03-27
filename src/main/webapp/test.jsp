@@ -14,6 +14,14 @@
 	<!-- 메롱 -->
 	<!-- test -->
 	
+	
+	<header>헤더 테스트</header>
+	<main>
+	    <div id="logo"><img src="/images/logo_가로.png"></div>
+	    <div class="basicContainer">배경 색 사이즈 테스트</div>
+	</main>
+    
+	
 				
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>

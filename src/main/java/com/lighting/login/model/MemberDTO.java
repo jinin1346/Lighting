@@ -22,3 +22,36 @@ public class MemberDTO {
     private String registrationDate;
     private String status;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

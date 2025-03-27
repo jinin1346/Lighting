@@ -77,7 +77,7 @@
     
     .slides { 
         display: flex; /* 이미지를 가로로 나열 */
-        animation: slide 16s linear infinite; /* 애니메이션 적용 */
+        animation: slide 8s linear infinite; /* 애니메이션 적용 */
         height: 100%;
     }
     
@@ -94,16 +94,16 @@
     }
 
     @keyframes slide {
-        0%, 12.499999% {
+        0%, 12.4% {
             transform: translateX(0);
         }
-        12.5%, 37.499999% {
+        12.5%, 37.4% {
             transform: translateX(-100%);
         }
-        37.5%, 62.499999% {
+        37.5%, 62.4% {
             transform: translateX(-200%);
         }
-        62.5%, 87.499999% {
+        62.5%, 87.4% {
             transform: translateX(-300%);
         }
         87.5%, 100% {
