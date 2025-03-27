@@ -12,7 +12,7 @@
     }
 
 #logo {  
-        border : 1px solid black;
+        
         width: 220px;  
         height: auto;  
         margin-bottom: 20px; /* 로고와 다음 요소 사이의 간격 */  
