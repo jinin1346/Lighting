@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원가입 완료</title>
-	<link rel="stylesheet" href="/css/lightning.css">
+	<link rel="stylesheet" href="/css/lighting.css">
 	<style>
         body {
             display: flex;
@@ -58,16 +58,17 @@
         }
     </style>
 </head>
-<body>
+<body class="body">
     <img alt="로고" src="images/logo_가로.png" id="logo">
     
     <div>
         <img alt="로고" src="images/logo_세로.png" id="logo2">
         <p id="loginMsg">회원가입이 <br> 완료되었습니다.</p>
     </div>
-
-    <button id="btnCheck">모임 참석하러 가기</button>
-	
+    
+    <form method="POST" action="/main.do">
+        <button id="btnCheck">모임 참석하러 가기</button>
+	</form>
 	
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
