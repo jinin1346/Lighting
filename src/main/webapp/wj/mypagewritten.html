@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘어때?</title>
+
+    <!-- 전체 박스 -->
+    <style> 
+
+        #mypageLogo {
+            cursor: pointer;
+            display: inline-block;
+            margin: 20px 0 20px 60px;
+            color: #0D0143;
+        }
+
+        #back_box {
+          width: 1300px;
+          margin: 0 auto;
+          background-color: #f9f7ff;
+        }
+      
+        #grid_box {
+          display: grid;
+          grid-template-columns: 300px auto 200px; /* 3열 */
+          grid-template-rows: repeat(2, 1fr); /* 2행 */
+          width: 100%;
+          max-width: 1300px;
+          margin: 0 auto;
+        }
+      
+        #grid_box > div {
+          margin: 0;
+          box-sizing: border-box;
+          /*border: 1px solid #ccc;*/
+          text-align: center;
+        }
+
+        #box1 {
+            grid-row: span 2;
+            border-top: 1px solid #1E62C8;
+            padding-top: 50px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        #box2 {
+            grid-row: span 2;
+            overflow-y: auto;
+            height: 920px;
+            position: relative;
+            padding-top: 100px;
+            padding: 100px 20px 0 20px;
+            border-top: 1px solid #1E62C8;
+        }
+        
+        #box3 {
+            overflow-y: auto;
+            height: 495px;
+            border-left: 1px solid #1E62C8;
+            border-top: 1px solid #1E62C8;
+        }
+
+        #box4 {
+            overflow-y: auto;
+            height: 495px;
+            border-left: 1px solid #1E62C8;
+            border-top: 2px solid black;
+        }
+      
+    </style>
+
+    <!-- box1 -->
+    <style>
+
+        #profile {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+
+        #myEvaluation {
+            margin-bottom: 50px;
+        }
+
+        .link a {
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .link a:visited {
+            color: #0D0143;
+        }
+
+        .link {
+            margin: 10px auto;
+            text-align: left;
+            margin-left: 40px;
+        }
+
+        #unregister {
+            text-align: left;
+            margin-top: auto;
+            margin-bottom: 30px;
+        }
+
+        #unregister > a {
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 40px;
+        }
+
+        #unregister > a:visited {
+            color: #0D0143;
+        }
+
+        #userInfo > span {
+            color: #0D0143;
+            font-size: 20px;
+        }
+
+        #evaluationIcon {
+            width: 25px;
+            height: 25px;
+        }
+
+        #myEvaluation span {
+            color: #0D0143;
+            font-size: 20px;
+        }
+        
+    </style> 
+
+
+    <!-- box2 -->
+    <style>
+        #btnPassion {
+            width: 130px;
+            background-color: #1e62c8;
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            padding: 5px 0;
+            cursor: pointer;
+
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #btnPassion:hover {
+            background-color: #1e4ca0;
+        }
+
+        #box2 > h3 {
+            display: inline;
+        }
+
+        #box2 > h3 {
+            position: absolute;
+            top: 35px;
+            left: 25px;
+        }
+
+        #box2 h3 {
+            color: #0D0143;
+        }
+
+        #list {
+            width: 680px;
+            margin-left: 40px;
+            border-collapse: collapse;;
+        }
+
+
+        #list th {
+            padding: 8px 0 8px 0;
+            color: #0D0143;
+            border-bottom: 2px solid #1E62C8;
+        }
+
+        #list td {
+            font-size: 12px;
+            padding: 10px 0;
+            color: #0D0143;
+            font-weight: bold;
+            border-bottom: 1px solid #1E62C8;
+        }
+
+        .col1 {
+            width: 105px;
+        }
+
+        .col2 {
+            max-width: 350px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .col3 {
+            width: 120px;
+        }
+
+        #sort {
+            width: 100px;
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px 0;
+        }
+
+        #sort:focus {
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            outline: none; /* 기본 포커스 스타일 제거 */
+        }
+
+        .col3 > button {
+            width: 50px;
+            background-color: #1e62c8;
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            padding: 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .col3 > button:hover {
+            background-color: #1e4ca0;
+        }
+
+
+    </style>
+
+    <!-- box3,4 -->
+    <style>
+
+        #friendList > :nth-child(1) {
+            margin: 20px auto;
+            color: #505050;
+        }
+
+        #blockList > :nth-child(1) {
+            margin: 20px auto;
+            color: #505050;
+        }
+
+        .friendItem > :nth-child(2), .blockItem > :nth-child(2) {
+            color: #505050;
+            display: inline-block;
+            width: 140px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+
+        .friendItem > img, .blockItem > img {
+            width: 20px;
+            height: 20px;
+        }
+
+    </style>
+
+    <!-- header -->
+    <style>  
+
+        .body {
+            width:1300px;
+            height:auto;
+            align-content:center;
+            display: flex;  
+            flex-direction: column;
+            margin: 0 auto;
+        }
+    
+    #logo {  
+            width: 220px;  
+            height: auto;  
+            margin-bottom: 20px; /* 로고와 다음 요소 사이의 간격 */  
+            position: relative;
+            top: 20px; /* 상단 20px 떨어지게 */  
+            left: 20px; /* 왼쪽 20px 떨어지게 */  
+        }  
+    
+        .header {  
+            font-size: 15px;  
+            color: #888;  
+            cursor: pointer;  
+            display: flex; /* 수평으로 나열하기 위해 flex 사용 */  
+            justify-content: flex-end; /* 오른쪽 정렬 */  
+            width: calc(100% - 40px);
+            text-decoration: none;
+        }  
+    
+        #userinfo {  
+            display: flex; /* 유저 정보 항목 수평 정렬 */  
+            gap: 20px; /* 링크 간의 간격 */ 
+            position: relative;
+            bottom: 50px;
+            text-decoration: none;
+        }  
+    
+        .search-container {  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+        }  
+    
+        .search-box {  
+            width: 700px;  
+            height: 30px;  
+            padding: 7px 35px 7px 15px;   
+            border: none;   
+            border-radius: 30px;   
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+        }  
+    
+        .search-button {  
+            background: none;  
+            border: none;  
+            cursor: pointer;  
+            margin-left: -60px; /* 검색창과 버튼의 간격 조정 */  
+        }  
+    
+        .search-button img {  
+            width: 30px;  
+            height: 30px;  
+            color: rgb(13, 1, 67);  
+        }  
+    </style>
+
+    <!-- footer -->
+    <style>
+        /* 일반적인 footer 스타일 (고정되지 않고 content 뒤에 위치) */
+            footer {
+            width: 1300px;
+            margin: 0 auto;
+                background-color: #fff;
+                padding: 40px 0;
+                font-family: 'Pretendard-Regular', sans-serif;
+            }
+            /* footer 내부 컨테이너 및 영역 스타일 */
+            .footer-container {
+                /*  width: 1300px; */
+                margin: 0 auto 100px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .footer-links {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                font-size: 14px;
+                color: #666;
+            }
+            .footer-links .left-links,
+            .footer-links .right-links {
+                display: flex;
+                gap: 30px;
+            }
+            .footer-links .right-links {
+                gap: 20px;
+            }
+            .footer-links a {
+                text-decoration: none;
+                color: #666;
+            }
+            .footer-info {
+                border-top: 1px solid #ddd;
+                padding-top: 20px;
+                font-size: 13px;
+                color: #999;
+                line-height: 1.6;
+            }
+            .footer-info strong {
+                color: #333;
+            }
+            .footer-social {
+                display: flex;
+                gap: 15px;
+                margin-top: 10px;
+            }
+            .footer-social a {
+                text-decoration: none;
+                color: #666;
+                font-size: 14px;
+            }
+    </style>
+</head>
+<body>
+    <div id="back_box">
+    <header class="body">  
+        <img src="/src/main/webapp/images/logo_가로.png" id="logo">  
+        <div class="header">  
+            <div id="userinfo">  
+                <a id="login" href="/lighting/login.do">LOGIN</a>  
+                <a id="logout" href="">LOGOUT</a>  
+                <a id="join" href="/lighting/login/register.do">JOIN</a>  
+                <a id="mypage" href="">MY PAGE</a>  
+            </div>  
+        </div>  
+        <div class="search-container">  
+            <input type="text" class="search-box" placeholder="&ensp;&ensp;모임을 검색해 보세요." />  
+            <button class="search-button" onclick="performSearch()">  
+                <img src="/src/main/webapp/images/search.png" alt="Search">
+            </button>  
+        </div>  
+    </header>
+    
+    <main>
+        <h2 id="mypageLogo">마이 페이지</h2>
+
+        <div id="grid_box">
+
+            <div id="box1">
+                <div>
+                    <!-- icon.png >> 변수명 -->
+                    <img src="/src/main/webapp/images/icon.png" id="profile">
+                </div>
+
+                <div id="userInfo">
+                    <!-- 마스터.png >> 변수명 -->
+                    <img src="/src/main/webapp/images/마스터.png" id="evaluationIcon">
+                    <!-- 닉네임 >> 변수명 -->
+                    <span id="myNickname">닉네임</span>
+                    <!-- (아이디) >> 변수명 -->
+                    <span id="myId">(아이디)</span>
+                </div>
+
+                <div id="myEvaluation">
+                    <span>⭐</span>
+                    <span>
+                        <!-- 5.0 >> 변수명 -->
+                        <b><span>5.0</span>점</b>
+                    </span>
+                </div>
+
+                <div class="link">
+                    <a href=""><b>내가 참여한 모임 보기</b></a>
+                </div>
+                <div class="link">
+                    <a href="">내가 작성한 글 보기</a>
+                </div>
+                <div class="link">
+                    <a href="">내가 찜한 모임 보기</a>
+                </div>
+                <div class="link">
+                    <a href="">회원 정보 수정</a>
+                </div>
+                <div class="link">
+                    <a href="">참가 신청 현황</a>
+                </div>
+                <div class="link">
+                    <a href="">참가 신청 관리</a>
+                </div>
+                <div id="unregister">
+                    <a href="">회원 탈퇴</a>
+                </div>
+            </div>
+
+            <div id="box2">
+                <h3>내가 작성한 글 보기</h3>
+                <button id="btnPassion">열정(등급) 보기</button>
+
+                <table id="list">
+                    <tr>
+                        <th>작성 일자</th>
+                        <th>제목</th>
+                        <th>
+                            <select name="sort" id="sort">
+                                <option value="recentOrder" selected>최신 순</option>
+                                <option value="koreanOrder">가나다 순</option>
+                                <option value="moreCapOrder">많이 참여한 순</option>
+                                <option value="lessCapOrder">적게 참여한 순</option>
+                                <option value="oldestOrder">오래된 순</option>
+                            </select>
+                        </th>
+                    </tr>
+
+                    <!-- for문 시작 -->
+                    <tr>
+                        <td class="col1">
+                            <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
+                            2025년 4월 2일
+                        </td>
+                        <td class="col2">
+                            <!-- 게시글의 제목 가져오기 -->
+                            4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                        </td>
+                        <td class="col3">
+                            <button>
+                                수정
+                            </button>
+                            <button>
+                                삭제
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- for문 종료 -->
+
+                </table>
+                
+            </div>
+
+            <div id="box3"">
+                <div id="friendList">
+                    <div>친구목록</div>
+
+                    <!-- for문 시작 -->
+                    <div class="friendItem">
+                        <!-- 다이아.png >> 변수명 -->
+                        <img src="/src/main/webapp/images/다이아.png">
+
+                        <span>
+                            닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
+                        </span>
+
+                        <img src="/src/main/webapp/images/닫기.png">
+                    </div>
+                    <!-- for문 종료 -->
+
+                    <!-- for문 시작 -->
+                    <div class="friendItem">
+                        <!-- 다이아.png >> 변수명 -->
+                        <img src="/src/main/webapp/images/다이아.png">
+
+                        <span>
+                            닉네임닉<!-- 닉네임 >> 변수명 -->
+                        </span>
+
+                        <img src="/src/main/webapp/images/닫기.png">
+                    </div>
+                    <!-- for문 종료 -->
+
+                </div>
+            </div>
+
+            <div id="box4">
+                <div id="blockList">
+                    <div>차단목록</div>
+
+                    <!-- for문 시작 -->
+                    <div class="blockItem">
+                        <!-- 다이아.png >> 변수명 -->
+                        <img src="/src/main/webapp/images/다이아.png">
+
+                        <span>
+                            닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
+                        </span>
+
+                        <img src="/src/main/webapp/images/닫기.png">
+                    </div>
+                    <!-- for문 종료 -->
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+        
+    <footer class="fixed-footer">
+            <div class="footer-container">
+            <!-- 상단 링크 영역 -->
+            <div class="footer-links">
+                <div class="left-links">
+                <a href="#">회사소개</a>
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">자주 묻는 질문</a>
+                </div>
+                <div class="right-links">
+                <span>고객센터: 1588-1234</span>
+                <a href="#">1:1 문의하기</a>
+                </div>
+            </div>
+            <!-- 하단 회사 정보 영역 -->
+            <div class="footer-info">
+                <p>
+                (주)오늘뭐해? | 대표자: 홍길동 | 사업자등록번호: 123-45-67890 | 통신판매업신고: 제2025-서울강남-0000호
+                </p>
+                <p>
+                주소: 서울특별시 강남구 테헤란로 123 (오늘뭐해? 빌딩) | 대표번호: 1588-1234 | 이메일: cs@oneulmohae.co.kr
+                </p>
+                <p>
+                © 2025 오늘뭐해? All Rights Reserved.
+                </p>
+            </div>
+            <!-- 소셜 미디어 영역 -->
+            <div class="footer-social">
+                <a href="#">페이스북</a>
+                <a href="#">인스타그램</a>
+                <a href="#">트위터</a>
+            </div>
+            </div>
+    </footer>
+    </div>
+</body>
+</html>
