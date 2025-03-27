@@ -4,8 +4,9 @@
 
 <style>
     body {
-    margin: 0;
+    	margin: 0;
     }
+    
     .category {  
         display: flex;
         justify-content: center;   
@@ -44,7 +45,8 @@
         gap: 20px; /* 항목 간격 */
         padding: 0;
         list-style: none; /* 기본 리스트 스타일 제거 */
-    }  
+    } 
+    
     .category .dropdown li {  
         text-align: center;  
         cursor: pointer;
@@ -67,7 +69,7 @@
         display: block;  
     }
     
-    .slider { 
+    #slider { 
         margin: 0 auto;
         width: 1100px;
         height: 350px;
@@ -75,18 +77,18 @@
         position: relative; /* 슬라이드 이동을 위해 필요 */
     }
     
-    .slides { 
+    #slides { 
         display: flex; /* 이미지를 가로로 나열 */
-        animation: slide 8s linear infinite; /* 애니메이션 적용 */
+        animation: slide 16s linear infinite; /* 애니메이션 적용 */
         height: 100%;
     }
     
-    .slides div {  
+    #slides div {  
         width: 100%/4; /* 이미지 4개 기준, 이미지 개수에 따라 조정 필요 */
         flex-shrink: 0; /* 이미지 크기 유지 */
     }  
     
-    .slides img {  
+    #slides img {  
         width: 100%; /* 이미지 너비를 부모 요소에 맞춤 */
         height: 100%; /* 이미지 높이 자동 조절 */
         display: block; /* 이미지 아래 여백 제거 */
@@ -110,6 +112,7 @@
             transform: translateX(-400%);
         }
     }
+    
     .extra {
         margin: 0 auto;
         width: 1100px;
@@ -124,15 +127,15 @@
         color: #0d0143;
     }
     
-    .extra > p {
+    #extraView {
         color: #0d0143;
         cursor: pointer;
     }
+    
 </style>
 
 <style>
-    #meeting_box {
-        
+    #meetingBox {
         display: grid; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 40px;
@@ -151,19 +154,25 @@
         text-align: center; 
     }
 
-    .item > img {
+    .thumnail {
         width: 200px; 
         border-radius: 15px;
     }
 
-    .item > span {
+    .title {
         font-size: 22px;  
         font-weight: bold;  
         color: #0d0143;  
         margin: 8px 0; /* 텍스트 사이의 여백 */
+        cursor: pointer;
+
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
-    .text1 {
+    .nameAndCap {
         font-size: 15px;  
         color: #505050;
         font-weight: normal;  
@@ -177,6 +186,17 @@
         height: 23px;
     }
 
+    #slides img:hover {
+        cursor: pointer;
+    }
+
+    .thumnail {
+        cursor: pointer;
+    }
+
+    .capBox {
+        text-align: right;
+    }
     
 </style>
 
@@ -277,92 +297,147 @@
     </div>
     
     <!-- 모임 추천 -->
-    <div class="slider">
-        <div class="slides">
-            <img alt="event 1" src="images/event_1.jpg">
-            <img alt="event 2" src="images/event_2.jpg">
-            <img alt="event 3" src="images/event_3.jpg">
-            <img alt="event 4" src="images/event_4.jpg">
-            <img alt="event 1" src="images/event_1.jpg">
+    <div id="slider">
+        <div id="slides">
+            <div id="event1">
+                <img alt="event 1" src="/lighting/images/event_1.jpg">
+            </div>
+            <div id="event2">
+                <img alt="event 2" src="/lighting/images/event_2.jpg">
+            </div>
+            <div id="event3">
+                <img alt="event 3" src="/lighting/images/event_3.jpg">
+            </div>
+            <div id="event4">
+                <img alt="event 4" src="/lighting/images/event_4.jpg">
+            </div>
+            <div id="event5">
+                <img alt="event 1" src="/lighting/images/event_1.jpg">
+            </div>
         </div>
     </div>
 
     <div class="extra">
         <h2>만들어진 모임 LIST</h2>
-        <p id="extra_view">더보기 ></p>
+        <p id="extraView">더보기 ></p>
     </div>
     
-    <div id="meeting_box">		
+    <div id="meetingBox">	
+        
+        <!-- for문 시작작 -->
         <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
             <div>
-                <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
             </div>
-        </div>  
-        <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+            <span class="title" data-seq="">
+                <!-- 게시글의 title -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
             <div>
                 <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
-            </div>
-        </div> 
-        <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-            <div>
-                <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
-            </div>
-        </div>
-        <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-            <div>
-                <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <div class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </div>
+                </span>
             </div>
         </div>
+        <!-- for문 끝 -->
+
         <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail">  
+            </div>
+            <span class="title">
+                제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+            </span>
+
             <div>
                 <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">치킨중독자치킨중독자</span>
+                    &ensp; 
+                    <span class="capacity">3</span>
+                    명 모집중
+                </span>
             </div>
         </div>
+
         <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail">  
+            </div>
+            <span class="title">
+                제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+            </span>
+
             <div>
                 <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">치킨중독자</span>
+                    &ensp; 
+                    <span class="capacity">3</span>
+                    명 모집중
+                </span>
             </div>
         </div>
+
         <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail">  
+            </div>
+            <span class="title">
+                제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+            </span>
+
             <div>
                 <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">치킨중독자</span>
+                    &ensp; 
+                    <span class="capacity">3</span>
+                    명 모집중
+                </span>
             </div>
         </div>
+
         <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail">  
+            </div>
+            <span class="title">
+                제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+            </span>
+
             <div>
                 <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">치킨중독자</span>
+                    &ensp; 
+                    <span class="capacity">3</span>
+                    명 모집중
+                </span>
             </div>
         </div>
-        <div class="item">  
-            <img src="images/치킨.jpg">  
-            <span>4월 5일 강남에서 치킨드실3명 모집합니다!!!!</span>  
-            <div>
-                <img class="icon" src="images/icon.png" alt="Icon">
-                <span class="text1">&ensp; 치킨중독자&ensp; 3명 모집중</span>
-            </div>
-        </div>
-    </div>
+
+    </div><!-- meetingBox -->
+
+    <script>
+
+
+    </script>
