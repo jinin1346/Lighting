@@ -212,13 +212,13 @@
       <!-- 생년월일 -->
       <div class="formGroup">
         <label for="birthdate">생년월일</label>
-        <input type="text" id="birthdate" name="birthdate" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
+        <input type="text" id="birthdate" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
       </div>
       
       <!-- 연락처 -->
       <div class="formGroup">
         <label for="phone">연락처</label>
-        <input type="text" id="phone" name="phone" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
+        <input type="text" id="phone" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
       </div>
       
       <!-- 이메일 -->
@@ -247,7 +247,7 @@
         <div style="display: flex; gap: 10px;">
           <select id="city" name="city" style="flex: 1;">
             <option value="" disabled selected>시/도 선택</option>
-            <option value="서울">서울</option>
+            <option value="서울특별시">서울특별시</option>
             <option value="부산">부산</option>
             <option value="대구">대구</option>
             <option value="인천">인천</option>
@@ -282,7 +282,7 @@
       <button type="submit" id="btnSubmit">회원가입 완료</button>
     </form>
   </div>
-  
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script>
     // 시/도 선택에 따라 구/군 셀렉트 박스 제어
     const citySelect = document.getElementById("city");
@@ -320,7 +320,7 @@
 
     citySelect.addEventListener("change", function() {
       const selectedCity = this.value;
-      if (selectedCity === "서울") {
+      if (selectedCity === "서울특별시") {
         // 서울 선택 시 구/군 옵션 활성화
         districtSelect.innerHTML = seoulDistrictOptions;
         districtSelect.disabled = false;
@@ -343,9 +343,9 @@
       });
     });
 
-    $('#logo', '#btnSubmit').click(() => { 
-      window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
-    });
+    $('#logo, #btnSubmit').click(() => { 
+    	  window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
+    	});
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
