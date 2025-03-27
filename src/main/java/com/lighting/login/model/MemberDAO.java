@@ -71,5 +71,38 @@ public class MemberDAO {
         }
     }
     
+    public MemberDTO login(MemberDTO dto) {
+
+        try {
+
+            String sql = "select * from tblMember where id =? and pw = ?";
+
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getId());
+            pstat.setString(2, dto.getPw());
+
+            rs = pstat.executeQuery();
+
+            if (rs.next()) {
+                //로그인 성공
+                MemberDTO result = new MemberDTO();
+
+                result.setId(rs.getString("id"));
+                result.setId(rs.getString("name"));
+                result.setId(rs.getString("id"));
+
+                return result;
+
+            } else {
+                //로그인 실패
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    
 
 }
