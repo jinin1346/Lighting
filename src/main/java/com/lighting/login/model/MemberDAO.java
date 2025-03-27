@@ -42,6 +42,8 @@ public class MemberDAO {
             
             String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname,birthday,tel,email,gender,photoFileName,registrationDate,status) values (seqMember.nextVal,?, ?, ?, ?, ?, ?, ?, ?,'basicProfile.png',default, default)";
             
+            //String sql = "insert into tblMember (tblMemberSeq, id, pw, name, nickname, birthday, tel, email, gender, photoFileName, registrationDate, status) values (seqMember.nextVal, ?, ?, ?, ?, TO_DATE(?, 'YYYY-MM-DD'), ?, ?, ?,'basicProfile.png', default, default)";
+            
             String birthday = dto.getBirthday();
             
             birthday = birthday.substring(0,4) + "-" + birthday.substring(4,6) + "-" + birthday.substring(6);
@@ -59,11 +61,11 @@ public class MemberDAO {
             pstat.setString(7, dto.getEmail());
             pstat.setString(8, dto.getGender());
             System.out.println(11);
-            // 회원 정보를 삽입하고, 삽입된 행의 수를 반환받음
+            // 회원 정보를 삽입하고, 삽입된 행의 수 반환
             int result = pstat.executeUpdate();
             System.out.println(11);
             
-            // 회원 정보가 정상적으로 삽입되었을 경우
+            // 정상삽입 되면
             if(result > 0) {
                 //최근 넣은 tblMemberSeq
                 String sql2 = "select max(tblMemberSeq) as maxSeq from tblMember";
@@ -91,10 +93,13 @@ public class MemberDAO {
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, memberDto.getSido());     // "서울특별시"
             pstat.setString(2, memberDto.getGugun());   // "강남구"
+            System.out.println(123);
             rs = pstat.executeQuery();
+            System.out.println(1234);
             if (rs.next()) {
                 JusoSeq = rs.getInt("tblActivityRegionCoordinateSeq");
-            }
+                System.out.println(JusoSeq);
+            }System.out.println(JusoSeq);
         } catch (Exception e) {
             e.printStackTrace();
         }
