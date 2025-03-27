@@ -25,6 +25,8 @@ body {
 
 #logo1 {
 	width: 250px;
+	margin: 15px 0 0 15px;
+	cursor: pointer;
 }
 
 #tx {
@@ -33,10 +35,12 @@ body {
 	text-align: center;
 }
 
-#pic {
-	margin-top: 10px;
+#pic > img {
+	margin: 10px;
 	text-align: center;
 	margin-bottom: 10px;
+	position: relative;
+	left: 230px;
 }
 
 #button {
@@ -103,7 +107,6 @@ body {
 	<div id="div1">
 		<img alt="" id="logo1" src="/lighting/asset/images/a.webp">
 	</div>
-<<<<<<< Updated upstream
 	<div id="tx">
 		회원가입을 위해 <br>아래 서비스<b>이용약관에 동의</b>해주세요.
 	</div>
@@ -174,9 +177,9 @@ body {
 			}
 		}
 	</script>
-=======
+
 	
-	<div class="btn1">
+<!-- 	<div class="btn1">
 	<form method="POST" action="/login/register.jsp">
 	<button value="회원가입">
 	회원가입
@@ -186,7 +189,7 @@ body {
         회원가입
     </a>
     </form>
-	</div>
+	</div> -->
 	    
     
     
@@ -209,8 +212,11 @@ body {
                 //window.location.href = "register_sw.jsp"; // 페이지 이동
             }
         }
+        
+        $('#logo1').click(()=>{ 
+            window.location.href='/main.do'//메인페이지로 이동
+        });
     </script>
-    </script>
->>>>>>> Stashed changes
+
 </body>
 </html>
