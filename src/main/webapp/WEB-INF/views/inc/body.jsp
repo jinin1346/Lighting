@@ -308,10 +308,10 @@
             		1. 오늘의 추천으로 날씨, 요일에 맞는 중분류 카테고리를 4개 가져오기
             	 -->
                 <!-- event_1.jpg >> 첫번째 사진 변수명 -->
-                <!-- 예시) src="/lighting/images/${변수명}" -->
+                <!-- 예시) src="/lighting/images/" -->
                 
                 <!-- data-tblCategorySubSeq >> 중분류 pk -->
-                <!-- 예시) data-tblCategorySubSeq="${변수명}" -->
+                <!-- 예시) data-tblCategorySubSeq="" -->
                 
                 <img alt="event1" src="/lighting/images/event_1.jpg" data-tblCategorySubSeq="">
             </div>
@@ -350,7 +350,7 @@
                 <!-- 치킨.jpg >> 게시글의 photoFileName  -->
                 <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
             </div>
-            <span class="title" data-seq="">
+            <span class="title" data-tblMeetingPostSeq="">
                 <!-- 게시글의 title -->
                 제목제목제목제목제목제목제목제목제목제목
             </span>
