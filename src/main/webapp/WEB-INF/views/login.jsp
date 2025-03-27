@@ -28,7 +28,8 @@ request.setCharacterEncoding("UTF-8");
 }
 
 #logo1 {
-    width: 150px;
+    width: 250px;
+    margin: 15px 0 0 15px;
     
 }
 
@@ -62,11 +63,10 @@ button {
     height: 30px;
     border: none;
     margin-top: 10px;
+    margin-left: 5px;
     color: #FFF;
     background: rgb(29, 99, 202);
-    
-    
-   
+    cursor: pointer;    
 }
 
 form {
@@ -84,6 +84,12 @@ h3 {
     margin-left: 15px;
     padding: 4px;
 }
+
+a:link { color: #1e62c8; }
+a:visited { color: #1e62c8; }
+a:hover { color: #0000FF; }   /* 마우스 오버 시 색상 */
+a:active { color: #FF00FF; }  /* 클릭 중 색상 */
+
 </style>
 </head>
 <body>
@@ -100,18 +106,18 @@ h3 {
                         </div>
                         <h3>로그인</h3>
                         <div>
-                            <input type="text" placeholder="아이디">
+                            <input type="text" placeholder="아이디" required>
                         </div>
                         <div>
-                            <input type="password" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)">
+                            <input type="password" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)" required>
                         </div>
         
                         <div class="a">
-                            <a href="register.jsp">회원가입</a>
+                             <a href="registerrole.do">회원가입</a>
                              | 
                              <a href="findid.do">아이디 찾기</a>
                              | 
-                              <a href="findpassword.do">비밀번호 찾기</a>
+                             <a href="findpassword.do">비밀번호 찾기</a>
                         </div>
                         <button>로그인</button>
                     </form>
@@ -119,12 +125,9 @@ h3 {
             </div>
     </div>
 
-    <%@include file="/WEB-INF/views/inc/footer.jsp"%>	
+    <%@include file="/WEB-INF/views/inc/footer.jsp"%>   
 </body>
 
-
-
-<%@include file="/WEB-INF/views/inc/footer.jsp"%>
 
 <script>
     

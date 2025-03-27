@@ -14,44 +14,54 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.4);
             justify-content: center;
             align-items: center;
             border-radius: 16px;
+            display: none; /* 초기에는 숨김 */
         }
 
         .modal {
-   			background-color: rgb(249, 247, 255); /* 변경된 배경색 */
-            padding: 20px;
-            border-radius: 8px;
-            width: 470px;
-            height: 450px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f9f7ff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             position: relative;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        /* 닫기 이미지 버튼 */
-        .close-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .close-btn img {
-            width: 30px;  /* 이미지 크기 조정 */
-            height: 30px;
-        }
+
+        /* 닫기 버튼 스타일 개선 */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+    }
+    .close-btn img {
+        width: 18px;
+        height: 18px;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+    }
+    .close-btn:hover img {
+        opacity: 1;
+    }
 
         /* 배지 컨테이너 */
         .badge-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            margin-top:25px;
+            margin-top: 25px;
         }
 
         /* 각 배지 스타일 */
@@ -59,57 +69,64 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            border: 1px solid #ccc;
-            padding: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         .badge-icon {
             width: 60px;
             height: 60px;
-          	margin-left: 30px;
+            margin-left: 15px;
         }
 
         .badge-info h3 {
             font-size: 16px;
-            margin: 10px 0 0 0;
-            font-weight: bold;
+            margin: 0;
+            font-weight: 600;
+            color: #333;
         }
 
         .badge-info p {
             font-size: 14px;
             color: #555;
             margin-top: 5px;
+            line-height: 1.4;
         }
 
         /* 각 등급에 따른 스타일 */
         .master {
-            background-color: white;
+            border-left: 4px solid #ff6b6b;
         }
 
         .diamond {
-            background-color: white;
+            border-left: 4px solid #4cc9f0;
         }
 
         .gold {
-            background-color: white;
+            border-left: 4px solid #f8961e;
         }
 
         .silver {
-            background-color: white;
+            border-left: 4px solid #adb5bd;
         }
     </style>
 </head>
-<body onload="openModal()"> <!-- 페이지 로드 시 바로 모달 열기 -->>
-
-
+<body onload="openModal()">
     <!-- 모달 -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal()">
-             <img src="images/닫기.png" alt="닫기">
-            </button>
+            <img src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png" alt="Close">
+        </button>
             <div class="modal-content">
                 <div class="badge-container">
                     <div class="badge master">
@@ -149,12 +166,26 @@
     // 모달 열기
     function openModal() {
         document.getElementById('modalOverlay').style.display = 'flex';
+        
+        // ESC 키로 모달 닫기 이벤트 등록
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     }
 
     // 모달 닫기
     function closeModal() {
         document.getElementById('modalOverlay').style.display = 'none';
     }
+    
+    // 모달 외부 클릭 시 닫기
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
     </script>
 </body>
 </html>

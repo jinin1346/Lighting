@@ -132,6 +132,7 @@
             text-align: center;
             color: black;
             font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
