@@ -62,6 +62,7 @@ button {
     height: 30px;
     border: none;
     margin-top: 10px;
+    margin-left: 5px;
     color: #FFF;
     background: rgb(29, 99, 202);
     
@@ -107,7 +108,7 @@ h3 {
                         </div>
         
                         <div class="a">
-                            <a href="register.jsp">회원가입</a>
+                            <a href="registerrole.do">회원가입</a>
                              | 
                              <a href="findid.do">아이디 찾기</a>
                              | 
@@ -122,9 +123,6 @@ h3 {
     <%@include file="/WEB-INF/views/inc/footer.jsp"%>	
 </body>
 
-
-
-<%@include file="/WEB-INF/views/inc/footer.jsp"%>
 
 <script>
     

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
+
 <style>
 /* 일반적인 footer 스타일 (고정되지 않고 content 뒤에 위치) */
     footer {
@@ -57,13 +57,7 @@
       font-size: 14px;
     }
 </style>
-=======
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<%request.setCharacterEncoding("UTF-8");%>
-<footer>
-</footer>
->>>>>>> 198b3b38cf3ee8a918222586040ca1190b18a095
+
 
 <footer class="fixed-footer">
   <div class="footer-container">
