@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>개인 정보 수정</title>
     <style>
-        /* 전체 화면 덮는 모달 배경 */
         .modal {
             display: none;
             position: fixed;
@@ -18,7 +17,6 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
 
-        /* 모달 내부 콘텐츠 */
         .modal-content {
             background-color: #f9f7ff;
             width: 500px;
@@ -29,7 +27,6 @@
             position: relative;
         }
 
-        /* 닫기 버튼 (x) */
         .close-button {
             position: absolute;
             top: 10px;
@@ -49,10 +46,9 @@
             font-weight: bold;
             margin: 30px auto 30px;
             font-size: 20px;
-            color: black; /* 글자색 검정색 */
+            color: black;
         }
 
-        /* 왼쪽 상자 + 입력 필드를 감싸는 컨테이너 */
         .infoContainer {
             display: flex;
             width: 80%;
@@ -60,7 +56,6 @@
             padding: 0;
         }
 
-        /* 왼쪽 파란 상자 */
         .infoLabel {
             background-color: #1e62c8;
             color: #fff;
@@ -71,10 +66,9 @@
             align-items: center;
             justify-content: center;
             border-radius: 8px 0px 0px 8px;
-            width: 80px; /* Label width */
+            width: 80px;
         }
 
-        /* 오른쪽 흰색 배경+파란 테두리 상자 */
         .inputContainer {
             display: flex;
             align-items: center;
@@ -93,7 +87,6 @@
             outline: none;
         }
 
-        /* 제출 버튼 (개인 정보 수정 완료) */
         .submitButton {
             display: block;
             width: 60%;
@@ -112,7 +105,6 @@
             background-color: #0056b3;
         }
 
-        /* 모달 열기 버튼 */
         #openModalBtn {
             margin: 30px;
             padding: 10px 20px;
@@ -120,15 +112,13 @@
             cursor: pointer;
         }
 
-        /* 활동 지역 변경 스타일 */
         #sido, #gugun {
             padding: 8px;
-            border: none; /* 테두리 제거 */
-            outline: none; /* 아웃라인 제거 */
-            width: 100%; /* Select box width to 100% */
+            border: none;
+            outline: none;
+            width: 100%;
         }
 
-        /* 활동 지역 변경 Wrapper */
         .locationContainer {
             width: 80%;
             margin: 20px auto;
@@ -140,16 +130,14 @@
 
         .locationContainer p {
             text-align: center;
-            color: black; /* 글자색 검정색 */
-            font-size: 20px; /* 글자 크기 */
+            color: black;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- 모달을 열기 위한 버튼 -->
     <button id="openModalBtn">개인 정보 수정</button>
 
-    <!-- 모달 창 -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -177,13 +165,26 @@
                     <div class="inputContainer">
                         <select id="sido">
                             <option>서울시</option>
+                            <option>인천광역시</option>
+                            <option>경기도</option>
+                            <option>경상남도</option>
+                            <option>경상북도</option>
+                            <option>대구광역시</option>
+                            <option>전라남도</option>
+                            <option>전라북도</option>
+                            <option>광주광역시</option>
+                            <option>충청남도</option>
+                            <option>충청북도</option>
+                            <option>대전광역시</option>
+                            <option>강원도</option>
+                            <option>제주도</option>
                         </select>
                     </div>
                 </div>
                 <div class="infoContainer">
                      <div class="infoLabel">구/군 변경</div>
                     <div class="inputContainer">
-                        <select id="gugun">
+                        <select id="gugun" disabled>
                             <option>강남구</option>
                             <option>강동구</option>
                             <option>강북구</option>
@@ -221,23 +222,32 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         $(document).ready(function() {
-            // 모달 열기 버튼 클릭 시
             $("#openModalBtn").click(function() {
                 $("#myModal").css("display", "block");
             });
 
-            // 닫기 버튼 클릭 시
             $(".close-button").click(function() {
                 $("#myModal").css("display", "none");
             });
 
-            // 모달 바깥 영역 클릭 시 닫기
             $(window).click(function(event) {
                 if (event.target.className === "modal") {
                     $("#myModal").css("display", "none");
                 }
             });
+            
+            // 시/도 선택 시 이벤트 처리
+            $("#sido").change(function() {
+                if ($(this).val() === "서울시") {
+                    $("#gugun").prop("disabled", false);
+                } else {
+                    $("#gugun").prop("disabled", true);
+                    $("#gugun").val("");
+                }
+            });
         });
+        
+        
     </script>
 </body>
 </html>
