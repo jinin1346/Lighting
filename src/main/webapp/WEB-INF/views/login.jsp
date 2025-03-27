@@ -28,7 +28,8 @@ request.setCharacterEncoding("UTF-8");
 }
 
 #logo1 {
-    width: 150px;
+    width: 250px;
+    margin: 15px 0 0 15px;
     
 }
 

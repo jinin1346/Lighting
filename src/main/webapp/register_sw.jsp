@@ -165,11 +165,10 @@
     .interest-tags{
       border : 1px solid #1e62c8;
       border-radius: 4px;
-        font-size: 14px;
-        padding: 10px;
-        text-align: center;
-        background-color:  #fff;
-    
+      font-size: 14px;
+      padding: 10px;
+      text-align: center;
+      background-color:  #fff;
     }
 
     /* 회원가입 완료 버튼 */
