@@ -150,13 +150,14 @@
 	</div>
 	
 	<div class="btn1">
-	<form method="POST" action="/lighting/login/registerok.do">
-		<button type="submit">회원가입</button>
-	</form>
+	<form method="POST" action="/login/register.jsp">
+	<button value="회원가입">
 	
-    <!-- <a id="btn1" href="/lighting/login/registerok.do">
+	</button>
+    <!-- <a id="btn1" href="/login/registerok.do">
         회원가입
     </a> -->
+    </form>
 	</div>
 	    
     
@@ -178,6 +179,7 @@
                 //window.location.href = "register_sw.jsp"; // 페이지 이동
             }
         }
+    </script>
     </script>
 </body>
 </html>
