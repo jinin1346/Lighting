@@ -103,6 +103,7 @@ body {
 	<div id="div1">
 		<img alt="" id="logo1" src="/lighting/asset/images/a.webp">
 	</div>
+<<<<<<< Updated upstream
 	<div id="tx">
 		회원가입을 위해 <br>아래 서비스<b>이용약관에 동의</b>해주세요.
 	</div>
@@ -173,5 +174,43 @@ body {
 			}
 		}
 	</script>
+=======
+	
+	<div class="btn1">
+	<form method="POST" action="/login/register.jsp">
+	<button value="회원가입">
+	회원가입
+	</button>
+	<button type="submit" onclick="location.href='lighting/login/register.jsp';">회원가입2</button>
+    <a id="btn1" href="/login/registerok.do">
+        회원가입
+    </a>
+    </form>
+	</div>
+	    
+    
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://bit.ly/4cMuheh"></script>
+
+    <script>
+        // 회원가입 버튼 클릭 시 실행되는 함수
+        document.getElementById("btn1").onclick = function(event) {
+            // 체크박스를 선택했는지 확인
+            var checkbox = document.getElementsByName("agree")[0];
+            
+            // 체크되지 않은 경우
+            if (!checkbox.checked) {
+                alert("이용약관에 동의해주세요.");
+                event.preventDefault(); // 폼 제출을 막음
+            } else {
+            	alert("페이지 넘어가야함.");
+                // 체크되었으면 register_sw.do로 이동
+                //window.location.href = "register_sw.jsp"; // 페이지 이동
+            }
+        }
+    </script>
+    </script>
+>>>>>>> Stashed changes
 </body>
 </html>
