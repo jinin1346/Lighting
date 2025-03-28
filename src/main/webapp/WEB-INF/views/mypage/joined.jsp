@@ -474,15 +474,7 @@
 	</div>
 <script>
 </script>
-	$('#btnPassion').click(()=>{
-		alert('123');
-    	openServletInNewWindow("/lighting/mypage/grade.do");
-    });
-    
-    function openServletInNewWindow(servletUrl) {
-        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
-    }
-    
+	
 </body>
 </html>
 
