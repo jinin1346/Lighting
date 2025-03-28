@@ -1,4 +1,4 @@
-package com.lighting.user;
+package com.lighting.user.register;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/login/registerok.do")
+import com.lighting.user.model.UserDAO;
+
+@WebServlet("/user/register/registerok.do")
 public class RegisterOK extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       /* 
+    	/* 
     	// 인코딩 설정
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
@@ -93,6 +95,6 @@ public class RegisterOK extends HttpServlet {
             writer.print("<script>alert('회원가입 처리 중 오류가 발생했습니다.'); history.back();</script>");
             writer.close();*/
     	
-    	req.getRequestDispatcher("/WEB-INF/views/user/registerfinish.jsp").forward(req, resp);
+    	req.getRequestDispatcher("/WEB-INF/views/user/register/registerfinish.jsp").forward(req, resp);
       }
   }
