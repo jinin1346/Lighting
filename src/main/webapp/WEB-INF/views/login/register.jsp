@@ -36,11 +36,16 @@
     }
     
     #logo {
-      display: block;
-      width: 200px;
+      /* display: block; */
+      /* width: 200px;
       margin: 0 auto;
       cursor: pointer;
-      margin-bottom: 30px;
+      margin-bottom: 30px; */
+      position: absolute;
+      left: 0; 
+      top: 0;
+      width: 250px;
+      margin: 15px 0 0 15px;
     }
 
     /* 안내 문구 */
@@ -58,9 +63,11 @@
       display: block;
       margin: 0 auto 50px auto;
     } 
+    
     #step {
       width: 550px;
       height: auto;
+
     }
 
     /* 회원가입 폼 */
@@ -88,6 +95,17 @@
       outline: none;
       box-shadow: none;
     }
+    
+    input[type="text"], 
+    button {
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1;
+    padding: 8px;
+    vertical-align: middle;
+    }
+    
     /* 아이디 중복체크 및 이메일 인증 버튼 스타일 */
     .inputGroup .btnIdCheck,
     .inputGroup .btnEmailCheck {
@@ -146,6 +164,7 @@
       padding: 10px;
       text-align: center;
       background-color: #fff;
+
     }
 
     /* 회원가입 완료 버튼 */
@@ -343,12 +362,12 @@
       });
     });
 
-    $('#logo', '#btnSubmit').click(() => { 
-      window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
-    });
+    $('#logo, #btnSubmit').click(() => { 
+    	   alert('회원가입이 완료되었습니다.!');
+    	  window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
+    	});
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
-  
 </body>
 </html>

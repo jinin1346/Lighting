@@ -3,29 +3,38 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>회원가입 완료</title>
-	<link rel="stylesheet" href="/css/lighting.css">
-	<style>
+    <meta charset="UTF-8">
+    <title>회원가입 완료</title>
+    <link rel="stylesheet" href="/css/lighting.css">
+    <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: auto;
             text-align: center;
-            position : relative;
+        }
+        
+        /* 가운데 컨테이너 */
+        .container {
+            width: 1270px;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f7ff;
+            padding: 40px 20px;
+            position: relative;
         }
 
         #logo {
-	    position: absolute;
-	    left: 30px;
-	    top: 22px;
-	    width: 250px;
-	    height: auto;
-	    cursor: pointer;
-	
-	   }
+	        position: absolute;
+            left: 20px;
+            top: -10px;
+            margin: 15px 0 0 0;
+            width: 250px;
+            height: auto;
+            cursor: pointer;
+       }
 
         #logo2 {
             width: 250px;
@@ -34,7 +43,7 @@
 
         #loginMsg {
             color: #2765c7;
-            font-size: 3rem;
+            font-size: 30px;
             font-weight: bold;
             margin-bottom: 20px;
             font-family: 'Arial', sans-serif;
@@ -51,34 +60,47 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            position: relative;
+            top: 130px;
+            border-color: none;
         }
 
         #btnCheck:hover {
             background-color: #1e4ca0;
         }
+        
+        #message {
+            position: relative;
+            top: 150px;
+            
+        }
     </style>
 </head>
 <body class="body">
-    <img alt="로고" src="images/logo_가로.png" id="logo">
+    <main class="container">
+        <div>
+	       <img alt="로고" src="images/logo_가로.png" id="logo">
+	    </div>
+	    <div id="message">
+	        <img alt="로고" src="images/logo_세로.png" id="logo2">
+	        <p id="loginMsg">회원가입이 <br> 완료되었습니다.</p>
+	    </div>
+	    
+	    <form method="POST" action="/main.do">
+	        <button id="btnCheck">모임 참석하러 가기</button>
+	    </form>
+    </main>
     
-    <div>
-        <img alt="로고" src="images/logo_세로.png" id="logo2">
-        <p id="loginMsg">회원가입이 <br> 완료되었습니다.</p>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://bit.ly/4cMuheh"></script>
+    <script>
     
-    <form method="POST" action="/main.do">
-        <button id="btnCheck">모임 참석하러 가기</button>
-	</form>
-	
-	
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	<script src="https://bit.ly/4cMuheh"></script>
-	<script>
-	
-	   $('#logo', '#btnCheck').click(()=>{ 
-		   window.location.href='/main.do'//메인페이지로 이동
-	   });
-	
-	</script>
+       $('#logo', '#btnCheck').click(()=>{ 
+           window.location.href='/main.do'//메인페이지로 이동
+       });
+    
+    </script>
+    <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
+    
 </body>
 </html>
