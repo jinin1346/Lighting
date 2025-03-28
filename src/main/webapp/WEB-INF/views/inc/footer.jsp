@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <style>
 /* 일반적인 footer 스타일 (고정되지 않고 content 뒤에 위치) */
     footer {
@@ -12,7 +11,7 @@
     /* footer 내부 컨테이너 및 영역 스타일 */
     .footer-container {
      /*  width: 1300px; */
-      margin: 0 auto 100px;
+      margin: 0 auto 30px;
       display: flex;
       flex-direction: column;
       gap: 20px;
