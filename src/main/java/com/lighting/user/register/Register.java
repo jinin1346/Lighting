@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/user/register.do")
+@WebServlet("/user/register/register.do")
 
 public class Register extends HttpServlet {
 

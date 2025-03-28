@@ -208,7 +208,7 @@
             <img src="/lighting/images/맛집아이콘.png" id="car_1">
             <div class="dropdown">
                 <ul>
-                    <li><a>식사</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="18">식사</a></li>&ensp;
                     <li><a>카페</a></li>&ensp;
                     <li><a>디저트</a></li>&ensp;
                     <li><a>술</a></li>&ensp;
@@ -458,6 +458,6 @@
     </div><!-- meetingBox -->
 
     <script>
-
+		
 
     </script>
