@@ -209,16 +209,22 @@
       <!-- 아이디 -->
       <div class="form-group">
         <label for="userid">아이디</label>
+<<<<<<< HEAD
         <div class="input-group">
           <input type="text" id="userid" name="userid" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
           <button type="button" class="btn-idcheck">중복체크</button>
+=======
+        <div class="inputGroup">
+          <input type="text" id="id" name="id" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
+          <button type="button" class="btnIdCheck">중복체크</button>
+>>>>>>> f1f0d4dddf6f9b43bbc093eaff2cd045f626308e
         </div>
       </div>
       
       <!-- 비밀번호 -->
       <div class="form-group">
         <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
+        <input type="password" id="pw" name="pw" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
       </div>
       
       <!-- 이름 -->
@@ -236,13 +242,13 @@
       <!-- 생년월일 -->
       <div class="form-group">
         <label for="birthdate">생년월일</label>
-        <input type="text" id="birthdate" name="birthdate" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
+        <input type="text" id="birthday" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
       </div>
       
       <!-- 연락처 -->
       <div class="form-group">
         <label for="phone">연락처</label>
-        <input type="text" id="phone" name="phone" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
+        <input type="text" id="tel" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
       </div>
       
       <!-- 이메일 -->
@@ -257,14 +263,20 @@
       <!-- 성별 선택 -->
       <div class="form-group">
         <label>성별</label>
+<<<<<<< HEAD
         <div id = "gender">
           <input type="radio" id="male" name="gender" value="남성" required>
+=======
+        <div id="gender">
+          <input type="radio" id="male" name="gender" value="m" required>
+>>>>>>> f1f0d4dddf6f9b43bbc093eaff2cd045f626308e
           <label for="male">남성</label>
-          <input type="radio" id="female" name="gender" value="여성" required>
+          <input type="radio" id="female" name="gender" value="f" required>
           <label for="female">여성</label>
         </div>
       </div>
       
+<<<<<<< HEAD
       
       <div class="form-group">
                 <label>주소</label>
@@ -284,6 +296,25 @@
             </div>
       
       
+=======
+      <!-- 주소 -->
+      <div class="formGroup">
+        <label>주소</label>
+        <div style="display: flex; gap: 10px;">
+          <select id="city" name="city" style="flex: 1;">
+            <option value="" disabled selected>시/도 선택</option>
+            <option value="서울특별시">서울특별시</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="인천">인천</option>
+            <option value="경기도">경기도</option>
+          </select>
+          <select id="district" name="district" style="flex: 1;" disabled>
+            <option value="">구/군 선택</option>
+          </select>
+        </div>
+      </div>
+>>>>>>> f1f0d4dddf6f9b43bbc093eaff2cd045f626308e
       
       <!-- 관심 태그 선택 (최대 2개) -->
       <div class="form-group">
@@ -308,7 +339,7 @@
       <button type="submit" id="btnSubmit">회원가입 완료</button>
     </form>
   </div>
-  
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script>
 //시/도 선택에 따라 구/군 셀렉트 박스 제어
   const citySelect = document.getElementById("city");
@@ -347,10 +378,17 @@
 
   citySelect.addEventListener("change", function() {
       const selectedCity = this.value;
+<<<<<<< HEAD
       if (selectedCity === "서울") {
           // 서울 선택 시 구/군 옵션 활성화
           districtSelect.innerHTML = seoulDistrictOptions;
           districtSelect.disabled = false;
+=======
+      if (selectedCity === "서울특별시") {
+        // 서울 선택 시 구/군 옵션 활성화
+        districtSelect.innerHTML = seoulDistrictOptions;
+        districtSelect.disabled = false;
+>>>>>>> f1f0d4dddf6f9b43bbc093eaff2cd045f626308e
       } else {
           // 서울이 아닐 경우 구/군 선택 불가능 및 안내 메시지 표시
           districtSelect.innerHTML = '<option value="">아직 서울만 지원합니다.</option>';
@@ -370,11 +408,18 @@
         }
       });
     });
+<<<<<<< HEAD
     
     
     $('#logo', '#btnSubmit').click(()=>{ 
         window.location.href='/main.do'//메인페이지로 이동
     });
+=======
+
+    $('#logo, #btnSubmit').click(() => { 
+    	  window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
+    	});
+>>>>>>> f1f0d4dddf6f9b43bbc093eaff2cd045f626308e
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
