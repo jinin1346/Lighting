@@ -150,7 +150,7 @@ body {
         </div>
 
         <div class="btn1">
-            <form method="GET" action="/lighting/user/register.do">
+            <form method="GET" action="/lighting/user/register/register.do">
                 <button type="submit" id="btn1">회원가입</button>
 
                 <!-- <a id="btn1" href="/login/registerok.do">
