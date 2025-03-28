@@ -337,7 +337,8 @@
                     <a href="/lighting/mypage/requested.do">참가 신청 관리</a>
                 </div>
                 <div id="unregister">
-                    <a href="/lighting/mypage/unregister.do">회원 탈퇴</a>
+                    <a href="#!">회원 탈퇴</a>
+                    <!-- href="/lighting/mypage/unregister.do" -->
                 </div>
             </div>
 
@@ -472,9 +473,28 @@
 
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	</div>
-<script>
-</script>
 	
+	<script>
+
+	$('#btnPassion').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/grade.do");
+    });
+	
+	$('#unregister').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/unregister.do");
+    });
+	
+	$('.btnEvaluation').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/evaluation.do");
+    });
+	
+    function openServletInNewWindow(servletUrl) {
+        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
+    }
+    
+    
+    </script>
+    
 </body>
 </html>
 
