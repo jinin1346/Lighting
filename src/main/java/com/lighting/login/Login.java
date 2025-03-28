@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/login.do")
+@WebServlet("/login/login.do")
 public class Login extends HttpServlet {
 
     @Override
@@ -17,7 +17,7 @@ public class Login extends HttpServlet {
         //Login.java
         
 
-        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(req, resp);
     }
 
 }
