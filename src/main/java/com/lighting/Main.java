@@ -1,4 +1,4 @@
-package com.lighting.main;
+package com.lighting;
 
 import java.io.IOException;
 
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/main.do")
 public class Main extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+    }
 
 }

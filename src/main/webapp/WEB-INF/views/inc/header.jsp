@@ -73,7 +73,7 @@
     <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">  
     <div class="header">  
         <div id="userinfo">  
-            <a id="login" href="">LOGIN</a>  
+            <a id="login" href="/lighting/login/login.do">LOGIN</a>  
             <a id="logout" href="">LOGOUT</a>  
             <a id="join" href="">JOIN</a>  
             <a id="mypage" href="">MY PAGE</a>  

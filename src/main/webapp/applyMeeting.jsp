@@ -4,7 +4,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="css/lighting.css">
 <title>내가 신청한 모임 보기</title>
 <style>
 	body {
@@ -42,10 +41,6 @@
             height:30px;
          
         }
-        
-
-		
-		
 
         th {
             background-color: #f9f7ff;
@@ -54,8 +49,6 @@
             border-bottom: 1px solid #1e62c8;
             font-size: 18px;
         }
-        
-        
 
         /* "열정(등급) 보기" 버튼을 오른쪽 상단에 배치 */
         .enthusiasm-btn {
