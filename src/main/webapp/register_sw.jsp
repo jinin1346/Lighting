@@ -377,7 +377,7 @@
     });
   </script>
   
-<%@ include file="/WEB-INF/views/inc/footer.jsp"%>
+  <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
 
 </body>
 </html>
