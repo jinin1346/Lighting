@@ -17,8 +17,8 @@ public class LogoutOk extends HttpServlet {
 		//LogoutOk.java
 		//세션 삭제하고 메인으로 보낼것
 		//FIXME
-
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+	    
+	    resp.sendRedirect("/lighting/main.do");
 	}
 
 }
