@@ -17,8 +17,9 @@
 	
 	<header>헤더 테스트</header>
 	<main>
-	    <div id="logo"><img src="/images/logo_가로.png"></div>
+	    <div id="logo"><img src="/lighting/images/logo_가로.png"></div>
 	    <div class="basicContainer">배경 색 사이즈 테스트</div>
+	    <input type="time" min="00:00" step="1800">
 	</main>
     
 	
