@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import com.lighting.login.model.MemberDAO;
 import com.lighting.login.model.MemberDTO;
 
-@WebServlet("/loginok.do")
+@WebServlet("/login/loginok.do")
 public class LoginOk extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //LoginOk.java
         
@@ -44,21 +44,20 @@ public class LoginOk extends HttpServlet {
             session.setAttribute("auth", result.getId());//인증 티켓
             session.setAttribute("name", result.getName());//개인정보
             
-            resp.sendRedirect("/ligiting/main.do");
+            System.out.println("테스트");
+            resp.sendRedirect("/lighting/main/main.do");
             
         } else {
             //로그인 실패
             PrintWriter writer = resp.getWriter();
             writer.print("""
                     <script>
-                        alert('failed to login");
+                        alert('failed to login');
                         history.back();
                     </script>
                     """);
             writer.close();
             
         }
-
-        req.getRequestDispatcher("/WEB-INF/views/loginok.jsp").forward(req, resp);
     }
 }

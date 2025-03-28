@@ -134,8 +134,7 @@ public class MemberDAO {
                 MemberDTO result = new MemberDTO();
 
                 result.setId(rs.getString("id"));
-                result.setId(rs.getString("name"));
-                result.setId(rs.getString("id"));
+                result.setName(rs.getString("name"));
 
                 return result;
 
