@@ -29,13 +29,13 @@ drop table tblActivityRegionCoordinate cascade constraints;
 /* 회원 */
 CREATE TABLE tblMember (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
-	id VARCHAR2(20) NOT NULL, /* 아이디 */
+	id VARCHAR2(20) NOT NULL UNIQUE, /* 아이디 */
 	pw VARCHAR2(20) NOT NULL, /* 비밀번호 */
 	name VARCHAR2(30) NOT NULL, /* 이름 */
 	nickname VARCHAR2(30) NOT NULL, /* 닉네임 */
 	birthday DATE NOT NULL, /* 생년월일 */
-	tel VARCHAR2(20) NOT NULL, /* 연락처 */
-	email VARCHAR2(100) NOT NULL, /* 이메일 */
+	tel VARCHAR2(20) NOT NULL UNIQUE, /* 연락처 */
+	email VARCHAR2(100) NOT NULL UNIQUE, /* 이메일 */
 	gender VARCHAR2(1) NOT NULL, /* 성별 */
 	photoFileName VARCHAR2(1020) NOT NULL, /* 사진파일명 */
 	registrationDate DATE DEFAULT sysdate NOT NULL, /* 가입일 */
@@ -43,7 +43,7 @@ CREATE TABLE tblMember (
 );
 
 DROP SEQUENCE seqMember;
-CREATE SEQUENCE seqMember;
+CREATE SEQUENCE seqMember start with 1001;
 
 ALTER TABLE tblMember
 	ADD
@@ -62,7 +62,7 @@ CREATE TABLE tblActivityRegionCoordinate (
 );
 
 DROP SEQUENCE seqActivityRegionCoordinate;
-CREATE SEQUENCE seqActivityRegionCoordinate;
+CREATE SEQUENCE seqActivityRegionCoordinate start with 26;
 
 ALTER TABLE tblActivityRegionCoordinate
 	ADD
@@ -84,8 +84,6 @@ ALTER TABLE tblCategoryMain
 			tblCategoryMainSeq
 		);
 		
-DROP SEQUENCE seqCategoryMain;
-CREATE SEQUENCE seqCategoryMain;		
 
 /* 활동지역 */
 CREATE TABLE tblActivityRegion (
@@ -282,7 +280,7 @@ CREATE TABLE tblCategorySub (
 );
 
 DROP SEQUENCE seqCategorySub;
-CREATE SEQUENCE seqCategorySub;
+CREATE SEQUENCE seqCategorySub start with 51;
 
 ALTER TABLE tblCategorySub
 	ADD
@@ -349,7 +347,7 @@ CREATE TABLE tblPhotoPost (
 );
 
 DROP SEQUENCE seqPhotoPost;
-CREATE SEQUENCE seqPhotoPost;
+CREATE SEQUENCE seqPhotoPost start with 501;
 
 ALTER TABLE tblPhotoPost
 	ADD
@@ -454,7 +452,7 @@ CREATE TABLE tblAttachedPhoto (
 );
 
 DROP SEQUENCE seqAttachedPhoto;
-CREATE SEQUENCE seqAttachedPhoto;
+CREATE SEQUENCE seqAttachedPhoto start with 501;
 
 ALTER TABLE tblAttachedPhoto
 	ADD
@@ -489,7 +487,7 @@ CREATE TABLE tblMeetingPost (
 );
 
 DROP SEQUENCE seqMeetingPost;
-CREATE SEQUENCE seqMeetingPost;
+CREATE SEQUENCE seqMeetingPost start with 501;
 
 ALTER TABLE tblMeetingPost
 	ADD
