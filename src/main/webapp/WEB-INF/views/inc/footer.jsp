@@ -57,7 +57,6 @@
     }
 </style>
 
-
 <footer class="fixed-footer">
   <div class="footer-container">
     <!-- 상단 링크 영역 -->
