@@ -7,9 +7,28 @@
 <meta charset="UTF-8">
 
 <title>오늘어때?</title>
+<script>
+    window.onload = function() {
+        let status = sessionStorage.getItem('status');
+
+        if (status) {
+            $.ajax({
+                url: '/lighting/mypage/setSessionStatus.do', // 서블릿 URL 변경
+                type: 'POST', // 요청 방식 변경
+                data: { status: status }, // 전송할 데이터
+                success: function(response) {
+                },
+                error: function(error) {
+                    console.error('Error updating session status:', error);
+                }
+            });
+        }
+    };
+</script>
 
 	    <!-- 전체 박스 -->
     <style> 
+
 
         #mypageLogo {
             display: inline-block;
@@ -137,9 +156,9 @@
         
     </style> 
 
-	<!-- box2 -->
-    <style>
-        #btnPassion {
+	<!-- box2 공통-->
+	<style>
+		#btnPassion {
             width: 130px;
             background-color: #1e62c8;
             color: white;
@@ -187,6 +206,10 @@
         #box2 h3 {
             color: #0D0143;
         }
+	</style>
+	
+	<!-- box2 joined -->
+    <style>
 
         #list {
             width: 680px;
@@ -222,6 +245,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
         .col4 {
@@ -245,12 +269,6 @@
             border: 2px solid #1E62C8;
             border-radius: 4px;
             outline: none; /* 기본 포커스 스타일 제거 */
-        }
-
-        #iframe {
-            width: 700px;
-            height: 600px;
-            border: none;
         }
 
     </style>
@@ -277,16 +295,20 @@
             text-overflow: ellipsis;
         }
 
-
         .friendItem > img, .blockItem > img {
             width: 20px;
             height: 20px;
+        }
+        
+        .btnDelFreiend, .btnUnblock {
+        	cursor: pointer;
         }
 
     </style>
 
 </head>
 <body>
+
 	<div id="back_box">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	
@@ -319,22 +341,70 @@
                 </div>
 
                 <div class="link">
-                    <a href="/lighting/mypage/joined.do"><b>내가 참여한 모임 보기</b></a>
+                    <a href="/lighting/mypage/mypage.do" onclick="sessionStorage.setItem('status', 'joined');">
+                    	<c:if test="${sessionScope.status == 'joined'}">
+                    	<b>
+                    	</c:if>
+                    	내가 참여한 모임 보기
+                    	<c:if test="${sessionScope.status == 'joined'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/written.do">내가 작성한 글 보기</a>
+                    <a href="/lighting/mypage/mypage.do" onclick="sessionStorage.setItem('status', 'written');">
+                    	<c:if test="${sessionScope.status == 'written'}">
+                    	<b>
+                    	</c:if>
+                    	내가 작성한 글 보기
+                    	<c:if test="${sessionScope.status == 'written'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/wish.do">내가 찜한 모임 보기</a>
+                    <a href="/lighting/mypage/wish.do">
+                    	<c:if test="${sessionScope.status == 'wish'}">
+                    	<b>
+                    	</c:if>
+                    	내가 찜한 모임 보기
+                    	<c:if test="${sessionScope.status == 'wish'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/updateinfo.do">회원 정보 수정</a>
+                    <a href="/lighting/mypage/updateinfo.do">
+                    	<c:if test="${sessionScope.status == 'updateInfo'}">
+                    	<b>
+                    	</c:if>
+                    	회원 정보 수정
+                    	<c:if test="${sessionScope.status == 'updateInfo'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/requesting.do">참가 신청 현황</a>
+                    <a href="/lighting/mypage/requesting.do">
+                    	<c:if test="${sessionScope.status == 'requesting'}">
+                    	<b>
+                    	</c:if>
+                    	참가 신청 현황
+                    	<c:if test="${sessionScope.status == 'requesting'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/requested.do">참가 신청 관리</a>
+                    <a href="/lighting/mypage/requested.do">
+                    	<c:if test="${sessionScope.status == 'requested'}">
+                    	<b>
+                    	</c:if>
+                    	참가 신청 관리
+                    	<c:if test="${sessionScope.status == 'requested'}">
+                    	</b>
+                    	</c:if>
+                    </a>
                 </div>
                 <div id="unregister">
                     <a href="#!">회원 탈퇴</a>
@@ -342,10 +412,36 @@
                 </div>
             </div>
 
-            
+            <!-- joined -->
             <div id="box2">
-                <h3>내가 참여한 모임 보기</h3>
                 <button id="btnPassion">열정(등급) 보기</button>
+                
+                <c:if test="${sessionScope.status == 'joined'}">
+                <h3>내가 참여한 모임 보기</h3>
+                </c:if>
+                
+                <c:if test="${sessionScope.status == 'written'}">
+                <h3>내가 작성한 글 보기</h3>
+                </c:if>
+                
+                <c:if test="${sessionScope.status == 'wish'}">
+                <h3>내가 찜한 모임 보기</h3>
+                </c:if>
+                
+                <c:if test="${sessionScope.status == 'requesting'}">
+                <h3>내가 신청한 모임 보기</h3>
+                </c:if>
+                
+                <c:if test="${sessionScope.status == 'requested'}">
+                <h3>내가 만든 모임 신청 보기</h3>
+                </c:if>
+                
+                <c:if test="${sessionScope.status == 'updateInfo'}">
+                <h3>회원 정보 수정</h3>
+                </c:if>
+                
+                
+                
 
                 <table id="list">
                     <tr>
@@ -354,6 +450,7 @@
                         <th>제목</th>
                         <th>모집인원</th>
                         <th>
+                        	<!-- change 이벤트 걸기 -->
                             <select name="sort" id="sort">
                                 <option value="recentOrder" selected>최신 순</option>
                                 <option value="koreanOrder">가나다 순</option>
@@ -411,10 +508,9 @@
                 
             </div>
 
+			
 
-            
-
-            <div id="box3"">
+            <div id="box3">
                 <div id="friendList">
                     <div>친구목록</div>
 
@@ -427,7 +523,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -440,7 +537,7 @@
                             닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
                     </div>
                     <!-- for문 종료 -->
 
@@ -460,7 +557,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnUnblock">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -474,6 +572,7 @@
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	</div>
 	
+	<!-- 마이페이지 공통 자바스크립트 -->
 	<script>
 
 	$('#btnPassion').click(()=>{
@@ -492,8 +591,13 @@
         window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
     }
     
+    $('#list .col3').click(()=>{
+    	location.href='/lighting/meeting/read.do';
+    });
     
     </script>
+    
+    
     
 </body>
 </html>

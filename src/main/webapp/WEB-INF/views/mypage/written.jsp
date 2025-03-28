@@ -222,6 +222,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
         .col4 {
@@ -277,10 +278,13 @@
             text-overflow: ellipsis;
         }
 
-
         .friendItem > img, .blockItem > img {
             width: 20px;
             height: 20px;
+        }
+        
+        .btnDelFreiend, .btnUnblock {
+        	cursor: pointer;
         }
 
     </style>
@@ -319,25 +323,26 @@
                 </div>
 
                 <div class="link">
-                    <a href="/lighting/mypage/joined"><b>내가 참여한 모임 보기</b></a>
+                    <a href="/lighting/mypage/joined.do"><b>내가 참여한 모임 보기</b></a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/written">내가 작성한 글 보기</a>
+                    <a href="/lighting/mypage/written.do">내가 작성한 글 보기</a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/wish">내가 찜한 모임 보기</a>
+                    <a href="/lighting/mypage/wish.do">내가 찜한 모임 보기</a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/updateinfo">회원 정보 수정</a>
+                    <a href="/lighting/mypage/updateinfo.do">회원 정보 수정</a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/requesting">참가 신청 현황</a>
+                    <a href="/lighting/mypage/requesting.do">참가 신청 현황</a>
                 </div>
                 <div class="link">
-                    <a href="/lighting/mypage/requested">참가 신청 관리</a>
+                    <a href="/lighting/mypage/requested.do">참가 신청 관리</a>
                 </div>
                 <div id="unregister">
-                    <a href="/lighting/mypage/unregister">회원 탈퇴</a>
+                    <a href="#!">회원 탈퇴</a>
+                    <!-- href="/lighting/mypage/unregister.do" -->
                 </div>
             </div>
 
@@ -353,6 +358,7 @@
                         <th>제목</th>
                         <th>모집인원</th>
                         <th>
+                        	<!-- change 이벤트 걸기 -->
                             <select name="sort" id="sort">
                                 <option value="recentOrder" selected>최신 순</option>
                                 <option value="koreanOrder">가나다 순</option>
@@ -411,9 +417,7 @@
             </div>
 
 
-            
-
-            <div id="box3"">
+            <div id="box3">
                 <div id="friendList">
                     <div>친구목록</div>
 
@@ -426,7 +430,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -439,7 +444,7 @@
                             닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
                     </div>
                     <!-- for문 종료 -->
 
@@ -459,7 +464,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnUnblock">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -472,9 +478,34 @@
 
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	</div>
-<script>
-</script>
+	
+	<!-- 마이페이지 공통 자바스크립트 -->
+	<script>
 
+	$('#btnPassion').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/grade.do");
+    });
+	
+	$('#unregister').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/unregister.do");
+    });
+	
+	$('.btnEvaluation').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/evaluation.do");
+    });
+	
+    function openServletInNewWindow(servletUrl) {
+        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
+    }
+    
+    $('#list .col3').click(()=>{
+    	location.href='/lighting/meeting/read.do';
+    });
+    
+    </script>
+    
+    
+    
 </body>
 </html>
 

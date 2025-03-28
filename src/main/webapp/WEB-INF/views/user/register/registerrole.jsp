@@ -6,7 +6,7 @@
 <head>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <meta charset="UTF-8">
-<title>회원가입약관</title>
+<title>오늘어때?</title>
 <!-- <link rel="stylesheet" href="css/lighting.css"> -->
 
 <style>

@@ -350,6 +350,7 @@
                 <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 치킨.jpg >> 게시글의 photoFileName  -->
                 <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
             </div>
             <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 게시글의 title -->
@@ -379,19 +380,251 @@
         </div><!-- item -->
         </c:forEach>
         <!-- for문 끝 -->
-    </div><!-- meetingBox -->
+
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="item">  
+            <div>
+                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+            </div>
+            <span class="title" data-tblMeetingPostSeq="">
+                <!-- 게시글의 title -->
+                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+                제목제목제목제목제목제목제목제목제목제목
+            </span>
+
+            <div>
+                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- icon.png >> Member의 photoFileName -->
+                <span class="nameAndCap">
+                    &ensp; 
+                    <span class="name">
+                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                    </span>
+                    <br>
+                    <span class="capBox">
+                        <span class="capacity">
+                            3<!-- 게시글의 capacity -->
+                        </span>
+                        명 모집중
+                    </span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <!-- meetingBox -->
 
         
 
 
     <script>
     	$('.thumnail').click(() => {
-    			openServletInNewWindow("/lighting/login/register.do");
+    			location.href='/lighting/meeting/read.do';
     	});
+    	
+    	$('.title').click(() => {
+			location.href='/lighting/meeting/read.do';
+		});
     	
 	    function openServletInNewWindow(servletUrl) {
 	        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
 	    }
+	    
+	    
 
 	    
 	    $('#extraView').click(() => {
