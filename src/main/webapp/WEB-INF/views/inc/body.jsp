@@ -209,11 +209,11 @@
             <div class="dropdown">
                 <ul>
                     <li><a data-tblCategorySubSeq="18">식사</a></li>&ensp;
-                    <li><a>카페</a></li>&ensp;
-                    <li><a>디저트</a></li>&ensp;
-                    <li><a>술</a></li>&ensp;
-                    <li><a>비건</a></li>&ensp;
-                    <li><a>기타</a></li>
+	                <li><a data-tblCategorySubSeq="19">카페</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="20">디저트</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="21">술</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="22">비건</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="23">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -221,16 +221,16 @@
             <img src="/lighting/images/게임아이콘.png" id="car_2">
             <div class="dropdown">
                 <ul>
-                    <li><a>액션</a></li>&ensp;
-                    <li><a>어드벤처</a></li>&ensp;
-                    <li><a>롤플레잉(RPG)</a></li>&ensp;
-                    <li><a>시뮬레이션</a></li>&ensp;
-                    <li><a>전략</a></li>&ensp;
-                    <li><a>스포츠</a></li>&ensp;
-                    <li><a>퍼즐</a></li>&ensp;
-                    <li><a>아케이드</a></li>&ensp;
-                    <li><a>슈팅</a></li>&ensp;
-                    <li><a>기타</a></li>
+                    <li><a data-tblCategorySubSeq="8">액션</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="9">어드벤처</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="10">롤플레잉(RPG)</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="11">시뮬레이션</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="12">전략</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="13">스포츠</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="14">퍼즐</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="15">아케이드</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="16">슈팅</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="17">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -238,15 +238,15 @@
             <img src="/lighting/images/문화아이콘.png" id="car_3">
             <div class="dropdown">
                 <ul>
-                    <li><a>영화</a></li>&ensp;
-                    <li><a>공연</a></li>&ensp;
-                    <li><a>전시회/미술</a></li>&ensp;
-                    <li><a>노래/춤</a></li>&ensp;
-                    <li><a>언어교환</a></li>&ensp;
-                    <li><a>애니메이션</a></li>&ensp;
-                    <li><a>쇼핑</a></li>&ensp;
-                    <li><a>악기연주</a></li>&ensp;
-                    <li><a>기타</a></li>
+                    <li><a data-tblCategorySubSeq="24">영화</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="25">공연</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="26">전시회/미술</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="27">노래/춤</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="28">언어교환</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="29">애니메이션</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="30">쇼핑</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="31">악기연주</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="32">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -254,13 +254,13 @@
             <img src="/lighting/images/스포츠아이콘.png" id="car_4">
             <div class="dropdown">
                 <ul>
-                    <li><a>유산소</a></li>&ensp;
-                    <li><a>웨이트(무산소) </a></li>&ensp;
-                    <li><a>격투</a></li>&ensp;
-                    <li><a>코어&밸런스</a></li>&ensp;
-                    <li><a>기능성</a></li>&ensp;
-                    <li><a>다이어트</a></li>&ensp;
-                    <li><a>기타</a></li>
+                    <li><a data-tblCategorySubSeq="1">유산소</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="2">웨이트(무산소)</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="3">격투</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="4">코어&밸런스</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="5">기능성</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="6">다이어트</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="7">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -268,15 +268,15 @@
             <img src="/lighting/images/자기계발아이콘.png" id="car_5">
             <div class="dropdown">
                 <ul>
-                    <li><a>여행</a></li>&ensp;
-                    <li><a>드라이브</a></li>&ensp;
-                    <li><a>캠핑</a></li>&ensp;
-                    <li><a>등산</a></li>&ensp;
-                    <li><a>명상</a></li>&ensp;
-                    <li><a>반려동물</a></li>&ensp;
-                    <li><a>꽃꽃이</a></li>&ensp;
-                    <li><a>독서</a></li>&ensp;
-                    <li><a>기타</a></li>
+                    <li><a data-tblCategorySubSeq="42">여행</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="43">드라이브</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="44">캠핑</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="45">등산</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="46">명상</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="47">반려동물</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="48">꽃꽃이</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="49">독서</a></li>&ensp;
+	                <li><a data-tblCategorySubSeq="50">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -342,39 +342,43 @@
     </div>
     
     <div id="meetingBox">	
-        
         <!-- for문 시작 -->
+        <c:forEach begin="1" end="8" var="meeting" items="${meetingList}">
         <div class="item">  
             <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
+                <!-- 쿼리 작성할때 mp.phtoFileName as meetingPhoto 별칭 붙이기!! -->
+                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 치킨.jpg >> 게시글의 photoFileName  -->
                 <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
                 <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
             </div>
-            <span class="title" data-tblMeetingPostSeq="">
+            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
+                ${meeting.title}
             </span>
 
             <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
+                <!-- 쿼리 작성할때 m.phtoFileName as memberPhoto 별칭 붙이기!! -->
+                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
                 <!-- icon.png >> Member의 photoFileName -->
                 <span class="nameAndCap">
                     &ensp; 
                     <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
+                        <!-- 게시글 > 멤버 참조 >> nickname -->
+                        ${meeting.nickname}
                     </span>
                     <br>
                     <span class="capBox">
                         <span class="capacity">
-                            3<!-- 게시글의 capacity -->
+                            <!-- 게시글의 capacity -->
+                            ${meeting.capacity}
                         </span>
                         명 모집중
                     </span>
                 </span>
             </div>
-        </div>
+        </div><!-- item -->
+        </c:forEach>
         <!-- for문 끝 -->
 
         <div class="item">  
@@ -604,6 +608,9 @@
     </div>
     <!-- meetingBox -->
 
+        
+
+
     <script>
     	$('.thumnail').click(() => {
     			location.href='/lighting/meeting/read.do';
@@ -619,4 +626,58 @@
 	    
 	    
 
+	    
+	    $('#extraView').click(() => {
+	        $.ajax({
+	            type: 'GET',  
+	            url: '/lighting/maindata.do',  
+	            dataType: 'json',
+	            success: function(result) {
+	                // 기존 내용을 비우기
+	                $('#meetingBox').html('');
+	                
+	                // 전체 목록넣기
+	                result.forEach(meeting => {
+	                    $('#meetingBox').append(`
+	                        <div class="item">  
+	                            <div>
+	                                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
+	                            </div>
+	                            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
+	                                ${meeting.title}
+	                            </span>
+	                            <div>
+	                                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
+	                                <span class="nameAndCap">
+	                                    &ensp; 
+	                                    <span class="name">
+	                                        ${meeting.nickname}
+	                                    </span>
+	                                    <br>
+	                                    <span class="capBox">
+	                                        <span class="capacity">
+	                                            ${meeting.capacity}
+	                                        </span>
+	                                        명 모집중
+	                                    </span>
+	                                </span>
+	                            </div>
+	                        </div>
+	                    `);
+	                });
+	            },
+	            error: function(a, b, c){
+	                console.log(a, b, c);
+	            }
+	        });
+	    });
+	    
+	    
     </script>
+    
+    
+    
+    
+    
+    
+    
