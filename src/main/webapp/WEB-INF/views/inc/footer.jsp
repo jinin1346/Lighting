@@ -57,12 +57,6 @@
     }
 </style>
 
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<%request.setCharacterEncoding("UTF-8");%>
-<footer>
-</footer>
-
 
 <footer class="fixed-footer">
   <div class="footer-container">

@@ -28,8 +28,7 @@ request.setCharacterEncoding("UTF-8");
 }
 
 #logo1 {
-    width: 250px;
-    margin: 15px 0 0 15px;
+    width: 150px;
     
 }
 
@@ -48,23 +47,16 @@ request.setCharacterEncoding("UTF-8");
     height: 90vh;
 }
 
-.inputText {
+div>input {
     border-radius: 5px;
     width: 300px;
     height: 30px;
     margin-bottom: 10px;
     font-size: 13px;
     padding: 5px;
-    border: 1px solid #ccc;
 }
 
-.inputText:focus {
-    border-color: #1e62c8; /* 포커스 시 변경할 색상 */
-    outline: none; /* 기본 포커스 아웃라인 제거 */
-    box-shadow: 0 0 5px rgba(30, 98, 200, 0.5); /* 선택적 그림자 효과 */
-}
-
-#loginBtn {
+button {
     border-radius: 5px;
     width: 300px;
     height: 30px;
@@ -73,12 +65,9 @@ request.setCharacterEncoding("UTF-8");
     margin-left: 5px;
     color: #FFF;
     background: rgb(29, 99, 202);
-    cursor: pointer;
     
-}
-
-#loginBtn:hover {
-    background-color: #1e4ca0;
+    
+   
 }
 
 form {
@@ -96,12 +85,6 @@ h3 {
     margin-left: 15px;
     padding: 4px;
 }
-
-a:link { color: #1e62c8; }
-a:visited { color: #1e62c8; }
-a:hover { color: #0000FF; }   /* 마우스 오버 시 색상 */
-a:active { color: #FF00FF; }  /* 클릭 중 색상 */
-
 </style>
 </head>
 <body>
@@ -112,49 +95,32 @@ a:active { color: #FF00FF; }  /* 클릭 중 색상 */
             </div>
             <div>
                 <div class="div2">
-                    <form method="POST" action="/lighting/login/loginok.do">
+                    <form>
                         <div style="text-align: center;">
                             <img alt="" id="logo2" src="images/logo_세로.png">
                         </div>
                         <h3>로그인</h3>
                         <div>
-                            <input type="text" placeholder="아이디" required class="inputText">
+                            <input type="text" placeholder="아이디">
                         </div>
                         <div>
-                            <input type="password" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)" required class="inputText">
+                            <input type="password" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)">
                         </div>
         
                         <div class="a">
-                             <a href="registerrole.do">회원가입</a>
+                            <a href="registerrole.do">회원가입</a>
                              | 
                              <a href="findid.do">아이디 찾기</a>
                              | 
-                             <a href="findpassword.do">비밀번호 찾기</a>
+                              <a href="findpassword.do">비밀번호 찾기</a>
                         </div>
-                        <button type="submit" id="loginBtn">로그인</button>
+                        <button>로그인</button>
                     </form>
                 </div>
             </div>
-            
-        <!-- 개발용 -->
-        <hr>
-        <div>
-            <form method="POST" action="/lighting/login/loginok.do">
-                <input type="hidden" name="id" value="e3fmy3n">
-                <input type="hidden" name="pw" value="i7^17*k$(4%9%v^(8">
-                <button type="submit" class="in">로그인(이현빈)</button>
-            </form>
-        </div>
-        <div>
-            <form method="POST" action="/lighting/login/loginok.do">
-                <input type="hidden" name="id" value="e3fmy3n">
-                <input type="hidden" name="pw" value="i7^17*k$(4%9%v^(8">
-                <button type="submit" class="in">로그인(이현빈)</button>
-            </form>
-        </div>
     </div>
 
-    <%@include file="/WEB-INF/views/inc/footer.jsp"%>   
+    <%@include file="/WEB-INF/views/inc/footer.jsp"%>	
 </body>
 
 
