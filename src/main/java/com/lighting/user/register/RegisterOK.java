@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+=======
 import com.lighting.user.model.UserDAO;
 
+>>>>>>> main
 @WebServlet("/user/register/registerok.do")
 public class RegisterOK extends HttpServlet {
 
