@@ -201,7 +201,7 @@
     </div>
     
     <!-- 회원가입 폼 -->
-    <form class="signupForm" action="/lighting/login/registerok.do" method="post">
+    <form class="signupForm" action="/lighting/user/register/registerok.do" method="post">
       <!-- 아이디 -->
       <div class="formGroup">
         <label for="userid">아이디</label>

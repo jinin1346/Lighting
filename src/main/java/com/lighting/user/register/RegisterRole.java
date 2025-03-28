@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/registerrole.do")
+@WebServlet("/user/register/registerrole.do")
 public class RegisterRole extends HttpServlet {
 
     @Override

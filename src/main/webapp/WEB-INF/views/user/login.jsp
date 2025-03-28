@@ -90,13 +90,13 @@ h3 {
 
     <div class="body">
             <div id="div1">
-                <img alt="" id="logo1"  src="images/logo_가로.png">
+                <img alt="" id="logo1"  src="/lighting/images/logo_가로.png">
             </div>
             <div>
                 <div class="div2">
                     <form>
                         <div style="text-align: center;">
-                            <img alt="" id="logo2" src="images/logo_세로.png">
+                            <img alt="" id="logo2" src="/lighting/images/logo_세로.png">
                         </div>
                         <h3>로그인</h3>
                         <div>
@@ -107,7 +107,7 @@ h3 {
                         </div>
         
                         <div class="a">
-                            <a href="/lighting/user/register.do">회원가입</a>
+                            <a href="/lighting/user/register/registerrole.do">회원가입</a>
                              | 
                              <a id="findId">아이디 찾기</a>
                              <!-- "/lighting/user/findid.do" -->
