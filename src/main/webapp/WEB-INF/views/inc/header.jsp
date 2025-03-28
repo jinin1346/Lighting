@@ -71,16 +71,16 @@
 
 <header class="body">  
 
-    <a href="/lighting/main_test.do">
+    <a href="/lighting/main.do">
       <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
     </a>
     
     <div class="header">  
         <div id="userinfo">  
-            <a id="login" href="">LOGIN</a>  
-            <a id="logout" href="">LOGOUT</a>  
-            <a id="join" href="">JOIN</a>  
-            <a id="mypage" href="">MY PAGE</a>  
+            <a id="login" href="/lighting/user/login.do">LOGIN</a>  
+            <a id="logout" href="/lighting/user/logoutok.do">LOGOUT</a>
+            <a id="join" href="/lighting/user/registerrole.do">JOIN</a>  
+            <a id="mypage" href="/lighting/mypage/joined.do">MY PAGE</a>  
         </div>  
     </div>  
     <div class="search-container">  
