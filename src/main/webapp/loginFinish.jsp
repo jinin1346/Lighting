@@ -12,15 +12,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: auto;
             text-align: center;
         }
         
         /* 가운데 컨테이너 */
         .container {
             width: 1270px;
-            min-height: 100vh;
-            margin: 0 auto;
+            height: 100vh;
+            margin: 0;
             background-color: #f9f7ff;
             padding: 40px 20px;
             position: relative;
@@ -28,12 +28,12 @@
 
         #logo {
 	        position: absolute;
-	        left: 20px;
-	        top: 30px;
-	        margin: 15px 0 0 0;
-	        width: 250px;
-	        height: auto;
-	        cursor: pointer;
+            left: 20px;
+            top: -10px;
+            margin: 15px 0 0 0;
+            width: 250px;
+            height: auto;
+            cursor: pointer;
        }
 
         #logo2 {
@@ -43,7 +43,7 @@
 
         #loginMsg {
             color: #2765c7;
-            font-size: 3rem;
+            font-size: 30px;
             font-weight: bold;
             margin-bottom: 20px;
             font-family: 'Arial', sans-serif;
@@ -60,18 +60,28 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            position: relative;
+            top: 130px;
+            border-color: none;
         }
 
         #btnCheck:hover {
             background-color: #1e4ca0;
         }
+        
+        #message {
+            position: relative;
+            top: 150px;
+            
+        }
     </style>
 </head>
 <body class="body">
     <main class="container">
-	    <img alt="로고" src="images/logo_가로.png" id="logo">
-	    
-	    <div>
+        <div>
+	       <img alt="로고" src="images/logo_가로.png" id="logo">
+	    </div>
+	    <div id="message">
 	        <img alt="로고" src="images/logo_세로.png" id="logo2">
 	        <p id="loginMsg">회원가입이 <br> 완료되었습니다.</p>
 	    </div>
@@ -90,5 +100,7 @@
        });
     
     </script>
+    <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
+    
 </body>
 </html>

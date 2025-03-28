@@ -36,11 +36,16 @@
     }
     
     #logo {
-      display: block;
-      width: 200px;
+      /* display: block; */
+      /* width: 200px;
       margin: 0 auto;
       cursor: pointer;
-      margin-bottom: 30px;
+      margin-bottom: 30px; */
+      position: absolute;
+      left: 0; 
+      top: 0;
+      width: 250px;
+      margin: 15px 0 0 15px;
     }
 
     /* 안내 문구 */
@@ -58,9 +63,11 @@
       display: block;
       margin: 0 auto 50px auto;
     } 
+    
     #step {
       width: 550px;
       height: auto;
+
     }
 
     /* 회원가입 폼 */
@@ -88,6 +95,17 @@
       outline: none;
       box-shadow: none;
     }
+    
+    input[type="text"], 
+    button {
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1;
+    padding: 8px;
+    vertical-align: middle;
+    }
+    
     /* 아이디 중복체크 및 이메일 인증 버튼 스타일 */
     .inputGroup .btnIdCheck,
     .inputGroup .btnEmailCheck {
@@ -146,6 +164,7 @@
       padding: 10px;
       text-align: center;
       background-color: #fff;
+
     }
 
     /* 회원가입 완료 버튼 */
@@ -186,7 +205,7 @@
       <div class="formGroup">
         <label for="userid">아이디</label>
         <div class="inputGroup">
-          <input type="text" id="id" name="id" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
+          <input type="text" id="userid" name="userid" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>
           <button type="button" class="btnIdCheck">중복체크</button>
         </div>
       </div>
@@ -194,7 +213,7 @@
       <!-- 비밀번호 -->
       <div class="formGroup">
         <label for="password">비밀번호</label>
-        <input type="password" id="pw" name="pw" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
+        <input type="password" id="password" name="password" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
       </div>
       
       <!-- 이름 -->
@@ -212,13 +231,13 @@
       <!-- 생년월일 -->
       <div class="formGroup">
         <label for="birthdate">생년월일</label>
-        <input type="text" id="birthday" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
+        <input type="text" id="birthdate" name="birthdate" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required>
       </div>
       
       <!-- 연락처 -->
       <div class="formGroup">
         <label for="phone">연락처</label>
-        <input type="text" id="tel" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
+        <input type="text" id="phone" name="phone" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required>
       </div>
       
       <!-- 이메일 -->
@@ -234,9 +253,9 @@
       <div class="formGroup">
         <label>성별</label>
         <div id="gender">
-          <input type="radio" id="male" name="gender" value="m" required>
+          <input type="radio" id="male" name="gender" value="남성" required>
           <label for="male">남성</label>
-          <input type="radio" id="female" name="gender" value="f" required>
+          <input type="radio" id="female" name="gender" value="여성" required>
           <label for="female">여성</label>
         </div>
       </div>
@@ -247,7 +266,7 @@
         <div style="display: flex; gap: 10px;">
           <select id="city" name="city" style="flex: 1;">
             <option value="" disabled selected>시/도 선택</option>
-            <option value="서울특별시">서울특별시</option>
+            <option value="서울">서울</option>
             <option value="부산">부산</option>
             <option value="대구">대구</option>
             <option value="인천">인천</option>
@@ -282,7 +301,7 @@
       <button type="submit" id="btnSubmit">회원가입 완료</button>
     </form>
   </div>
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  
   <script>
     // 시/도 선택에 따라 구/군 셀렉트 박스 제어
     const citySelect = document.getElementById("city");
@@ -320,7 +339,7 @@
 
     citySelect.addEventListener("change", function() {
       const selectedCity = this.value;
-      if (selectedCity === "서울특별시") {
+      if (selectedCity === "서울") {
         // 서울 선택 시 구/군 옵션 활성화
         districtSelect.innerHTML = seoulDistrictOptions;
         districtSelect.disabled = false;
@@ -350,6 +369,5 @@
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
-  
 </body>
 </html>

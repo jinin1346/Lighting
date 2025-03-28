@@ -49,20 +49,11 @@
     }
 
     /* 안내 문구 */
-<<<<<<< HEAD
     .signupTitle {
       font-size: 18px;
       line-height: 1.4;
       text-align: center;
       margin: 60px auto 50px;
-=======
-    .signup-title {
-        font-size: 30px;
-        text-align: center;
-        display: block;
-        position: relative;
-        top: 50px;
->>>>>>> main
     }
 
     /* 진행 바 */
@@ -72,19 +63,11 @@
       display: block;
       margin: 0 auto 50px auto;
     } 
-<<<<<<< HEAD
+    
     #step {
       width: 550px;
       height: auto;
-=======
-    #step{
-      margin-top: 10px;
-      text-align: center;
-      margin-bottom: 10px;
-      position: relative;
-      left: -136px;
-      top: 48px;
->>>>>>> main
+
     }
 
     /* 회원가입 폼 */
@@ -180,11 +163,8 @@
       font-size: 14px;
       padding: 10px;
       text-align: center;
-<<<<<<< HEAD
       background-color: #fff;
-=======
-      background-color:  #fff;
->>>>>>> main
+
     }
 
     /* 회원가입 완료 버튼 */
@@ -206,11 +186,7 @@
   <div class="container">
     <!-- 로고 영역 -->
     <a href="/lighting/main_test.do">
-<<<<<<< HEAD
       <img alt="로고" src="/lighting/images/logo_세로.png" id="logo">
-=======
-  <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
->>>>>>> main
     </a>
 
     <!-- 안내 문구 -->
@@ -392,6 +368,5 @@
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
-  
 </body>
 </html>
