@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
  <link rel="stylesheet" href="css/lighting.css">
-<title>평점</title>
+ <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
+<title>오늘어때?</title>
 <style>
  /* 전체 모달 스타일 */
         .modal {
@@ -156,7 +157,7 @@
     <div class="modal">
         <div class="modal-content">
             <div class="modal-header">
-            	<img src="images/logo_가로.png" alt="로고" id="logo">
+            	<img src="/lighting/images/logo_가로.png" alt="로고" id="logo">
             	<div class="modal-header-text">
             	
                 강남 스터디 모임
@@ -166,36 +167,42 @@
             </div>
             </div>
             
-            <img src="images/닫기.png" alt="닫기" id="close-btn" onclick="closeModal()">
+            <img src="/lighting/images/닫기.png" alt="닫기" id="close-btn" onclick="closeModal()">
 
             <!-- 사용자 정보 리스트 -->
             <div class="user-info">
                 <!-- 이미지 삽입 부분 -->
-                <img src="images/icon.png" alt="홍길동" class="user-img"> 
-                <img src="images/마스터.png" alt="Master" class="badge-icon">
+                <img src="/lighting/images/icon.png" alt="홍길동" class="user-img"> 
+                <img src="/lighting/images/마스터.png" alt="Master" class="badge-icon">
                 <span class="user-name">홍길동 (hong123)</span>
                 <div class="stars">★★★★★</div>
             </div>
 
             <div class="user-info">
-                <img src="images/icon.png" alt="치킨중독자" class="user-img">
-                <img src="images/다이아.png" alt="Diamond" class="badge-icon">
+                <img src="/lighting/images/icon.png" alt="치킨중독자" class="user-img">
+                <img src="/lighting/images/다이아.png" alt="Diamond" class="badge-icon">
                 <span class="user-name">치킨중독자 (chchi0)</span>
                 <div class="stars">★★★★★</div>
             </div>
 
             <div class="user-info">
-                <img src="images/icon.png" alt="여미새인줄" class="user-img">
-                <img src="images/실버.png" alt="Silver" class="badge-icon">
+                <img src="/lighting/images/icon.png" alt="여미새인줄" class="user-img">
+                <img src="/lighting/images/실버.png" alt="Silver" class="badge-icon">
                 <span class="user-name">여미새인줄 (mansh88)</span>
                 <div class="stars">★★★★★</div>
             </div>
 
             <!-- 평가 완료 버튼 -->
             <div class="modal-footer">
-                <button onclick="alert('평가가 완료되었습니다');">평가 완료</button>
+                <button onclick="alert('평가가 완료되었습니다');" id="btnSubmit">평가 완료</button>
             </div>
         </div>
     </div>
+    <script>
+    	$('#btnSubmit').click(()=>{
+			//DB접근하기
+			location.href='/lighting/mypage/evaluationok.do';
+	});
+    </script>
 </body>
 </html>

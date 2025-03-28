@@ -79,7 +79,7 @@
         <div id="userinfo">  
             <a id="login" href="/lighting/user/login.do">LOGIN</a>  
             <a id="logout" href="/lighting/user/logoutok.do">LOGOUT</a>
-            <a id="join" href="/lighting/user/registerrole.do">JOIN</a>  
+            <a id="join" href="/lighting/user/register/registerrole.do">JOIN</a>  
             <a id="mypage" href="/lighting/mypage/joined.do">MY PAGE</a>  
         </div>  
     </div>  

@@ -1,4 +1,4 @@
-package com.lighting.user;
+package com.lighting.user.register;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,6 +93,6 @@ public class RegisterOK extends HttpServlet {
             writer.print("<script>alert('회원가입 처리 중 오류가 발생했습니다.'); history.back();</script>");
             writer.close();*/
     	
-    	req.getRequestDispatcher("/WEB-INF/views/user/registerfinish.jsp").forward(req, resp);
+    	req.getRequestDispatcher("/WEB-INF/views/user/register/registerfinish.jsp").forward(req, resp);
       }
   }

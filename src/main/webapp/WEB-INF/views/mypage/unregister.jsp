@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <meta charset="UTF-8">
 <title>회원탈퇴 모달</title>
 <style>
@@ -156,10 +157,10 @@
         // 여기에 서버로 탈퇴 요청을 보내는 코드 작성
         // 예: fetch API 사용 또는 form submit
         
+        // 완료 후 리디렉션
+        window.location.href = "/lighting/mypage/unregisterok.do"; // 홈페이지로 이동
         // 임시로 성공 처리
         alert("탈퇴가 완료되었습니다.\n이용해 주셔서 감사합니다.");
-        // 완료 후 리디렉션
-        window.location.href = "/"; // 홈페이지로 이동
     }
     
  // 모달 외부 클릭 시 닫기
