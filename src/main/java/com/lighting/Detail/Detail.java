@@ -1,4 +1,4 @@
-package com.lighting.Detail;
+package com.lighting.detail;
 
 import java.io.IOException;
 

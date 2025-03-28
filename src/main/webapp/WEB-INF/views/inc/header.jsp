@@ -12,7 +12,6 @@
     }
 
 #logo {  
-        border : 1px solid black;
         width: 220px;  
         height: auto;  
         margin-bottom: 20px; /* 로고와 다음 요소 사이의 간격 */  
@@ -70,7 +69,11 @@
 </style>  
 
 <header class="body">  
-    <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">  
+
+    <a href="/lighting/main_test.do">
+      <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
+    </a>
+    
     <div class="header">  
         <div id="userinfo">  
             <a id="login" href="">LOGIN</a>  

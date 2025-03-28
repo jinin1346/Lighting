@@ -19,8 +19,6 @@
 	width: 1300px;
 	margin: 0 auto;
     background-color: #f9f7ff;
-
-
 }
 	.body {
     width: 1300px;
@@ -163,6 +161,7 @@ width: 25px;
 	position: absolute;
 	bottom: 21px;
 	left: -50px;
+	cursor: pointer;
 }
 
 #share{
@@ -243,7 +242,8 @@ width: 25px;
 <button type="button" id="delete">모임삭제</button>
 
 <div id="participate">
-<img alt=""찜하기 src="./images/찜하기버튼.png" id="Steaming">
+<img alt="찜하기" src="./images/찜하기전버튼.png" id="Steaming" onclick="toggleImage()">
+<!-- <img alt="찜하기" src="./images/찜하기버튼.png" class="Steaming" onclick="toggleImage()"> -->
 <button type="button" id="share">공유</button>
 <button type="button" id="Join_button">참석신청</button>
 </div> <!-- participate -->
@@ -252,7 +252,18 @@ width: 25px;
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>
 	<script>
-		
+
+
+	function toggleImage() {
+        const img = document.getElementById("Steaming");
+        // getAttribute로 실제 지정한 src 값을 가져옴
+        if (img.getAttribute("src") === "./images/찜하기전버튼.png") {
+            img.setAttribute("src", "./images/찜하기버튼.png");
+        } else {
+            img.setAttribute("src", "./images/찜하기전버튼.png");
+        }
+    }
 	</script>
+	
 </body>
 </html>
