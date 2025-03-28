@@ -34,6 +34,23 @@ public class MemberDAO {
         
     }
     
+    public boolean isDuplicateId(String id) {
+        boolean exists = false;
+        String sql = "select count(*) as cnt from tblMember WHERE id = ?";
+        try {
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, id);
+            rs = pstat.executeQuery();
+            if (rs.next()) {
+                exists = rs.getInt("cnt") > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    
     public int addMember(MemberDTO dto) {
         
         int MemSeq = 0; // insert 한  회원 시퀀스를 저장
@@ -149,7 +166,8 @@ public class MemberDAO {
         return null;
     }
 
-
+    
+   
 
   
     

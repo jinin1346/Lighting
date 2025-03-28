@@ -62,7 +62,7 @@ CREATE TABLE tblActivityRegionCoordinate (
 );
 
 DROP SEQUENCE seqActivityRegionCoordinate;
-CREATE SEQUENCE seqActivityRegionCoordinate start with 1001;
+CREATE SEQUENCE seqActivityRegionCoordinate start with 26;
 
 ALTER TABLE tblActivityRegionCoordinate
 	ADD
