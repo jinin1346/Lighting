@@ -9,7 +9,6 @@
     <style> 
 
         #mypageLogo {
-            cursor: pointer;
             display: inline-block;
             margin: 20px 0 20px 60px;
             color: #0D0143;
@@ -153,6 +152,32 @@
 
         #btnPassion:hover {
             background-color: #1e4ca0;
+        }
+
+        .btnParticipation {
+            background-color: #1e62c8;
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            font-size: 10px;
+            font-weight: bold;
+
+            width: 100px;
+            padding: 5px 5px;
+            cursor: pointer;
+        }
+
+        .btnParticipationClose {
+            background-color: #C81E1E;
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            font-size: 10px;
+            font-weight: bold;
+
+            width: 50px;
+            padding: 5px 5px;
+            cursor: pointer;
         }
 
         #box2 > h3 {
@@ -406,7 +431,7 @@
             </button>  
         </div>  
     </header>
-    
+
     <main>
         <h2 id="mypageLogo">마이 페이지</h2>
 
@@ -436,13 +461,13 @@
                 </div>
 
                 <div class="link">
-                    <a href=""><b>내가 참여한 모임 보기</b></a>
+                    <a href="">내가 참여한 모임 보기</a>
                 </div>
                 <div class="link">
                     <a href="">내가 작성한 글 보기</a>
                 </div>
                 <div class="link">
-                    <a href="">내가 찜한 모임 보기</a>
+                    <a href=""><b>내가 찜한 모임 보기</b></a>
                 </div>
                 <div class="link">
                     <a href="">회원 정보 수정</a>
@@ -464,7 +489,7 @@
 
                 <table id="list">
                     <tr>
-                        <th>모임 일자</th>
+                        <th>글 번호</th>
                         <th>장소</th>
                         <th>제목</th>
                         <th>모집인원</th>
@@ -479,11 +504,13 @@
                         </th>
                     </tr>
 
+
                     <!-- for문 시작 -->
                     <tr>
+                    <!-- 마감된 모임의 경우 인라인 스타일을 적용하여 글자 색 수정 -->
                         <td class="col1">
-                            <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            2025년 4월 2일
+                        <!-- 게시글의 seq 가져오기 -->
+                            5
                         </td>
                         <td class="col2">
                             <!-- 글 작성자의 활동지역 가져오기 -->
@@ -498,28 +525,43 @@
                             <span>
                                 3</span>명 <!-- 띄어쓰기 X -->
                         </td>
+
                         <td class="col5">
-                            <button class="btnEvaluation">
-                                회원 평가하기
+                            <!-- if문or choose문을 통해 버튼 선택적으로 출력 -->
+                            <button class="btnParticipation">
+                                모임 참여하기
                             </button>
                         </td>
+
+
                     </tr>
                     <!-- for문 종료 -->
 
                     <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">회원 평가하기</td>
-                    </tr>
+                        <!-- 마감된 모임의 경우 인라인 스타일을 적용하여 글자 색 수정 -->
+                        <td class="col1" style="color: #908CA2;">
+                            <!-- 게시글의 seq 가져오기 -->
+                                1
+                            </td>
+                            <td class="col2" style="color: #908CA2;">
+                                <!-- 글 작성자의 활동지역 가져오기 -->
+                                서울/강남구
+                            </td>
+                            <td class="col3" style="color: #908CA2;">
+                                <!-- 게시글의 제목 가져오기 -->
+                                4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            </td>
+                            <td class="col4" style="color: #908CA2;">
+                                <!-- 게시글의 정원 가져오기 -->
+                                <span>
+                                    3</span>명 <!-- 띄어쓰기 X -->
+                            </td>
+                            <td class="col5">
+                                <button class="btnParticipationClose">
+                                    마감
+                                </button>
+                            </td>
 
-                    <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3">4월 2일 강남역 그룹 스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">회원 평가하기</td>
                     </tr>
 
                 </table>

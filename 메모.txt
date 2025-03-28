@@ -1,10 +1,7 @@
 메인
 
-
-
 com.lighting
 -Main.java
-
 
 com.lighting.user
 -회원가입
@@ -15,7 +12,6 @@ com.lighting.user
 	
 -비밀번호 찾기
 
-
 com.lighting.mypage
 -열정등급(모달)
 -회원조회
@@ -25,11 +21,7 @@ com.lighting.mypage
 -내가 참여한 모임 보기
 -내가 작성한 글 보기
 
-
-
 com.lighting.meetingpost
-
-
 
 com.lighting.photopost
 
