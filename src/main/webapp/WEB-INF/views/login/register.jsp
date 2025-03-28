@@ -344,6 +344,7 @@
     });
 
     $('#logo, #btnSubmit').click(() => { 
+    	   alert('회원가입이 완료되었습니다.!');
     	  window.location.href = '/lighting/main_test.do'; // 메인페이지로 이동
     	});
   </script>

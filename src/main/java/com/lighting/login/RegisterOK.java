@@ -51,8 +51,17 @@ public class RegisterOK extends HttpServlet {
             memberDto.setSido(city);
             memberDto.setGugun(district);
 
-            // DAO를 통해 회원정보 저장 및 회원 시퀀스 반환 받기
             MemberDAO mdao = new MemberDAO(); 
+            //아이디 중복 검사
+            if(mdao.isDuplicateId(id)) {
+                PrintWriter writer = resp.getWriter();
+                writer.print("<script>alert('중복된 아이디입니다. 다른 아이디를 선택해 주세요.'); history.back();</script>");
+                writer.close();
+                return;
+            }
+            
+            
+            // DAO를 통해 회원정보 저장 및 회원 시퀀스 반환 받기
             int memberSeq = mdao.addMember(memberDto);
             System.out.println(memberSeq);
             // 회원가입 후, 선택한 주소에 해당하는 활동지역 시퀀스 가져오기
