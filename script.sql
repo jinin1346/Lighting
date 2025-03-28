@@ -26,6 +26,8 @@ drop table tblMember cascade constraints;
 drop table tblCategoryMain cascade constraints;
 drop table tblActivityRegionCoordinate cascade constraints;
 
+drop table tblEmail cascade constraints;
+
 /* 회원 */
 CREATE TABLE tblMember (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
@@ -43,7 +45,7 @@ CREATE TABLE tblMember (
 );
 
 DROP SEQUENCE seqMember;
-CREATE SEQUENCE seqMember;
+CREATE SEQUENCE seqMember start with 1001;
 
 ALTER TABLE tblMember
 	ADD
@@ -62,7 +64,7 @@ CREATE TABLE tblActivityRegionCoordinate (
 );
 
 DROP SEQUENCE seqActivityRegionCoordinate;
-CREATE SEQUENCE seqActivityRegionCoordinate;
+CREATE SEQUENCE seqActivityRegionCoordinate start with 26;
 
 ALTER TABLE tblActivityRegionCoordinate
 	ADD
@@ -280,7 +282,7 @@ CREATE TABLE tblCategorySub (
 );
 
 DROP SEQUENCE seqCategorySub;
-CREATE SEQUENCE seqCategorySub;
+CREATE SEQUENCE seqCategorySub start with 51;
 
 ALTER TABLE tblCategorySub
 	ADD
@@ -347,7 +349,7 @@ CREATE TABLE tblPhotoPost (
 );
 
 DROP SEQUENCE seqPhotoPost;
-CREATE SEQUENCE seqPhotoPost;
+CREATE SEQUENCE seqPhotoPost start with 501;
 
 ALTER TABLE tblPhotoPost
 	ADD
@@ -452,7 +454,7 @@ CREATE TABLE tblAttachedPhoto (
 );
 
 DROP SEQUENCE seqAttachedPhoto;
-CREATE SEQUENCE seqAttachedPhoto;
+CREATE SEQUENCE seqAttachedPhoto start with 501;
 
 ALTER TABLE tblAttachedPhoto
 	ADD
@@ -487,7 +489,7 @@ CREATE TABLE tblMeetingPost (
 );
 
 DROP SEQUENCE seqMeetingPost;
-CREATE SEQUENCE seqMeetingPost;
+CREATE SEQUENCE seqMeetingPost start with 501;
 
 ALTER TABLE tblMeetingPost
 	ADD
@@ -755,3 +757,16 @@ ALTER TABLE tblEvaluation
 		REFERENCES tblMeeting (
 			tblMeetingSeq
 		);		
+/* 이메일 */
+CREATE TABLE tblEmail (
+	email VARCHAR2(40) NOT NULL, /* 이메일 */
+	validNumber VARCHAR2(255) NOT NULL, /* 인증번호 */
+	regdate DATE NOT NULL /* 시간 */
+);
+
+ALTER TABLE tblEmail
+	ADD
+		CONSTRAINT PK_TABLE5
+		PRIMARY KEY (
+			email
+		);
