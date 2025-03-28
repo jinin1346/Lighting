@@ -4,8 +4,8 @@
 <html lang="ko">
 <head>  
 	<meta charset="UTF-8">
-	<title>Detail</title>
-	<link rel="stylesheet" href="css/lighting_test.css">
+	<title>오늘어때?</title>
+	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<style>
 	
 	@font-face {  
@@ -187,18 +187,18 @@ width: 25px;
 	</style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 <div class="body">
 <!-- 1.모임장 -->
 <div id="leader">
 	<h1 id="title">모임장</h1>
-	<img alt="프로필이미지" src="./images/icon.png" id="Profile">
-	<p><img alt="등급" src="./images/마스터.png">홍길동(hong123)</p>
-	<p><img alt="등급" src="./images/별점.png">4.2점</p>
+	<img alt="프로필이미지" src="/lighting/images/icon.png" id="Profile">
+	<p><img alt="등급" src="/lighting/images/마스터.png">홍길동(hong123)</p>
+	<p><img alt="등급" src="/lighting/images/별점.png">4.2점</p>
 </div>
 
 <!-- 2. 메인이미지 -->
-<img alt="메인이미지" src="./images/맛집.png" id="main_img">
+<img alt="메인이미지" src="/lighting/images/맛집.png" id="main_img">
 
 <!-- 3. 돌아가기 -->
 <input type="button" id="back" value="이전 화면">
@@ -233,34 +233,32 @@ width: 25px;
 
 <h3>모임 참여자</h3>
 <div id="Participation">
-<img alt="프로필이미지" src="./images/icon.png" class="Participants">
-<img alt="프로필이미지" src="./images/icon.png" class="Participants">
-<img alt="프로필이미지" src="./images/icon.png" class="Participants">
-<img alt="화살표" src="./images/arrow.png" id="Participants_arrow">
+<img alt="프로필이미지" src="/lighting/images/icon.png" class="Participants">
+<img alt="프로필이미지" src="/lighting/images/icon.png" class="Participants">
+<img alt="프로필이미지" src="/lighting/images/icon.png" class="Participants">
+<img alt="화살표" src="/lighting/images/arrow.png" id="Participants_arrow">
 </div><!-- Participation -->
 
 <button type="button" id="delete">모임삭제</button>
 
 <div id="participate">
-<img alt="찜하기" src="./images/찜하기전버튼.png" id="Steaming" onclick="toggleImage()">
+<img alt="찜하기" src="/lighting/images/찜하기전버튼.png" id="Steaming" onclick="toggleImage()">
 <!-- <img alt="찜하기" src="./images/찜하기버튼.png" class="Steaming" onclick="toggleImage()"> -->
 <button type="button" id="share">공유</button>
 <button type="button" id="Join_button">참석신청</button>
 </div> <!-- participate -->
 
-
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	<script src="https://bit.ly/4cMuheh"></script>
+<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<script>
 
 
 	function toggleImage() {
         const img = document.getElementById("Steaming");
         // getAttribute로 실제 지정한 src 값을 가져옴
-        if (img.getAttribute("src") === "./images/찜하기전버튼.png") {
-            img.setAttribute("src", "./images/찜하기버튼.png");
+        if (img.getAttribute("src") === "/lighting/images/찜하기전버튼.png") {
+            img.setAttribute("src", "/lighting/images/찜하기버튼.png");
         } else {
-            img.setAttribute("src", "./images/찜하기전버튼.png");
+            img.setAttribute("src", "/lighting/images/찜하기전버튼.png");
         }
     }
 	</script>

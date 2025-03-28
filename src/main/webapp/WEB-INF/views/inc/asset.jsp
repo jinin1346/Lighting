@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="/css/new.css">
 <link rel="stylesheet" href="/css/lighting_test.css">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

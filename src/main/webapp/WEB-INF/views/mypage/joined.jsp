@@ -222,6 +222,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
         .col4 {
@@ -277,10 +278,13 @@
             text-overflow: ellipsis;
         }
 
-
         .friendItem > img, .blockItem > img {
             width: 20px;
             height: 20px;
+        }
+        
+        .btnDelFreiend, .btnUnblock {
+        	cursor: pointer;
         }
 
     </style>
@@ -354,6 +358,7 @@
                         <th>제목</th>
                         <th>모집인원</th>
                         <th>
+                        	<!-- change 이벤트 걸기 -->
                             <select name="sort" id="sort">
                                 <option value="recentOrder" selected>최신 순</option>
                                 <option value="koreanOrder">가나다 순</option>
@@ -412,9 +417,7 @@
             </div>
 
 
-            
-
-            <div id="box3"">
+            <div id="box3">
                 <div id="friendList">
                     <div>친구목록</div>
 
@@ -427,7 +430,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -440,7 +444,7 @@
                             닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
                     </div>
                     <!-- for문 종료 -->
 
@@ -460,7 +464,8 @@
                             닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
                         </span>
 
-                        <img src="/lighting/images/닫기.png">
+                        <img src="/lighting/images/닫기.png" class="btnUnblock">
+                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
                     <!-- for문 종료 -->
 
@@ -474,6 +479,7 @@
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	</div>
 	
+	<!-- 마이페이지 공통 자바스크립트 -->
 	<script>
 
 	$('#btnPassion').click(()=>{
@@ -492,8 +498,13 @@
         window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
     }
     
+    $('#list .col3').click(()=>{
+    	location.href='/lighting/meeting/read.do';
+    });
     
     </script>
+    
+    
     
 </body>
 </html>
