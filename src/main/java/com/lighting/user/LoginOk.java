@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lighting.login.model.MemberDAO;
-import com.lighting.login.model.MemberDTO;
-
 @WebServlet("/login/loginok.do")
 public class LoginOk extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //LoginOk.java
+        /*//LoginOk.java
         
         //1. 데이터 가져오기(id,pw)
         //2. DB 작업
@@ -56,8 +53,8 @@ public class LoginOk extends HttpServlet {
                         history.back();
                     </script>
                     """);
-            writer.close();
+            writer.close();*/
             
-        }
+        
     }
 }

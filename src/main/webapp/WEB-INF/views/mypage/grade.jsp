@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/lighting.css">
+    <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
     <title>열정등급</title>
     <style>
         /* 모달창 전체 */
@@ -130,28 +130,28 @@
             <div class="modal-content">
                 <div class="badge-container">
                     <div class="badge master">
-                        <img src="images/마스터.png" alt="Master" class="badge-icon">
+                        <img src="/lighting/images/마스터.png" alt="Master" class="badge-icon">
                         <div class="badge-info">
                             <h3>마스터 등급</h3>
                             <p>별점 4점 이상 5점 이하인 모임에 열정 넘치는 프로 참여!</p>
                         </div>
                     </div>
                     <div class="badge diamond">
-                        <img src="images/다이아.png" alt="Diamond" class="badge-icon">
+                        <img src="/lighting/images/다이아.png" alt="Diamond" class="badge-icon">
                         <div class="badge-info">
                             <h3>다이아 등급</h3>
                             <p>별점 3점 이상 4점 미만인 모임에 진심인 준프로 참여!</p>
                         </div>
                     </div>
                     <div class="badge gold">
-                        <img src="images/골드.png" alt="Gold" class="badge-icon">
+                        <img src="/lighting/images/골드.png" alt="Gold" class="badge-icon">
                         <div class="badge-info">
                             <h3>골드 등급</h3>
                             <p>별점 2점 이상 3점 미만인 모임에 욕심이 생긴 참가자!</p>
                         </div>
                     </div>
                     <div class="badge silver">
-                        <img src="images/실버.png" alt="Silver" class="badge-icon">
+                        <img src="/lighting/images/실버.png" alt="Silver" class="badge-icon">
                         <div class="badge-info">
                             <h3>실버 등급</h3>
                             <p>회원의 기본 등급으로 모임에 흥미가 생긴 신입 참가자!</p>
