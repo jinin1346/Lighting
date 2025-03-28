@@ -25,6 +25,7 @@ public class RegisterOK extends HttpServlet {
         try {
             // 회원 정보 파라미터 읽기
             String id = req.getParameter("id");
+            System.out.println(id);
             String pw = req.getParameter("pw");
             String name = req.getParameter("name");
             String nickname = req.getParameter("nickname");
