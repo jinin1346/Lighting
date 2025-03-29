@@ -1,5 +1,6 @@
 package com.lighting.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 
-
+@Data
 public class MainDTO {
     //tblMember
     private String tblMemberSeq;

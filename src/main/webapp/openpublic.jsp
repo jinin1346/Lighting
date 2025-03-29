@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
     <meta charset="UTF-8" />
     <title>정보 공개 여부 설정</title>
     <style>
         /* 전체 화면 덮는 모달 배경 */
         .modalElement {
-            display: none;
             position: fixed;
             z-index: 999;
             left: 0;
@@ -109,33 +110,13 @@
         .submitButton:hover {
             background-color: #0056b3;
         }
-
-        /* 모달 열기 버튼 */
-        #openModalButton {
-            margin: 30px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            const openModalButton = document.getElementById('openModalButton');
             const closeModalButton = document.getElementById('closeModalButton');
             const modalElement = document.getElementById('modalElement');
             const submitButton = document.querySelector('.submitButton');
 
-            // 모달 열기
-            openModalButton.addEventListener('click', () => {
-                modalElement.style.display = 'block';
-            });
-
-            // 모달 닫기 (x 버튼)
-            closeModalButton.addEventListener('click', () => {
-                modalElement.style.display = 'none';
-            });
-
-            // 배경 클릭 시에는 모달이 닫히지 않도록 별도의 이벤트 제거
 
             // '공개 여부 설정 완료' 버튼 클릭 시
             submitButton.addEventListener('click', () => {
@@ -148,8 +129,6 @@
     </script>
 </head>
 <body>
-    <!-- 모달 열기 버튼 -->
-    <button id="openModalButton">모달 열기</button>
 
     <!-- 모달 영역 -->
     <div id="modalElement" class="modalElement">

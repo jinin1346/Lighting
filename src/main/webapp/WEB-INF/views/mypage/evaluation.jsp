@@ -192,17 +192,16 @@
                 <div class="stars">★★★★★</div>
             </div>
 
+			<form method="POST" action="/lighting/mypage/evaluationok.do">
             <!-- 평가 완료 버튼 -->
             <div class="modal-footer">
                 <button onclick="alert('평가가 완료되었습니다');" id="btnSubmit">평가 완료</button>
             </div>
+            </form>
+            
         </div>
     </div>
     <script>
-    	$('#btnSubmit').click(()=>{
-			//DB접근하기
-			location.href='/lighting/mypage/evaluationok.do';
-	});
     </script>
 </body>
 </html>

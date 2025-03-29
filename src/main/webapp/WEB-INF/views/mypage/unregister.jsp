@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -159,8 +159,6 @@
         
         // 완료 후 리디렉션
         window.location.href = "/lighting/mypage/unregisterok.do"; // 홈페이지로 이동
-        // 임시로 성공 처리
-        alert("탈퇴가 완료되었습니다.\n이용해 주셔서 감사합니다.");
     }
     
  // 모달 외부 클릭 시 닫기
