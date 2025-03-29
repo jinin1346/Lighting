@@ -21,9 +21,7 @@ public class Mypage extends HttpServlet {
 
         if (status == null){
             session.setAttribute("status", "joined");
-        } else {
-        	session.setAttribute("status", status);
-        }
+        } 
 
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp").forward(req, resp);
 	}
