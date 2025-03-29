@@ -1,6 +1,7 @@
 package com.lighting.mypage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,15 @@ public class UnregisterOk extends HttpServlet {
 		//UnregisterOk.java
 		//DB 접근하기
 		
-
-		req.getRequestDispatcher("/WEB-INF/views/mypage/unregisterok.jsp").forward(req, resp);
+		resp.setContentType("text/html");
+	    PrintWriter out = resp.getWriter();
+	    out.println("<script type='text/javascript'>");
+//	    결과에 따라 피드백
+	    out.println("alert('complete');");
+//	    
+	    out.println("window.close();");
+	    out.println("</script>");
+	    out.close();
 	}
 
 }

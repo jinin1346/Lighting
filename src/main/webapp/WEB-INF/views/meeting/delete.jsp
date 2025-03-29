@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FriendDel</title>
-<link rel="stylesheet" href="css/lighting_test.css">
+<title>게시글 삭제</title>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <style>
 @font-face {
 	font-family: 'Pretendard-Regular';
@@ -119,19 +118,19 @@ p {
 	<!-- 모달 창 -->
 	<div id="myModal" class="modal">
 		<div class="modal-content">
-			<img alt="로고" src="images/logo_가로.png" id="logo">
+			<img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
 			<h1>3월 24일 역삼역에서
 			삼겹살 드실 3분 구합니다!!</h1>
 			<h2 id="subtitle">장소 : 서울/강남구 &ensp;&ensp; 일시 : 3월 25일 19:00</h2>
 			<div id="main_user">
 				<div class="userbox">
-					<img src="images/마스터.png" class="icon">
+					<img src="/lighting/images/마스터.png" class="icon">
 					<h2>
 						홍길동<small>(모임장)</small>
 					</h2>
 				</div>
 				<div class="userbox">
-					<img src="images/다이아.png" class="icon">
+					<img src="/lighting/images/다이아.png" class="icon">
 					<h2>
 						치킨중독자<small>(참석자)</small>
 					</h2>
@@ -152,8 +151,6 @@ p {
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	<script src="https://bit.ly/4cMuheh"></script>
 	<script>
 		const modal = document.getElementById("myModal");
 		const modalConfirmDelete = document

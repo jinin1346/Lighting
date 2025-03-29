@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
     <meta charset="UTF-8" />
     <title>거부 사유 모달 예시</title>
     <style>
         /* 공통 모달 스타일 */
         .modalElement {
-            display: none; /* 초기에는 숨김 */
             position: fixed;
             z-index: 999;
             left: 0;
@@ -70,15 +71,6 @@
            margin : 10px auto;
         }
         
-        /* 모달 열기 버튼 스타일 (선택 사항) */
-        #openRejectModalButton {
-            margin: 30px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
-        
         /** 왼쪽 상자 + 라디오 버튼 상자를 감싸는 컨테이너 */
         .infoContainer {
             display: flex;
@@ -119,28 +111,10 @@
     </style>
 
     <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        // 두 번째 모달 관련 요소
-        const openRejectModalButton = document.getElementById('openRejectModalButton');
-        const rejectModalElement = document.getElementById('rejectModalElement');
-        const closeRejectModalButton = document.getElementById('closeRejectModalButton');
-
-        // 모달 열기
-        openRejectModalButton.addEventListener('click', () => {
-            rejectModalElement.style.display = 'block';
-        });
-
-        // 모달 닫기
-        closeRejectModalButton.addEventListener('click', () => {
-            rejectModalElement.style.display = 'none';
-        });
-    });
+    
     </script>
 </head>
 <body>
-    <!-- 거부 사유 모달 열기 버튼 -->
-    <button id="openRejectModalButton">거부 사유 모달 열기</button>
-
     <!-- 거부 사유 모달 영역 -->
     <div id="rejectModalElement" class="modalElement">
         <div class="modalContent">

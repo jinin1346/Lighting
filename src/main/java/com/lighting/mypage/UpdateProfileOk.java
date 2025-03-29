@@ -9,14 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/mypage/evaluationok.do")
-public class EvaluationOk extends HttpServlet {
+@WebServlet("/mypage/updateprofileok.do")
+public class UpdateProfileOk extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//EvaluationOk.java
-		//DB 접근하기
 		
 		resp.setContentType("text/html");
 	    PrintWriter out = resp.getWriter();

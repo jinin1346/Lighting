@@ -474,6 +474,224 @@
     </style>
     </c:if>
 
+    <!-- requesting -->
+    <c:if test="${sessionScope.status == 'requesting'}">
+    <style>
+
+        #list {
+            width: 680px;
+            margin-left: 40px;
+            border-collapse: collapse;;
+        }
+
+        #list th {
+            padding: 8px 0 8px 0;
+            color: #0D0143;
+            border-bottom: 2px solid #1E62C8;
+        }
+
+        #list td {
+            font-size: 12px;
+            padding: 10px 0;
+            color: #0D0143;
+            font-weight: bold;
+            border-bottom: 1px solid #1E62C8;
+        }
+
+        .col1 {
+            width: 105px;
+        }
+
+        .col2 {
+            width: 80px;
+        }
+
+        .col3 {
+            max-width: 315px;
+            height: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .col4 {
+            width: 70px;
+        }
+
+        .col5 {
+            width: 110px;
+        }
+
+        #sort {
+            width: 100px;
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px 0;
+        }
+
+        #sort:focus {
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            outline: none; /* 기본 포커스 스타일 제거 */
+        }
+
+        .btnConfirmed, .btnCancle, .btnRejectionReason {
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            font-size: 12px;
+            font-weight: bold;
+
+            height: 28px;
+            width: 100px;
+            padding: 5px 5px;
+        }
+
+        .btnConfirmed {
+            background-color: #1e62c8;
+        }
+
+        .btnCancle {
+            background-color: #1EC842;
+            cursor: pointer;
+        }
+
+        .btnCancle:hover {
+            background-color: #1E7542;
+        }
+
+        .btnRejectionReason {
+            background-color: #C81E1E;
+            cursor: pointer;
+        }
+
+        .btnRejectionReason:hover {
+            background-color: #A31E1E;
+        }
+
+
+    </style>
+    </c:if>
+
+    <!-- requested -->
+    <c:if test="${sessionScope.status == 'requested'}">
+    <style>
+
+        #list {
+            width: 680px;
+            margin-left: 40px;
+            border-collapse: collapse;;
+        }
+
+        #list th {
+            padding: 8px 0 8px 0;
+            color: #0D0143;
+            border-bottom: 2px solid #1E62C8;
+        }
+
+        #list td {
+            font-size: 12px;
+            padding: 10px 0;
+            color: #0D0143;
+            font-weight: bold;
+            border-bottom: 1px solid #1E62C8;
+        }
+
+        .col1 {
+            width: 105px;
+        }
+
+        .col2 {
+            width: 80px;
+        }
+
+        .col3 {
+            max-width: 315px;
+            height: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .col4 {
+            width: 70px;
+        }
+
+        .col5 {
+            width: 110px;
+        }
+
+        #sort {
+            width: 100px;
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px 0;
+        }
+
+        #sort:focus {
+            border: 2px solid #1E62C8;
+            border-radius: 4px;
+            outline: none; /* 기본 포커스 스타일 제거 */
+        }
+
+        .btnRequested, .btnEnded {
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            font-size: 12px;
+            font-weight: bold;
+
+            height: 28px;
+            width: 100px;
+            padding: 5px 5px;
+        }
+
+        .btnRequested {
+            background-color: #1e62c8;
+            cursor: pointer;
+        }
+
+        .btnRequested:hover {
+            background-color: #1e4ca0
+        }
+
+        .btnEnded {
+            background-color: #C81E1E;
+        }
+
+    </style>
+    </c:if>
+
+    <!-- updateInfo -->
+    <c:if test="${sessionScope.status == 'updateInfo'}">
+    <style>
+        #btnBox {
+            margin-left: 30px;
+        }
+
+        #btnBox > button {
+            display: block;
+            margin-top: 10px;
+            width: 200px;
+            background-color: #1e62c8;
+            color: white;
+            border-radius: 5px; 
+            border: none;
+            padding: 10px 30px;
+            cursor: pointer;
+        }
+
+        #btnBox > button:hover {
+            background-color: #1e4ca0;
+        }
+        
+    </style>
+    </c:if>
+
 	<!-- box3,4 -->
     <style>
 
@@ -715,10 +933,10 @@
                             4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.
                         </td>
                         <td class="col3">
-                            <button>
+                            <button class="btnUpdatePost">
                                 수정
                             </button>
-                            <button>
+                            <button class="btnDeletePost">
                                 삭제
                             </button>
                         </td>
@@ -817,16 +1035,165 @@
                 <!-- requesting -->
                 <c:if test="${sessionScope.status == 'requesting'}">
                 <h3>내가 신청한 모임 보기</h3>
+                <table id="list">
+                    <tr>
+                        <th>모임 일자</th>
+                        <th>장소</th>
+                        <th>제목</th>
+                        <th>모집인원</th>
+                        <th>
+                        	<!-- change 이벤트 걸기 -->
+                            <select name="sort" id="sort">
+                                <option value="recentOrder" selected>최신 순</option>
+                                <option value="koreanOrder">가나다 순</option>
+                                <option value="moreCapOrder">많이 참여한 순</option>
+                                <option value="lessCapOrder">적게 참여한 순</option>
+                                <option value="oldestOrder">오래된 순</option>
+                            </select>
+                        </th>
+                    </tr>
+
+                    <!-- for문 시작 -->
+                    <tr>
+                        <td class="col1">
+                            <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
+                            2025년 4월 2일
+                        </td>
+                        <td class="col2">
+                            <!-- 글 작성자의 활동지역 가져오기 -->
+                            서울/강남구
+                        </td>
+                        <td class="col3 title">
+                            <!-- 게시글의 제목 가져오기 -->
+                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                        </td>
+                        <td class="col4">
+                            <!-- 게시글의 정원 가져오기 -->
+                            <span>
+                                3</span>명 <!-- 띄어쓰기 X -->
+                        </td>
+                        <td class="col5">
+                            <button class="btnConfirmed">
+                                승인완료
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- for문 종료 -->
+
+                    <tr>
+                        <td class="col1">2025년 4월 2일</td>
+                        <td class="col2">서울/강남구</td>
+                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
+                        <td class="col4">3명</td>
+                        <td class="col5">
+                            <button class="btnCancle">
+                                (대기)취소
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col1">2025년 4월 2일</td>
+                        <td class="col2">서울/강남구</td>
+                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니다.</td>
+                        <td class="col4">3명</td>
+                        <td class="col5">
+                            <button class="btnRejectionReason">
+                                (거부)사유
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
                 </c:if>
                 
                 <!-- requested -->
                 <c:if test="${sessionScope.status == 'requested'}">
                 <h3>내가 만든 모임 신청 보기</h3>
+                <table id="list">
+                    <tr>
+                        <th>모임 일자</th>
+                        <th>장소</th>
+                        <th>제목</th>
+                        <th>모집인원</th>
+                        <th>
+                        	<!-- change 이벤트 걸기 -->
+                            <select name="sort" id="sort">
+                                <option value="recentOrder" selected>최신 순</option>
+                                <option value="koreanOrder">가나다 순</option>
+                                <option value="moreCapOrder">많이 참여한 순</option>
+                                <option value="lessCapOrder">적게 참여한 순</option>
+                                <option value="oldestOrder">오래된 순</option>
+                            </select>
+                        </th>
+                    </tr>
+
+                    <!-- for문 시작 -->
+                    <tr>
+                        <td class="col1">
+                            <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
+                            2025년 4월 2일
+                        </td>
+                        <td class="col2">
+                            <!-- 글 작성자의 활동지역 가져오기 -->
+                            서울/강남구
+                        </td>
+                        <td class="col3 title">
+                            <!-- 게시글의 제목 가져오기 -->
+                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                        </td>
+                        <td class="col4">
+                            <!-- 게시글의 정원 가져오기 -->
+                            <span>
+                                3</span>명 <!-- 띄어쓰기 X -->
+                        </td>
+                        <td class="col5">
+                            <button class="btnRequested">
+                                신청 받은 현황
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- for문 종료 -->
+
+                    <tr>
+                        <td class="col1" style="color: #908CA2;">
+                            2025년 4월 2일</td>
+                        <td class="col2" style="color: #908CA2;">서울/강남구</td>
+                        <td class="col3 title" style="color: #908CA2;">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
+                        <td class="col4" style="color: #908CA2;">3명</td>
+                        <td class="col5">
+                            <button class="btnEnded">
+                                종료된 모임
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+
                 </c:if>
                 
                 <!-- updateInfo -->
                 <c:if test="${sessionScope.status == 'updateInfo'}">
                 <h3>회원 정보 수정</h3>
+
+                    <div id="btnBox">
+                        <button id="btnUpdateProfile">
+                            프로필 이미지 변경
+                        </button>
+
+                        <button id="btnUpdateInfo">
+                            개인 정보 수정
+                        </button>
+
+                        <button id="btnOpenPublic">
+                            공개 여부 설정
+                        </button>
+
+                        <button id="btnUpdatePassword">
+                            비밀번호 변경
+                        </button>
+                    </div>
+
                 </c:if>
                 
                 
@@ -911,6 +1278,30 @@
 	
 	$('.btnEvaluation').click(()=>{
     	openServletInNewWindow("/lighting/mypage/evaluation.do");
+    });
+	
+	$('#btnUpdateInfo').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/updateinfo.do");
+    });
+	
+	$('#btnUpdatePassword').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/updatepassword.do");
+    });
+	
+	$('.btnDeletePost').click(()=>{
+    	openServletInNewWindow("/lighting/meeting/delete.do");
+    });
+	
+	$('#btnUpdateProfile').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/updateprofile.do");
+    });
+	
+	$('#btnUpdateProfile').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/updateprofile.do");
+    });
+	
+	$('.btnRejectionReason').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/rejectionreason.do");
     });
 	
     function openServletInNewWindow(servletUrl) {
