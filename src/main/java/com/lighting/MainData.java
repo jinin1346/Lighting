@@ -23,21 +23,21 @@ public class MainData extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //MainData.java
-        
+        System.out.println("12");
         MainDAO dao = new MainDAO();
         List<MainDTO> meetingList = dao.getMeetingList(); 
         
         JSONArray arr = new JSONArray();
         for(MainDTO dto : meetingList) {
             JSONObject obj = new JSONObject();
-            obj.put("meetingphoto", dto.getTblMeetingPostSeq());
-            obj.put("meetingphoto", dto.getTblMemberSeq());
-            obj.put("meetingphoto", dto.getTblCategorySubSeq());
-            obj.put("meetingphoto", dto.getMeetingPhoto());
-            obj.put("meetingphoto", dto.getTitle());
-            obj.put("meetingphoto", dto.getMemberPhoto());
-            obj.put("meetingphoto", dto.getNickname());
-            obj.put("meetingphoto", dto.getCapacity());
+            obj.put("tblMeetingPostSeq", dto.getTblMeetingPostSeq());
+            obj.put("tblMemberSeq", dto.getTblMemberSeq());
+            obj.put("tblCategorySubSeq", dto.getTblCategorySubSeq());
+            obj.put("meetingPhoto", dto.getMeetingPhoto());
+            obj.put("title", dto.getTitle());
+            obj.put("memberPhoto", dto.getMemberPhoto());
+            obj.put("nickname", dto.getNickname());
+            obj.put("capacity", dto.getCapacity());
             
             arr.add(obj);
             

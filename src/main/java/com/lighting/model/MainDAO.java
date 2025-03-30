@@ -54,9 +54,6 @@ public class MainDAO {
             select mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname
             from tblMeetingPost mp
             join tblMember m on mp.tblMemberSeq = m.tblMemberSeq;
-            
-            
-            
             */
             
 

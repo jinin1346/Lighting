@@ -202,18 +202,19 @@
     
 </style>
 
-    <!-- 카테고리 -->
+
+<!-- 카테고리 -->
     <div class="category">
         <div class="icon-container">
             <img src="/lighting/images/맛집아이콘.png" id="car_1">
             <div class="dropdown">
                 <ul>
                     <li><a data-tblCategorySubSeq="18">식사</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="19">카페</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="20">디저트</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="21">술</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="22">비건</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="23">기타</a></li>
+                    <li><a data-tblCategorySubSeq="19">카페</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="20">디저트</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="21">술</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="22">비건</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="23">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -222,15 +223,15 @@
             <div class="dropdown">
                 <ul>
                     <li><a data-tblCategorySubSeq="8">액션</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="9">어드벤처</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="10">롤플레잉(RPG)</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="11">시뮬레이션</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="12">전략</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="13">스포츠</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="14">퍼즐</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="15">아케이드</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="16">슈팅</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="17">기타</a></li>
+                    <li><a data-tblCategorySubSeq="9">어드벤처</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="10">롤플레잉(RPG)</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="11">시뮬레이션</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="12">전략</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="13">스포츠</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="14">퍼즐</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="15">아케이드</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="16">슈팅</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="17">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -239,14 +240,14 @@
             <div class="dropdown">
                 <ul>
                     <li><a data-tblCategorySubSeq="24">영화</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="25">공연</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="26">전시회/미술</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="27">노래/춤</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="28">언어교환</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="29">애니메이션</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="30">쇼핑</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="31">악기연주</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="32">기타</a></li>
+                    <li><a data-tblCategorySubSeq="25">공연</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="26">전시회/미술</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="27">노래/춤</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="28">언어교환</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="29">애니메이션</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="30">쇼핑</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="31">악기연주</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="32">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -255,12 +256,12 @@
             <div class="dropdown">
                 <ul>
                     <li><a data-tblCategorySubSeq="1">유산소</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="2">웨이트(무산소)</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="3">격투</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="4">코어&밸런스</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="5">기능성</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="6">다이어트</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="7">기타</a></li>
+                    <li><a data-tblCategorySubSeq="2">웨이트(무산소)</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="3">격투</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="4">코어&밸런스</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="5">기능성</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="6">다이어트</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="7">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -268,15 +269,15 @@
             <img src="/lighting/images/자기계발아이콘.png" id="car_5">
             <div class="dropdown">
                 <ul>
-                    <li><a data-tblCategorySubSeq="42">여행</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="43">드라이브</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="44">캠핑</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="45">등산</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="46">명상</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="47">반려동물</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="48">꽃꽃이</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="49">독서</a></li>&ensp;
-	                <li><a data-tblCategorySubSeq="50">기타</a></li>
+                    <li><a data-tblCategorySubSeq="33">스터디</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="34">취업준비</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="35">모의면접</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="36">멘토/멘티</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="37">독서</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="38">재테크</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="39">비즈니스</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="40">코딩</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="41">기타</a></li>
                 </ul>
             </div>
         </div>
@@ -284,19 +285,21 @@
             <img src="/lighting/images/힐링아이콘.png" id="car_6">
             <div class="dropdown">
                 <ul>
-                    <li><a>스터디</a></li>&ensp;
-                    <li><a>취업준비</a></li>&ensp;
-                    <li><a>모의면접</a></li>&ensp;
-                    <li><a>멘토/멘티</a></li>&ensp;
-                    <li><a>독서</a></li>&ensp;
-                    <li><a>재테크</a></li>&ensp;
-                    <li><a>비즈니스</a></li>&ensp;
-                    <li><a>코딩</a></li>&ensp;
-                    <li><a>기타</a></li>
+                    
+                    <li><a data-tblCategorySubSeq="42">여행</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="43">드라이브</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="44">캠핑</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="45">등산</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="46">명상</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="47">반려동물</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="48">꽃꽃이</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="49">독서</a></li>&ensp;
+                    <li><a data-tblCategorySubSeq="50">기타</a></li>
                 </ul>
             </div>
         </div>
     </div>
+
     
     <!-- 모임 추천 -->
     <div id="slider">
@@ -346,7 +349,7 @@
         <c:forEach begin="1" end="8" var="meeting" items="${meetingList}">
         <div class="item">  
             <div>
-                <!-- 쿼리 작성할때 mp.phtoFileName as meetingPhoto 별칭 붙이기!! -->
+                <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->
                 <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 치킨.jpg >> 게시글의 photoFileName  -->
                 <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
@@ -358,7 +361,7 @@
             </span>
 
             <div>
-                <!-- 쿼리 작성할때 m.phtoFileName as memberPhoto 별칭 붙이기!! -->
+                <!-- 쿼리 작성할때 m.photoFileName as memberPhoto 별칭 붙이기!! -->
                 <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
                 <!-- icon.png >> Member의 photoFileName -->
                 <span class="nameAndCap">
@@ -381,229 +384,6 @@
         </c:forEach>
         <!-- for문 끝 -->
 
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
-        
-        <div class="item">  
-            <div>
-                <img src="/lighting/images/치킨.jpg" class="thumnail" data-tblMeetingPostSeq="">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="">
-                <!-- 게시글의 title -->
-                <!-- .item .title 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-                제목제목제목제목제목제목제목제목제목제목
-            </span>
-
-            <div>
-                <img class="icon" src="/lighting/images/icon.png" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        작성자작성자작성자작<!-- 게시글 > 멤버 참조 >> nickname -->
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            3<!-- 게시글의 capacity -->
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div>
 
     </div>
     <!-- meetingBox -->
@@ -612,9 +392,12 @@
 
 
     <script>
+    	
     	$('.thumnail').click(() => {
     			location.href='/lighting/meeting/read.do';
     	});
+    	
+
     	
     	$('.title').click(() => {
 			location.href='/lighting/meeting/read.do';
@@ -665,6 +448,7 @@
 	                        </div>
 	                    `);
 	                });
+	                console.log(result);
 	            },
 	            error: function(a, b, c){
 	                console.log(a, b, c);
