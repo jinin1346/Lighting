@@ -14,9 +14,9 @@ public class Add extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//Grade.java
+	
 
-		req.getRequestDispatcher("/WEB-INF/views/photo/add.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/sj/photoadd.jsp").forward(req, resp);
 	}
 
 }
