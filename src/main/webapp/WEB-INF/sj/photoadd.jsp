@@ -9,14 +9,14 @@
 <body>
 
     <form action="upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="img_file">
-        <input type="submit" value="사진 등록하기">
-    </form>
-    
     <h1>오늘어때? 이미지 갤러리</h1>
     <div>
     
     </div>
+        <input type="file" name="img_file">
+        <input type="submit" value="사진 등록하기">
+    </form>
+    
 
 
 </body>
