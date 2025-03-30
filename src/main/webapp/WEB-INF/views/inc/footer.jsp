@@ -6,7 +6,7 @@
     margin: 0 auto;
       background-color: #fff;
       padding: 40px 0;
-      font-family: 'Pretendard-Regular', sans-serif;
+      font-family: 'Pretendard-Regular';
     }
     /* footer 내부 컨테이너 및 영역 스타일 */
     .footer-container {

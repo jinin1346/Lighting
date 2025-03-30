@@ -17,7 +17,7 @@ public class Detail extends HttpServlet {
         //Login.java
         
 
-        req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/sj/detail.jsp").forward(req, resp);
     }
 
 }
