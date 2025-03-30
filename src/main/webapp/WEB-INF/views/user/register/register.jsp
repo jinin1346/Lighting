@@ -11,7 +11,7 @@
       font-family: 'Pretendard-Regular';  
       src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');  
       font-weight: 400;  
-      font-style: normal;  
+      font-style: normal;
     }  
     * {
       margin: 0;
@@ -37,11 +37,6 @@
     }
     
     #logo {
-      /* display: block; */
-      /* width: 200px;
-      margin: 0 auto;
-      cursor: pointer;
-      margin-bottom: 30px; */
       position: absolute;
       left: 0; 
       top: 0;
@@ -68,7 +63,6 @@
     #step {
       width: 550px;
       height: auto;
-
     }
 
     /* 회원가입 폼 */
@@ -99,12 +93,12 @@
     
     input[type="text"], 
     button {
-    height: 40px;
-    box-sizing: border-box;
-    font-size: 16px;
-    line-height: 1;
-    padding: 8px;
-    vertical-align: middle;
+      height: 40px;
+      box-sizing: border-box;
+      font-size: 16px;
+      line-height: 1;
+      padding: 8px;
+      vertical-align: middle;
     }
     
     /* 아이디 중복체크 및 이메일 인증 버튼 스타일 */
@@ -165,7 +159,6 @@
       padding: 10px;
       text-align: center;
       background-color: #fff;
-
     }
 
     /* 회원가입 완료 버튼 */
@@ -186,9 +179,7 @@
 <body>
   <div class="container">
     <!-- 로고 영역 -->
-    <a href="/lighting/main.do">
       <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
-    </a>
 
     <!-- 안내 문구 -->
     <div class="signupTitle">
@@ -206,7 +197,7 @@
       <div class="formGroup">
         <label for="userid">아이디</label>
         <div class="inputGroup">
-          <input type="text" id="userid" name="userid" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required value="asdasd">
+          <input type="text" id="id" name="id" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required value="asdasd">
           <button type="button" class="btnIdCheck">중복체크</button>
         </div>
       </div>
@@ -214,7 +205,7 @@
       <!-- 비밀번호 -->
       <div class="formGroup">
         <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" placeholder="8~16자리, 영문+숫자+특수문자 조합" required value="asdasd">
+        <input type="password" id="pw" name="pw" placeholder="8~16자리, 영문+숫자+특수문자 조합" required value="asdasd">
       </div>
       
       <!-- 이름 -->
@@ -232,13 +223,13 @@
       <!-- 생년월일 -->
       <div class="formGroup">
         <label for="birthdate">생년월일</label>
-        <input type="text" id="birthdate" name="birthdate" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required value="19990101">
+        <input type="text" id="birthday" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required value="19990101">
       </div>
       
       <!-- 연락처 -->
       <div class="formGroup">
         <label for="phone">연락처</label>
-        <input type="text" id="phone" name="phone" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required value="01012341234">
+        <input type="text" id="tel" name="tel" placeholder="11자리 숫자만 입력 가능 (‘-’ 없음)" required value="01012341234">
       </div>
       
       <!-- 이메일 -->
@@ -254,9 +245,9 @@
       <div class="formGroup">
         <label>성별</label>
         <div id="gender">
-          <input type="radio" id="male" name="gender" value="남성" required checked="checked">
+          <input type="radio" id="male" name="gender" value="m" required checked="checked">
           <label for="male">남성</label>
-          <input type="radio" id="female" name="gender" value="여성" required>
+          <input type="radio" id="female" name="gender" value="f" required>
           <label for="female">여성</label>
         </div>
       </div>
@@ -265,7 +256,7 @@
       <div class="formGroup">
         <label>주소</label>
         <div style="display: flex; gap: 10px;">
-          <select id="city" name="city" style="flex: 1;">
+          <select id="sido" name="sido" style="flex: 1;">
             <option value="" disabled selected>시/도 선택</option>
             <option value="서울" selected="selected">서울</option>
             <option value="부산">부산</option>
@@ -273,7 +264,7 @@
             <option value="인천">인천</option>
             <option value="경기도">경기도</option>
           </select>
-          <select id="district" name="district" style="flex: 1;" disabled>
+          <select id="gugun" name="gugun" style="flex: 1;" disabled>
             <option value="">구/군 선택</option>
           </select>
         </div>
@@ -363,7 +354,8 @@
       });
     });
 
-    $('#logo', '#btnSubmit').click(() => { 
+
+    $('#logo').click(() => { 
       window.location.href = '/lighting/main.do'; // 메인페이지로 이동
     });
   </script>
