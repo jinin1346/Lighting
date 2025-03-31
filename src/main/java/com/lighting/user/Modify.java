@@ -1,4 +1,4 @@
-package com.lighting.login;
+package com.lighting.user;
 
 import java.io.IOException;
 
