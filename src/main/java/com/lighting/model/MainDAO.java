@@ -126,6 +126,40 @@ public class MainDAO {
         return null;
     }
 
+    public void insertSearchHistory(String searchKeyword, String tblMemberSeq, String tblCategorySubSeq) {
+        try {
+            String sql = "insert into tblSearchHistory (tblSearchHistorySeq,searchKeyword,tblMemberSeq,tblCategorySubSeq) "
+                    + "values(seqSearchHistory.nextval,?,?,?)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, searchKeyword);
+            pstat.setString(2, tblMemberSeq);
+            pstat.setString(3, tblCategorySubSeq);
+            int result = pstat.executeUpdate();
+            System.out.println(result);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void insertInterestScore(String tblMemberSeq, String tblCategorySubSeq) {
+        try {
+            String sql = "insert into tblinterest (tblinterestseq, tblmemberseq, tblcategorysubseq, score) "
+                    + "values(seqInterest.nextval,?,?,10)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            pstat.setString(2, tblCategorySubSeq);
+            int result = pstat.executeUpdate();
+            System.out.println(result);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

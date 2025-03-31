@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,11 +29,28 @@ public class SearchData extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         
         String searchKeyword = req.getParameter("searchKeyword");
-        String categorySubSeqStr = req.getParameter("tblCategorySubSeq");
+        String tblCategorySubSeq = req.getParameter("tblCategorySubSeq");
 
         
+        //1. 회원 검색조회 + tblSearchHistory insert
+        HttpSession session = req.getSession(true);
+        session.setAttribute("auth", "1"); //인증티켓
+        
+        // 세션 확인 : 회원이면 세션에 auth 속성이 있음
+        //HttpSession session = req.getSession(false);
         MainDAO dao = new MainDAO();
-        //1. 비회원의 검색어를 통한 게시글 조회
+
+        if (session != null && session.getAttribute("auth") != null) {
+            // 세션에 저장된 값(auth)이 회원 번호라고 가정
+            String tblMemberSeq = (String) session.getAttribute("auth");
+            // 회원의 검색 기록을 tblSearchHistory에 저장 
+            dao.insertSearchHistory(searchKeyword, tblMemberSeq, tblCategorySubSeq);
+            //회원  tblInterest에 관심 점수 추가\
+            dao.insertInterestScore(tblMemberSeq, tblCategorySubSeq);
+        }
+        
+        
+        //2. 회원 + 비회원의 검색어를 통한 게시글 조회
         List<MainDTO> meetingList = dao.searchMeetingPosts(searchKeyword); 
         
         JSONArray arr = new JSONArray();
@@ -51,7 +69,6 @@ public class SearchData extends HttpServlet {
             
         }
         
-        //2. 회원의 게시글 조회 + tblSearchHistory insert
         
         
         
