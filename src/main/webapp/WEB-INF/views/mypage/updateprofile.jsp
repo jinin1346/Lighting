@@ -129,9 +129,6 @@
             <form method="POST" action="/lighting/mypage/updateprofileok.do">
             <button class="submitProfileImageButton">이미지 변경 완료</button>
             </form>
-            
-            
-            
         </div>
     </div>
 </body>

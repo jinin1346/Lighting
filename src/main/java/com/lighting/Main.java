@@ -28,7 +28,7 @@ public class Main extends HttpServlet {
         req.setAttribute("meetingList", meetingList);
         
         
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp); 
 	}  
 
 }
