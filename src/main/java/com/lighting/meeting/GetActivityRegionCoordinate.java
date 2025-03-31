@@ -13,27 +13,27 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.lighting.meeting.model.CategorySubDTO;
+import com.lighting.meeting.model.ActivityRegionCoordinateDTO;
 import com.lighting.meeting.model.MeetingDAO;
 
-@WebServlet("/meeting/getcategorysub.do")
-public class GetCategorySub extends HttpServlet {
+@WebServlet("/meeting/getactivityregioncoordinate.do")
+public class GetActivityRegionCoordinate extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        String tblCategoryMainSeq = req.getParameter("tblCategoryMainSeq");
+        String tblMemberSeq = req.getParameter("tblMemberSeq");
         
         MeetingDAO dao = new MeetingDAO();
-        List<CategorySubDTO> list = dao.getCategories(tblCategoryMainSeq);
+        List<ActivityRegionCoordinateDTO> list = dao.getActivityRegionCoordinate(tblMemberSeq);
         dao.close();
         
         JSONArray arr = new JSONArray();
         
-        for(CategorySubDTO dto : list) {
+        for(ActivityRegionCoordinateDTO dto : list) {
             JSONObject obj = new JSONObject();
-            obj.put("tblCategorySubSeq", dto.getTblCategorySubSeq());
-            obj.put("categoryName", dto.getCategoryName());
+            obj.put("latitude", dto.getLatitude());
+            obj.put("longitude", dto.getLongitude());
             
             arr.add(obj);
         }
@@ -45,4 +45,5 @@ public class GetCategorySub extends HttpServlet {
         writer.print(arr);
         writer.close();
     }
+
 }

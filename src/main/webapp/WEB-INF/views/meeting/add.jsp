@@ -235,7 +235,7 @@ textarea:focus, input:focus, button:focus, #title:focus {
 	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	</div>
-	<form method="POST" action="/lighting/meeting/addok.do" enctype="multipart/form-data">
+	<form method="POST" action="/lighting/meeting/addok.do">
 	<div class="container">
 		<!-- 상단 섹션 -->
 		<div class="top-section">
@@ -285,10 +285,10 @@ textarea:focus, input:focus, button:focus, #title:focus {
                             장소명 :
                             <input type="text" maxlength="20" id="location" name="location">
                         </div>
-						<div>
+						<!-- <div>
                             대표사진 :
                             <input type="file" name="photoFileName" accept="image/*">
-                        </div>
+                        </div> -->
 					</div>
 				</div>
 				
@@ -345,13 +345,6 @@ textarea:focus, input:focus, button:focus, #title:focus {
             });
 
 	    });
-    
-	    $('#date').on('change', function() {
-			console.log($(this).val());
-		});
-	    $('#time').on('change', function() {
-			console.log($(this).val());
-		});
 	    
         function getToday() {
         	let today = new Date();
@@ -364,47 +357,68 @@ textarea:focus, input:focus, button:focus, #title:focus {
 	    
         $('#date').attr('min', getToday());
         
-        const container = document.getElementById('map');
-		const options = {
-			center: new kakao.maps.LatLng(37.4979, 127.0276), //member 활동지역 37.4979	127.0276
-			level: 4
-		};
-	
-		const map = new kakao.maps.Map(container, options); //map 만들기
+        $.ajax({//작성자 좌표 가져와서 맵 중앙에 띄우고 마커 추가하는 이벤트까지 추가
+            url: '/lighting/meeting/getactivityregioncoordinate.do',
+            type: 'GET',
+            data: 'tblMemberSeq=' + ${auth},
+            dataType: 'json',
+            success: function(result) {
 
-		let m1 = null;
-		let info = null;
-		
-		kakao.maps.event.addListener(map, 'click', function(evt) {
-			
-			if (m1 != null) {
-				//기존 마커가 존재O > 삭제
-				m1.setMap(null);
-				m1.setImage(null);
-			}
-			
-			let latitude = evt.latLng.getLat();
-			let longitude = evt.latLng.getLng();
-			
-            $('#latitude').val(latitude);//위도, 경도 할당
-            $('#longitude').val(longitude);
+            	result.forEach(function(latLon) {
 
-			m1 = new kakao.maps.Marker({
-				position: evt.latLng
-			});
-			
-			//이미지 마커
-			const path = '/lighting/images/찜하기버튼.png';
-			const size = new kakao.maps.Size(32, 32);
-			const op = {
-				offset: new kakao.maps.Point(16, 32)
-			};
-			
-			const img = new kakao.maps.MarkerImage(path, size, op);
-			
-			m1.setImage(img);
-			m1.setMap(map);
-		});//작성자에게는 마커로 보여주고 마커의 위치값 저장
+            		/* member 활동지역 좌표 가져오기 */
+                    //GetActivityRegionCoordinate
+                    let activityRegionLatitude = latLon.latitude;
+                    let activityRegionLongitude = latLon.longitude;
+                    
+                    const container = document.getElementById('map');
+            		const options = {
+            			center: new kakao.maps.LatLng(activityRegionLatitude, activityRegionLongitude),
+            			level: 4
+            		};
+            	
+            		const map = new kakao.maps.Map(container, options); //map 만들기
+            		
+            		let m1 = null;
+            		let info = null;
+            		
+            		kakao.maps.event.addListener(map, 'click', function(evt) {
+            			
+            			if (m1 != null) {
+            				//기존 마커가 존재O > 삭제
+            				m1.setMap(null);
+            				m1.setImage(null);
+            			}
+            			
+            			let latitude = evt.latLng.getLat();
+            			let longitude = evt.latLng.getLng();
+            			
+                        $('#latitude').val(latitude);//위도, 경도 할당
+                        $('#longitude').val(longitude);
+
+            			m1 = new kakao.maps.Marker({
+            				position: evt.latLng
+            			});
+            			
+            			//이미지 마커
+            			const path = '/lighting/images/찜하기버튼.png';
+            			const size = new kakao.maps.Size(32, 32);
+            			const op = {
+            				offset: new kakao.maps.Point(16, 32)
+            			};
+            			
+            			const img = new kakao.maps.MarkerImage(path, size, op);
+            			
+            			m1.setImage(img);
+            			m1.setMap(map);
+            		});//작성자에게는 마커로 보여주고 마커의 위치값 저장
+                    
+            	});
+            },
+            error: function(a, b, c) {
+                console.error(a,b,c);
+            }
+        });
 		
     </script>
 </body>
