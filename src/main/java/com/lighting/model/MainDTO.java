@@ -29,5 +29,15 @@ public class MainDTO {
     //tblCategorySub
     private String tblCategorySubSeq;
     
+    //tblSearchHistory
+    private String tblSearchHistorySeq;
+    private String searchKeyword;
+    
+    //tblInterest
+    private String tblInterestSeq;
+    private int score;
+    
+    
+    
     
 }

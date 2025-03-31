@@ -156,7 +156,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    /*var selectedCategory = null;
+
+	
+    var selectedCategory = null;
 
     function setCategory(catSeq) {
         selectedCategory = catSeq;
@@ -172,6 +174,10 @@
             alert("카테고리를 선택하세요.");
             return;
         }
+        
+        console.log(keyword);
+        console.log(selectedCategory);
+        
         $.ajax({
             type: 'POST',
             url: '/lighting/searchdata.do',
@@ -188,32 +194,44 @@
                         var item = `
                         <div class="item">
                             <div>
-                                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
-                            </div>
-                            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
-                                ${meeting.title}
+                                <img src="/lighting/images/\${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
+                            </div> 
+                            <span class="title" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
+                                \${meeting.title}
                             </span>
                             <div>
-                                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
+                                <img class="icon" src="/lighting/images/\${meeting.memberPhoto}" alt="Icon">
                                 <span class="nameAndCap">
                                     &ensp;
-                                    <span class="name">${meeting.nickname}</span>
+                                    <span class="name">\${meeting.nickname}</span>
                                     <br>
                                     <span class="capBox">
-                                        <span class="capacity">${meeting.capacity}</span> 명 모집중
+                                        <span class="capacity">\${meeting.capacity}</span> 명 모집중
                                     </span>
                                 </span>
                             </div>
                         </div>`;
-                        $('#meetingBox').append(item);
+                        \$('#meetingBox').append(item);
                     });
                 } else {
-                    $('#meetingBox').html('<p>검색 결과가 없습니다.</p>');
+                    \$('#meetingBox').html('<p>검색 결과가 없습니다.</p>');
                 }
+            console.log(result);
             },
             error: function(a, b, c){
                 console.log(a, b, c);
             }
         });
-    }*/
+    }
+    
+  //엔터 키를 눌렀을 때 performSearch() 호출
+    $(document).ready(function() {
+        $('.search-box').keypress(function(e) {
+            if (e.which == 13) { // Enter 키
+                performSearch();
+            }
+        });
+    });
+    
+  
 </script>

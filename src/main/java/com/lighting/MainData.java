@@ -23,8 +23,9 @@ public class MainData extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //MainData.java
-        System.out.println("12");
         MainDAO dao = new MainDAO();
+        
+        //1. 비회원 검색
         List<MainDTO> meetingList = dao.getMeetingList(); 
         
         JSONArray arr = new JSONArray();
