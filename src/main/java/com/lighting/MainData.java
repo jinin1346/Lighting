@@ -25,8 +25,15 @@ public class MainData extends HttpServlet {
         //MainData.java
         MainDAO dao = new MainDAO();
         
-        //1. 비회원 검색
-        List<MainDTO> meetingList = dao.getMeetingList(); 
+        //캍테고리 시퀀스가 있으면 조회, 없으면 전체조회
+        String categorySubSeq = req.getParameter("tblCategorySubSeq");
+        List<MainDTO> meetingList;
+        
+        if (categorySubSeq != null && !categorySubSeq.trim().isEmpty()) {
+            meetingList = dao.getMeetingListByCategory(categorySubSeq);
+        } else {
+            meetingList = dao.getMeetingList();
+        }
         
         JSONArray arr = new JSONArray();
         for(MainDTO dto : meetingList) {
@@ -43,7 +50,13 @@ public class MainData extends HttpServlet {
             arr.add(obj);
             
         }
+        
+        
+        
+        
 
+        dao.close();
+        
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         
