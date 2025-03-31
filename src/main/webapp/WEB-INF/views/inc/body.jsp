@@ -302,6 +302,12 @@
     </div>
 
     
+    <div>
+    	<button id="btnAdd" onclick="location.href='/lighting/meeting/add.do';">
+    		글쓰기
+    	</button>
+    </div>
+    
     <!-- 모임 추천 -->
     <div id="slider">
     
