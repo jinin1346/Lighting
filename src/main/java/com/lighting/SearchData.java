@@ -70,7 +70,7 @@ public class SearchData extends HttpServlet {
         }
         
         
-        
+        dao.close();
         
         PrintWriter writer = resp.getWriter();
         writer.print(arr);
