@@ -442,15 +442,12 @@
 	        });
 	    });
 	    
-	    $('.thumnail').click(() => {
-            location.href='/lighting/meeting/read.do';
-    });
-    
 
     
-    $('.title').click(() => {
-        location.href='/lighting/meeting/read.do';
+    $(document).on('click', '.thumnail, .title', function() {
+        location.href = '/lighting/meeting/read.do';
     });
+
     
     function openServletInNewWindow(servletUrl) {
         window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
