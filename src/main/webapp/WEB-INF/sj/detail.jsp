@@ -22,6 +22,7 @@ body {
 	width: 1300px;
 	margin: 0 auto;
 	background-color: #f9f7ff;
+	font-family: 'Pretendard-Regular';
 }
 
 .body {
@@ -65,7 +66,8 @@ body {
 
 #main_img {
 	width: 950px;
-	height: auto;
+	height: 230px;
+	margin: 10px;
 }
 
 #back {
@@ -222,7 +224,7 @@ height: 40px;
 		</div>
 
 		<!-- 2. 메인이미지 -->
-		<img alt="메인이미지" src="./images/맛집.png" id="main_img">
+		<img alt="메인이미지" src="./images/food/basic맛집식사.png" id="main_img">
 
 		<!-- 3. 돌아가기 -->
 		<input type="button" id="back" value="이전 화면">
