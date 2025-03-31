@@ -26,6 +26,7 @@
 
 </head>
 <body>
+	<h1>${auth}</h1>
 	<div class="container">
     <%@ include file="/WEB-INF/views/inc/header.jsp" %>
     <div class="content">

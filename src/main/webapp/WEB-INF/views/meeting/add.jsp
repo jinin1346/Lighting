@@ -223,14 +223,19 @@ textarea:focus, input:focus, button:focus, #title:focus {
 	margin-top: 10px;
 	margin-left:25px;
 	color: #6A6969;
-	
+}
+
+#content {
+	resize: none;
 }
 </style>
 </head>
 <body>
-<div id="headerContainer">
-<%@ include file="/WEB-INF/views/inc/header.jsp" %>
-</div>
+	<h1>${auth}</h1>
+	<div id="headerContainer">
+	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
+	</div>
+	<form method="POST" action="/lighting/meeting/addok.do" enctype="multipart/form-data">
 	<div class="container">
 		<!-- 상단 섹션 -->
 		<div class="top-section">
@@ -244,7 +249,7 @@ textarea:focus, input:focus, button:focus, #title:focus {
 					<option value="5">자기계발</option>
 				</select>
 				
-                <select id="categorySub">
+                <select id="categorySub" name="tblCategorySubSeq">
                     <option value="18" selected>식사</option>
                     <option value="19">카페</option>
                     <option value="20">디저트</option>
@@ -253,12 +258,12 @@ textarea:focus, input:focus, button:focus, #title:focus {
                     <option value="23">기타</option>
 				</select>
 				
-                <input type="text" id="title" placeholder="제목은 20자 이내로 입력 가능합니다." maxlength="20" required>
+                <input type="text" id="title" placeholder="제목은 20자 이내로 입력 가능합니다." maxlength="20" required name="title">
 
 				<div class="time-section">
-					<input type="date" id="date" required>
-					<input type="time" id="time" required>
-					<input type="number" id="people" placeholder="인원수" min="2" max="10" required>
+					<input type="date" id="date" required name="date">
+					<input type="time" id="time" required name="time">
+					<input type="number" id="people" placeholder="인원수" min="2" max="10" required name="capacity">
 				</div>
 			</div>
 		</div>
@@ -267,31 +272,42 @@ textarea:focus, input:focus, button:focus, #title:focus {
 		<div class="middle-section">
 			<!-- 왼쪽 중간: 글 내용 텍스트 영역 -->
 			<div class="left-section">
-				<textarea id="content" placeholder="글 내용을 입력하세요."></textarea>
+				<textarea id="content" placeholder="글 내용을 입력하세요." maxlength="2000" name="content"></textarea>
 			</div>
 
 			<div>
 				<!-- 오른쪽 중간: 지도 섹션 -->
 				<div class="right-section">
 					<div id="map">
-						<!-- <img src="/lighting/images/치킨.jpg" alt="지도"
-							style="width: 100%; height: 100%;"> -->
 					</div>
-					<div class="location-text">장소 : 역삼 남호식당 역삼 본점</div>
+					<div class="location-text">
+						<div>
+                            장소명 :
+                            <input type="text" maxlength="20" id="location" name="location">
+                        </div>
+						<div>
+                            대표사진 :
+                            <input type="file" name="photoFileName" accept="image/*">
+                        </div>
+					</div>
 				</div>
 				
 				<!-- 하단 섹션 -->
 				<div class="bottons-box">
 	
 					<div class="buttons">
-						<button id="loadPost">내가 쓴 글 불러오기</button>
-						<button id="goBack">돌아가기</button>
-						<button id="attend">글 작성하기 </button>
+						<button id="loadPost" type="button">내가 쓴 글 불러오기</button>
+						<button id="goBack" type="button">돌아가기</button>
+						<button id="attend" type="submit">글 작성하기 </button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+        <input type="hidden" id="latitude" name="latitude" value="">
+        <input type="hidden" id="longitude" name="longitude" value="">
+        <input type="hidden" name="tblMemberSeq" value="${auth}">
+	</form>
 <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
     <script>
@@ -313,10 +329,11 @@ textarea:focus, input:focus, button:focus, #title:focus {
             		}
 
 					result.forEach(function(subcategory) { 
-                    let option = document.createElement('option');
-                    option.value = subcategory.tblCategorySubSeq; 
-                    option.text = subcategory.categoryName + subcategory.tblCategorySubSeq; 
-                    categorySub.appendChild(option);
+	                    let option = document.createElement('option');
+	                    option.value = subcategory.tblCategorySubSeq; 
+	                    option.text = subcategory.categoryName + subcategory.tblCategorySubSeq; 
+	                    
+	                    categorySub.appendChild(option);
                     });
 					
 					categorySub.firstElementChild.setAttribute("selected", "selected");
@@ -329,6 +346,13 @@ textarea:focus, input:focus, button:focus, #title:focus {
 
 	    });
     
+	    $('#date').on('change', function() {
+			console.log($(this).val());
+		});
+	    $('#time').on('change', function() {
+			console.log($(this).val());
+		});
+	    
         function getToday() {
         	let today = new Date();
             let year = today.getFullYear();
@@ -340,16 +364,48 @@ textarea:focus, input:focus, button:focus, #title:focus {
 	    
         $('#date').attr('min', getToday());
         
-        
-        
         const container = document.getElementById('map');
 		const options = {
 			center: new kakao.maps.LatLng(37.4979, 127.0276), //member 활동지역 37.4979	127.0276
 			level: 4
 		};
 	
-		const map = new kakao.maps.Map(container, options);
+		const map = new kakao.maps.Map(container, options); //map 만들기
 
+		let m1 = null;
+		let info = null;
+		
+		kakao.maps.event.addListener(map, 'click', function(evt) {
+			
+			if (m1 != null) {
+				//기존 마커가 존재O > 삭제
+				m1.setMap(null);
+				m1.setImage(null);
+			}
+			
+			let latitude = evt.latLng.getLat();
+			let longitude = evt.latLng.getLng();
+			
+            $('#latitude').val(latitude);//위도, 경도 할당
+            $('#longitude').val(longitude);
+
+			m1 = new kakao.maps.Marker({
+				position: evt.latLng
+			});
+			
+			//이미지 마커
+			const path = '/lighting/images/찜하기버튼.png';
+			const size = new kakao.maps.Size(32, 32);
+			const op = {
+				offset: new kakao.maps.Point(16, 32)
+			};
+			
+			const img = new kakao.maps.MarkerImage(path, size, op);
+			
+			m1.setImage(img);
+			m1.setMap(map);
+		});//작성자에게는 마커로 보여주고 마커의 위치값 저장
+		
     </script>
 </body>
 </html>

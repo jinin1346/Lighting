@@ -43,6 +43,8 @@ public class MainData extends HttpServlet {
             
         }
 
+        dao.close();
+        
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         

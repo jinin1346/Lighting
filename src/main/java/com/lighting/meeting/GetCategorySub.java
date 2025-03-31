@@ -23,8 +23,7 @@ public class GetCategorySub extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String tblCategoryMainSeq = req.getParameter("tblCategoryMainSeq");
-        //String tblCategoryMainSeq = "1";
-        //addCategorySub.java
+        
         MeetingDAO dao = new MeetingDAO();
         List<CategorySubDTO> list = dao.getCategories(tblCategoryMainSeq);
         
