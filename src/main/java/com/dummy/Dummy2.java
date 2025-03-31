@@ -45,7 +45,7 @@ public class Dummy2 {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         BufferedWriter writer = null;
-        
+
         try {
             // 1. JDBC 드라이버 로딩
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -71,9 +71,8 @@ public class Dummy2 {
             for (int meetingPostSeq = 1; meetingPostSeq <= 500; meetingPostSeq++) {
                 pstmt.setInt(1, meetingPostSeq);
                 rs = pstmt.executeQuery();
-                
+
                 if (rs.next()) {
-                    System.out.println(11);
                     String location = rs.getString("location");
                     String latitude = "";
                     String longitude = "";

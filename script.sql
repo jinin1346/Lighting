@@ -1,8 +1,3 @@
-<<<<<<< HEAD
---haha 메롱
---test
-=======
---DDL
 drop table tblRejectionReason cascade constraints;
 drop table tblEvaluation cascade constraints;
 
@@ -31,21 +26,26 @@ drop table tblMember cascade constraints;
 drop table tblCategoryMain cascade constraints;
 drop table tblActivityRegionCoordinate cascade constraints;
 
+drop table tblEmail cascade constraints;
+
 /* 회원 */
 CREATE TABLE tblMember (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
-	id VARCHAR2(20) NOT NULL, /* 아이디 */
+	id VARCHAR2(20) NOT NULL UNIQUE, /* 아이디 */
 	pw VARCHAR2(20) NOT NULL, /* 비밀번호 */
 	name VARCHAR2(30) NOT NULL, /* 이름 */
 	nickname VARCHAR2(30) NOT NULL, /* 닉네임 */
 	birthday DATE NOT NULL, /* 생년월일 */
-	tel VARCHAR2(20) NOT NULL, /* 연락처 */
-	email VARCHAR2(100) NOT NULL, /* 이메일 */
+	tel VARCHAR2(20) NOT NULL UNIQUE, /* 연락처 */
+	email VARCHAR2(100) NOT NULL UNIQUE, /* 이메일 */
 	gender VARCHAR2(1) NOT NULL, /* 성별 */
 	photoFileName VARCHAR2(1020) NOT NULL, /* 사진파일명 */
 	registrationDate DATE DEFAULT sysdate NOT NULL, /* 가입일 */
 	status NUMBER DEFAULT 0 NOT NULL /* 회원상태 */
 );
+
+DROP SEQUENCE seqMember;
+CREATE SEQUENCE seqMember start with 1001;
 
 ALTER TABLE tblMember
 	ADD
@@ -62,6 +62,9 @@ CREATE TABLE tblActivityRegionCoordinate (
 	latitude NUMBER NOT NULL, /* 위도 */
 	longitude NUMBER NOT NULL /* 경도 */
 );
+
+DROP SEQUENCE seqActivityRegionCoordinate;
+CREATE SEQUENCE seqActivityRegionCoordinate start with 26;
 
 ALTER TABLE tblActivityRegionCoordinate
 	ADD
@@ -82,6 +85,7 @@ ALTER TABLE tblCategoryMain
 		PRIMARY KEY (
 			tblCategoryMainSeq
 		);
+		
 
 /* 활동지역 */
 CREATE TABLE tblActivityRegion (
@@ -194,6 +198,9 @@ CREATE TABLE tblFriendRequest (
 	approvalStatus VARCHAR2(1) /* 승인여부 */
 );
 
+DROP SEQUENCE seqFriendRequest;
+CREATE SEQUENCE seqFriendRequest;
+
 ALTER TABLE tblFriendRequest
 	ADD
 		CONSTRAINT PK_tblFriendRequest
@@ -274,6 +281,9 @@ CREATE TABLE tblCategorySub (
 	categoryName VARCHAR2(255) NOT NULL /* 분류명 */
 );
 
+DROP SEQUENCE seqCategorySub;
+CREATE SEQUENCE seqCategorySub start with 51;
+
 ALTER TABLE tblCategorySub
 	ADD
 		CONSTRAINT PK_tblCategorySub
@@ -298,6 +308,9 @@ CREATE TABLE tblChatRoom (
 	chatPartnerSeq NUMBER NOT NULL, /* 회원seq2 */
 	createDate DATE DEFAULT sysdate NOT NULL /* 개설일 */
 );
+
+DROP SEQUENCE seqChatRoom;
+CREATE SEQUENCE seqChatRoom;
 
 ALTER TABLE tblChatRoom
 	ADD
@@ -335,6 +348,9 @@ CREATE TABLE tblPhotoPost (
 	tblMemberSeq NUMBER NOT NULL /* 회원seq */
 );
 
+DROP SEQUENCE seqPhotoPost;
+CREATE SEQUENCE seqPhotoPost start with 501;
+
 ALTER TABLE tblPhotoPost
 	ADD
 		CONSTRAINT PK_tblPhotoPost
@@ -361,6 +377,9 @@ CREATE TABLE tblChatHistory (
 	postDate DATE DEFAULT sysdate NOT NULL, /* 작성시간 */
 	status VARCHAR2(1) DEFAULT 0 NOT NULL /* 읽음여부 */
 );
+
+DROP SEQUENCE seqChatHistory;
+CREATE SEQUENCE seqChatHistory;
 
 ALTER TABLE tblChatHistory
 	ADD
@@ -397,6 +416,9 @@ CREATE TABLE tblInterest (
 	score NUMBER NOT NULL /* 점수 */
 );
 
+DROP SEQUENCE seqInterest;
+CREATE SEQUENCE seqInterest;
+
 ALTER TABLE tblInterest
 	ADD
 		CONSTRAINT PK_tblInterest
@@ -431,6 +453,9 @@ CREATE TABLE tblAttachedPhoto (
 	photoFileName VARCHAR2(1020) NOT NULL /* 사진파일명 */
 );
 
+DROP SEQUENCE seqAttachedPhoto;
+CREATE SEQUENCE seqAttachedPhoto start with 501;
+
 ALTER TABLE tblAttachedPhoto
 	ADD
 		CONSTRAINT PK_tblAttachedPhoto
@@ -462,6 +487,9 @@ CREATE TABLE tblMeetingPost (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
 	tblCategorySubSeq NUMBER NOT NULL /* 중분류seq */
 );
+
+DROP SEQUENCE seqMeetingPost;
+CREATE SEQUENCE seqMeetingPost start with 501;
 
 ALTER TABLE tblMeetingPost
 	ADD
@@ -498,6 +526,9 @@ CREATE TABLE tblSearchHistory (
 	tblCategorySubSeq NUMBER NOT NULL /* 중분류seq */
 );
 
+DROP SEQUENCE seqSearchHistory;
+CREATE SEQUENCE seqSearchHistory;
+
 ALTER TABLE tblSearchHistory
 	ADD
 		CONSTRAINT PK_tblSearchHistory
@@ -531,6 +562,9 @@ CREATE TABLE tblWishlist (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
 	tblMeetingPostSeq NUMBER NOT NULL /* 모임게시글seq */
 );
+
+DROP SEQUENCE seqWishlist;
+CREATE SEQUENCE seqWishlist;
 
 ALTER TABLE tblWishlist
 	ADD
@@ -566,6 +600,9 @@ CREATE TABLE tblLocationCoordinate (
 	longitude NUMBER NOT NULL /* 장소(경도) */
 );
 
+DROP SEQUENCE seqLocationCoordinate;
+CREATE SEQUENCE seqLocationCoordinate;
+
 ALTER TABLE tblLocationCoordinate
 	ADD
 		CONSTRAINT PK_tblLocationCoordinate
@@ -588,6 +625,9 @@ CREATE TABLE tblMeeting (
 	tblMeetingSeq NUMBER NOT NULL, /* 모임seq */
 	tblMeetingPostSeq NUMBER NOT NULL /* 모임게시글seq */
 );
+
+DROP SEQUENCE seqMeeting;
+CREATE SEQUENCE seqMeeting;
 
 ALTER TABLE tblMeeting
 	ADD
@@ -613,6 +653,9 @@ CREATE TABLE tblParticipationRequest (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
 	approvalStatus VARCHAR2(1) /* 승인여부 */
 );
+
+DROP SEQUENCE seqParticipationRequest;
+CREATE SEQUENCE seqParticipationRequest;
 
 ALTER TABLE tblParticipationRequest
 	ADD
@@ -648,6 +691,9 @@ CREATE TABLE tblRejectionReason (
 	reason VARCHAR2(500) NOT NULL /* 거절사유 */
 );
 
+DROP SEQUENCE seqRejectionReason;
+CREATE SEQUENCE seqRejectionReason;
+
 ALTER TABLE tblRejectionReason
 	ADD
 		CONSTRAINT PK_tblRejectionReason
@@ -663,8 +709,7 @@ ALTER TABLE tblRejectionReason
 		)
 		REFERENCES tblParticipationRequest (
 			tblParticipationRequestSeq
-		);
-		
+		);	
 		
 /* 평가 */
 CREATE TABLE tblEvaluation (
@@ -712,4 +757,16 @@ ALTER TABLE tblEvaluation
 		REFERENCES tblMeeting (
 			tblMeetingSeq
 		);		
->>>>>>> origin/main
+/* 이메일 */
+CREATE TABLE tblEmail (
+	email VARCHAR2(40) NOT NULL, /* 이메일 */
+	validNumber VARCHAR2(255) NOT NULL, /* 인증번호 */
+	regdate DATE NOT NULL /* 시간 */
+);
+
+ALTER TABLE tblEmail
+	ADD
+		CONSTRAINT PK_TABLE5
+		PRIMARY KEY (
+			email
+		);

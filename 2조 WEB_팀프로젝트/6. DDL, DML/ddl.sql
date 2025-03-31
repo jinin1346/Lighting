@@ -26,6 +26,8 @@ drop table tblMember cascade constraints;
 drop table tblCategoryMain cascade constraints;
 drop table tblActivityRegionCoordinate cascade constraints;
 
+drop table tblEmail cascade constraints;
+
 /* 회원 */
 CREATE TABLE tblMember (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
@@ -62,7 +64,7 @@ CREATE TABLE tblActivityRegionCoordinate (
 );
 
 DROP SEQUENCE seqActivityRegionCoordinate;
-CREATE SEQUENCE seqActivityRegionCoordinate start with 1001;
+CREATE SEQUENCE seqActivityRegionCoordinate start with 26;
 
 ALTER TABLE tblActivityRegionCoordinate
 	ADD
@@ -755,3 +757,16 @@ ALTER TABLE tblEvaluation
 		REFERENCES tblMeeting (
 			tblMeetingSeq
 		);		
+/* 이메일 */
+CREATE TABLE tblEmail (
+	email VARCHAR2(40) NOT NULL, /* 이메일 */
+	validNumber VARCHAR2(255) NOT NULL, /* 인증번호 */
+	regdate DATE NOT NULL /* 시간 */
+);
+
+ALTER TABLE tblEmail
+	ADD
+		CONSTRAINT PK_TABLE5
+		PRIMARY KEY (
+			email
+		);
