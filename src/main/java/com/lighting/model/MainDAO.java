@@ -78,6 +78,46 @@ public class MainDAO {
                 list.add(dto);
             }
             
+            rs.close();
+            return list;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<MainDTO> searchMeetingPosts(String searchKeyword) {
+        try {
+            
+            List<MainDTO> list = new ArrayList<MainDTO>();
+            String sql = "select mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname "
+                    + "from tblMeetingPost mp "
+                    + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq "
+                    + "where title like ? or content like ? "
+                    +"order by tblMeetingPostSeq";
+            
+            pstat = conn.prepareStatement(sql);
+            
+            String pattern = "%" + searchKeyword + "%";
+            pstat.setString(1, pattern);
+            pstat.setString(2, pattern);
+            
+            rs = pstat.executeQuery();
+            
+            while (rs.next()) {
+                MainDTO dto = new MainDTO();
+                dto.setTblMeetingPostSeq(rs.getString("tblMeetingPostSeq"));
+                dto.setTitle(rs.getString("title"));
+                dto.setMeetingPhoto(rs.getString("meetingPhoto"));
+                dto.setCapacity(rs.getString("capacity"));
+                dto.setMemberPhoto(rs.getString("memberPhoto"));
+                dto.setNickname(rs.getString("nickname"));
+                
+                list.add(dto);
+            }
+            
+            rs.close();
             return list;
             
         } catch (Exception e) {

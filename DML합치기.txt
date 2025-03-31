@@ -6507,4 +6507,6 @@ INSERT INTO tblLocationCoordinate (tblMeetingPostSeq, latitude, longitude) VALUE
 INSERT INTO tblLocationCoordinate (tblMeetingPostSeq, latitude, longitude) VALUES (498, 37.504468, 127.024859);
 INSERT INTO tblLocationCoordinate (tblMeetingPostSeq, latitude, longitude) VALUES (499, 37.498008, 127.028024);
 INSERT INTO tblLocationCoordinate (tblMeetingPostSeq, latitude, longitude) VALUES (500, 37.504468, 127.024859);
+update tblCategoryMain set categoryname = '자기계발' where tblcategorymainseq = 5;
+update tblCategoryMain set categoryname = '힐링' where tblcategorymainseq = 6;
 COMMIT;

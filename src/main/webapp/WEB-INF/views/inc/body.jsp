@@ -393,20 +393,7 @@
 
     <script>
     	
-    	$('.thumnail').click(() => {
-    			location.href='/lighting/meeting/read.do';
-    	});
     	
-
-    	
-    	$('.title').click(() => {
-			location.href='/lighting/meeting/read.do';
-		});
-    	
-	    function openServletInNewWindow(servletUrl) {
-	        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
-	    }
-	    
 	    
 
 	    
@@ -424,22 +411,22 @@
 	                    $('#meetingBox').append(`
 	                        <div class="item">  
 	                            <div>
-	                                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
+	                                <img src="/lighting/images/\${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
 	                            </div>
-	                            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
-	                                ${meeting.title}
+	                            <span class="title" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
+	                                \${meeting.title}
 	                            </span>
 	                            <div>
-	                                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
+	                                <img class="icon" src="/lighting/images/\${meeting.memberPhoto}" alt="Icon">
 	                                <span class="nameAndCap">
 	                                    &ensp; 
 	                                    <span class="name">
-	                                        ${meeting.nickname}
+	                                        \${meeting.nickname}
 	                                    </span>
 	                                    <br>
 	                                    <span class="capBox">
 	                                        <span class="capacity">
-	                                            ${meeting.capacity}
+	                                            \${meeting.capacity}
 	                                        </span>
 	                                        명 모집중
 	                                    </span>
@@ -448,7 +435,6 @@
 	                        </div>
 	                    `);
 	                });
-	                console.log(result);
 	            },
 	            error: function(a, b, c){
 	                console.log(a, b, c);
@@ -456,6 +442,20 @@
 	        });
 	    });
 	    
+	    $('.thumnail').click(() => {
+            location.href='/lighting/meeting/read.do';
+    });
+    
+
+    
+    $('.title').click(() => {
+        location.href='/lighting/meeting/read.do';
+    });
+    
+    function openServletInNewWindow(servletUrl) {
+        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
+    }
+    
 	    
     </script>
     
