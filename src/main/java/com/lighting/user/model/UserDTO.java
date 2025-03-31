@@ -2,10 +2,12 @@ package com.lighting.user.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class MemberDTO {
+@ToString
+public class UserDTO {
 
 	private String id;
 	  private String pw;

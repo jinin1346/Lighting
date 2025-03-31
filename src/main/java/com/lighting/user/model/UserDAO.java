@@ -55,7 +55,7 @@ public class UserDAO {
     }
 
     // 회원 정보를 추가하는 메서드
-    public int addMember(MemberDTO memberDto) {
+    public int addMember(UserDTO memberDto) {
         String query = "INSERT INTO tblMember (id, pw, name, nickname, birthday, tel, email, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, memberDto.getId());
@@ -91,4 +91,36 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+
+
+
+	public int addUser(UserDTO dto) {
+		
+		try {
+			String sql= "insert into tblMember (tblMemberSeq, id,pw,name,nickname,birthday,tel,email,gender,photofilename,registrationdate,status) values(seqMember.nextval,?,?,?,?,?,?,?,?,'basicProfile.png',default, 0)";
+			
+			String birthday = dto.getBirthday();
+			birthday=birthday.substring(0,4)+"-"+birthday.substring(4,6)+"-"+birthday.substring(6);
+			System.out.println(birthday);
+			
+			
+			
+			pstat=conn.prepareStatement(sql);
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPw());
+			pstat.setString(3, dto.getName());
+			pstat.setString(4, dto.getNickname());
+			pstat.setString(5, dto.getBirthday());
+			pstat.setString(6, dto.getTel());
+			pstat.setString(7, dto.getEmail());
+			pstat.setString(8, dto.getGender());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 }
