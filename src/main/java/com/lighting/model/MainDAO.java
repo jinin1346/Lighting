@@ -61,7 +61,7 @@ public class MainDAO {
             
             String sql = "select mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname "
                     + "from tblMeetingPost mp "
-                    + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq order by tblMeetingPostSeq";
+                    + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq order by tblMeetingPostSeq desc";
             
             rs = stat.executeQuery(sql);
             
@@ -96,7 +96,7 @@ public class MainDAO {
                     + "from tblMeetingPost mp "
                     + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq "
                     + "where (title like ? or content like ?) and mp.tblCategorySubSeq=? "
-                    + "order by tblMeetingPostSeq";
+                    + "order by tblMeetingPostSeq desc";
             
             /*
              
@@ -179,7 +179,7 @@ public class MainDAO {
                          "from tblMeetingPost mp " +
                          "join tblMember m on mp.tblMemberSeq = m.tblMemberSeq " +
                          "where mp.tblCategorySubSeq = ? " +
-                         "order by mp.tblMeetingPostSeq";
+                         "order by mp.tblMeetingPostSeq desc";
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, categorySubSeq);
             rs = pstat.executeQuery(); // executeQuery() 사용

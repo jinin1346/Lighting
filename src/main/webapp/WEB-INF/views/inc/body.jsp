@@ -235,16 +235,18 @@
     	display: block;
         text-align: right;
     }
+</style>
     
+<style>
     /* 오른쪽 아래 고정 컨테이너 */
 #floatingAdd {
   position: fixed;
   bottom: 50px;
   right: 50px;
   z-index: 1000;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 /* 메인 버튼 스타일 */
@@ -256,27 +258,42 @@
   background: transparent; 
   cursor: pointer;
   padding: 0;
-  outline: none;
+  outline: non
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /*  그림자 효과 */
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
+
+#floatingAdd .main-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
 
 /* 자식 버튼 컨테이너 - 기본적으로 숨김 */
 #floatingAdd .child-buttons {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
+    position: absolute;      /* 절대 위치 지정 */
+    bottom: 90px;            /* 메인 버튼 위에 위치하도록 조정 (필요에 따라 값 조정) */
+    right: 0;
+    /* display: none; */
+    opacity: 0;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+    /* margin-bottom: 10px; */
 }
 
 /* 버튼 활성화시 자식 버튼 노출 */
 #floatingAdd.active .child-buttons {
-  display: flex;
+	  /* display: flex;
+    transition: all 1s; */
+	  opacity: 1;  
 }
 
 /* 개별 자식 버튼 스타일 */
 #floatingAdd .child-button {
   width: 80px;
   height: 40px;
-  /* border-radius: 50%; */
   border-radius: .4em;
   background-color: #4285F4;
   color: #fff;
@@ -297,6 +314,7 @@
   opacity: 1;
   transform: translateY(0);
 }
+
 
 .speech-bubble {
   position: relative;
