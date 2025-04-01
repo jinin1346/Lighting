@@ -258,7 +258,7 @@
   background: transparent; 
   cursor: pointer;
   padding: 0;
-  outline: non
+  outline: none;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /*  그림자 효과 */
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
