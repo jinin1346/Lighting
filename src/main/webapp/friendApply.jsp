@@ -173,7 +173,7 @@
             </div>
             
             <div class="checkBtn">
-                <button>확인</button>
+                <button type="submit" id="btn1">확인</button>
             </div>
         </div>
     </div>
@@ -186,8 +186,8 @@
                 $("#myModal").css("display", "block");
             });
 
-            // 닫기 버튼 클릭 시
-            $(".close-button").click(function() {
+            // 닫기 버튼, 확인 버튼 클릭 시
+            $(".close-button, #btn1").click(function() {
                 $("#myModal").css("display", "none");
             });
 

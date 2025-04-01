@@ -488,6 +488,8 @@ CREATE TABLE tblMeetingPost (
 	tblCategorySubSeq NUMBER NOT NULL /* 중분류seq */
 );
 
+select * from tblMeetingPost;
+
 DROP SEQUENCE seqMeetingPost;
 CREATE SEQUENCE seqMeetingPost start with 501;
 
