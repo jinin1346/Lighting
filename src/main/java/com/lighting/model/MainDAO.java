@@ -84,23 +84,36 @@ public class MainDAO {
             e.printStackTrace();
         }
         return null;
-    }
 
-    public List<MainDTO> searchMeetingPosts(String searchKeyword) {
+    }
+    
+
+    public List<MainDTO> searchMeetingPosts(String searchKeyword, String tblCategorySubSeq) {
         try {
             
             List<MainDTO> list = new ArrayList<MainDTO>();
             String sql = "select mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname "
                     + "from tblMeetingPost mp "
                     + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq "
-                    + "where title like ? or content like ? "
-                    +"order by tblMeetingPostSeq";
+                    + "where (title like ? or content like ?) and mp.tblCategorySubSeq=? "
+                    + "order by tblMeetingPostSeq";
+            
+            /*
+             
+             select mp.tblCategorySubSeq,mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname 
+            from tblMeetingPost mp 
+            join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq 
+            where (title like '%산%' or content like '%산%') and mp.tblCategorySubSeq=1
+            order by tblMeetingPostSeq;
+             
+             */
             
             pstat = conn.prepareStatement(sql);
             
             String pattern = "%" + searchKeyword + "%";
             pstat.setString(1, pattern);
             pstat.setString(2, pattern);
+            pstat.setString(3, tblCategorySubSeq);
             
             rs = pstat.executeQuery();
             
@@ -182,15 +195,41 @@ public class MainDAO {
                 dto.setTblCategorySubSeq(rs.getString("tblCategorySubSeq")); // 필요 시 추가
                 list.add(dto);
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list; // 빈 리스트라도 반환 
     }
 
+    public String getHighestInterestCategory(String tblMemberSeq) {
+
+        String highestCategorySubSeq = null;
+        try {
+            
+            String sql = "SELECT tblcategorysubseq FROM (select tblcategorysubseq,sum(score) from tblinterest WHERE tblmemberseq =? group by tblcategorysubseq ORDER BY sum(score) DESC) WHERE ROWNUM = 1";
+                       
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                highestCategorySubSeq = rs.getString("tblcategorysubseq");
+            }
+            System.out.println("Highest Interest Category: " + highestCategorySubSeq);
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return highestCategorySubSeq;
+    }
+
+ 
     
 }
-
 
 
 
