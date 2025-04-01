@@ -13,9 +13,9 @@ public class Delete extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	    
 		
-
+	    
 		req.getRequestDispatcher("/WEB-INF/views/meeting/delete.jsp").forward(req, resp);
 	}
 
