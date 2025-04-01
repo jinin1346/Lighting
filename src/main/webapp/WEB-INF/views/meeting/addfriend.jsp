@@ -8,7 +8,6 @@
     <style>
         /* 전체 화면 덮는 모달 배경 */
         .modal {
-            display: none;
             position: fixed;    
             z-index: 999;
             left: 0;
@@ -143,9 +142,6 @@
     </style>
 </head>
 <body>
-    <!-- 모달을 열기 위한 버튼 -->
-    <button id="openModalBtn">친구 신청 화면</button>
-
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>

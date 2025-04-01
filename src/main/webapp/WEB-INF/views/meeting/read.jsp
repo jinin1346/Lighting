@@ -182,6 +182,9 @@
 			height: 40px;
 			margin: 5px;
 		}
+		.imgParticipants:hover {
+			cursor: pointer;
+		}
 		
 		#imgArrow {
 			width: 40px;
@@ -250,32 +253,30 @@
 	</style>
 </head>
 <body>
+<h1>${tblMeetingPostSeq }</h1>
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	<main>
 		<hr>
 		<div id="topBox">
 			<div id="hostBox">
 				<h1>모임장</h1>
-				<img alt="프로필이미지" src="/lighting/images/icon.png" id="imgProfile">
+				<img alt="프로필이미지" src="" id="imgProfile">
 				<div id="hostInfoBox">
-					<img alt="등급" src="/lighting/images/마스터.png" id="imgIcon">
+					<img alt="등급" src="" id="imgIcon">
 					<span>
-						홍길동홍길동홍길동홍
-					</span>
-					<span>
-						(hong123)
+					<!-- 닉네임 -->
 					</span>
 				</div>
 				<div id="hostEvaluationBox">
 					<img alt="등급" src="/lighting/images/별점.png" id="imgStar">
 					<span>
-						4.2점
+						<!-- 4.2점 -->
 					</span>
 				</div>
 			</div>
 			
 			<div id="imgMainBox">
-				<img alt="메인이미지" src="/lighting/images/basic맛집술.png" id="imgMain">
+				<img alt="메인이미지" src="" id="imgMain">
 			</div>
 			<div id="btnBox">
 				<button type="button" id="btnBackward">
@@ -287,68 +288,44 @@
 		<div id="contentBox">
 			<div id="titleAndCon">
 				<div id="title">
-					4월 3일 역삼에서 삼겹살 드실 3명 구해봅니다!
+					<!-- 4월 3일 역삼에서 삼겹살 드실 3명 구해봅니다! -->
 				</div> 
 				<div id="locAndDateBox">
 					<span>장소 : 
-						<span>서울특별시</span> /
-						<span>강남구</span>
+						<span id="sido"><!-- 서울특별시 --></span> /
+						<span id="gugun"><!-- 강남구 --></span>
 					</span>
 					<span>
 					&ensp;&ensp;&ensp;시간 :
-						<span>4</span>월
-						<span>3</span>일
-						<span>19</span> :
-						<span>20</span>
+						<span id="month"><!-- 4 --></span>월
+						<span id="day"><!-- 3 --></span>일
+						<span id="hour"><!-- 19 --></span> :
+						<span id="minute"><!-- 20 --></span>
 					</span>
 				</div>
 				
 				<div id="content">
-					🆕노는게 제일 좋은 뽀로로들의 모임🆕<br>
-					🫧텃새 절대 없는 따듯하고 젠틀한 모임입니다<br>
-					🫧신입분들 적응 어렵지않도록 잘 챙겨드려요😊<br>
-					🫧단순 술만 아닌,맛집,카페,운동,문화생활도 함께 해요<br>
-					<br>
-					✅가입 후 가입인사 즉시 작성해주세요 :)<br>
-					✅가입인사 삭제될 시 자진탈퇴 부탁드립니다<br>
-					✅고품격 원앤온리 프리미엄 모임을 위해 외모는 조금 볼게요😉<br>
-					✅오픈채팅방 필참으로 운영되는 모임입니다<br>
-					<br>
-					🎄뽀로로 자격요건🎄<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
-					-인성, 외모 자기관리 하시는 분<br>
-					-남자 키 173cm, 여자 키 155cm 이상<br>
+                    <!-- 내용 -->
 				</div> 
 			</div>
 			
 			<div id="infoBox">
 				<div id="capacityBox">
 					<span>모집인원 : </span>
-					<span>3</span>
+					<span><!-- 3 -->></span>
 					<span>명</span>
 				</div>
 				<div id="mapBox">
 				</div>
 				<div id="locationBox">
 					<div>
-						장소명 : 역삼 홍콩 반점인데 홍콩 반점아님홍콩콩박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기박스밀기
+						<!--장소명 : 역삼 홍콩 반점인-->
 					</div>
 				</div>
 			</div>
 			
 			<div id="participationBox">
-				<img alt="프로필이미지" src="/lighting/images/icon.png" class="imgParticipants">
-				<img alt="프로필이미지" src="/lighting/images/icon.png" class="imgParticipants">
-				<img alt="프로필이미지" src="/lighting/images/icon.png" class="imgParticipants">
+				<!--<img alt="프로필이미지" src="/lighting/images/icon.png" class="imgParticipants">-->
 				<img alt="화살표" src="/lighting/images/arrow.png" id="imgArrow">
 			</div>
 		</div><!-- contentBox -->
@@ -365,81 +342,252 @@
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
 	<script>
-
+		let tblMeetingPostSeq = ${tblMeetingPostSeq};
+		let loginedtblMemberSeq = ${auth};
+	
 	function toggleImage() {
         const img = document.getElementById("imgWish");
         // getAttribute로 실제 지정한 src 값을 가져옴
         if (img.getAttribute("src") === "/lighting/images/찜하기전버튼.png") {
-            img.setAttribute("src", "/lighting/images/찜하기버튼.png");
+            //찜하기
+        	img.setAttribute("src", "/lighting/images/찜하기버튼.png");
+            addWish();
         } else {
+			//취소
             img.setAttribute("src", "/lighting/images/찜하기전버튼.png");
+			deleteWish();
         }
     }
+
+	function addWish() {
+		$.ajax({ //AddWish.java
+			url: '/lighting/meeting/addwish.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq,
+	        	loginedtblMemberSeq: loginedtblMemberSeq
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	}
+
+	function deleteWish() {
+		$.ajax({ //DeleteWish.java
+			url: '/lighting/meeting/deletewish.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq,
+	        	loginedtblMemberSeq: loginedtblMemberSeq
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	}
 	
-	$.ajax({//게시글에 저장된 위치 정보가져오기(마커) >> 맵 중앙에 띄우기 + 마커 박기 + 이동, 스크롤, 확대 금지
-        url: '/lighting/meeting/getmap.do',
+	function createMap(Latitude, Longitude) { //map 생성 함수
+
+		const container = document.getElementById('mapBox');
+		const options = {
+
+			center: new kakao.maps.LatLng(Latitude, Longitude),
+			level: 4
+		};
+		        	
+		const map = new kakao.maps.Map(container, options); //map 만들기
+		map.setDraggable(false);
+		map.setZoomable(false);
+		
+		var markerImage = new kakao.maps.MarkerImage(
+			    '/lighting/images/search.png', // 이미지 경로
+			    new kakao.maps.Size(50, 50) // 이미지 크기
+		);
+		
+		var marker = new kakao.maps.Marker({
+		    position: new kakao.maps.LatLng(Latitude, Longitude),
+		    image: markerImage
+		});
+		
+		marker.setMap(map);
+		
+	}
+	
+	//1. 글 번호 넘겨서 작성자 정보 가져오기
+	//2. 글 번호로 글 내용 가져오기
+	//2. 글 번호로 맵 정보 가져오기
+	//3. 글 번호로 참가자 가져오기
+	let tblMemberSeq = "";
+	let gender = "";
+	
+	$.ajax({//1.
+        url: '/lighting/meeting/getmemberinfo.do',
         type: 'GET',
-        data: 'tblMeetingPostSeq=',
+        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
         dataType: 'json',
         success: function(result) {
-
-        	result.forEach(function(latLon) {
-
-        		/* member 활동지역 좌표 가져오기 */
-                //GetActivityRegionCoordinate
-                let activityRegionLatitude = latLon.latitude;
-                let activityRegionLongitude = latLon.longitude;
-                
-                const container = document.getElementById('map');
-        		const options = {
-        			center: new kakao.maps.LatLng(activityRegionLatitude, activityRegionLongitude),
-        			level: 4
-        		};
-        	
-        		const map = new kakao.maps.Map(container, options); //map 만들기
-        		
-        		let m1 = null;
-        		let info = null;
-        		
-        		kakao.maps.event.addListener(map, 'click', function(evt) {
-        			
-        			if (m1 != null) {
-        				//기존 마커가 존재O > 삭제
-        				m1.setMap(null);
-        				m1.setImage(null);
-        			}
-        			
-        			let latitude = evt.latLng.getLat();
-        			let longitude = evt.latLng.getLng();
-        			
-                    $('#latitude').val(latitude);//위도, 경도 할당
-                    $('#longitude').val(longitude);
-
-        			m1 = new kakao.maps.Marker({
-        				position: evt.latLng
-        			});
-        			
-        			//이미지 마커
-        			const path = '/lighting/images/찜하기버튼.png';
-        			const size = new kakao.maps.Size(32, 32);
-        			const op = {
-        				offset: new kakao.maps.Point(16, 32)
-        			};
-        			
-        			const img = new kakao.maps.MarkerImage(path, size, op);
-        			
-        			m1.setImage(img);
-        			m1.setMap(map);
-        		});//작성자에게는 마커로 보여주고 마커의 위치값 저장
-                
-        	});
+            $('#imgProfile').attr('src', '/lighting/images/' + result.photoFileName);
+            tblMemberSeq = result.tblMemberSeq;
+            $('#hostInfoBox > span').text(result.nickname);
+            gender = result.gender;
+            
+            const score = parseFloat(result.score);
+            
+            if (score == 0) {
+            	$('#hostEvaluationBox > span').text('점수없음');
+            } else {
+	            $('#hostEvaluationBox > span').text(score + '점');
+            }
+            
+            let icon = "";
+            
+            if (score < 2) {
+				//src="/lighting/images/마스터.png" id="imgIcon"
+            	icon = '실버.png';
+            } else if (score < 3) {
+            	icon = '골드.png';
+            } else if (score < 4) {
+            	icon = '다이아.png';
+            } else {
+            	icon = '마스터.png';
+            }
+            
+            $('#imgIcon').attr('src', '/lighting/images/' + icon);
+            $('#sido').text(result.sido);
+            $('#gugun').text(result.gugun);
+            
+            hiddenBox();
+            
         },
         error: function(a, b, c) {
             console.error(a,b,c);
         }
     });
 	
+	let PostDate = "";
+	let Latitude = "";
+	let Longitude = "";
+	
+	$.ajax({//2.
+		url: '/lighting/meeting/getpostinfo.do',
+        type: 'GET',
+        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        dataType: 'json',
+        success: function(result) {
+			//console.log(result.StartTime);
+        	$('#title').text(result.Title);
+        	const content = result.Content.replace("\r\n", "<br>");
+        	$('#content').html(content);
+        	PostDate = result.PostDate;
+        	$('#locationBox').text('장소명 : ' + result.Location);
+        	$('#capacityBox :nth-child(2)').text(result.Capacity);
+        	$('#imgMain').attr('src', '/lighting/images/' + result.PhotoFileName);
+        	Latitude = result.Latitude;
+        	Longitude = result.Longitude;
+        	
+        	StartTime = result.StartTime;
+        	
+        	const dateStr = result.StartTime;
+
+			// 날짜와 시간을 분리
+			const [datePart, timePart] = dateStr.split(' ');
+			
+			// 날짜와 시간 각각을 나눔
+			const [year, month, day] = datePart.split('-');
+			const [hour, minute, second] = timePart.split(':');
+			
+			// 0을 제거하는 함수
+			const removeLeadingZero = (str) => str.startsWith('0') ? str.slice(1) : str;
+			
+			// 결과값 처리
+			const parsedMonth = removeLeadingZero(month);
+			const parsedDay = removeLeadingZero(day);
+			const parsedHour = removeLeadingZero(hour);
+			const parsedMinute = removeLeadingZero(minute);
+			
+			$('#month').text(parsedMonth);
+			$('#day').text(parsedDay);
+			$('#hour').text(parsedHour);
+			$('#minute').text(parsedMinute);
+			
+        	createMap(Latitude, Longitude);
+        	
+        },
+		error: function(a, b, c) {
+            console.error(a,b,c);
+        }
+	});
+	
+	$.ajax({//3.
+		url: '/lighting/meeting/getparticipantinfo.do',
+        type: 'GET',
+        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        dataType: 'json',
+        success: function(result) {
+			//console.log(result);
+			
+			result.forEach(function(member){
+				// img 태그 생성
+				let img = $('<img />')
+				    .attr('src', '/lighting/images/' + member.PhotoFileName)
+				    .attr('class', 'imgParticipants')
+				    .attr('data-TblMemberSeq', member.TblMemberSeq);
+
+				$('#participationBox').prepend(img);
+				
+			});
+        },
+		error: function(a, b, c) {
+            console.error(a,b,c);
+        }
+	});
+	
+	$('#btnBackward').click(()=>{
+		history.back();
+	});
+	
+	$('#btnDelete').click(()=>{
+		window.open('/lighting/meeting/delete.do', '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
+	});
+	
+	function openServletInNewWindow(servletUrl) {
+        window.open(servletUrl, "_blank", "width=780,height=800,scrollbars=no");
+    }
+	
+	function hiddenBox() {
+		if (tblMemberSeq == loginedtblMemberSeq) {
+			$('#rightBox').css('visibility', 'hidden');
+		} else {
+			$('#btnDelete').css('visibility', 'hidden');
+		}
+	}
+	
+	$('#participationBox').on('click', '.imgParticipants', function() {
+	    const seq = $(this).data('TblMemberSeq');
+	    
+	    const url = `/lighting/meeting/addfriend.do?requestingMemberSeq=${tblMemberSeq}&requestedMemberSeq=${seq}`;
+	    
+	    window.open(url, '_blank', 'width=600,height=650,resizable=no,menubar=no,toolbar=no,location=no,status=no');
+		    
+	});
+
+	
+	
 	</script>
 	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

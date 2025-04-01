@@ -176,6 +176,173 @@ public class MeetingDAO {
         }
         return 0;
     }
+
+    public MemberDTO getMemberInfo(String tblMeetingPostSeq) {
+
+        try {
+            
+            MemberDTO dto = new MemberDTO();
+            String sql = "select * from tblMember where tblMemberSeq ="
+                    + "(select tblMemberSeq from tblMeetingPost where tblMeetingPostSeq = ?)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                dto.setTblMemberSeq(rs.getString("tblMemberSeq"));
+                dto.setNickname(rs.getString("nickname"));
+                dto.setPhotoFileName(rs.getString("PhotoFileName"));
+                dto.setGender(rs.getString("gender"));
+            }
+            
+            sql = "select nvl(round(avg(score), 1), 0) as score from tblEvaluation where evaluatedMemberSeq = ?";
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, dto.getTblMemberSeq());
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                dto.setScore(rs.getString("score"));
+            }
+            
+            sql = "select sido, gugun from tblActivityRegionCoordinate where tblActivityRegionCoordinateSeq = (select tblActivityRegionCoordinateSeq from tblActivityRegion where tblMemberSeq = ?)";
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, dto.getTblMemberSeq());
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                dto.setSido(rs.getString("sido"));
+                dto.setGugun(rs.getString("gugun"));
+            }
+            
+            return dto;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public MeetingPostDTO getPostInfo(String tblMeetingPostSeq) {
+
+        try {
+            
+            MeetingPostDTO dto = new MeetingPostDTO();
+            String sql = "select * from tblMeetingPost where tblMeetingPostSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                dto.setTitle(rs.getString("Title"));
+                dto.setContent(rs.getString("Content"));
+                dto.setPostDate(rs.getString("PostDate"));
+                dto.setLocation(rs.getString("Location"));
+                dto.setCapacity(rs.getString("Capacity"));
+                dto.setStartTime(rs.getString("StartTime"));
+                dto.setPhotoFileName(rs.getString("PhotoFileName"));
+            }
+            
+            sql = "select * from tblLocationCoordinate where tblMeetingPostSeq = ?";
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                dto.setLatitude(rs.getString("Latitude"));
+                dto.setLongitude(rs.getString("Longitude"));
+            }
+            
+            return dto;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public List<MemberDTO> getParticipantInfo(String tblMeetingPostSeq) {
+        
+        try {
+            
+            List<MemberDTO> list = new ArrayList<MemberDTO>();
+            
+            String sql = "select a.tblMemberSeq as tblMemberSeq, photoFileName from tblParticipationRequest a join tblMember b on a.tblMemberSeq = b.tblMemberSeq where tblMeetingPostSeq = ? and approvalStatus = 'Y'";
+            
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            rs = pstat.executeQuery();
+            
+            while (rs.next()) {
+                MemberDTO dto = new MemberDTO();
+                dto.setTblMemberSeq(rs.getString("TblMemberSeq"));
+                dto.setPhotoFileName(rs.getString("photoFileName"));
+                list.add(dto);
+            }
+            
+            return list;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public int addWish(WishlistDTO dto) {
+        
+        try {
+            String sql = """
+                    insert into tblWishlist values (seqWishList.nextVal, ?, ?)
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getTblMemberSeq());
+            pstat.setString(2, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int deleteWish(WishlistDTO dto) {
+        
+        try {
+            String sql = """
+                    delete from tblWishlist where tblMemberSeq = ? and tblMeetingPostSeq = ?
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getTblMemberSeq());
+            pstat.setString(2, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+
     
 }
 

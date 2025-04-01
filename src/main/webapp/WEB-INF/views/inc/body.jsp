@@ -505,7 +505,8 @@
 	 
     
     $(document).on('click', '.thumnail, .title', function() {
-        location.href = '/lighting/meeting/read.do';
+        const tblMeetingPostSeq = this.dataset.tblmeetingpostseq;
+        location.href = '/lighting/meeting/read.do?tblMeetingPostSeq=' + tblMeetingPostSeq;
     });
 
     
