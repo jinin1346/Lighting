@@ -44,7 +44,17 @@
         justify-content: center;  
         align-items: center;
         padding-top : 50px;  
+        gap: 10px;
     }  
+    
+    .search-container select {
+/*  width: 100px; */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #1e62c8;
+    border-radius: 4px;
+}
+    
 
     .search-box {  
         width: 700px;  
@@ -190,6 +200,7 @@
             	$('#meetingBox').html('');
             	
             	if(result && result.length > 0) {
+            		$('#noResultMessage').html(''); 
                     $.each(result, function(index, meeting) {
                         var item = `
                         <div class="item">
@@ -214,7 +225,49 @@
                         \$('#meetingBox').append(item);
                     });
                 } else {
-                    \$('#meetingBox').html('<p>검색 결과가 없습니다.</p>');
+                    \$('#noResultMessage').html('<p>검색 결과가 없습니다.<br>이런 모임은 어떠세요?</p>');
+                    
+                    $.ajax({
+                        type: 'GET',
+                        url: '/lighting/maindata.do',
+                        data: { showAll: "true" },
+                        dataType: 'json',
+                        success: function(defaultResult) {
+                            // 기본 모임 데이터 중 처음 4개만 선택
+                            let count = 0;
+                            $.each(defaultResult, function(index, meeting) {
+                                if(count < 4) {
+                                    var item = `
+                                    <div class="item">
+                                        <div>
+                                            <img src="/lighting/images/\${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
+                                        </div>
+                                        <span class="title" data-tblMeetingPostSeq="\${meeting.tblMeetingPostSeq}">
+                                            \${meeting.title}
+                                        </span>
+                                        <div>
+                                            <img class="icon" src="/lighting/images/\${meeting.memberPhoto}" alt="Icon">
+                                            <span class="nameAndCap">
+                                                &ensp;
+                                                <span class="name">\${meeting.nickname}</span>
+                                                <br>
+                                                <span class="capBox">
+                                                    <span class="capacity">\${meeting.capacity}</span> 명 모집중
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>`;
+                                    $('#meetingBox').append(item);
+                                    count++;
+                                }
+                            });
+                        },
+                        error: function(a, b, c) {
+                            console.log(a, b, c);
+                        }
+                    });
+                    
+                    
                 }
             console.log(result);
             },

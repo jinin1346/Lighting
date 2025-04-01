@@ -34,7 +34,6 @@ public class SearchData extends HttpServlet {
         
         //1. 회원 검색조회 + tblSearchHistory insert
         HttpSession session = req.getSession(true);
-        session.setAttribute("auth", "1"); //인증티켓
         
         // 세션 확인 : 회원이면 세션에 auth 속성이 있음
         //HttpSession session = req.getSession(false);
@@ -51,7 +50,7 @@ public class SearchData extends HttpServlet {
         
         
         //2. 회원 + 비회원의 검색어를 통한 게시글 조회
-        List<MainDTO> meetingList = dao.searchMeetingPosts(searchKeyword); 
+        List<MainDTO> meetingList = dao.searchMeetingPosts(searchKeyword, tblCategorySubSeq); 
         
         JSONArray arr = new JSONArray();
         for(MainDTO dto : meetingList) {

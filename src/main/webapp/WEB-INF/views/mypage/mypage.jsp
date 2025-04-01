@@ -1,5 +1,9 @@
+<%@page import="com.lighting.mypage.model.MemberDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.lighting.mypage.model.MeetingDAO, com.lighting.mypage.model.MeetingDTO, com.lighting.mypage.model.MemberDTO" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -160,7 +164,7 @@
             font-size: 20px;
         }
 
-        #evaluationIcon {
+        #evaluationIcon, .gradeIcon {
             width: 25px;
             height: 25px;
         }
@@ -302,7 +306,7 @@
         #list {
             width: 680px;
             margin-left: 40px;
-            border-collapse: collapse;;
+            border-collapse: collapse;
         }
 
 
@@ -471,7 +475,6 @@
 
     </style>
 
-    </style>
     </c:if>
 
     <!-- requesting -->
@@ -731,8 +734,10 @@
 	<div id="back_box">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	
+	
 	<main>
         <h2 id="mypageLogo">마이 페이지</h2>
+        
 
         <div id="grid_box">
 
@@ -847,59 +852,43 @@
                         <th>모집인원</th>
                         <th>
                         	<!-- change 이벤트 걸기 -->
-                            <select name="sort" id="sort">
-                                <option value="recentOrder" selected>최신 순</option>
-                                <option value="koreanOrder">가나다 순</option>
-                                <option value="moreCapOrder">많이 참여한 순</option>
-                                <option value="lessCapOrder">적게 참여한 순</option>
-                                <option value="oldestOrder">오래된 순</option>
+                            <select name="sort" id="sort_joined" onchange="sortMeetings('joined')">
+                                <option value="recentOrder" ${param.sort eq 'recentOrder' ? 'selected' : ''}>최신 순</option>
+                                <option value="koreanOrder" ${param.sort eq 'koreanOrder' ? 'selected' : ''}>가나다 순</option>
+                                <option value="moreCapOrder" ${param.sort eq 'moreCapOrder' ? 'selected' : ''}>많이 참여한 순</option>
+                                <option value="lessCapOrder" ${param.sort eq 'lessCapOrder' ? 'selected' : ''}>적게 참여한 순</option>
+                                <option value="oldestOrder" ${param.sort eq 'oldestOrder' ? 'selected' : ''}>오래된 순</option>
                             </select>
                         </th>
                     </tr>
 
                     <!-- for문 시작 -->
+                    <c:forEach var="meeting" items="${meetingList}">
                     <tr>
                         <td class="col1">
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            2025년 4월 2일
+                            ${meeting.startTime}
                         </td>
                         <td class="col2">
                             <!-- 글 작성자의 활동지역 가져오기 -->
-                            서울/강남구
+                            ${meeting.location}
                         </td>
                         <td class="col3 title">
                             <!-- 게시글의 제목 가져오기 -->
-                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            ${meeting.title}
                         </td>
                         <td class="col4">
                             <!-- 게시글의 정원 가져오기 -->
-                            <span>
-                                3</span>명 <!-- 띄어쓰기 X -->
+                            <span>${meeting.capacity}</span>명
                         </td>
-                        <td class="col5">
+                        <td>
                             <button class="btnEvaluation">
                                 회원 평가하기
                             </button>
                         </td>
                     </tr>
+                    </c:forEach>
                     <!-- for문 종료 -->
-
-                    <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">회원 평가하기</td>
-                    </tr>
-
-                    <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">회원 평가하기</td>
-                    </tr>
-
                 </table>
 
                 </c:if>
@@ -912,25 +901,26 @@
                         <th>작성 일자</th>
                         <th>제목</th>
                         <th>
-                            <select name="sort" id="sort">
-                                <option value="recentOrder" selected>최신 순</option>
-                                <option value="koreanOrder">가나다 순</option>
-                                <option value="moreCapOrder">많이 참여한 순</option>
-                                <option value="lessCapOrder">적게 참여한 순</option>
-                                <option value="oldestOrder">오래된 순</option>
+                            <select name="sort" id="sort_written" onchange="sortMeetings('written')">
+                                <option value="recentOrder" ${param.sort eq 'recentOrder' ? 'selected' : ''}>최신 순</option>
+                                <option value="koreanOrder" ${param.sort eq 'koreanOrder' ? 'selected' : ''}>가나다 순</option>
+                                <option value="moreCapOrder" ${param.sort eq 'moreCapOrder' ? 'selected' : ''}>많이 참여한 순</option>
+                                <option value="lessCapOrder" ${param.sort eq 'lessCapOrder' ? 'selected' : ''}>적게 참여한 순</option>
+                                <option value="oldestOrder" ${param.sort eq 'oldestOrder' ? 'selected' : ''}>오래된 순</option>
                             </select>
                         </th>
                     </tr>
 
                     <!-- for문 시작 -->
+                    <c:forEach var="meeting" items="${meetingList}">
                     <tr>
                         <td class="col1">
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            2025년 4월 2일
+                            ${meeting.startTime}
                         </td>
                         <td class="col2 title">
                             <!-- 게시글의 제목 가져오기 -->
-                            4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            ${meeting.title}
                         </td>
                         <td class="col3">
                             <button class="btnUpdatePost">
@@ -941,6 +931,7 @@
                             </button>
                         </td>
                     </tr>
+                    </c:forEach>
                     <!-- for문 종료 -->
 
                 </table>
@@ -957,36 +948,36 @@
                         <th>제목</th>
                         <th>모집인원</th>
                         <th>
-                            <select name="sort" id="sort">
-                                <option value="recentOrder" selected>최신 순</option>
-                                <option value="koreanOrder">가나다 순</option>
-                                <option value="moreCapOrder">많이 참여한 순</option>
-                                <option value="lessCapOrder">적게 참여한 순</option>
-                                <option value="oldestOrder">오래된 순</option>
+                            <select name="sort" id="sort_wish" onchange="sortMeetings('wish')">
+                                <option value="recentOrder" ${param.sort eq 'recentOrder' ? 'selected' : ''}>최신 순</option>
+                                <option value="koreanOrder" ${param.sort eq 'koreanOrder' ? 'selected' : ''}>가나다 순</option>
+                                <option value="moreCapOrder" ${param.sort eq 'moreCapOrder' ? 'selected' : ''}>많이 참여한 순</option>
+                                <option value="lessCapOrder" ${param.sort eq 'lessCapOrder' ? 'selected' : ''}>적게 참여한 순</option>
+                                <option value="oldestOrder" ${param.sort eq 'oldestOrder' ? 'selected' : ''}>오래된 순</option>
                             </select>
                         </th>
                     </tr>
 
 
                     <!-- for문 시작 -->
+                    <c:forEach var="meeting" items="${meetingList}">
                     <tr>
                     <!-- 마감된 모임의 경우 인라인 스타일을 적용하여 글자 색 수정 -->
                         <td class="col1">
                         <!-- 게시글의 seq 가져오기 -->
-                            5
+                            ${meeting.tblMeetingPostSeq}
                         </td>
                         <td class="col2">
                             <!-- 글 작성자의 활동지역 가져오기 -->
-                            서울/강남구
+                            서울/강남구${meeting.location}
                         </td>
                         <td class="col3 title">
                             <!-- 게시글의 제목 가져오기 -->
-                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            ${meeting.title}
                         </td>
                         <td class="col4">
                             <!-- 게시글의 정원 가져오기 -->
-                            <span>
-                                3</span>명 <!-- 띄어쓰기 X -->
+                            <span>${meeting.capacity}</span>명
                         </td>
 
                         <td class="col5">
@@ -996,28 +987,27 @@
                             </button>
                         </td>
 
-
                     </tr>
+                    </c:forEach>
                     <!-- for문 종료 -->
 
                     <tr>
                         <!-- 마감된 모임의 경우 인라인 스타일을 적용하여 글자 색 수정 -->
                         <td class="col1" style="color: #908CA2;">
                             <!-- 게시글의 seq 가져오기 -->
-                                1
+                            ${meeting.startTime}
                             </td>
                             <td class="col2" style="color: #908CA2;">
                                 <!-- 글 작성자의 활동지역 가져오기 -->
-                                서울/강남구
+                                서울/강남구${meeting.location}
                             </td>
                             <td class="col3" style="color: #908CA2;">
                                 <!-- 게시글의 제목 가져오기 -->
-                                4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                                ${meeting.title}
                             </td>
                             <td class="col4" style="color: #908CA2;">
                                 <!-- 게시글의 정원 가져오기 -->
-                                <span>
-                                    3</span>명 <!-- 띄어쓰기 X -->
+                               <span>${meeting.capacity}</span>명
                             </td>
                             <td class="col5">
                                 <button class="btnParticipationClose">
@@ -1043,34 +1033,33 @@
                         <th>모집인원</th>
                         <th>
                         	<!-- change 이벤트 걸기 -->
-                            <select name="sort" id="sort">
-                                <option value="recentOrder" selected>최신 순</option>
-                                <option value="koreanOrder">가나다 순</option>
-                                <option value="moreCapOrder">많이 참여한 순</option>
-                                <option value="lessCapOrder">적게 참여한 순</option>
-                                <option value="oldestOrder">오래된 순</option>
+                            <select name="sort" id="sort_requesting" onchange="sortMeetings('requesting')">
+                                <option value="recentOrder" ${param.sort eq 'recentOrder' ? 'selected' : ''}>최신 순</option>
+                                <option value="koreanOrder" ${param.sort eq 'koreanOrder' ? 'selected' : ''}>가나다 순</option>
+                                <option value="moreCapOrder" ${param.sort eq 'moreCapOrder' ? 'selected' : ''}>많이 참여한 순</option>
+                                <option value="lessCapOrder" ${param.sort eq 'lessCapOrder' ? 'selected' : ''}>적게 참여한 순</option>
+                                <option value="oldestOrder" ${param.sort eq 'oldestOrder' ? 'selected' : ''}>오래된 순</option>
                             </select>
                         </th>
                     </tr>
-
+    
                     <!-- for문 시작 -->
                     <tr>
                         <td class="col1">
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            2025년 4월 2일
+                            ${meeting.startTime}
                         </td>
                         <td class="col2">
                             <!-- 글 작성자의 활동지역 가져오기 -->
-                            서울/강남구
+                            서울/강남구${meeting.location}
                         </td>
                         <td class="col3 title">
                             <!-- 게시글의 제목 가져오기 -->
-                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            ${meeting.title}
                         </td>
                         <td class="col4">
                             <!-- 게시글의 정원 가져오기 -->
-                            <span>
-                                3</span>명 <!-- 띄어쓰기 X -->
+                            <span>${meeting.capacity}</span>명
                         </td>
                         <td class="col5">
                             <button class="btnConfirmed">
@@ -1118,34 +1107,34 @@
                         <th>모집인원</th>
                         <th>
                         	<!-- change 이벤트 걸기 -->
-                            <select name="sort" id="sort">
-                                <option value="recentOrder" selected>최신 순</option>
-                                <option value="koreanOrder">가나다 순</option>
-                                <option value="moreCapOrder">많이 참여한 순</option>
-                                <option value="lessCapOrder">적게 참여한 순</option>
-                                <option value="oldestOrder">오래된 순</option>
+                            <select name="sort" id="sort_requested" onchange="sortMeetings('requested')">
+                                <option value="recentOrder" ${param.sort eq 'recentOrder' ? 'selected' : ''}>최신 순</option>
+                                <option value="koreanOrder" ${param.sort eq 'koreanOrder' ? 'selected' : ''}>가나다 순</option>
+                                <option value="moreCapOrder" ${param.sort eq 'moreCapOrder' ? 'selected' : ''}>많이 참여한 순</option>
+                                <option value="lessCapOrder" ${param.sort eq 'lessCapOrder' ? 'selected' : ''}>적게 참여한 순</option>
+                                <option value="oldestOrder" ${param.sort eq 'oldestOrder' ? 'selected' : ''}>오래된 순</option>
                             </select>
                         </th>
                     </tr>
 
                     <!-- for문 시작 -->
+                    <c:forEach var="meeting" items="${meetingList}">
                     <tr>
                         <td class="col1">
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            2025년 4월 2일
+                            ${meeting.startTime}
                         </td>
                         <td class="col2">
                             <!-- 글 작성자의 활동지역 가져오기 -->
-                            서울/강남구
+                            ${meeting.location}
                         </td>
                         <td class="col3 title">
                             <!-- 게시글의 제목 가져오기 -->
-                            4월 2일 강남역 그룹 스터디 5명 모집합니다.
+                            ${meeting.title}
                         </td>
                         <td class="col4">
                             <!-- 게시글의 정원 가져오기 -->
-                            <span>
-                                3</span>명 <!-- 띄어쓰기 X -->
+                            <span>${meeting.capacity}</span>명
                         </td>
                         <td class="col5">
                             <button class="btnRequested">
@@ -1153,6 +1142,7 @@
                             </button>
                         </td>
                     </tr>
+                    </c:forEach>
                     <!-- for문 종료 -->
 
                     <tr>
@@ -1206,32 +1196,19 @@
             <div id="box3">
                 <div id="friendList">
                     <div>친구목록</div>
-
-                    <!-- for문 시작 -->
-                    <div class="friendItem">
-                        <!-- 다이아.png >> 변수명 -->
-                        <img src="/lighting/images/다이아.png">
                         
-                        <span>
-                            닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
-                        </span>
-
-                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
+                    <!-- for문 시작 -->
+                    <!-- friendList는 FriendDTO 객체 리스트 -->
+                    <c:forEach var="friend" items="${friendList}">
+                    <div class="friendItem" data-friend-id="${friend.friendMemberSeq}">
+                        <!-- 다이아.png >> 변수명 -->
+                        <img src="/lighting/images/default.png" class="evaluationIcon" alt="평가 아이콘">
+                        <span>${friend.nickname}</span>
+                        <img src="/lighting/images/닫기.png" class="btnDelFreiend" alt="삭제" style="cursor:pointer;"
+     onclick="deleteFriend(${friend.friendMemberSeq}, this);"/>
                         <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
                     </div>
-                    <!-- for문 종료 -->
-
-                    <!-- for문 시작 -->
-                    <div class="friendItem">
-                        <!-- 다이아.png >> 변수명 -->
-                        <img src="/lighting/images/다이아.png">
-
-                        <span>
-                            닉네임닉<!-- 닉네임 >> 변수명 -->
-                        </span>
-
-                        <img src="/lighting/images/닫기.png" class="btnDelFreiend">
-                    </div>
+                    </c:forEach>
                     <!-- for문 종료 -->
 
                 </div>
@@ -1242,17 +1219,18 @@
                     <div>차단목록</div>
 
                     <!-- for문 시작 -->
+                    <c:forEach var="block" items="${blockList}">
                     <div class="blockItem">
-                        <!-- 다이아.png >> 변수명 -->
-                        <img src="/lighting/images/다이아.png">
+                        <img src="/lighting/images/" class="gradeIcon" data-friend-id="${block.blockedMemberSeq}" alt="프로필">
 
-                        <span>
-                            닉네임닉네임닉네임닉<!-- 닉네임 >> 변수명 -->
-                        </span>
-
-                        <img src="/lighting/images/닫기.png" class="btnUnblock">
-                        <!-- 삭제 이벤트 이후 한번 더 리스트 출력할것 -->
+                        <span>${block.nickname}</span>
+                        <img src="/lighting/images/닫기.png"
+                        class="btnUnblock"
+                        data-id="${block.blockedMemberSeq}"
+                        onclick="unblockUser(${block.blockedMemberSeq}, this);"/>
                     </div>
+                    </c:forEach>
+
                     <!-- for문 종료 -->
 
                 </div>
@@ -1277,7 +1255,7 @@
     });
 	
 	$('.btnEvaluation').click(()=>{
-    	openServletInNewWindow("/lighting/mypage/evaluation.do");
+    	openServletInNewWindow("/lighting/mypage/giveevaluation.do");
     });
 	
 	$('#btnUpdateInfo').click(()=>{
@@ -1296,8 +1274,8 @@
     	openServletInNewWindow("/lighting/mypage/updateprofile.do");
     });
 	
-	$('#btnUpdateProfile').click(()=>{
-    	openServletInNewWindow("/lighting/mypage/updateprofile.do");
+	$('#btnOpenPublic').click(()=>{
+    	openServletInNewWindow("/lighting/mypage/updateopenpublic.do");
     });
 	
 	$('.btnRejectionReason').click(()=>{
@@ -1312,38 +1290,120 @@
     	location.href='/lighting/meeting/read.do';
     });
     
+    //셀렉트 박스 정렬
+    function sortMeetings(section) {
+        var sortValue = document.getElementById('sort_' + section).value;
+        window.location.href = '<%=request.getContextPath()%>/mypage/mypage.do?status=' + section + '&sort=' + sortValue;
+    }
+    
+    function deleteFriend(friendId, btn) {
+        // 전달받은 btn(삭제 아이콘)으로부터 가장 가까운 .friendItem 요소 찾기
+        var friendItem = $(btn).closest('.friendItem');
+        if (confirm("친구를 삭제하시겠습니까?")) {
+            $.ajax({
+                url: '<%=request.getContextPath()%>/mypage/deletefriend.do',
+                type: 'POST',
+                data: { friendId: friendId },
+                success: function(response) {
+                    // 응답이 JSON 문자열일 경우 JSON.parse()로 파싱
+                    var res = typeof response === "string" ? JSON.parse(response) : response;
+                    if (res.status === "success") {
+                        friendItem.remove();
+                    } else {
+                        alert("친구 삭제에 실패했습니다.");
+                    }
+                },
+                error: function(error) {
+                    console.error("친구 삭제 실패:", error);
+                    alert("친구 삭제에 실패했습니다.");
+                }
+            });
+        }
+    }
+    
+    function unblockUser(blockedId, btn) {
+        console.log("📦 전달 blockedId:", blockedId);
+        const blockItem = btn.closest('.blockItem');
+
+        if (confirm("차단을 해제하시겠습니까?")) {
+            fetch("/lighting/mypage/unblock.do", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "blockedId=" + blockedId
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("📨 서버 응답:", data);
+                if (data.status === "success") {
+                    blockItem.remove(); // ✅ DOM에서 제거
+                } else {
+                    alert("차단 해제에 실패했습니다.");
+                }
+            })
+            .catch(err => {
+                console.error("❌ fetch 실패:", err);
+                alert("차단 해제에 실패했습니다.");
+            });
+        }
+    }
+    
+    $(document).ready(function() {
+        $(".gradeIcon").each(function() {
+            let friendId = $(this).data("friend-id");
+            let $img = $(this);
+
+            $.ajax({
+                url: "/lighting/mypage/evaluation.do",
+                method: "POST",
+                data: { friendId: friendId },
+                dataType: 'json',
+                success: function(res) {
+                	console.log("🔥 받은 점수:", res.score);
+                    let score = res.score;
+                    let grade = "실버";
+                    if (score >= 4) grade = "마스터";
+                    else if (score >= 3) grade = "다이아";
+                    else if (score >= 2) grade = "골드";
+                    else grade = "실버";
+                    console.log("🎖️ 등급:", grade);
+                    
+                    $img.attr("src", '/lighting/images/' + grade + '.png');
+                },
+                error: function(err) {
+                    console.error("점수 불러오기 실패:", err);
+                }
+            });
+        });
+    });
+
+
+    $(".evaluationIcon").each(function() {
+        // 부모 .friendItem에 설정된 data-friend-id에서 친구 번호를 가져옴
+        let friendId = $(this).closest(".friendItem").data("friend-id");
+        let $img = $(this);
+        $.ajax({
+            url: "/lighting/mypage/evaluation.do",
+            method: "POST",
+            data: { friendId: friendId },
+            dataType: 'json',
+            success: function(res) {
+                let score = res.score;
+                let grade = "실버";
+                if (score >= 4) grade = "마스터";
+                else if (score >= 3) grade = "다이아";
+                else if (score >= 2) grade = "골드";
+                else grade = "실버";
+                $img.attr("src", '/lighting/images/' + grade + '.png');
+            },
+            error: function(err) {
+                console.error("친구 평가 점수 불러오기 실패:", err);
+            }
+        });
+    });
     </script>
     
-    
-    
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
