@@ -136,7 +136,32 @@
 </style>
 
 <style>
-    #meetingBox {
+
+	#meetingContainer {
+	  width: 100%;
+	  max-width: 1000px; /* 필요에 따라 너비 조절 */
+	  margin: 0 auto;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;  /* 자식 요소들을 가로로 중앙 정렬 */
+	}
+	
+	#noResultMessage {
+	  text-align: center;
+	  font-size: 18px;
+	  color: #555;
+	  margin-top: 20px;
+	}
+	
+	#meetingBox {
+	  display: grid;
+	  grid-template-columns: repeat(4, 1fr);
+	  gap: 40px;
+	  width: 100%;
+	  margin-top: 20px;
+	  justify-items: center; /* 각 그리드 아이템을 가운데 정렬 */
+	}
+    /* #meetingBox {
         display: grid; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 40px;
@@ -144,7 +169,7 @@
         max-width: 1000px;
         justify-content: center;
         margin: 0 auto;
-    }
+    } */
 
     .item {
         border-radius: 15px; 
@@ -210,6 +235,93 @@
     	display: block;
         text-align: right;
     }
+    
+    /* 오른쪽 아래 고정 컨테이너 */
+#floatingAdd {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 메인 버튼 스타일 */
+#floatingAdd .main-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none; 
+  background: transparent; 
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+/* 자식 버튼 컨테이너 - 기본적으로 숨김 */
+#floatingAdd .child-buttons {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 버튼 활성화시 자식 버튼 노출 */
+#floatingAdd.active .child-buttons {
+  display: flex;
+}
+
+/* 개별 자식 버튼 스타일 */
+#floatingAdd .child-button {
+  width: 80px;
+  height: 40px;
+  /* border-radius: 50%; */
+  border-radius: .4em;
+  background-color: #4285F4;
+  color: #fff;
+  border: none;
+  margin-bottom: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+#floatingAdd .child-button:active {
+  background-color: #1e62c8;
+}
+#floatingAdd.active .child-buttons .child-button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.speech-bubble {
+  position: relative;
+  background-color: #1e62c8; /* 자식 버튼의 배경색과 동일 */
+  border-radius: .4em;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  bottom: -20px; /* 꼬리의 위치 조정 (필요에 따라 값 변경) */
+  left: 80%;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent; /* 꼬리의 크기를 버튼 크기에 맞게 조절 */
+  border-left: 0;
+  border-top-color: #1e62c8; /* 배경색과 동일 */
+  margin-left: -10px;
+}
+
+    #floatingAdd .main-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 버튼 크기에 맞게 이미지 비율을 유지하며 축소 */
+}
     
 </style>
 
@@ -312,11 +424,14 @@
     </div>
 
     
-    <div>
+    <!-- <div>
     	<button id="btnAdd" onclick="location.href='/lighting/meeting/add.do';">
     		글쓰기
     	</button>
-    </div>
+    </div> -->
+    
+	
+    
     
     <!-- 모임 추천 -->
     <div id="slider">
@@ -360,53 +475,69 @@
         <h2>만들어진 모임 LIST</h2>
         <p id="extraView">전체보기 ></p>
     </div>
-    
-    <div id="meetingBox">	
-        <!-- for문 시작 -->
-        <c:forEach begin="1" end="12" var="meeting" items="${meetingList}">
-            <div>
-            <div class="photo-container">
-                <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->
-                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
-                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
-                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
-                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
-            </div>
-            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
-                <!-- 게시글의 title -->
-                ${meeting.title}
-            </span>
-
-            <div class="meeting-info">
-                <!-- 쿼리 작성할때 m.photoFileName as memberPhoto 별칭 붙이기!! -->
-                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
-                <!-- icon.png >> Member의 photoFileName -->
-                <span class="nameAndCap">
-                    &ensp; 
-                    <span class="name">
-                        <!-- 게시글 > 멤버 참조 >> nickname -->
-                        ${meeting.nickname}
-                    </span>
-                    <br>
-                    <span class="capBox">
-                        <span class="capacity">
-                            <!-- 게시글의 capacity -->
-                            ${meeting.capacity}
-                        </span>
-                        명 모집중
-                    </span>
-                </span>
-            </div>
-        </div><!-- item -->
-        </c:forEach>
-        <!-- for문 끝 -->
-
-
-    </div>
+    <div id="meetingContainer">
+	    <!-- 검색 결과 메시지 -->
+	    <p id="noResultMessage"></p>
+        <!-- 모임 목록 영역 -->
+	    <div id="meetingBox">	
+	        <!-- for문 시작 -->
+	        <c:forEach begin="1" end="12" var="meeting" items="${meetingList}">
+	            <div>
+	            <div class="photo-container">
+	                <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->
+	                <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
+	                <!-- 치킨.jpg >> 게시글의 photoFileName  -->
+	                <!-- data-tblMeetingPostSeq >> 게시글의 seq -->
+	                <!-- .item .thumnail 클릭 시 data-tblMeetingPostSeq 값에 맞는 글 조회 하는 페이지로 이동 -->
+	            </div>
+	            <span class="title" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
+	                <!-- 게시글의 title -->
+	                ${meeting.title}
+	            </span>
+	
+	            <div class="meeting-info">
+	                <!-- 쿼리 작성할때 m.photoFileName as memberPhoto 별칭 붙이기!! -->
+	                <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
+	                <!-- icon.png >> Member의 photoFileName -->
+	                <span class="nameAndCap">
+	                    &ensp; 
+	                    <span class="name">
+	                        <!-- 게시글 > 멤버 참조 >> nickname -->
+	                        ${meeting.nickname}
+	                    </span>
+	                    <br>
+	                    <span class="capBox">
+	                        <span class="capacity">
+	                            <!-- 게시글의 capacity -->
+	                            ${meeting.capacity}
+	                        </span>
+	                        명 모집중
+	                    </span>
+	                </span>
+	            </div>
+	        </div><!-- item -->
+	        </c:forEach>
+	        <!-- for문 끝 -->
+	
+	
+	    </div>
     <!-- meetingBox -->
 
-        
-
+        </div><!-- meetingContainer -->
+    
+    
+    <div id="floatingAdd">
+      <!-- 노출될 동그란 버튼들 (기본 hidden) -->
+      <div class="child-buttons">
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임만들기</button>
+        <button class="child-button speech-bubble">버튼2</button>
+        <button class="child-button speech-bubble">버튼3</button>
+      </div>
+      <!-- 메인 버튼 -->
+      <button class="main-button">
+        <img src="/lighting/images/add.png" alt="Add" />
+      </button>
+    </div>
 
     <script>
     	
@@ -523,6 +654,11 @@
     function openServletInNewWindow(servletUrl) {
         window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
     }
+    
+    document.querySelector('#floatingAdd .main-button').addEventListener('click', function() {
+    	  document.getElementById('floatingAdd').classList.toggle('active');
+    	});
+
     
 	    
     </script>
