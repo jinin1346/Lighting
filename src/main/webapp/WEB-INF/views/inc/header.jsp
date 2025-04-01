@@ -33,11 +33,13 @@
 
     #userinfo {  
         display: flex; /* 유저 정보 항목 수평 정렬 */  
-        gap: 20px; /* 링크 간의 간격 */ 
+        gap: 30px; /* 링크 간의 간격 */ 
         position: relative;
         bottom: 50px;
         text-decoration: none;
+       padding-right:20px;
     }  
+
 
     .search-container {  
         display: flex;  
@@ -94,11 +96,15 @@
     </a>
     
     <div class="header">  
-        <div id="userinfo">  
+        <div id="userinfo">
+        <c:if test="${empty sessionScope.auth}">  
             <a id="login" href="/lighting/user/login.do">LOGIN</a>  
-            <a id="logout" href="/lighting/user/logoutok.do">LOGOUT</a>
             <a id="join" href="/lighting/user/register/registerrole.do">JOIN</a>  
+        </c:if>
+        <c:if test="${not empty sessionScope.auth}">
+            <a id="logout" href="/lighting/user/logoutok.do">LOGOUT</a>
             <a id="mypage" href="/lighting/mypage/mypage.do">MY PAGE</a>  
+        </c:if>
         </div>  
     </div>  
     <div class="search-container">  
