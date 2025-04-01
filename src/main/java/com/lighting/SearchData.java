@@ -34,7 +34,6 @@ public class SearchData extends HttpServlet {
         
         //1. 회원 검색조회 + tblSearchHistory insert
         HttpSession session = req.getSession(true);
-        session.setAttribute("auth", "1"); //인증티켓
         
         // 세션 확인 : 회원이면 세션에 auth 속성이 있음
         //HttpSession session = req.getSession(false);

@@ -31,14 +31,9 @@ public class MainData extends HttpServlet {
         String showAll = req.getParameter("showAll");
         
         //1. 회원 캍테고리 시퀀스 + tblInterest insert
-        HttpSession session = req.getSession(true);
-        //session.setAttribute("auth", "1"); //인증티켓
-        if(session.getAttribute("auth") == null) {
-            session.setAttribute("auth", "1");
-        }
-        
+        HttpSession session = req.getSession();
+       
         // 세션 확인 : 회원이면 세션에 auth 속성이 있음
-        //HttpSession session = req.getSession(false);
         String tblMemberSeq = (session != null) ? (String) session.getAttribute("auth") : null;
 
         
