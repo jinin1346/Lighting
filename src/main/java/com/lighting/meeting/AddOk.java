@@ -22,6 +22,7 @@ public class AddOk extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 /*
+        사진 작업 보류
         String saveDirectory = req.getRealPath("/images"); // 파일 저장 경로 (webapp/images)
         int maxPostSize = 1024 * 1024 * 10; // 10MB
         String encoding = "UTF-8";
@@ -74,12 +75,27 @@ public class AddOk extends HttpServlet {
         dto.setTblMemberSeq(tblMemberSeq);
         dto.setPhotoFileName(photoFileName);
         
-        int result = dao.add(dto);
+        int result = dao.add(dto); 
         
         
-        if (result == 1) {
+        if (result == 1) { // meetingpost에 게시글 추가 >> 좌표값도 추가해야함
             //성공
-            resp.sendRedirect("/lighting/main.do");
+            result = dao.addLocationCoordinate(dto);
+            dao.close();
+            if (result == 1) {
+                resp.sendRedirect("/lighting/main.do");
+            } else {
+                //실패
+                PrintWriter writer = resp.getWriter();
+                writer.print("""
+                        <script>
+                            alert('failed');
+                            history.back();
+                        </script>
+                        """);
+                writer.close();
+            }
+           
         } else {
             //실패
             dao.close();

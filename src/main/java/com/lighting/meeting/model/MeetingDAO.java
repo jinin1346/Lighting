@@ -146,6 +146,36 @@ public class MeetingDAO {
         return 0;
     }
 
+    public int addLocationCoordinate(MeetingPostDTO dto) {
+        
+        try {
+            
+            String sql = "select max(tblMeetingPostSeq) as tblMeetingPostSeq from tblMeetingPost";
+            String tblMeetingPostSeq = "";
+            
+            rs = stat.executeQuery(sql);
+            
+            if (rs.next()) {
+                tblMeetingPostSeq = rs.getString(1);
+                
+                sql = """
+                        insert into tblLocationCoordinate values (?, ?, ?)
+                        """;
+                
+                pstat = conn.prepareStatement(sql);
+                pstat.setString(1, tblMeetingPostSeq);
+                pstat.setString(2, dto.getLatitude());
+                pstat.setString(3, dto.getLongitude());
+                
+                return pstat.executeUpdate();
+                
+            } 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     
 }
 
