@@ -44,7 +44,17 @@
         justify-content: center;  
         align-items: center;
         padding-top : 50px;  
+        gap: 10px;
     }  
+    
+    .search-container select {
+/*  width: 100px; */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #1e62c8;
+    border-radius: 4px;
+}
+    
 
     .search-box {  
         width: 700px;  

@@ -161,18 +161,28 @@
         border-radius: 15px;
     }
 
+
+
+
     .title {
         font-size: 22px;  
         font-weight: bold;  
         color: #0d0143;  
         margin: 8px 0; /* 텍스트 사이의 여백 */
         cursor: pointer;
-
+        text-align : center;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
+    
+    .meeting-info {
+        padding : 0px 10px 10px 15px;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	}
 
     .nameAndCap {
         font-size: 15px;  
@@ -353,9 +363,9 @@
     
     <div id="meetingBox">	
         <!-- for문 시작 -->
-        <c:forEach begin="1" end="8" var="meeting" items="${meetingList}">
-        <div class="item">  
+        <c:forEach begin="1" end="12" var="meeting" items="${meetingList}">
             <div>
+            <div class="photo-container">
                 <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->
                 <img src="/lighting/images/${meeting.meetingPhoto}" class="thumnail" data-tblMeetingPostSeq="${meeting.tblMeetingPostSeq}">
                 <!-- 치킨.jpg >> 게시글의 photoFileName  -->
@@ -367,7 +377,7 @@
                 ${meeting.title}
             </span>
 
-            <div>
+            <div class="meeting-info">
                 <!-- 쿼리 작성할때 m.photoFileName as memberPhoto 별칭 붙이기!! -->
                 <img class="icon" src="/lighting/images/${meeting.memberPhoto}" alt="Icon">
                 <!-- icon.png >> Member의 photoFileName -->
@@ -403,11 +413,12 @@
     	
 	    
 
-	    
+        //$(document).ready(function() {
 	    $('#extraView').click(() => {
 	        $.ajax({
 	            type: 'GET',  
-	            url: '/lighting/maindata.do',  
+	            url: '/lighting/maindata.do',
+	            data: { showAll: "true" },
 	            dataType: 'json',
 	            success: function(result) {
 	                // 기존 내용을 비우기

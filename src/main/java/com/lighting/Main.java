@@ -21,14 +21,27 @@ public class Main extends HttpServlet {
 	    
 	    HttpSession session = req.getSession();
         
-        session.setAttribute("auth", 1);
+        session.setAttribute("auth", "1");
 	    
 	    MainDAO dao = new MainDAO();
-        List<MainDTO> meetingList = dao.getMeetingList();
+	    String tblMemberSeq = (String) session.getAttribute("auth");
+        String categorySubSeq = null;
+        
+        if(tblMemberSeq != null) {
+            categorySubSeq = dao.getHighestInterestCategory(tblMemberSeq);
+        }
+        
+        List<MainDTO> meetingList;
+     // 최고 관심 카테고리가 있으면 해당 카테고리 기준 조회, 없으면 전체 리스트 조회
+        if (categorySubSeq != null && !categorySubSeq.trim().isEmpty()) {
+            meetingList = dao.getMeetingListByCategory(categorySubSeq);
+        } else {
+            meetingList = dao.getMeetingList();
+        }
+        dao.close();
+        
         req.setAttribute("meetingList", meetingList);
-        
-        
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp); 
+        req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
 	}  
 
 }
