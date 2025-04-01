@@ -356,7 +356,7 @@
 		<div id="bottomBox">
 			<button type="button" id="btnDelete">모임 삭제 🗑️</button>
 			<div id="rightBox">
-                <img alt="찜" src="/lighting/images/찜하기전버튼.png" id="imgWish" onclick="toggleImage()">
+                <img alt="찜" src="/lighting/images/찜하기전버튼.png" id="imgWish" onclick="toggleImage();">
                 <button type="button" id="btnShare">공유</button>
                 <button type="button" id="btnParticipate">참석하기</button>
             </div>
@@ -367,7 +367,7 @@
 	<script>
 
 	function toggleImage() {
-        const img = document.getElementById("Steaming");
+        const img = document.getElementById("imgWish");
         // getAttribute로 실제 지정한 src 값을 가져옴
         if (img.getAttribute("src") === "/lighting/images/찜하기전버튼.png") {
             img.setAttribute("src", "/lighting/images/찜하기버튼.png");
@@ -379,7 +379,7 @@
 	$.ajax({//게시글에 저장된 위치 정보가져오기(마커) >> 맵 중앙에 띄우기 + 마커 박기 + 이동, 스크롤, 확대 금지
         url: '/lighting/meeting/getmap.do',
         type: 'GET',
-        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        data: 'tblMeetingPostSeq=',
         dataType: 'json',
         success: function(result) {
 
