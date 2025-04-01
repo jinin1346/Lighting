@@ -132,12 +132,12 @@
         <!-- 아이디 입력 -->
         <div class="formGroup">
           <label for="id">아이디</label>
-          <input type="text" id="id" name="id" placeholder="아이디" value="ex46746iw721x4p" required>
+          <input type="text" id="id" name="id" placeholder="아이디"  required>
         </div>
         <!-- 비밀번호 입력 -->
         <div class="formGroup">
           <label for="pw">비밀번호</label>
-          <input type="password" id="pw" name="pw" value="e6@vf@s45" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)" required>
+          <input type="password" id="pw" name="pw" placeholder="비밀번호(영문, 숫자, 특수문자 포함 8 ~ 20자)" required>
         </div>
         <!-- 추가 링크 영역 -->
         <div class="link">
@@ -149,6 +149,34 @@
         <button type="submit">로그인</button>
       </form>
     </div>
+      
+      <br>
+      <br>
+      <!-- 개발용 -->
+        <div>
+        <form action="/lighting/user/loginok.do" method="POST">
+            <input type="hidden" name="id" value="4z3wyacj">
+            <input type="hidden" name="pw" value="h9^v$s9@^7ryc">
+            <button type="submit" class="in">1로그인</button>
+        </form>
+        </div>
+        <div>
+        <form action="/lighting/user/loginok.do" method="POST">
+            <input type="hidden" name="id" value="p60n46w31tx6uisnh">
+            <input type="hidden" name="pw" value="j0!900!d&0!5">
+            <button type="submit" class="in">160로그인</button>
+        </form>
+        </div>
+        <div>
+        <form action="/lighting/user/loginok.do" method="POST">
+            <input type="hidden" name="id" value="gm4z">
+            <input type="hidden" name="pw" value="q6(#@*&*)07v8ck1q">
+            <button type="submit" class="in">600로그인</button>
+        </form>
+        </div>
+        
+        
+        
   </div>
   
   <script>
