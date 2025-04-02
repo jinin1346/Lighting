@@ -83,7 +83,7 @@
     #slides { 
         display: flex; /* 이미지를 가로로 나열 */
         width: 500%;
-        animation: slide 16s linear infinite; /* 애니메이션 적용 */
+        animation: slide 16s ease-in-out infinite; /* 애니메이션 적용 */
         height: 100%;
     }
     
@@ -94,11 +94,11 @@
     }  
     
     #slides img {  
-        width: 100%; /* 이미지 너비를 부모 요소에 맞춤 */
-        height: 100%; /* 이미지 높이 자동 조절 */
-        display: block; /* 이미지 아래 여백 제거 */
+        width: 100%; 
+        height: 100%; 
+        display: block; 
         /* flex-shrink: 0;  */
-        object-fit: cover;      /* 이미지 비율 유지하며, 컨테이너에 꽉 채우되 여분은 잘라냄 */
+        object-fit: cover;      
       object-position: center;
     }
 
@@ -472,7 +472,7 @@
                 <!-- data-tblCategorySubSeq >> 중분류 pk -->
                 <!-- 예시) data-tblCategorySubSeq="" -->
                 
-                <img alt="event1" src="" data-tblCategorySubSeq="">
+                <img alt="event1" src="" onerror="this.onerror=null; this.src='/lighting/images/event_1.jpg';">
             </div>
             <div id="event2">
             	<!-- event_2.jpg >> 두번째 변수명 -->

@@ -50,7 +50,7 @@
     .location-info{
         width:850px;
         margin : 0 auto;  
-        padding-top: 50px;
+        padding-top: 10px;
         font-size: 16px;
         color: #888;
         display : block;
@@ -60,7 +60,8 @@
 
     .weather-info {
         width:850px;
-        margin : 0 auto;  
+        margin : 0 auto; 
+        margin-bottom : 10px; 
         padding-top: 5px;
         font-size: 16px;
         color: #555;
