@@ -22,7 +22,7 @@ public class APITest {
         String nx = "61";
         String ny = "125";
         String baseDate = "20250402";
-        String baseTime = "1100";
+        String baseTime = "1200";
 
         String dataType = "JSON";
 

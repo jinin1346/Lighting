@@ -227,6 +227,56 @@ public class MainDAO {
         return highestCategorySubSeq;
     }
 
+    public String getUserLocation(String tblMemberSeq) {
+        String location = "서울특별시 강남구";
+        try {
+            
+            String sql = "select arc.tblActivityRegionCoordinateseq, arc.sido, arc.gugun "
+                    + "from tblActivityRegionCoordinate arc "
+                    + "join tblActivityRegion ar on ar.tblActivityRegionCoordinateseq=arc.tblActivityRegionCoordinateseq "
+                    + "where ar.tblmemberseq=?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            rs = pstat.executeQuery();
+            if (rs.next()) {
+                String sido = rs.getString("sido");
+                String gugun = rs.getString("gugun");
+                location = sido + " " + gugun;
+                System.out.println(location);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return location;
+    }
+
+    public double[] getUserCoordinates(String tblMemberSeq) {
+        double[] coordinates = null;
+        try {
+            
+            String sql ="select arc.latitude, arc.longitude "
+                    + "from tblActivityRegionCoordinate arc "
+                    + "join tblActivityRegion ar on ar.tblActivityRegionCoordinateseq=arc.tblActivityRegionCoordinateseq "
+                    + "where ar.tblmemberseq=?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            rs = pstat.executeQuery();
+            if (rs.next()) {
+                double latitude = rs.getDouble("latitude");
+                double longitude = rs.getDouble("longitude");
+                coordinates = new double[]{latitude, longitude};
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
  
     
 }
