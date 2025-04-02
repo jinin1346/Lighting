@@ -35,6 +35,7 @@ public class GetPostInfo extends HttpServlet {
             obj.put("Location", dto.getLocation());
             obj.put("Capacity", dto.getCapacity());
             obj.put("StartTime", dto.getStartTime());
+            obj.put("EndTime", dto.getEndTime());
             obj.put("PhotoFileName", dto.getPhotoFileName());
             obj.put("Latitude", dto.getLatitude());
             obj.put("Longitude", dto.getLongitude());

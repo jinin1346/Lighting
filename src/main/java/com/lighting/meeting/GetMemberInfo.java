@@ -44,23 +44,6 @@ public class GetMemberInfo extends HttpServlet {
         writer.print(obj);
         writer.close();
 
-
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

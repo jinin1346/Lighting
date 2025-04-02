@@ -250,6 +250,17 @@
         	cursor: pointer;
         }
 
+        #btnDisabled {
+            width: 150px;
+			height: 60px;
+			border: none;
+			background-color: #C81E1E;
+			color: white;
+			border-radius: 5px;
+			font-size: 24px;
+            display: none;
+        }
+
 	</style>
 </head>
 <body>
@@ -336,6 +347,7 @@
                 <img alt="찜" src="/lighting/images/찜하기전버튼.png" id="imgWish" onclick="toggleImage();">
                 <button type="button" id="btnShare">공유</button>
                 <button type="button" id="btnParticipate">참석하기</button>
+                <button type="button" id="btnDisabled">종료된 모임</button>
             </div>
 		</div>
 	</main>
@@ -343,8 +355,26 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
 	<script>
 		let tblMeetingPostSeq = ${tblMeetingPostSeq};
-		let loginedtblMemberSeq = ${auth};
-	
+		let loginedtblMemberSeq = "";
+		
+		// auth가 null이거나 빈 문자열인지 확인
+		if ("${auth}" == "" || "${auth}" == "null") {
+			console.log('auth확인 = 비회원');
+			loginedtblMemberSeq = 0;
+		} else {
+			// auth가 숫자인지 확인
+			if (!isNaN("${auth}")) {
+				console.log('auth확인 = 회원/세션할당');
+				loginedtblMemberSeq = parseInt("${auth}"); // 숫자로 변환하여 할당
+			} else {
+				console.log('비상비상');
+				loginedtblMemberSeq = 0; // 숫자가 아니면 0으로 처리하거나, 다른 로직을 추가
+				// 또는 오류를 발생시키거나, 사용자에게 알림을 줄 수 있습니다.
+				console.error("auth 값이 숫자가 아닙니다.");
+			}
+		}
+		
+		
 	function toggleImage() {
         const img = document.getElementById("imgWish");
         // getAttribute로 실제 지정한 src 값을 가져옴
@@ -424,7 +454,7 @@
 	$.ajax({//1.
         url: '/lighting/meeting/getmemberinfo.do',
         type: 'GET',
-        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        data: 'tblMeetingPostSeq=' + tblMeetingPostSeq,
         dataType: 'json',
         success: function(result) {
             $('#imgProfile').attr('src', '/lighting/images/' + result.photoFileName);
@@ -472,7 +502,7 @@
 	$.ajax({//2.
 		url: '/lighting/meeting/getpostinfo.do',
         type: 'GET',
-        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        data: 'tblMeetingPostSeq=' + tblMeetingPostSeq,
         dataType: 'json',
         success: function(result) {
 			//console.log(result.StartTime);
@@ -486,6 +516,7 @@
         	Latitude = result.Latitude;
         	Longitude = result.Longitude;
         	
+        	EndTime = result.EndTime;
         	StartTime = result.StartTime;
         	
         	const dateStr = result.StartTime;
@@ -503,13 +534,32 @@
 			// 결과값 처리
 			const parsedMonth = removeLeadingZero(month);
 			const parsedDay = removeLeadingZero(day);
-			const parsedHour = removeLeadingZero(hour);
-			const parsedMinute = removeLeadingZero(minute);
+			const parsedHour = hour;
+			const parsedMinute = minute;
 			
 			$('#month').text(parsedMonth);
 			$('#day').text(parsedDay);
 			$('#hour').text(parsedHour);
 			$('#minute').text(parsedMinute);
+			
+			const currentTime = new Date(); // 현재 시간
+
+			// 문자열을 Date 객체로 변환
+			const parsedTime = new Date(EndTime.replace(' ', 'T'));
+
+			// 비교
+			if (parsedTime > currentTime) {
+				
+			} else if (parsedTime < currentTime) {
+			 	// btnDisabled 요소의 display: none 제거
+			    $('#btnDisabled').css('display', 'block');
+			    $('#imgWish').css('visibility', 'hidden');
+			    $('#btnShare').css('visibility', 'hidden');
+			    $('#btnParticipate').css('visibility', 'hidden');
+			    //$('#btnDelete').css('visibility', 'hidden');
+			} else {
+
+			}
 			
         	createMap(Latitude, Longitude);
         	
@@ -522,7 +572,7 @@
 	$.ajax({//3.
 		url: '/lighting/meeting/getparticipantinfo.do',
         type: 'GET',
-        data: 'tblMeetingPostSeq=' + ${tblMeetingPostSeq},
+        data: 'tblMeetingPostSeq=' + tblMeetingPostSeq,
         dataType: 'json',
         success: function(result) {
 			//console.log(result);
@@ -548,7 +598,7 @@
 	});
 	
 	$('#btnDelete').click(()=>{
-		window.open('/lighting/meeting/delete.do', '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
+		window.open('/lighting/meeting/delete.do?tblMeetingPostSeq=' + tblMeetingPostSeq, '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
 	});
 	
 	function openServletInNewWindow(servletUrl) {
@@ -556,38 +606,119 @@
     }
 	
 	function hiddenBox() {
-		if (tblMemberSeq == loginedtblMemberSeq) {
-			$('#rightBox').css('visibility', 'hidden');
+		//tblMemberSeq = 글 작성자 번호
+		//loginedtblMemberSeq = 로그인한 회원 번호, 비로그인 = 0
+		if (loginedtblMemberSeq == tblMemberSeq) {//로그인 == 작성자
+		    $('#imgWish').css('visibility', 'hidden');
+		    $('#btnShare').css('visibility', 'hidden');
+		    $('#btnParticipate').css('visibility', 'hidden');
 		} else {
-			$('#btnDelete').css('visibility', 'hidden');
+			if (loginedtblMemberSeq == 0) {//비로그인
+			    $('#imgWish').css('visibility', 'hidden');
+			    $('#btnShare').css('visibility', 'hidden');
+			    $('#btnParticipate').css('visibility', 'hidden');
+				$('#btnDelete').css('visibility', 'hidden');
+			} else {//로그인 != 작성자
+				$('#btnDelete').css('visibility', 'hidden');
+			}
 		}
 	}
 	
 	$('#participationBox').on('click', '.imgParticipants', function() {
-	    const seq = $(this).data('TblMemberSeq');
-	    
-	    const url = `/lighting/meeting/addfriend.do?requestingMemberSeq=${tblMemberSeq}&requestedMemberSeq=${seq}`;
+	    const seq = $(this).data('tblmemberseq');
+
+	    const url = '/lighting/meeting/addfriend.do?requestedMemberSeq=' + seq;
 	    
 	    window.open(url, '_blank', 'width=600,height=650,resizable=no,menubar=no,toolbar=no,location=no,status=no');
 		    
 	});
-
 	
+    $('#btnShare').click(() => {
+        const currentUrl = window.location.href;
+
+        // 클립보드에 복사
+        navigator.clipboard.writeText(currentUrl)
+            .then(() => {
+                // 복사 성공 시 알림
+                alert('현재 주소가 클립보드에 복사되었습니다.');
+            })
+            .catch(err => {
+                // 복사 실패 시 에러 처리
+                console.error('클립보드 복사에 실패했습니다.', err);
+                alert('클립보드 복사에 실패했습니다. 수동으로 복사해주세요.');
+            });
+    });
+
+	$.ajax({//찜하기 버튼 결정
+		url: '/lighting/meeting/getwish.do',
+        type: 'GET',
+        data: {
+        	tblMeetingPostSeq: tblMeetingPostSeq,
+        	loginedtblMemberSeq: loginedtblMemberSeq
+        },
+        dataType: 'json',
+        success: function(result) {
+			//imgWish > src 변경
+			//console.log(result.result);
+			if (result.result == 0) {
+				$('#imgWish').attr('src', '/lighting/images/찜하기전버튼.png');
+			} else {
+				$('#imgWish').attr('src', '/lighting/images/찜하기버튼.png');
+			}
+        	
+        },
+		error: function(a, b, c) {
+            console.error(a,b,c);
+        }
+	});
+    
+	$('#btnParticipate').on('click', function() {
+		$.ajax({//참가신청 insert하기 tblParticipationRequest
+			url: '/lighting/meeting/addparticipationrequest.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq,
+	        	loginedtblMemberSeq: loginedtblMemberSeq
+	        },
+	        dataType: 'json',
+	        success: function(result) {
+				if (result.result == 1) {
+					alert('참가 신청 완료!');
+					$('#btnParticipate').off('click');
+					$('#btnParticipate').text('신청완료');
+				} else {
+					alert('참가 신청 실패!');
+				}
+	        	
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	});
+	
+	$.ajax({//참가신청 했는지 안했는지 확인
+		url: '/lighting/meeting/getparticipationrequest.do',
+        type: 'GET',
+        data: {
+        	tblMeetingPostSeq: tblMeetingPostSeq,
+        	loginedtblMemberSeq: loginedtblMemberSeq
+        },
+        dataType: 'json',
+        success: function(result) {
+			//console.log(result.result);
+			if(result.result == 1) {
+				$('#btnParticipate').off('click');
+				$('#btnParticipate').text('신청완료');
+			} 
+        	
+        },
+		error: function(a, b, c) {
+            console.error(a,b,c);
+        }
+	});
 	
 	</script>
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

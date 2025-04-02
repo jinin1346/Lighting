@@ -30,6 +30,8 @@ public class AddWish extends HttpServlet {
         
         int result = dao.addWish(dto);
         
+        dao.close();
+        
     }
 
 }
