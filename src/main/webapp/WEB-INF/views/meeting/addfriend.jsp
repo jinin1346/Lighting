@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>친구 신청화면</title>
+    <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
     <style>
         /* 전체 화면 덮는 모달 배경 */
         .modal {
@@ -113,6 +114,7 @@
             background-color: red;
             color: white;
             cursor: pointer;
+            width: 150px;
 
         }
 
@@ -150,22 +152,17 @@
                 <img src="/lighting/images/logo_가로.png" id="logo">
             </div>
             <div>
-                <img src="/lighting/images/icon.png" id="profileImg">
+                <img src="/lighting/images/${dto.photoFileName}" id="profileImg">
             </div>
             
             <div id="userName">
-                <img src="/lighting/images/마스터.png" id="grade"><span>홍길동</span><br> 
-                <a>거주 지역: 서울시 강남구</a>
+            	
+                <img src="/lighting/images/${scoreimage }" id="grade"><span>${dto.nickname}</span><br> 
+                <a>거주 지역: ${dto.sido} / ${dto.gugun}</a>
             </div>
             <div class="btn">
                 <input type="button" value="친구 신청" id="friendApply">
-                <input type="button" value="친구 차단" id="friendBlock">        
-            </div>
-            
-            <div id="textBox">
-                <h3>최근 모임 내역</h3>
-                <p>4월 2일 강남역 그룹 스터디 5명 모집합니다.</p>
-                <p>4월 2일 강남역 그룹 스터디 5명 모집합니다.</p>
+                <input type="button" value="차단 등록" id="friendBlock">        
             </div>
             
             <div class="checkBtn">
@@ -174,26 +171,162 @@
         </div>
     </div>
     
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
-        $(document).ready(function() {
-            // 모달 열기 버튼 클릭 시
-            $("#openModalBtn").click(function() {
-                $("#myModal").css("display", "block");
-            });
-
-            // 닫기 버튼, 확인 버튼 클릭 시
-            $(".close-button, #btn1").click(function() {
-                $("#myModal").css("display", "none");
-            });
-
-            // 모달 바깥 영역 클릭 시 닫기
-            $(window).click(function(event) {
-                if (event.target.className === "modal") {
-                    $("#myModal").css("display", "none");
+    	let requestingMemberSeq = ${auth};
+    	let requestedMemberSeq = ${dto.tblMemberSeq};
+    
+    	$('.close-button').click(function() {
+			window.close();
+    	});
+    	
+    	$('#btn1').click(function() {
+			window.close();
+    	});
+    	
+    	$.ajax({//친구신청 테이블 조회
+    		url: '/lighting/meeting/getfriendrequest.do',
+            type: 'GET',
+            data: {
+            	requestingMemberSeq: requestingMemberSeq,
+            	requestedMemberSeq: requestedMemberSeq
+            },
+            dataType: 'json',
+            success: function(result) {
+            	// 1 상대가 나에게 신청
+                // 2 내가 상대에게 신청(미응답)
+                // 3 이미 친구
+                // 4 거절 기록
+                // 5 최초 신청
+                
+                if (result.result == 1) {
+					$('#friendApply').attr('value', '받은 신청 있음');
+					$('#friendApply').css('cursor', 'default');
+                } else if (result.result == 2) {
+                	$('#friendApply').attr('value', '이미 신청함');
+                	$('#friendApply').css('cursor', 'default');
+                } else if (result.result == 3) {
+                	$('#friendApply').attr('value', '이미 친구');
+                	$('#friendApply').css('cursor', 'default');
+                } else if (result.result == 4) {
+                	$('#friendApply').attr('value', '상대가 거절함');
+                	$('#friendApply').css('cursor', 'default');
+                } else if (result.result == 5) {
+                	$('#friendApply').on('click', addFriendRequest);
                 }
-            });
-        });
+                
+            },
+    		error: function(a, b, c) {
+                console.error(a,b,c);
+            }
+    	});
+    	
+    	$.ajax({//블록리스트 조회
+    		url: '/lighting/meeting/getblocklist.do',
+            type: 'GET',
+            data: {
+            	blockerMemberSeq: requestingMemberSeq,
+            	blockedMemberSeq: requestedMemberSeq
+            },
+            dataType: 'json',
+            success: function(result) {
+            	// 0 차단 등록으로 전환(레코드 없음)
+                // 1 차단 해제로 전환(레코드 있음)
+                console.log(result.result);
+                if (result.result == 0) {
+                	$('#friendBlock').attr('value', '차단 등록');
+                	$('#friendBlock').on('click', addBlock);
+                } else if (result.result == 1) {
+                	$('#friendBlock').attr('value', '차단 해제');
+                	$('#friendBlock').on('click', deleteBlock);
+                } 
+                
+            },
+    		error: function(a, b, c) {
+                console.error(a,b,c);
+            }
+    	});
+    	
+    	function addFriendRequest() {
+    		$.ajax({//친구신청
+        		url: '/lighting/meeting/addfriendrequest.do',
+                type: 'GET',
+                data: {
+                	requestingMemberSeq: requestingMemberSeq,
+                	requestedMemberSeq: requestedMemberSeq
+                },
+                dataType: 'json',
+                success: function(result) {
+					                    
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+			
+    		location.reload();
+    	}
+    	
+    	function addBlock() {
+    		$.ajax({//차단신청
+        		url: '/lighting/meeting/addblocklist.do',
+                type: 'GET',
+                data: {
+                	blockerMemberSeq: requestingMemberSeq,
+                	blockedMemberSeq: requestedMemberSeq
+                },
+                //dataType: 'json',
+                success: function() {
+				//	console.log('어디까지 왔니');
+					location.reload();
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+    	}
+    	
+    	function deleteBlock() {
+    		$.ajax({//차단해제
+        		url: '/lighting/meeting/deleteblocklist.do',
+                type: 'GET',
+                data: {
+                	blockerMemberSeq: requestingMemberSeq,
+                	blockedMemberSeq: requestedMemberSeq
+                },
+                //dataType: 'json',
+                success: function(result) {
+                	location.reload();
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+    	}
+    
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
