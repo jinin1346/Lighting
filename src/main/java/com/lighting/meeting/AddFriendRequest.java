@@ -8,33 +8,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lighting.meeting.model.FriendRequestDTO;
 import com.lighting.meeting.model.MeetingDAO;
-import com.lighting.meeting.model.WishlistDTO;
 
-@WebServlet("/meeting/addwish.do")
-public class AddWish extends HttpServlet {
+@WebServlet("/meeting/addfriendrequest.do")
+public class AddFriendRequest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //AddWish.java
-        
+        //AddFriendRequest.java
         req.setCharacterEncoding("UTF-8");
-        String tblMeetingPostSeq = req.getParameter("tblMeetingPostSeq");
-        String loginedtblMemberSeq = req.getParameter("loginedtblMemberSeq");
+        String requestingMemberSeq = req.getParameter("requestingMemberSeq");
+        String requestedMemberSeq = req.getParameter("requestedMemberSeq");
         
-        WishlistDTO dto = new WishlistDTO();
+        FriendRequestDTO dto = new FriendRequestDTO();
         MeetingDAO dao = new MeetingDAO();
         
-        dto.setTblMeetingPostSeq(tblMeetingPostSeq);
-        dto.setTblMemberSeq(loginedtblMemberSeq);
+        dto.setRequestedMemberSeq(requestedMemberSeq);
+        dto.setRequestingMemberSeq(requestingMemberSeq);
         
-        int result = dao.addWish(dto);
-        
+        int result = dao.addFriendRequest(dto);
         dao.close();
-        
+
     }
 
 }
+
+
+
+
+
+
 
 
 

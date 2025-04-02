@@ -8,46 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lighting.meeting.model.BlockListDTO;
 import com.lighting.meeting.model.MeetingDAO;
-import com.lighting.meeting.model.WishlistDTO;
 
-@WebServlet("/meeting/addwish.do")
-public class AddWish extends HttpServlet {
+@WebServlet("/meeting/addblocklist.do")
+public class AddBlockList extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //AddWish.java
-        
+        //AddBlockList.java
         req.setCharacterEncoding("UTF-8");
-        String tblMeetingPostSeq = req.getParameter("tblMeetingPostSeq");
-        String loginedtblMemberSeq = req.getParameter("loginedtblMemberSeq");
+        String blockerMemberSeq = req.getParameter("blockerMemberSeq");
+        String blockedMemberSeq = req.getParameter("blockedMemberSeq");
         
-        WishlistDTO dto = new WishlistDTO();
+        BlockListDTO dto = new BlockListDTO();
         MeetingDAO dao = new MeetingDAO();
         
-        dto.setTblMeetingPostSeq(tblMeetingPostSeq);
-        dto.setTblMemberSeq(loginedtblMemberSeq);
+        dto.setBlockerMemberSeq(blockerMemberSeq);
+        dto.setBlockedMemberSeq(blockedMemberSeq);
         
-        int result = dao.addWish(dto);
-        
+        int result = dao.addBlockList(dto);
         dao.close();
         
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -28,6 +28,8 @@ public class DeleteWish extends HttpServlet {
         dto.setTblMemberSeq(loginedtblMemberSeq);
         
         int result = dao.deleteWish(dto);
+        
+        dao.close();
     }
 
 }

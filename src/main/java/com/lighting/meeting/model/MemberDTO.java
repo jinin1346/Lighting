@@ -16,5 +16,6 @@ public class MemberDTO {
     private String gugun;
     //private String latitude;
     //private String longitude;
-
+    private String scoreImage;
+    
 }
