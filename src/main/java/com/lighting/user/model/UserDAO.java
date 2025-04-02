@@ -52,15 +52,12 @@ public class UserDAO {
             rs = pstat.executeQuery();
             
             System.out.println(rs);
-            System.out.println("1234");
             
             if (rs.next()) {
-                System.out.println("67878");
                 //로그인 성공
                 UserDTO result = new UserDTO();
                 
                 result.setTblMemberSeq(rs.getString("tblMemberSeq"));
-                //result.setName(rs.getString("name"));
                 System.out.println(result);
                 
                 return result;
