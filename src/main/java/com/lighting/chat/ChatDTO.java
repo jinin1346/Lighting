@@ -17,6 +17,8 @@ public class ChatDTO {
     private String createDate;
     private String tblMemberSeq;
     
+    private String nickname;
+    
     //tblChatHistroy
     private String tblChatHistorySeq;
     private String content;

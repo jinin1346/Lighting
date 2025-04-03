@@ -41,8 +41,9 @@ public class Chat extends HttpServlet {
         
         
         HttpSession session = req.getSession();
-        //session.setAttribute("auth", "913");
         String tblMemberSeq = (String) session.getAttribute("auth");
+        System.out.println("Post요청의 tblmemseq : "+tblMemberSeq);
+        
         if(tblMemberSeq == null) {
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             PrintWriter out = resp.getWriter();
@@ -53,34 +54,35 @@ public class Chat extends HttpServlet {
         
      // 클라이언트로부터 상대방의 닉네임(nickname)와 메시지(content) 전달 받음
         String nickname = req.getParameter("nickname");
+        String content = req.getParameter("content");
+
         System.out.println("상대방 닉네임"+nickname);
-        String message = req.getParameter("message");
-        System.out.println("적은 메시지 : "+message);
-        if(nickname == null || message == null || nickname.isEmpty() || message.isEmpty()) {
+        System.out.println("적은 메시지 : "+content);
+        
+        if(nickname == null || content == null || nickname.isEmpty() || content.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             PrintWriter out = resp.getWriter();
             out.write("Bad Request: partnerId 와 message 필수");
             out.flush();
             return;
         }
-        String creatorId = tblMemberSeq;
         
         
      // 두 회원 간의 채팅방 번호 확인; 없으면 생성
         System.out.println("check");
         //dsadasd
-        String chatRoomSeq = chatRoomDAO.getChatRoomSeq(creatorId, nickname);
+        String chatRoomSeq = chatRoomDAO.getChatRoomSeq(tblMemberSeq, nickname);
         System.out.println("check");
         
         System.out.println("채ㅣㅇ방번호 널이면!"+chatRoomSeq);
         
         if(chatRoomSeq == null) {
-            chatRoomSeq = chatRoomDAO.createChatRoom(creatorId, nickname);
+            chatRoomSeq = chatRoomDAO.createChatRoom(tblMemberSeq, nickname);
         }
         System.out.println("챝팅방 번호 222"+chatRoomSeq);
         
         // 채팅내역에 메시지 삽입 (status: '0'은 읽지 않음)
-        chatDAO.insertChatHistory(chatRoomSeq, creatorId, message, "0");
+        chatDAO.insertChatHistory(chatRoomSeq, tblMemberSeq, content, "0");
         
         PrintWriter out = resp.getWriter();
         out.write("메시지 전송 완료");
@@ -89,14 +91,19 @@ public class Chat extends HttpServlet {
     
        
     
- // GET 요청: 특정 채팅방의 채팅내역 조회 (파라미터: partnerId)
+ // GET 요청: 특정 채팅방의 채팅내역 조회 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         //session.setAttribute("auth", "913");
-        String loggedInMemberSeq = (String)session.getAttribute("auth");
-        if(loggedInMemberSeq == null) {
+        String tblMemberSeq = (String)session.getAttribute("auth");
+        
+        
+        System.out.println("1. Get요청의 tblmemseq : "+tblMemberSeq);
+        
+        
+        if(tblMemberSeq == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             PrintWriter out = response.getWriter();
             out.write("Unauthorized: 로그인 필요");
@@ -105,6 +112,11 @@ public class Chat extends HttpServlet {
         }
         
         String nickname = request.getParameter("nickname");
+        
+        
+        System.out.println("2. Get안의 nickname : "+ nickname);
+        
+        
         if(nickname == null || nickname.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             PrintWriter out = response.getWriter();
@@ -113,9 +125,16 @@ public class Chat extends HttpServlet {
             return;
         }
         
-        String creatorId = loggedInMemberSeq;
         
-        String chatRoomSeq = chatRoomDAO.getChatRoomSeq(creatorId, nickname);
+        String chatRoomSeq = chatRoomDAO.getChatRoomSeq(tblMemberSeq, nickname);
+        
+        
+        
+        System.out.println("3. Get일때 chatRoomSeq : "+chatRoomSeq);
+        
+        
+        
+        
         // 채팅방이 없으면 빈 결과 리턴
         if(chatRoomSeq == null) {
             JSONArray jsonArray = new JSONArray();
@@ -129,11 +148,17 @@ public class Chat extends HttpServlet {
         
         List<ChatDTO> messages = chatDAO.getChatHistory(chatRoomSeq);
         JSONArray jsonArray = new JSONArray();
+        String mySeq = tblMemberSeq;  // 세션에 저장된 내 회원 seq
         for(ChatDTO dto : messages) {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("chatHistorySeq", dto.getTblChatHistorySeq());
             jsonObj.put("chatRoomSeq", dto.getTblChatRoomSeq());
-            jsonObj.put("memberSeq", dto.getTblMemberSeq());
+            // 내가 보낸 메시지면 "나:" 출력, 아니면 파라미터로 받은 상대방 닉네임 사용
+            if(mySeq.equals(dto.getTblMemberSeq())) {
+                 jsonObj.put("sender", "나");
+            } else {
+                 jsonObj.put("sender", nickname);
+            }
             jsonObj.put("content", dto.getContent());
             jsonObj.put("postDate", dto.getPostDate().toString());
             jsonObj.put("status", dto.getStatus());

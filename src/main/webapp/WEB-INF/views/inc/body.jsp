@@ -558,6 +558,7 @@
         <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임만들기</button>
         <button class="child-button speech-bubble">버튼2</button>
         <button class="child-button speech-bubble" onclick="location.href='/lighting/chat/chatview.do';">채팅하기</button>
+        
       </div>
       <!-- 메인 버튼 -->
       <button class="main-button">

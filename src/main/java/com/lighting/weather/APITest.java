@@ -21,8 +21,8 @@ public class APITest {
         // 구하고자 하는 시간과 좌표 대입
         String nx = "61";
         String ny = "125";
-        String baseDate = "20250402";
-        String baseTime = "1200";
+        String baseDate = "20250403";
+        String baseTime = "2000";
 
         String dataType = "JSON";
 

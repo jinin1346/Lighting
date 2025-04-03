@@ -73,9 +73,7 @@ public class ChatDAO {
     
     
     /**
-     * 특정 채팅방의 채팅 내역을 조회합니다.
-     * @param chatRoomSeq 채팅방 시퀀스
-     * @return 채팅 내역 리스트 (ChatMessage DTO의 리스트)
+     * 특정 채팅방의 채팅 내역을 조회
      */
     public List<ChatDTO> getChatHistory(String chatRoomSeq) {
         List<ChatDTO> list = new ArrayList<>();
@@ -84,7 +82,7 @@ public class ChatDAO {
                        + "FROM tblChatHistory WHERE tblChatRoomSeq = ? ORDER BY postDate ASC";
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, chatRoomSeq);
-            System.out.println("채ㅣㅇ방 번호!!"+chatRoomSeq);
+            System.out.println("getChatHistory의 채팅방 번호!!"+chatRoomSeq);
             rs = pstat.executeQuery();
             while(rs.next()){
                 ChatDTO chatDTO = new ChatDTO();
@@ -93,6 +91,7 @@ public class ChatDAO {
                 chatDTO.setTblChatRoomSeq(rs.getString("tblChatRoomSeq"));
                 // 채팅 생성자 정보가 별도로 필요하면 적절히 설정
                 chatDTO.setChatCreatorSeq(rs.getString("tblMemberSeq"));
+                chatDTO.setTblMemberSeq(rs.getString("tblMemberSeq"));
                 chatDTO.setContent(rs.getString("content"));
                 chatDTO.setPostDate(rs.getTimestamp("postDate").toString());
                 chatDTO.setStatus(rs.getString("status"));
