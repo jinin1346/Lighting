@@ -1,6 +1,5 @@
 package com.lighting.meeting;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,28 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.lighting.meeting.model.MeetingDAO;
 import com.lighting.meeting.model.MeetingPostDTO;
 
-@WebServlet("/meeting/addok.do")
-public class AddOk extends HttpServlet {
+@WebServlet("/meeting/updateok.do")
+public class UpdateOk extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //UpdateOk.java
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-/*
-        사진 작업 보류
-        String saveDirectory = req.getRealPath("/images"); // 파일 저장 경로 (webapp/images)
-        int maxPostSize = 1024 * 1024 * 10; // 10MB
-        String encoding = "UTF-8";
-        DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
-
         
-        MultipartRequest multi = new MultipartRequest(req, saveDirectory, maxPostSize, encoding, policy);
-
-        String photoFileName = multi.getFilesystemName("photoFileName"); // 서버에 저장된 파일 이름
-        File file = multi.getFile("photoFileName"); // File 객체
-*/
-      // 1. 폼 데이터 받기
+        //1. 폼 데이터 받기
         String tblCategorySubSeq = req.getParameter("tblCategorySubSeq");
         String title = req.getParameter("title");
         String date = req.getParameter("date");
@@ -46,21 +33,9 @@ public class AddOk extends HttpServlet {
         String longitude = req.getParameter("longitude");
         String content = req.getParameter("content");
         String tblMemberSeq = req.getParameter("tblMemberSeq");
+        String tblMeetingPostSeq = req.getParameter("tblMeetingPostSeq");
         String photoFileName = "";
         
-        /*
-        System.out.println("tblCategorySubSeq: " + tblCategorySubSeq);
-        System.out.println("title: " + title);
-        System.out.println("startTime: " + startTime);
-        System.out.println("capacity: " + capacity);
-        System.out.println("location: " + location);
-        System.out.println("latitude: " + latitude);
-        System.out.println("longitude: " + longitude);
-        System.out.println("content: " + content);
-        System.out.println("tblMemberSeq: " + tblMemberSeq);
-        */
-        
-        //insert 문 데이터 담기 + 넘기기
         MeetingDAO dao = new MeetingDAO();
         MeetingPostDTO dto = new MeetingPostDTO();
         
@@ -74,25 +49,29 @@ public class AddOk extends HttpServlet {
         dto.setTblCategorySubSeq(tblCategorySubSeq);
         dto.setTblMemberSeq(tblMemberSeq);
         dto.setPhotoFileName(photoFileName);
+        dto.setTblMeetingPostSeq(tblMeetingPostSeq);
         
-        int result = dao.add(dto); 
+        int result = dao.update(dto);
         
-        if (result == 1) { // meetingpost에 게시글 추가 >> 좌표값도 추가해야함
+        if (result == 1) {
             //성공
-            result = dao.addLocationCoordinate(dto);
+            result = dao.updateLocationCoordinate(dto);
             dao.close();
+            System.out.println("좌표값 업데이트 결과" + result);
             if (result == 1) {
-                resp.sendRedirect("/lighting/main.do");
+                resp.sendRedirect("/lighting/mypage/mypage.do");
+                return;
             } else {
                 //실패
                 PrintWriter writer = resp.getWriter();
                 writer.print("""
                         <script>
                             alert('failed');
-                            location.href='/lighting/main.do'
+                            location.href='/lighting/mypage/mypage.do'
                         </script>
                         """);
                 writer.close();
+                return;
             }
            
         } else {
@@ -102,12 +81,31 @@ public class AddOk extends HttpServlet {
             writer.print("""
                     <script>
                         alert('failed');
-                        location.href='/lighting/main.do'
+                        location.href='/lighting/mypage/mypage.do'
                     </script>
                     """);
             writer.close();
+            return;
         }
         
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

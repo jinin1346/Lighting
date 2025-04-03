@@ -7,6 +7,13 @@
 	<title>오늘어때?</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<style>
+		#headerContainer {
+			width: 1300px;
+			margin: 0 auto;
+			height: auto;
+			background-color: #f9f7ff;
+		}
+	
 		main {
 			width: 1300px;
 			height: auto;
@@ -270,7 +277,9 @@
 </head>
 <body>
 <h1>${tblMeetingPostSeq }</h1>
+	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
+	</div>
 	<main>
 		<hr>
 		<div id="topBox">
@@ -527,7 +536,7 @@
         success: function(result) {
 			//console.log(result.StartTime);
         	$('#title').text(result.Title);
-        	const content = result.Content.replace("\r\n", "<br>");
+        	const content = result.Content.replaceAll("\n", "<br>");
         	$('#content').html(content);
         	PostDate = result.PostDate;
         	$('#locationBox').text('장소명 : ' + result.Location);

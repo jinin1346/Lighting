@@ -129,10 +129,29 @@ public class MeetingDAO {
             pstat.setString(6, dto.getStartTime());//FIXME endTime 고쳐야 함 
             
             String photoFileName = "";
-            if (dto.getPhotoFileName().equals("") || dto.getPhotoFileName() == null) {
-                photoFileName = "basic스포츠유산소.png";
-            } else {
+            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
+                // 중분류 번호를 주고 대분류명||중분류명
+                sql = """
+                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
+                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
+                            where tblCategorySubSeq = ?
+                    """;
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblCategorySubSeq());
+                System.out.println("사진이 없어서 이름 구해오기");
+                rs = pstat.executeQuery();
+                if (rs.next()) {
+                    String mainCategoryName = rs.getString("a");
+                    String subCategoryName = rs.getString("b");
+                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                    System.out.println("사진 이름 :" + photoFileName);
+                
+            } else {//사진 첨부 했을 때
+                
                 photoFileName = dto.getPhotoFileName();
+                
+                }
             }
             
             pstat.setString(7, photoFileName);
@@ -254,6 +273,9 @@ public class MeetingDAO {
                 dto.setStartTime(rs.getString("StartTime"));
                 dto.setPhotoFileName(rs.getString("PhotoFileName"));
                 dto.setEndTime(rs.getString("EndTime"));
+                dto.setTblMeetingPostSeq(rs.getString("TblMeetingPostSeq"));
+                dto.setTblMemberSeq(rs.getString("TblMemberSeq"));
+                dto.setTblCategorySubSeq(rs.getString("TblCategorySubSeq"));
             }
             
             sql = "select * from tblLocationCoordinate where tblMeetingPostSeq = ?";
@@ -829,6 +851,157 @@ public class MeetingDAO {
         
         return 0;
         
+    }
+
+    public CategoryMainDTO getCategoryMain(String tblCategorySubSeq) {
+        
+        try {
+            
+            String sql = """
+                select * from tblCategoryMain where tblCategoryMainSeq =
+                    (select tblCategoryMainSeq from tblCategorySub where tblCategorySubSeq = ?)
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, tblCategorySubSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if (rs.next()) {
+                CategoryMainDTO categorydto = new CategoryMainDTO();
+                categorydto.setCategoryName(rs.getString("CategoryName"));
+                categorydto.setTblCategoryMainSeq(rs.getString("TblCategoryMainSeq"));
+                
+                return categorydto;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public int update(MeetingPostDTO dto) {
+        
+        try {
+            String sql = "";
+            
+            String photoFileName = "";
+            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
+                // 중분류 번호를 주고 대분류명||중분류명
+                sql = """
+                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
+                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
+                            where tblCategorySubSeq = ?
+                    """;
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblCategorySubSeq());
+                rs = pstat.executeQuery();
+                if (rs.next()) {
+                    String mainCategoryName = rs.getString("a");
+                    String subCategoryName = rs.getString("b");
+                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                
+            } else {//사진 첨부 했을 때
+                
+                photoFileName = dto.getPhotoFileName();
+                
+                }
+            }
+            
+            sql = """
+                    update tblMeetingPost set
+                        title = ?,
+                        content = ?,
+                        location = ?,
+                        capacity = ?,
+                        startTime = TO_DATE(?, 'YYYY-MM-DD HH24:MI'),
+                        endTime = (TO_DATE(?, 'YYYY-MM-DD HH24:MI') + 2/24),
+                        photoFileName = ?,
+                        tblCategorySubSeq = ?
+                        where tblMeetingPostSeq = ?
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getTitle());
+            pstat.setString(2, dto.getContent());
+            pstat.setString(3, dto.getLocation());
+            pstat.setString(4, dto.getCapacity());
+            pstat.setString(5, dto.getStartTime());
+            pstat.setString(6, dto.getStartTime());//FIXME endTime 고쳐야 함 
+            pstat.setString(7, photoFileName);
+            pstat.setString(8, dto.getTblCategorySubSeq());
+            pstat.setString(9, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int updateLocationCoordinate(MeetingPostDTO dto) {
+            
+        try {
+            String sql = """
+                    update tblLocationCoordinate 
+                    set latitude = ?,
+                        longitude = ?
+                        where tblMeetingPostSeq = ?
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getLatitude());
+            pstat.setString(2, dto.getLongitude());
+            pstat.setString(3, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<MeetingPostDTO> getMeetingInfoList(String tblMemberSeq) {
+        
+        try {
+            
+            String sql = """
+                    select * from tblMeetingPost where tblMemberSeq = ? order by postDate desc
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            
+            rs = pstat.executeQuery();
+            
+            List<MeetingPostDTO> list = new ArrayList<MeetingPostDTO>();
+            
+            int cnt = 1;
+            
+            while(rs.next() && cnt <= 5) {
+                MeetingPostDTO dto = new MeetingPostDTO();
+                
+                dto.setTitle(rs.getString("title"));
+                dto.setTblMeetingPostSeq(rs.getString("TblMeetingPostSeq"));
+                
+                list.add(dto);
+                cnt++;
+            }
+            
+            return list;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
     }
 
     
