@@ -94,9 +94,9 @@
     
     <script>
     
-       $('#logo', '#btnCheck').click(()=>{ 
-           window.location.href='/lighting/main.do'//메인페이지로 이동
-       });
+    $('#logo').click(() => { 
+        window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+      });
     
     </script>
     <%@ include file="/WEB-INF/views/inc/footer.jsp"%>
