@@ -62,9 +62,33 @@
         $(this).addClass('active');
         
         // 채팅방 번호와 닉네임 설정
-        currentRoom = $(this).data('chatroom');
-        $('#nickname').val($(this).data('nickname'));
+        var currentRoom = $(this).data('chatroom');
+	    var nickname = $(this).data('nickname');
+	    var currentMemberSeq = $('#tblMemberSeq').val();
         
+	    $.ajax({
+	        url: "${pageContext.request.contextPath}/chat/chat.do",
+	        type: "GET",
+	        data: { nickname: nickname },
+	        dataType: "json",
+	        success: function(response) {
+	            $('#chatBox').empty();
+	            // 서버에서 받은 JSON 배열(response)을 순회하며 메시지 출력
+	            $.each(response, function(index, message){
+	                // 서버에서 'sender'에 "나" 또는 상대방 닉네임을 설정하므로 그대로 사용합니다.
+	                var senderDisplay = message.sender;
+	                $('#chatBox').append(
+	                    '<p><strong>' + senderDisplay + ' : </strong>' + message.content + 
+	                    ' <em>(' + new Date(message.postDate).toLocaleTimeString() + ')</em></p>'
+	                );
+	            });
+	            $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+	        },
+	        error: function(err) {
+	            console.error("채팅 내역 로드 실패", err);
+	        }
+	    });
+	    
         // 기존 WebSocket 연결이 있다면 종료
         if(ws && ws.readyState === WebSocket.OPEN) {
             ws.close();
