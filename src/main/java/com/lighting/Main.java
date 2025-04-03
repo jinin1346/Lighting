@@ -21,7 +21,7 @@ public class Main extends HttpServlet {
 	    
 	    HttpSession session = req.getSession();
         
-        session.setAttribute("auth", "913");
+        //session.setAttribute("auth", "1");
         //session.setAttribute("auth", result.getTblMemberSeq());
 	    
 	    MainDAO dao = new MainDAO();

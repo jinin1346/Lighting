@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.lighting.meeting.model.FriendRequestDTO;
 import com.lighting.meeting.model.MeetingDAO;
 
-@WebServlet("/meeting/addfriendrequest.do")
-public class AddFriendRequest extends HttpServlet {
+@WebServlet("/meeting/acceptfriendrequest.do")
+public class AcceptFriendRequest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //AddFriendRequest.java
+        
         req.setCharacterEncoding("UTF-8");
         String requestingMemberSeq = req.getParameter("requestingMemberSeq");
         String requestedMemberSeq = req.getParameter("requestedMemberSeq");
@@ -27,9 +27,9 @@ public class AddFriendRequest extends HttpServlet {
         dto.setRequestedMemberSeq(requestedMemberSeq);
         dto.setRequestingMemberSeq(requestingMemberSeq);
         
-        int result = dao.addFriendRequest(dto);
+        int result = dao.acceptFriendRequest(dto);
         dao.close();
-
+        
     }
 
 }
