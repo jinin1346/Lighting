@@ -565,7 +565,7 @@
       <div class="child-buttons">
         <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임 만들기 ✉️</button>
         <button class="child-button speech-bubble" onclick="location.href='/lighting/gallery/gallerymain.do';">포토 갤러리 🖼️</button>
-        <button class="child-button speech-bubble">친구와 채팅 🔈</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/chat/chatview.do';">친구와 채팅 🔈</button>
       </div>
       <!-- 메인 버튼 -->
       <button class="main-button">
