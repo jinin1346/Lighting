@@ -169,7 +169,14 @@
 
 	<script>
         const isListEmpty = ${list == null || list.isEmpty()};
-
+		
+        if (${checkMeeting} == 1) {//모임이 성사 되었을 때
+        	$('#delete').css('visibility', 'hidden');
+        	$('#info').css('color', 'red');
+			$('#info').css('font-weight', 'bold');
+			$('#info').text('이미 성사된 모임은 삭제가 불가능합니다.');
+        }
+        
 		if (isListEmpty) {//참석자가 없을 때
 		    $('#delete').on('click', deleteMeetingPost);
 		} else {//참석자가 있을 때

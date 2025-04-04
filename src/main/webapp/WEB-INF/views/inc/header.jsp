@@ -8,6 +8,7 @@
         display: flex;  
         flex-direction: column;
         margin: 0 auto;
+        background-color: #f9f7ff;
     }
 
     #logo {  
@@ -15,7 +16,7 @@
         height: auto;  
         margin-bottom: 20px; /* 로고와 다음 요소 사이의 간격 */  
         position: relative;
-        top: 20px; /* 상단 20px 떨어지게 */  
+        top: 15px; /* 상단 20px 떨어지게 */  
         left: 20px; /* 왼쪽 20px 떨어지게 */  
     }  
 
@@ -89,6 +90,7 @@
         border: none;   
         border-radius: 30px;   
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+        margin-bottom: 20px;
     }  
  
     .search-button {  
@@ -96,6 +98,7 @@
         border: none;  
         cursor: pointer;  
         margin-left: -60px; /* 검색창과 버튼의 간격 조정 */  
+        margin-bottom: 20px;
     }  
 
     .search-button img {  
@@ -110,6 +113,7 @@
         padding: 5px;
         font-size: 16px;
         margin-right: 15px;
+        margin-bottom: 20px;
     }
 </style>  
 

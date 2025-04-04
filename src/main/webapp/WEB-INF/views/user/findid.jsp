@@ -102,6 +102,14 @@
         form button:hover, #openModalButton:hover {
             background-color:#1e62c8;
         }
+        
+          /* 로고에 마우스 포인터*/
+        #logo {
+            cursor: pointer;
+        }
+        
+        
+        
     </style>
 </head>
 <body>
@@ -111,11 +119,19 @@
          <img alt="로고" src="/lighting/images/logo_세로.png" id="logo" style="display: block; margin: 0 auto 20px; max-width: 200px;">
         
             <span class="close-button">&times;</span>
+            
+            <!-- 에러 메시지 출력 부분 -->
+   			 <c:if test="${not empty errorMessage}">
+        	<div class="error-message" style="color: red; font-size: 13px;">
+            <p>${errorMessage}</p>
+        	</div>
+   			 </c:if>
+            
             <form action="/lighting/user/findidok.do" method="POST">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" required>
-                <label for="contact">연락처</label>
-                <input type="text" id="contact" name="contact" required>
+                <input type="text" id="name" name="name" placeholder="예) 홍길동" required>
+                <label for="tel">연락처</label>
+                <input type="text" id="tel" name="tel" placeholder="예) 010-1234-5678, 대시(-) 포함 입력" required>
                 <button type="submit">아이디 찾기</button>
             </form>
         </div>
@@ -138,6 +154,10 @@
                 modal.style.display = "none";
             }
         }
+        
+        $('#logo').click(() => { 
+            window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+          });
     </script>
 </body>
 </html>

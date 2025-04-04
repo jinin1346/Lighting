@@ -172,8 +172,19 @@
     </div>
     
     <script>
-    	let requestingMemberSeq = ${auth};
     	let requestedMemberSeq = ${dto.tblMemberSeq};
+    	let requestingMemberSeq = ${requestingMemberSeq};
+    	let auth = "${auth}";
+    	
+    	if (auth == null || auth == "") {
+			console.log('통과');
+    		auth = 0;
+    	}
+    	
+    	if (requestedMemberSeq == requestingMemberSeq) {
+			$('#friendApply').css('visibility', 'hidden');
+			$('#friendBlock').css('visibility', 'hidden');
+    	}
     
     	$('.close-button').click(function() {
 			window.close();
@@ -183,87 +194,162 @@
 			window.close();
     	});
     	
-    	$.ajax({//친구신청 테이블 조회
-    		url: '/lighting/meeting/getfriendrequest.do',
-            type: 'GET',
-            data: {
-            	requestingMemberSeq: requestingMemberSeq,
-            	requestedMemberSeq: requestedMemberSeq
-            },
-            dataType: 'json',
-            success: function(result) {
-            	// 1 상대가 나에게 신청
-                // 2 내가 상대에게 신청(미응답)
-                // 3 이미 친구
-                // 4 거절 기록
-                // 5 최초 신청
-                
-                if (result.result == 1) {
-					$('#friendApply').attr('value', '받은 신청 있음');
-					$('#friendApply').css('cursor', 'default');
-                } else if (result.result == 2) {
-                	$('#friendApply').attr('value', '이미 신청함');
-                	$('#friendApply').css('cursor', 'default');
-                } else if (result.result == 3) {
-                	$('#friendApply').attr('value', '이미 친구');
-                	$('#friendApply').css('cursor', 'default');
-                } else if (result.result == 4) {
-                	$('#friendApply').attr('value', '상대가 거절함');
-                	$('#friendApply').css('cursor', 'default');
-                } else if (result.result == 5) {
-                	$('#friendApply').on('click', addFriendRequest);
-                }
-                
-            },
-    		error: function(a, b, c) {
-                console.error(a,b,c);
-            }
-    	});
+    	if (auth != 0) {
+
+	    	$.ajax({//친구신청 테이블 조회
+	    		url: '/lighting/meeting/getfriendrequest.do',
+	            type: 'GET',
+	            data: {
+	            	requestingMemberSeq: requestingMemberSeq,
+	            	requestedMemberSeq: requestedMemberSeq
+	            },
+	            dataType: 'json',
+	            success: function(result) {
+	            	// 1 상대가 나에게 신청
+	                // 2 내가 상대에게 신청(미응답)
+	                // 3 이미 친구
+	                // 4 거절 기록
+	                // 5 최초 신청
+	                
+	                if (result.result == 1) {
+						$('#friendApply').attr('value', '수락하기');
+						$('#friendApply').css('cursor', 'pointer');
+						$('#friendApply').on('click', acceptFriendRequest);
+						
+	                } else if (result.result == 2) {
+	                	$('#friendApply').attr('value', '신청취소');
+	                	$('#friendApply').css('cursor', 'pointer');
+	                	$('#friendApply').on('click', deleteFriendRequest);
+	                	
+	                } else if (result.result == 3) {
+	                	$('#friendApply').attr('value', '친구삭제');
+	                	$('#friendApply').css('cursor', 'pointer');
+	                	$('#friendApply').on('click', deleteFriendList);
+	                	
+	                } else if (result.result == 4) {
+	                	$('#friendApply').attr('value', '상대가 거절');
+	                	$('#friendApply').css('cursor', 'default');
+	                	$('#friendApply').css('background-color', 'red');
+	                	
+	                } else if (result.result == 5) {
+	                	$('#friendApply').on('click', addFriendRequest);
+	                }
+	                
+	            },
+	    		error: function(a, b, c) {
+	                console.error(a,b,c);
+	            }
+	    	});
+	    	
+	    	$.ajax({//블록리스트 조회
+	    		url: '/lighting/meeting/getblocklist.do',
+	            type: 'GET',
+	            data: {
+	            	blockerMemberSeq: requestingMemberSeq,
+	            	blockedMemberSeq: requestedMemberSeq
+	            },
+	            dataType: 'json',
+	            success: function(result) {
+	            	// 0 차단 등록으로 전환(레코드 없음)
+	                // 1 차단 해제로 전환(레코드 있음)
+	                console.log(result.result);
+	                if (result.result == 0) {
+	                	$('#friendBlock').attr('value', '차단 등록');
+	                	$('#friendBlock').on('click', addBlock);
+	                } else if (result.result == 1) {
+	                	$('#friendBlock').attr('value', '차단 해제');
+	                	$('#friendBlock').on('click', deleteBlock);
+	                } 
+	            },
+	    		error: function(a, b, c) {
+	                console.error(a,b,c);
+	            }
+	    	});
+    	} else {
+    		$('#friendApply').on('click', login);
+    		$('#friendBlock').on('click', login);
+    	}
     	
-    	$.ajax({//블록리스트 조회
-    		url: '/lighting/meeting/getblocklist.do',
-            type: 'GET',
-            data: {
-            	blockerMemberSeq: requestingMemberSeq,
-            	blockedMemberSeq: requestedMemberSeq
-            },
-            dataType: 'json',
-            success: function(result) {
-            	// 0 차단 등록으로 전환(레코드 없음)
-                // 1 차단 해제로 전환(레코드 있음)
-                console.log(result.result);
-                if (result.result == 0) {
-                	$('#friendBlock').attr('value', '차단 등록');
-                	$('#friendBlock').on('click', addBlock);
-                } else if (result.result == 1) {
-                	$('#friendBlock').attr('value', '차단 해제');
-                	$('#friendBlock').on('click', deleteBlock);
-                } 
-                
-            },
-    		error: function(a, b, c) {
-                console.error(a,b,c);
-            }
-    	});
+    	function login() {
+			opener.location.href='/lighting/user/login.do';
+			window.close();
+			return;
+    	}
+    	
+    	function acceptFriendRequest() {
+			//친구신청 수락
+    		$.ajax({
+        		url: '/lighting/meeting/acceptfriendrequest.do',
+                type: 'GET',
+                data: {
+                	requestingMemberSeq: requestingMemberSeq,
+                	requestedMemberSeq: requestedMemberSeq
+                },
+                //dataType: 'json',
+                success: function() {
+                	location.reload();                
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+    	}
+    	
+    	function deleteFriendRequest() {
+    		//친구신청 취소
+    		$.ajax({
+        		url: '/lighting/meeting/deletefriendrequest.do',
+                type: 'GET',
+                data: {
+                	requestingMemberSeq: requestingMemberSeq,
+                	requestedMemberSeq: requestedMemberSeq
+                },
+                //dataType: 'json',
+                success: function() {
+                	location.reload();                
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+    	}
+    	
+    	function deleteFriendList() {
+    		//친구삭제
+    		$.ajax({
+        		url: '/lighting/meeting/deletefriendlist.do',
+                type: 'GET',
+                data: {
+                	mainMemberSeq: requestingMemberSeq,
+                	subMemberSeq: requestedMemberSeq
+                },
+                //dataType: 'json',
+                success: function() {
+                	location.reload();                
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
+    	}
     	
     	function addFriendRequest() {
-    		$.ajax({//친구신청
+    		//친구신청
+    		$.ajax({
         		url: '/lighting/meeting/addfriendrequest.do',
                 type: 'GET',
                 data: {
                 	requestingMemberSeq: requestingMemberSeq,
                 	requestedMemberSeq: requestedMemberSeq
                 },
-                dataType: 'json',
-                success: function(result) {
-					                    
+                //dataType: 'json',
+                success: function() {
+                	location.reload();                
                 },
         		error: function(a, b, c) {
                     console.error(a,b,c);
                 }
         	});
-			
-    		location.reload();
     	}
     	
     	function addBlock() {
@@ -274,10 +360,10 @@
                 	blockerMemberSeq: requestingMemberSeq,
                 	blockedMemberSeq: requestedMemberSeq
                 },
-                //dataType: 'json',
                 success: function() {
-				//	console.log('어디까지 왔니');
-					location.reload();
+                	$('#friendBlock').off('click');
+                	$('#friendBlock').attr('value', '차단 해제');
+                	$('#friendBlock').on('click', deleteBlock);
                 },
         		error: function(a, b, c) {
                     console.error(a,b,c);
@@ -293,9 +379,10 @@
                 	blockerMemberSeq: requestingMemberSeq,
                 	blockedMemberSeq: requestedMemberSeq
                 },
-                //dataType: 'json',
-                success: function(result) {
-                	location.reload();
+                success: function() {
+                	$('#friendBlock').off('click');
+                	$('#friendBlock').attr('value', '차단 등록');
+                	$('#friendBlock').on('click', addBlock);
                 },
         		error: function(a, b, c) {
                     console.error(a,b,c);
@@ -306,27 +393,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

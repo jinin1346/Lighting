@@ -7,6 +7,13 @@
 	<title>오늘어때?</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<style>
+		#headerContainer {
+			width: 1300px;
+			margin: 0 auto;
+			height: auto;
+			background-color: #f9f7ff;
+		}
+	
 		main {
 			width: 1300px;
 			height: auto;
@@ -45,6 +52,7 @@
 			height: 100px;
 			margin: auto auto 5px auto;
 			display: block;
+			cursor: pointer;
 		}
 		
 		#imgIcon {
@@ -164,6 +172,10 @@
 			height: 250px;
 			border: 5px solid #616161;
 			box-sizing: border-box;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 		#locationBox {
@@ -260,12 +272,26 @@
 			font-size: 24px;
             display: none;
         }
+        
+        #btnFinish {
+     	    width: 150px;
+			height: 60px;
+			border: none;
+			background-color: #C81E1E;
+			color: white;
+			border-radius: 5px;
+			font-size: 24px;
+            display: none;
+            cursor: pointer;
+        }
 
 	</style>
 </head>
 <body>
 <h1>${tblMeetingPostSeq }</h1>
+	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
+	</div>
 	<main>
 		<hr>
 		<div id="topBox">
@@ -348,6 +374,7 @@
                 <button type="button" id="btnShare">공유</button>
                 <button type="button" id="btnParticipate">참석하기</button>
                 <button type="button" id="btnDisabled">종료된 모임</button>
+                <button type="button" id="btnFinish">모임종료</button>
             </div>
 		</div>
 	</main>
@@ -369,8 +396,6 @@
 			} else {
 				console.log('비상비상');
 				loginedtblMemberSeq = 0; // 숫자가 아니면 0으로 처리하거나, 다른 로직을 추가
-				// 또는 오류를 발생시키거나, 사용자에게 알림을 줄 수 있습니다.
-				console.error("auth 값이 숫자가 아닙니다.");
 			}
 		}
 		
@@ -380,8 +405,13 @@
         // getAttribute로 실제 지정한 src 값을 가져옴
         if (img.getAttribute("src") === "/lighting/images/찜하기전버튼.png") {
             //찜하기
-        	img.setAttribute("src", "/lighting/images/찜하기버튼.png");
-            addWish();
+            if (loginedtblMemberSeq == 0) {
+				location.href='/lighting/user/login.do';
+				return;
+            } else {
+            	img.setAttribute("src", "/lighting/images/찜하기버튼.png");
+            	addWish();
+            }
         } else {
 			//취소
             img.setAttribute("src", "/lighting/images/찜하기전버튼.png");
@@ -444,6 +474,14 @@
 		
 	}
 	
+	function writerClick() {
+		const seq = $(this).data('tblmemberseq');
+
+	    const url = '/lighting/meeting/addfriend.do?requestedMemberSeq=' + seq + '&requestingMemberSeq=' + loginedtblMemberSeq;
+	    
+	    window.open(url, '_blank', 'width=600,height=650,resizable=no,menubar=no,toolbar=no,location=no,status=no');
+	}
+	
 	//1. 글 번호 넘겨서 작성자 정보 가져오기
 	//2. 글 번호로 글 내용 가져오기
 	//2. 글 번호로 맵 정보 가져오기
@@ -459,6 +497,8 @@
         success: function(result) {
             $('#imgProfile').attr('src', '/lighting/images/' + result.photoFileName);
             tblMemberSeq = result.tblMemberSeq;
+            $('#imgProfile').attr('data-tblmemberseq', tblMemberSeq);
+            $('#imgProfile').on('click', writerClick);
             $('#hostInfoBox > span').text(result.nickname);
             gender = result.gender;
             
@@ -507,7 +547,7 @@
         success: function(result) {
 			//console.log(result.StartTime);
         	$('#title').text(result.Title);
-        	const content = result.Content.replace("\r\n", "<br>");
+        	const content = result.Content.replaceAll("\n", "<br>");
         	$('#content').html(content);
         	PostDate = result.PostDate;
         	$('#locationBox').text('장소명 : ' + result.Location);
@@ -553,16 +593,17 @@
 			} else if (parsedTime < currentTime) {
 			 	// btnDisabled 요소의 display: none 제거
 			    $('#btnDisabled').css('display', 'block');
-			    $('#imgWish').css('visibility', 'hidden');
-			    $('#btnShare').css('visibility', 'hidden');
-			    $('#btnParticipate').css('visibility', 'hidden');
+			    $('#btnParticipate').css('display', 'none');
+			    $('#btnFinish').css('display', 'none');
 			    //$('#btnDelete').css('visibility', 'hidden');
 			} else {
 
 			}
-			
-        	createMap(Latitude, Longitude);
-        	
+			if (Latitude == null || Latitude == "") {
+				$('#mapBox').html('작성자가 위치를 정하지 않았습니다!');
+			} else {
+				createMap(Latitude, Longitude);
+			}
         },
 		error: function(a, b, c) {
             console.error(a,b,c);
@@ -601,6 +642,22 @@
 		window.open('/lighting/meeting/delete.do?tblMeetingPostSeq=' + tblMeetingPostSeq, '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
 	});
 	
+	$('#btnFinish').click(()=>{
+		$.ajax({//모임 종료하기
+			url: '/lighting/meeting/finish.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq
+	        },
+	        success: function(result) {
+				location.reload();
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	});
+	
 	function openServletInNewWindow(servletUrl) {
         window.open(servletUrl, "_blank", "width=780,height=800,scrollbars=no");
     }
@@ -612,11 +669,9 @@
 		    $('#imgWish').css('visibility', 'hidden');
 		    $('#btnShare').css('visibility', 'hidden');
 		    $('#btnParticipate').css('visibility', 'hidden');
+		    $('#btnFinish').css('display', 'block');
 		} else {
 			if (loginedtblMemberSeq == 0) {//비로그인
-			    $('#imgWish').css('visibility', 'hidden');
-			    $('#btnShare').css('visibility', 'hidden');
-			    $('#btnParticipate').css('visibility', 'hidden');
 				$('#btnDelete').css('visibility', 'hidden');
 			} else {//로그인 != 작성자
 				$('#btnDelete').css('visibility', 'hidden');
@@ -627,7 +682,7 @@
 	$('#participationBox').on('click', '.imgParticipants', function() {
 	    const seq = $(this).data('tblmemberseq');
 
-	    const url = '/lighting/meeting/addfriend.do?requestedMemberSeq=' + seq;
+	    const url = '/lighting/meeting/addfriend.do?requestedMemberSeq=' + seq + '&requestingMemberSeq=' + loginedtblMemberSeq;
 	    
 	    window.open(url, '_blank', 'width=600,height=650,resizable=no,menubar=no,toolbar=no,location=no,status=no');
 		    
@@ -672,7 +727,13 @@
         }
 	});
     
-	$('#btnParticipate').on('click', function() {
+	function addParticipationRequest() {
+		
+		if (loginedtblMemberSeq == 0) {//비로그인 참가신청 >> 로그인으로
+			location.href='/lighting/user/login.do';
+			return;
+        } 
+		
 		$.ajax({//참가신청 insert하기 tblParticipationRequest
 			url: '/lighting/meeting/addparticipationrequest.do',
 	        type: 'GET',
@@ -685,17 +746,48 @@
 				if (result.result == 1) {
 					alert('참가 신청 완료!');
 					$('#btnParticipate').off('click');
-					$('#btnParticipate').text('신청완료');
+					$('#btnParticipate').text('신청취소');
+					$('#btnParticipate').on('click', deleteParticipationRequest);
 				} else {
 					alert('참가 신청 실패!');
 				}
-	        	
 	        },
 			error: function(a, b, c) {
 	            console.error(a,b,c);
 	        }
 		});
-	});
+	}
+	
+	function deleteParticipationRequest() {
+		
+		if (loginedtblMemberSeq == 0) {//비로그인 참가신청 >> 로그인으로
+			location.href='/lighting/user/login.do';
+			return;
+        } 
+		
+		$.ajax({//참가신청 delete하기 tblParticipationRequest
+			url: '/lighting/meeting/deleteparticipationrequest.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq,
+	        	loginedtblMemberSeq: loginedtblMemberSeq
+	        },
+	        dataType: 'json',
+	        success: function(result) {
+				if (result.result == 1) {
+					alert('취소 완료!');
+					$('#btnParticipate').off('click');
+					$('#btnParticipate').text('참석하기');
+					$('#btnParticipate').on('click', addParticipationRequest);
+				} else {
+					alert('취소 실패!');
+				}
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	}	
 	
 	$.ajax({//참가신청 했는지 안했는지 확인
 		url: '/lighting/meeting/getparticipationrequest.do',
@@ -706,11 +798,26 @@
         },
         dataType: 'json',
         success: function(result) {
-			//console.log(result.result);
-			if(result.result == 1) {
-				$('#btnParticipate').off('click');
-				$('#btnParticipate').text('신청완료');
-			} 
+			//결과에 따라 add, delete, finish
+        	//1 >> 이미 신청함 NULL >> 취소 이벤트 추가
+        	//2 >> 이미 신청함 'Y' >> 취소 불가
+        	//3 >> 이미 신청함 'N' >> 거절당함
+        	//0 >> 최초 신청
+        	console.log(result.result);
+        	
+			if(result.result == 0) {
+				$('#btnParticipate').text('참석하기');
+				$('#btnParticipate').on('click', addParticipationRequest);
+			} else if(result.result == 1) {
+				$('#btnParticipate').text('신청취소');
+				$('#btnParticipate').on('click', deleteParticipationRequest);
+			} else if(result.result == 2) {
+				$('#btnParticipate').text('승인완료');
+				$('#btnParticipate').css('cursor', 'default');
+			} else if(result.result == 3) {
+				$('#btnParticipate').text('거절(사유)');
+				$('#btnParticipate').css('cursor', 'default');
+			}
         	
         },
 		error: function(a, b, c) {
