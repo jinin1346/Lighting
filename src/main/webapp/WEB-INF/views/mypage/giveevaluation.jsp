@@ -104,8 +104,10 @@
         
         /* 별점 스타일 */
         .rating input {
-            display: none;
-        }
+		    position: absolute;
+		    opacity: 0;
+		    pointer-events: none;
+		}
         
         .rating label {
             color: #ccc;
@@ -220,6 +222,7 @@
 						   <input type="radio" id="star1_${status.index}" name="rating_${status.index}" value="1" />
 						   <label for="star1_${status.index}">★</label>
 					<input type="hidden" name="userId_${status.index}" value="${attendee.id}" />
+					
 				    </div>
 			    </div>
 			  </c:forEach>
@@ -248,8 +251,11 @@
             let allRated = true;
 
             for (let i = 0; i < userCount; i++) {
-                const selected = document.querySelector(`input[name="rating_${i}"]:checked`);
-                console.log(`rating_${i} 선택된 값:`, selected ? selected.value : "선택 안됨");
+            	const selected = document.querySelector(`input[name="rating_${i}"]:checked`);
+                const name = `rating_${i}`;
+                console.log(`radio name: ${name}, 선택된 값:`, selected ? selected.value : "선택 안됨");
+
+                
 
                 if (!selected) {
                     allRated = false;

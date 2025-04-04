@@ -11,8 +11,18 @@ public class DeleteFriend extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // 여기서는 테스트로 사용자 번호를 1로 고정합니다.
-        int userSeq = 1;
+        
+        HttpSession session = req.getSession();
+        Object userSeqObj = session.getAttribute("auth");
+
+        if (userSeqObj == null) {
+            resp.sendRedirect("/lighting/login.do");
+            return;
+        }
+
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
         
         // Ajax 요청으로 전달된 friendId 파라미터를 가져옵니다.
         int friendId = Integer.parseInt(req.getParameter("friendId"));

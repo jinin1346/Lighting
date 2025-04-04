@@ -232,7 +232,7 @@ public class MemberDAO {
             return pstat.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } 
         return 0;
     }
 

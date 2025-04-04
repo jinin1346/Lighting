@@ -1,12 +1,9 @@
 package com.lighting.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.lighting.mypage.model.ActivityRegionDAO;
 import com.lighting.mypage.model.MemberDAO;
@@ -20,14 +17,25 @@ public class UpdateInfoOk extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
-        int userSeq = 1; // 로그인 기능 없으므로 고정
+        // ✅ 로그인된 사용자 세션에서 userSeq 가져오기
+        HttpSession session = req.getSession();
+        Object userSeqObj = session.getAttribute("auth");
+
+        if (userSeqObj == null) {
+            resp.sendRedirect("/lighting/user/login.do");
+            return;
+        }
+
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
 
         String tel = req.getParameter("tel");
         String nickname = req.getParameter("nickname");
         String sido = req.getParameter("sido");
         String gugun = req.getParameter("gugun");
 
-        //기존 회원 정보 조회
+        // 기존 회원 정보 조회
         MemberDAO memberDAO = new MemberDAO();
         MemberDTO member = memberDAO.getMemberBySeq(userSeq);
 
@@ -38,26 +46,25 @@ public class UpdateInfoOk extends HttpServlet {
         if (nickname == null || nickname.trim().isEmpty()) {
             nickname = member.getNickname(); // 기존 닉네임 유지
         }
-        
-        //회원 정보 업데이트
+
+        // 회원 정보 업데이트
         memberDAO.updateMember(userSeq, tel, nickname);
-        
-        
-        //활동 지역 좌표 시퀀스 조회 및 업데이트
+
+        // 활동 지역 좌표 시퀀스 조회 및 업데이트
         ActivityRegionDAO regionDAO = new ActivityRegionDAO();
         int regionSeq = regionDAO.getCoordinateSeq(sido, gugun);
         if (regionSeq != -1) {
             regionDAO.updateActivityRegion(userSeq, regionSeq);
         }
 
-        resp.setCharacterEncoding("UTF-8"); // 응답 인코딩 설정
-        resp.setContentType("text/html; charset=UTF-8"); // Content-Type 명확히 설정
-        
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         resp.getWriter().write(
-                "<!DOCTYPE html>" +
-                "<html><head><meta charset='UTF-8'>" +
-                "<script>alert('개인정보가 성공적으로 수정되었습니다.'); window.close();</script>" +
-                "</head><body></body></html>"
-            );
+            "<!DOCTYPE html>" +
+            "<html><head><meta charset='UTF-8'>" +
+            "<script>alert('개인정보가 성공적으로 수정되었습니다.'); window.close();</script>" +
+            "</head><body></body></html>"
+        );
     }
 }
