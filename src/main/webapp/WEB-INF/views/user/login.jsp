@@ -188,8 +188,8 @@
   
   <script>
       document.getElementById("logo").addEventListener("click", function(){
-	    window.location.href = "/lighting/main.do";
-	  });
+        window.location.href = "/lighting/main.do";
+      });
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp" %>

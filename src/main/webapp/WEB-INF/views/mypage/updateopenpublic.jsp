@@ -142,23 +142,27 @@
             <div id=infoTitle>회원 정보 공개 여부 설정</div>
 
             <!-- 공개 여부 라디오 영역 -->
+            <form method="POST" action="/lighting/mypage/updateopenpublic.do">
             <div class="infoContainer">
                 <!-- 왼쪽 파란 상자 -->
                 <div class="infoLabel">공개 여부</div>
                 <!-- 오른쪽 라디오 상자 -->
                 <div class="radioContainer">
                     <label>
-                        <input type="radio" name="publicOption" value="공개" checked />
+                        <input type="radio" name="status" value="0" checked />
                         공개
                     </label>
                     <label>
-                        <input type="radio" name="publicOption" value="비공개" />
+                        <input type="radio" name="status" value="1" />
                         비공개
                     </label>
                 </div>
             </div>
+            <div>
+                <button class="submitButton"  type="submit">공개 여부 설정 완료</button>
+            </div>
+            </form>
 
-            <button class="submitButton">공개 여부 설정 완료</button>
         </div>
     </div>
 </body>

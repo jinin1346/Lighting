@@ -120,7 +120,10 @@
             width: 150px;
             height: 150px;
             margin-bottom: 10px;
+            border-radius: 50%;
+            object-fit: cover;
         }
+
 
         #myEvaluation {
             margin-bottom: 50px;
@@ -546,7 +549,7 @@
             border: none;
             font-size: 12px;
             font-weight: bold;
-
+            cursor: pointer;
             height: 28px;
             width: 100px;
             padding: 5px 5px;
@@ -744,23 +747,23 @@
             <div id="box1">
                 <div>
                     <!-- icon.png >> 변수명 -->
-                    <img src="/lighting/images/icon.png" id="profile">
+                    <img src="/lighting/images/${member.photoFileName}" id="profile">
                 </div>
 
                 <div id="userInfo">
                     <!-- 마스터.png >> 변수명 -->
-                    <img src="/lighting/images/마스터.png" id="evaluationIcon">
+                    <img src="/lighting/images/${gradeIcon}" id="evaluationIcon" alt="등급 아이콘">
                     <!-- 닉네임 >> 변수명 -->
-                    <span id="myNickname">닉네임</span>
+                    <span id="myNickname">${member.nickname}</span>
                     <!-- (아이디) >> 변수명 -->
-                    <span id="myId">(아이디)</span>
+                    <span id="myId">(${member.id})</span>
                 </div>
 
                 <div id="myEvaluation">
                     <span>⭐</span>
                     <span>
                         <!-- 5.0 >> 변수명 -->
-                        <b><span>5.0</span>점</b>
+                        <b><span>${avgScore}</span>점</b>
                     </span>
                 </div>
 
@@ -989,34 +992,6 @@
 
                     </tr>
                     </c:forEach>
-                    <!-- for문 종료 -->
-
-                    <tr>
-                        <!-- 마감된 모임의 경우 인라인 스타일을 적용하여 글자 색 수정 -->
-                        <td class="col1" style="color: #908CA2;">
-                            <!-- 게시글의 seq 가져오기 -->
-                            ${meeting.startTime}
-                            </td>
-                            <td class="col2" style="color: #908CA2;">
-                                <!-- 글 작성자의 활동지역 가져오기 -->
-                                서울/강남구${meeting.location}
-                            </td>
-                            <td class="col3" style="color: #908CA2;">
-                                <!-- 게시글의 제목 가져오기 -->
-                                ${meeting.title}
-                            </td>
-                            <td class="col4" style="color: #908CA2;">
-                                <!-- 게시글의 정원 가져오기 -->
-                               <span>${meeting.capacity}</span>명
-                            </td>
-                            <td class="col5">
-                                <button class="btnParticipationClose">
-                                    마감
-                                </button>
-                            </td>
-
-                    </tr>
-
                 </table>
 
 
@@ -1043,7 +1018,7 @@
                         </th>
                     </tr>
     
-                    <!-- for문 시작 -->
+<%--                     <!-- for문 시작 -->
                     <tr>
                         <td class="col1">
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
@@ -1067,31 +1042,37 @@
                             </button>
                         </td>
                     </tr>
-                    <!-- for문 종료 -->
+                    <!-- for문 종료 --> --%>
 
-                    <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">
-                            <button class="btnCancle">
-                                (대기)취소
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="col1">2025년 4월 2일</td>
-                        <td class="col2">서울/강남구</td>
-                        <td class="col3 title">4월 2일 강남역 그룹 스터디 5명 모집합니다.</td>
-                        <td class="col4">3명</td>
-                        <td class="col5">
-                            <button class="btnRejectionReason">
-                                (거부)사유
-                            </button>
-                        </td>
-                    </tr>
+                    <c:forEach var="meeting" items="${meetingList}">
+				    <tr>
+				        <td class="col1">${meeting.startTime}</td>
+				        <td class="col2">서울/강남구 ${meeting.location}</td>
+				        <td class="col3 title">${meeting.title}</td>
+				        <td class="col4"><span>${meeting.capacity}</span>명</td>
+				        <td class="col5">
+				            <c:choose>
+				                <c:when test="${meeting.approvalStatus == 'n'}">
+				                    <c:choose>
+				                        <c:when test="${meeting.requestSeq gt 0}">
+				                            <button class="btnRejectionReason" data-requestseq="${meeting.requestSeq}">
+				                                (거부)사유
+				                            </button>
+				                        </c:when>
+				                        <c:otherwise>
+				                            <button class="btnCancle" data-requestseq="${meeting.requestSeq}">
+				                                취소
+				                            </button>
+				                        </c:otherwise>
+				                    </c:choose>
+				                </c:when>
+				                <c:otherwise>
+				                    <button class="btnConfirmed">승인완료</button>
+				                </c:otherwise>
+				            </c:choose>
+				        </td>
+				    </tr>
+				    </c:forEach>
 
                 </table>
                 </c:if>
@@ -1145,7 +1126,7 @@
                     </c:forEach>
                     <!-- for문 종료 -->
 
-                    <tr>
+<!--                     <tr>
                         <td class="col1" style="color: #908CA2;">
                             2025년 4월 2일</td>
                         <td class="col2" style="color: #908CA2;">서울/강남구</td>
@@ -1156,7 +1137,7 @@
                                 종료된 모임
                             </button>
                         </td>
-                    </tr>
+                    </tr> -->
 
                 </table>
 
@@ -1279,7 +1260,7 @@
     });
 	
 	$('.btnRejectionReason').click(()=>{
-    	openServletInNewWindow("/lighting/mypage/rejectionreason.do");
+    	openServletInNewWindow("/lighting/mypage/rejectionreason.do?requestSeq=3");
     });
 	
     function openServletInNewWindow(servletUrl) {
@@ -1292,8 +1273,8 @@
     
     //셀렉트 박스 정렬
     function sortMeetings(section) {
-        var sortValue = document.getElementById('sort_' + section).value;
-        window.location.href = '<%=request.getContextPath()%>/mypage/mypage.do?status=' + section + '&sort=' + sortValue;
+	    var sortValue = document.getElementById('sort_' + section).value;
+	    window.location.href = '/lighting/mypage/mypage.do?status=' + section + '&sort=' + sortValue;
     }
     
     function deleteFriend(friendId, btn) {
@@ -1402,6 +1383,66 @@
             }
         });
     });
+    
+    $('.btnCancle').click(function(){
+        var btn = $(this);
+        var requestSeq = btn.data('requestseq'); // 각 버튼에 설정된 신청 건 번호
+        if(confirm("정말 취소하시겠습니까?")){
+             $.ajax({
+                  url: '/lighting/mypage/cancelRequest.do',
+                  type: 'POST',
+                  data: { requestSeq: requestSeq },
+                  success: function(response){
+                      // 서버 응답이 JSON 형태라고 가정합니다.
+                      if(response.status === "success"){
+                          btn.remove(); // 취소 처리 후 버튼 제거
+                          alert("취소 처리되었습니다.");
+                      } else {
+                          alert("취소 처리에 실패했습니다.");
+                      }
+                  },
+                  error: function(err){
+                      console.error("취소 처리 실패:", err);
+                      alert("취소 처리 중 오류 발생");
+                  }
+             });
+        }
+    });
+    
+    // (거부)사유 버튼 클릭: 모달 페이지를 새 창으로 열어 해당 신청 건의 requestSeq 전달
+    $('.btnRejectionReason').click(function(){
+        var reqSeq = $(this).data('requestseq');
+        openServletInNewWindow("/lighting/mypage/rejectionreason.do?requestSeq=" + reqSeq);
+    });
+
+    // 취소 버튼 클릭: AJAX를 통해 tblParticipationRequest 삭제 후 버튼 제거
+    $('.btnCancle').click(function(){
+        var btn = $(this);
+        var reqSeq = btn.data('requestseq');
+        if(confirm("정말 취소하시겠습니까?")){
+             $.ajax({
+                  url: '/lighting/mypage/cancelRequest.do',
+                  type: 'POST',
+                  data: { requestSeq: reqSeq },
+                  success: function(response){
+                      if(response.status === "success"){
+                          btn.remove();
+                          alert("취소 처리되었습니다.");
+                      } else {
+                          alert("취소 처리에 실패했습니다.");
+                      }
+                  },
+                  error: function(err){
+                      console.error("취소 처리 실패:", err);
+                      alert("취소 처리 중 오류 발생");
+                  }
+             });
+        }
+    });
+
+    function openServletInNewWindow(servletUrl) {
+        window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
+    }
     </script>
     
 
