@@ -1,18 +1,11 @@
 package com.lighting.user.model;
 
-<<<<<<< HEAD
-import java.beans.Statement;
-=======
->>>>>>> main
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
 import java.sql.Statement;
 import java.util.HashMap;
->>>>>>> main
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -34,25 +27,13 @@ public class UserDAO {
             DataSource ds = (DataSource)env.lookup("jdbc/pool");
             
             conn = ds.getConnection();
-<<<<<<< HEAD
-            stat = (Statement) conn.createStatement();
-=======
             stat = conn.createStatement();
->>>>>>> main
             
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }
-<<<<<<< HEAD
-    
-    
-
-    // 아이디 중복 검사
-    public boolean isDuplicateId(String id) {
-        String query = "SELECT COUNT(*) FROM users WHERE id = ?";
-=======
     public void close() {
         try {
             this.conn.close();
@@ -97,37 +78,25 @@ public class UserDAO {
     public boolean isDuplicateId(String id) {
         String query = "SELECT COUNT(*) FROM tblMember WHERE id = ?";
         System.out.println("Checking ID: " + id);  // ID 확인
->>>>>>> main
         
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     int count = rs.getInt(1);
-<<<<<<< HEAD
-=======
                     System.out.println("Duplicate count: " + count);  // 중복된 ID의 개수
->>>>>>> main
                     return count > 0; // 중복된 아이디가 있으면 true
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-        return false;
-=======
         return false; // 중복된 아이디가 없으면 false
->>>>>>> main
     }
 
     // 회원 정보를 추가하는 메서드
     public int addMember(UserDTO memberDto) {
-<<<<<<< HEAD
-        String query = "INSERT INTO tblMember (id, pw, name, nickname, birthday, tel, email, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-=======
         String query = "INSERT INTO tblMember (tblMemberSeq, id, pw, name, nickname, birthday, tel, email, gender) VALUES (seqMember.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
->>>>>>> main
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, memberDto.getId());
             stmt.setString(2, memberDto.getPw());
@@ -137,72 +106,15 @@ public class UserDAO {
             stmt.setString(6, memberDto.getTel());
             stmt.setString(7, memberDto.getEmail());
             stmt.setString(8, memberDto.getGender());
-<<<<<<< HEAD
-            
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                try (ResultSet rs = stmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        return rs.getInt(1); // 삽입된 회원의 ID 반환
-                    }
-                }
-=======
  
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 return 1; // 성공적으로 삽입되었을 경우 1 반환
->>>>>>> main
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1; // 실패
-<<<<<<< HEAD
-    }
-
-    // 자원 해제 메서드
-    public void close() {
-        try {
-            if (conn != null) {
-            	conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-	public int addUser(UserDTO dto) {
-		
-		try {
-			String sql= "insert into tblMember (tblMemberSeq, id,pw,name,nickname,birthday,tel,email,gender,photofilename,registrationdate,status) values(seqMember.nextval,?,?,?,?,?,?,?,?,'basicProfile.png',default, 0)";
-			
-			String birthday = dto.getBirthday();
-			birthday=birthday.substring(0,4)+"-"+birthday.substring(4,6)+"-"+birthday.substring(6);
-			System.out.println(birthday);
-			
-			
-			
-			pstat=conn.prepareStatement(sql);
-			pstat.setString(1, dto.getId());
-			pstat.setString(2, dto.getPw());
-			pstat.setString(3, dto.getName());
-			pstat.setString(4, dto.getNickname());
-			pstat.setString(5, dto.getBirthday());
-			pstat.setString(6, dto.getTel());
-			pstat.setString(7, dto.getEmail());
-			pstat.setString(8, dto.getGender());
-			
-			return pstat.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
-	}
-=======
     }  
 
 
@@ -340,8 +252,41 @@ public class UserDAO {
 	        e.printStackTrace();
 	    }
 	}
+	public String findUserIdByNameAndTel(String name, String tel) {
+		
+		 String sql = "SELECT id FROM tblMember WHERE name = ? AND tel = ?";
+	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	            stmt.setString(1, name);
+	            stmt.setString(2, tel); // 'contact' 대신 'tel'을 사용
+	            try (ResultSet rs = stmt.executeQuery()) {
+	                if (rs.next()) {
+	                    return rs.getString("id"); // 아이디 반환
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		return null;
+	}
+	public String findUserPasswordByNameAndIdTel(String name, String id, String tel) {
+		
+		 String sql = "SELECT pw FROM tblMember WHERE name = ? AND id = ? AND tel = ?";
+		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setString(1, name);
+		        stmt.setString(2, id); // id 추가
+		        stmt.setString(3, tel); // tel 추가
+		        try (ResultSet rs = stmt.executeQuery()) {
+		            if (rs.next()) {
+		                return rs.getString("pw"); // 비밀번호 반환
+		            }
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return null; // 일치하는 비밀번호가 없으면 null 반환
+		}
+	
 
     
 
->>>>>>> main
 }
