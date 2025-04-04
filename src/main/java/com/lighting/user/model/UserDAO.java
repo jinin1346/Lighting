@@ -252,6 +252,40 @@ public class UserDAO {
 	        e.printStackTrace();
 	    }
 	}
+	public String findUserIdByNameAndTel(String name, String tel) {
+		
+		 String sql = "SELECT id FROM tblMember WHERE name = ? AND tel = ?";
+	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	            stmt.setString(1, name);
+	            stmt.setString(2, tel); // 'contact' 대신 'tel'을 사용
+	            try (ResultSet rs = stmt.executeQuery()) {
+	                if (rs.next()) {
+	                    return rs.getString("id"); // 아이디 반환
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		return null;
+	}
+	public String findUserPasswordByNameAndIdTel(String name, String id, String tel) {
+		
+		 String sql = "SELECT pw FROM tblMember WHERE name = ? AND id = ? AND tel = ?";
+		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setString(1, name);
+		        stmt.setString(2, id); // id 추가
+		        stmt.setString(3, tel); // tel 추가
+		        try (ResultSet rs = stmt.executeQuery()) {
+		            if (rs.next()) {
+		                return rs.getString("pw"); // 비밀번호 반환
+		            }
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return null; // 일치하는 비밀번호가 없으면 null 반환
+		}
+	
 
     
 
