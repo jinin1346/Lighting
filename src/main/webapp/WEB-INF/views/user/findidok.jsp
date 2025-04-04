@@ -18,6 +18,7 @@
         #logo2 {
             width: 250px;
             margin: 30px 0;
+            cursor: pointer;
         }
         
         #findPwBtn {
@@ -85,6 +86,7 @@
             cursor: pointer;
             font-weight: bold;
         }
+
     </style>
 </head>
 <body>
@@ -97,7 +99,14 @@
                 <img alt="로고" src="/lighting/images/logo_세로.png" id="logo2">
             </div>
             <div class="content">
-                <p>찾으신 아이디는 <span>hong123</span> 입니다.</p>
+            	<c:if test="${not empty userId}">
+                <p>찾으신 아이디는 <strong>${userId}</strong> 입니다.</p>
+            </c:if>
+                <!-- <p>찾으신 아이디는 <span>hong123</span> 입니다.</p> -->
+                <c:if test="${empty userId}">
+                <p>입력하신 정보와 일치하는 아이디가 없습니다.</p>
+            </c:if>
+                
             </div>
             <button type="submit" id="findPwBtn">비밀번호 찾기</button>
             <p id="move">비밀번호 변경 페이지로 이동합니다.</p>
@@ -127,6 +136,10 @@
                 }
             });
         });
+        
+        $('#logo2').click(() => { 
+            window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+          });
     </script>
 
 </body> 

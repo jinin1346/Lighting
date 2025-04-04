@@ -210,6 +210,10 @@ body {
             }
         }
         
+        $('#logo1').click(() => { 
+            window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+          });
+        
     </script>
 </body>
 </html>

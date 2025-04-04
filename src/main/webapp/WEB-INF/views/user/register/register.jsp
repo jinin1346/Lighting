@@ -42,6 +42,7 @@
       top: 0;
       width: 250px;
       margin: 15px 0 0 15px;
+      cursor:pointer;
     }
 
     /* 안내 문구 */
@@ -195,7 +196,7 @@
     <form class="signupForm" action="/lighting/user/register/registerok.do" method="post">
       <!-- 아이디 -->
       <div class="formGroup">
-        <label for="userid">아이디</label>
+        <label for="userid">&ensp;아이디</label>
         <div class="inputGroup">
           <input type="text" id="id" name="id" placeholder="영문, 숫자, ‘_’ 사용 가능 4~20자" required>  
           <button type="button" class="btnIdCheck" onclick="checkId();">중복체크</button>
@@ -206,7 +207,7 @@
       
       <!-- 비밀번호 -->
       <div class="formGroup">
-        <label for="password">비밀번호</label>
+        <label for="password">&ensp;비밀번호</label>
          <input type="password" id="pw" name="pw" placeholder="8~16자리, 영문+숫자+특수문자 조합" required>
        <!-- value="asdasd" -->
         <!-- 오류 메시지를 이 곳에 표시 -->
@@ -215,7 +216,7 @@
       
       <!-- 이름 -->
       <div class="formGroup">
-        <label for="name">이름</label>
+        <label for="name">&ensp;이름</label>
         <input type="text" id="name" name="name" placeholder="실명 입력 (2~10자리, 한글만 입력 가능)" pattern="[가-힣]{2,10}" required><!-- value="홍길동" -->
  		 <!-- 오류 메시지를 이 곳에 표시 -->
   <span id="nameErrorMessage" style="color: red; font-size: 12px; display: none;">실명 입력 (2~10자리, 한글만 입력 가능)만 가능합니다.</span>    
@@ -223,7 +224,7 @@
       
       <!-- 닉네임 -->
       <div class="formGroup">
-        <label for="nickname">닉네임</label>
+        <label for="nickname">&ensp;닉네임</label>
         <input type="text" id="nickname" name="nickname" placeholder="2~10자리, 한글만 입력 가능"  pattern="[가-힣]{2,10}" required > <!-- value="홍길동" -->
 		 <!-- 오류 메시지를 이 곳에 표시 -->
   	   <span id="nicknameErrorMessage" style="color: red; font-size: 12px; display: none;">2~10자리, 한글만 입력 가능합니다.</span>      
@@ -231,7 +232,7 @@
       
       <!-- 생년월일 -->
       <div class="formGroup">
-        <label for="birthdate">생년월일</label>
+        <label for="birthdate">&ensp;생년월일</label>
         <input type="text" id="birthday" name="birthday" placeholder="YYYYMMDD 형식으로 입력" pattern="\d{8}" required > <!-- value="19990101" -->
 		<!-- 오류 메시지를 이 곳에 표시 -->
   <span id="birthdayErrorMessage" style="color: red; font-size: 12px; display: none;">생년월일은 8자리 숫자(YYYYMMDD)로만 입력 가능합니다.</span>     
@@ -239,7 +240,7 @@
       
       <!-- 연락처 -->
       <div class="formGroup">
-        <label for="phone">연락처</label>
+        <label for="phone">&ensp;연락처</label>
         <input type="text" id="tel" name="tel" placeholder="‘-’ 대시를 포함하여 정확한 연락처를 입력해주세요" pattern="\d{3}-\d{3,4}-\d{4}" required > <!--  value="01012341234" -->
       	<!-- 오류 메시지를 이 곳에 표시 -->
   <span id="telErrorMessage" style="color: red; font-size: 12px; display: none;">연락처를 올바르게 입력해주세요. (예: 010-1234-1234)</span>
@@ -247,7 +248,7 @@
       
       <!-- 이메일 -->
       <div class="formGroup">
-        <label for="email">이메일</label>
+        <label for="email">&ensp;이메일</label>
         <div class="inputGroup">
           <input type="email" id="email" name="email" placeholder="예) example@email.com" required > <!-- value="123@naver.com" -->
           <button type="button" class="btnEmailCheck" onclick="sendEmail();">인증받기</button>
@@ -265,7 +266,7 @@
       
       <!-- 성별 선택 -->
       <div class="formGroup">
-        <label>성별</label>
+        <label>&ensp;성별</label>
         <div id="gender">
           <input type="radio" id="male" name="gender" value="m" required checked="checked">
           <label for="male">남성</label>
@@ -276,7 +277,7 @@
       
       <!-- 주소 -->
       <div class="formGroup">
-        <label>주소</label>
+        <label>&ensp;주소</label>
         <div style="display: flex; gap: 10px;">
           <select id="sido" name="sido" style="flex: 1;">
   	<option value="" disabled selected>시/도 선택</option> <!-- 서울 선택 제거 -->
@@ -294,7 +295,7 @@
       
       <!-- 관심 태그 선택 (최대 2개) -->
       <div class="formGroup">
-        <label>관심 태그 (최대 2개 선택 가능)</label>
+        <label>&ensp;관심 태그 (최대 2개 선택 가능)</label>
         <div class="interestTags">
           <input type="checkbox" id="food" name="interest" value="맛집">
           <label for="food">맛집</label>

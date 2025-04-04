@@ -162,13 +162,6 @@
         </div>
         <div>
         <form action="/lighting/user/loginok.do" method="POST">
-            <input type="hidden" name="id" value="jzsxog9je36q8">
-            <input type="hidden" name="pw" value="h6$i!1e%0x^1">
-            <button type="submit" class="in">10로그인</button>
-        </form>
-        </div>
-        <div>
-        <form action="/lighting/user/loginok.do" method="POST">
             <input type="hidden" name="id" value="p60n46w31tx6uisnh">
             <input type="hidden" name="pw" value="j0!900!d&0!5">
             <button type="submit" class="in">160로그인</button>
@@ -188,8 +181,8 @@
   
   <script>
       document.getElementById("logo").addEventListener("click", function(){
-        window.location.href = "/lighting/main.do";
-      });
+	    window.location.href = "/lighting/main.do";
+	  });
   </script>
   
   <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
