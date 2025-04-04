@@ -7,16 +7,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/mypage/updatepassword.do")
 public class UpdatePassword extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
+        HttpSession session = req.getSession();
+        Object userSeqObj = session.getAttribute("auth");
 
-		req.getRequestDispatcher("/WEB-INF/views/mypage/updatepassword.jsp").forward(req, resp);
-	}
+        if (userSeqObj == null) {
+            resp.sendRedirect("/lighting/login.do");
+            return;
+        }
+
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
+
+        req.getRequestDispatcher("/WEB-INF/views/mypage/updatepassword.jsp").forward(req, resp);
+    }
 
 }

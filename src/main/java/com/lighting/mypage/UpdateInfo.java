@@ -1,12 +1,9 @@
 package com.lighting.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.lighting.mypage.model.ActivityRegionDAO;
 import com.lighting.mypage.model.MemberDAO;
@@ -18,7 +15,17 @@ public class UpdateInfo extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	    int userSeq = 1; // 로그인 구현 전 임시
+	    HttpSession session = req.getSession();
+	    Object userSeqObj = session.getAttribute("auth");
+
+	    if (userSeqObj == null) {
+	        resp.sendRedirect("/lighting/login.do");
+	        return;
+	    }
+
+	    int userSeq = (userSeqObj instanceof Integer)
+	        ? (Integer) userSeqObj
+	        : Integer.parseInt(userSeqObj.toString());
 
 	    MemberDAO memberDAO = new MemberDAO();
 	    MemberDTO member = memberDAO.getMemberBySeq(userSeq);

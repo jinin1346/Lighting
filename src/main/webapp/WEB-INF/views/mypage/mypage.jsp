@@ -1017,33 +1017,7 @@
                             </select>
                         </th>
                     </tr>
-    
-<%--                     <!-- for문 시작 -->
-                    <tr>
-                        <td class="col1">
-                            <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
-                            ${meeting.startTime}
-                        </td>
-                        <td class="col2">
-                            <!-- 글 작성자의 활동지역 가져오기 -->
-                            서울/강남구${meeting.location}
-                        </td>
-                        <td class="col3 title">
-                            <!-- 게시글의 제목 가져오기 -->
-                            ${meeting.title}
-                        </td>
-                        <td class="col4">
-                            <!-- 게시글의 정원 가져오기 -->
-                            <span>${meeting.capacity}</span>명
-                        </td>
-                        <td class="col5">
-                            <button class="btnConfirmed">
-                                승인완료
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- for문 종료 --> --%>
-
+                    
                     <c:forEach var="meeting" items="${meetingList}">
 				    <tr>
 				        <td class="col1">${meeting.startTime}</td>
@@ -1124,21 +1098,6 @@
                         </td>
                     </tr>
                     </c:forEach>
-                    <!-- for문 종료 -->
-
-<!--                     <tr>
-                        <td class="col1" style="color: #908CA2;">
-                            2025년 4월 2일</td>
-                        <td class="col2" style="color: #908CA2;">서울/강남구</td>
-                        <td class="col3 title" style="color: #908CA2;">4월 2일 강남역 그룹 스터디 5명 모집합니스터디 5터디 5명 모집합니스터디 5명 모집합니다.</td>
-                        <td class="col4" style="color: #908CA2;">3명</td>
-                        <td class="col5">
-                            <button class="btnEnded">
-                                종료된 모임
-                            </button>
-                        </td>
-                    </tr> -->
-
                 </table>
 
                 </c:if>
@@ -1183,7 +1142,7 @@
                     <c:forEach var="friend" items="${friendList}">
                     <div class="friendItem" data-friend-id="${friend.friendMemberSeq}">
                         <!-- 다이아.png >> 변수명 -->
-                        <img src="/lighting/images/default.png" class="evaluationIcon" alt="평가 아이콘">
+                        <img src="/lighting/images/실버.png" class="evaluationIcon" alt="평가 아이콘">
                         <span>${friend.nickname}</span>
                         <img src="/lighting/images/닫기.png" class="btnDelFreiend" alt="삭제" style="cursor:pointer;"
      onclick="deleteFriend(${friend.friendMemberSeq}, this);"/>
@@ -1202,7 +1161,7 @@
                     <!-- for문 시작 -->
                     <c:forEach var="block" items="${blockList}">
                     <div class="blockItem">
-                        <img src="/lighting/images/" class="gradeIcon" data-friend-id="${block.blockedMemberSeq}" alt="프로필">
+                        <img src="/lighting/images/실버.png" class="gradeIcon" data-friend-id="${block.blockedMemberSeq}" alt="프로필">
 
                         <span>${block.nickname}</span>
                         <img src="/lighting/images/닫기.png"

@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 
 @WebServlet("/mypage/evaluationok.do")
 public class GiveEvaluationOk extends HttpServlet {
+
     private DataSource getDataSource() throws NamingException {
         InitialContext ctx = new InitialContext();
         return (DataSource) ctx.lookup("java:comp/env/jdbc/pool");
@@ -25,10 +26,36 @@ public class GiveEvaluationOk extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int meetingSeq = Integer.parseInt(req.getParameter("meetingSeq"));
-        int count = Integer.parseInt(req.getParameter("evaluationCount"));
-        HttpSession session = req.getSession();
-        int evaluator = session.getAttribute("userSeq") != null ? (Integer) session.getAttribute("userSeq") : 1;
+
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("auth") == null) {
+            resp.getWriter().write("{\"result\":\"fail\", \"reason\":\"unauthorized\"}");
+            return;
+        }
+
+        int evaluator;
+        try {
+            Object authObj = session.getAttribute("auth");
+            evaluator = (authObj instanceof Integer) ? (Integer) authObj : Integer.parseInt(authObj.toString());
+        } catch (Exception e) {
+            resp.getWriter().write("{\"result\":\"fail\", \"reason\":\"invalid_session\"}");
+            return;
+        }
+
+        int meetingSeq;
+        int count;
+
+        try {
+            meetingSeq = Integer.parseInt(req.getParameter("meetingSeq"));
+            count = Integer.parseInt(req.getParameter("evaluationCount"));
+        } catch (NumberFormatException e) {
+            resp.getWriter().write("{\"result\":\"fail\", \"reason\":\"invalid_input\"}");
+            return;
+        }
 
         try (Connection conn = getDataSource().getConnection();
              PreparedStatement pstat = conn.prepareStatement(
@@ -48,20 +75,14 @@ public class GiveEvaluationOk extends HttpServlet {
                 pstat.setInt(3, targetSeq);
                 pstat.setInt(4, score);
                 pstat.addBatch();
-                
-
             }
             pstat.executeBatch();
-            /*
-             * resp.sendRedirect(req.getContextPath() + "/mypage/mypage.do?status=joined");
-             */
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
+
             resp.getWriter().write("{\"result\":\"success\"}");
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
-            resp.getWriter().write("DB 오류 발생: " + e.getMessage());
+            e.printStackTrace(); // TODO: 실제 운영 환경에서는 로깅 사용
+            resp.getWriter().write("{\"result\":\"fail\", \"reason\":\"db_error\"}");
         }
     }
 
