@@ -324,7 +324,7 @@
 					<div class="location-text">
 						<div>
                             장소명 :
-                            <input type="text" maxlength="20" id="location" name="location" value="" required>
+                            <input type="text" maxlength="20" id="location" name="location" required>
                         </div>
 						<!-- <div>
                             대표사진 :
@@ -417,6 +417,9 @@
 	    
         $('#date').attr('min', getToday());
         
+		let m1 = null;
+		let info = null;
+        
         $.ajax({//작성자 좌표 가져와서 맵 중앙에 띄우고 마커 추가하는 이벤트까지 추가
             url: '/lighting/meeting/getactivityregioncoordinate.do',
             type: 'GET',
@@ -438,9 +441,6 @@
             		};
             	
             		const map = new kakao.maps.Map(container, options); //map 만들기
-            		
-            		let m1 = null;
-            		let info = null;
             		
             		kakao.maps.event.addListener(map, 'click', function(evt) {
 
@@ -485,7 +485,45 @@
         });
         
         $('.myPostTitle').click(function() {
-			
+        	const seq = $(this).data('tblmeetingpostseq');
+        	
+        	$.ajax({
+        		url: '/lighting/meeting/getpostinfo.do',
+                type: 'GET',
+                data: 'tblMeetingPostSeq=' + seq,
+                dataType: 'json',
+                success: function(result) {
+        			//console.log(result.StartTime);
+                	$('#title').val(result.Title);
+                	$('#content').val(result.Content);
+                	let StartTime = result.StartTime;
+                	let dateStr = result.StartTime;
+        			// 날짜와 시간을 분리
+        			let [datePart, timePart] = dateStr.split(' ');
+        			// 날짜와 시간 각각을 나눔
+        			let [hour, minute, second] = timePart.split(':');
+        			
+        			let date = datePart;
+					let time = hour + ':' + minute;
+        			
+					$('#date').val(date);
+					$('#time').val(time);
+					$('#people').val(result.Capacity);
+					
+					$('#location').val(result.Location);
+                	console.log(result.Location);
+                	
+                	Latitude = result.Latitude;
+                	Longitude = result.Longitude;
+                	EndTime = result.EndTime;
+                	
+                	$('.modal, .overlay').fadeOut();
+
+                },
+        		error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+        	});
         	
         });
 		
