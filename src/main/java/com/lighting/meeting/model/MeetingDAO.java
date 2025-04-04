@@ -187,8 +187,16 @@ public class MeetingDAO {
                 pstat.setString(2, dto.getLatitude());
                 pstat.setString(3, dto.getLongitude());
                 
-                return pstat.executeUpdate();
+                pstat.executeUpdate();
                 
+                sql = "insert into tblParticipationRequest values (seqParticipationRequest.nextVal, ?, ?,'Y')";
+                
+                pstat = conn.prepareStatement(sql);
+                pstat.setString(1, tblMeetingPostSeq);
+                pstat.setString(2, dto.getTblMemberSeq());
+                //tblMeetingPostSeq
+                
+                return pstat.executeUpdate();
             } 
             
         } catch (Exception e) {
