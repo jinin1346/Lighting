@@ -18,25 +18,39 @@ public class Evaluation extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // 1. 파라미터 받기
-        int friendId = Integer.parseInt(req.getParameter("friendId"));
-
-        // 2. DAO를 통해 평균 점수 조회
-        EvaluationDAO dao = new EvaluationDAO();
-        double avgScore = dao.getAverageScore(friendId); // 예: 3.8
-        
-        /*
-         * System.out.println(avgScore);
-         */
-        
-        // 3. JSON 응답 설정
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        // 4. 결과 JSON으로 출력
+        HttpSession session = req.getSession();
+        int userSeq;
+
+        try {
+            userSeq = Integer.parseInt(session.getAttribute("auth").toString());
+        } catch (Exception e) {
+            PrintWriter out = resp.getWriter();
+            out.print("{\"status\":\"unauthorized\"}");
+            out.close();
+            return;
+        }
+
+        String friendIdParam = req.getParameter("friendId");
+        int friendId;
+
+        try {
+            friendId = Integer.parseInt(friendIdParam);
+        } catch (NumberFormatException e) {
+            PrintWriter out = resp.getWriter();
+            out.print("{\"status\":\"invalid_parameter\"}");
+            out.close();
+            return;
+        }
+
+        EvaluationDAO dao = new EvaluationDAO();
+        double avgScore = dao.getAverageScore(friendId);
+
         PrintWriter out = resp.getWriter();
         out.print("{\"score\":" + avgScore + "}");
-        out.flush();  // 버퍼에 있는 내용을 강제로 전송
-        out.close();  // 출력 스트림 닫기
+        out.close();
     }
 }

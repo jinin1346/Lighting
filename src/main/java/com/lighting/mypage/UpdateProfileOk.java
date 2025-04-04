@@ -26,21 +26,25 @@ public class UpdateProfileOk extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
+        Object userSeqObj = session.getAttribute("auth");
 
-        // ✅ 테스트용 세션값 설정 (로그인 기능 구현되면 이 부분 제거)
-        if (session.getAttribute("userSeq") == null) {
-            session.setAttribute("userSeq", 1); // tblMemberSeq = 1
+        if (userSeqObj == null) {
+            response.sendRedirect("/lighting/user/login.do");
+            return;
         }
 
-        int memberSeq = (int) session.getAttribute("userSeq");
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
 
         // 업로드된 이미지 파일
         Part filePart = request.getPart("profileImage");
         String fileName = getFileName(filePart); // 원본 파일명
 
         // 저장할 파일명 (중복 방지를 위해 유저 번호 붙임)
-        String savedFileName = "profile_" + memberSeq + "_" + System.currentTimeMillis() + "_" + fileName;
+        String savedFileName = "profile_" + userSeq + "_" + System.currentTimeMillis() + "_" + fileName;
 
         // 이미지 저장 경로
         String realPath = request.getServletContext().getRealPath("/images");
@@ -52,7 +56,7 @@ public class UpdateProfileOk extends HttpServlet {
 
         // DB 업데이트
         MemberDAO dao = new MemberDAO();
-        int result = dao.updateProfileImage(memberSeq, savedFileName);
+        int result = dao.updateProfileImage(userSeq, savedFileName);
 
         // 응답
         response.setContentType("application/json; charset=UTF-8");

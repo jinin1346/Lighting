@@ -16,13 +16,22 @@ public class UnregisterOk extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int userSeq = 1; // 로그인 기능 없으므로 고정
+        HttpSession session = req.getSession();
+        Object userSeqObj = session.getAttribute("auth");
+
+        if (userSeqObj == null) {
+            resp.sendRedirect("/lighting/user/login.do");
+            return;
+        }
+
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
 
         MemberDAO dao = new MemberDAO();
         dao.updateStatus(userSeq, 1);
 
         // 세션 무효화
-        HttpSession session = req.getSession();
         session.invalidate();
 
         // 부모창 이동 + 현재 창 닫기

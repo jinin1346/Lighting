@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lighting.mypage.model.MeetingDAO;
 import com.lighting.mypage.model.MemberDTO;
@@ -16,7 +17,19 @@ import com.lighting.mypage.model.MemberDTO;
 public class GiveEvaluation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int hostSeq = 1; // 테스트용
+        
+        // 세션에서 로그인 사용자 번호 가져오기
+        HttpSession session = req.getSession();
+        Object hostSeqObj = session.getAttribute("auth");
+
+        if (hostSeqObj == null) {
+            resp.sendRedirect("/lighting/login.do");
+            return;
+        }
+
+        int hostSeq = (hostSeqObj instanceof Integer)
+            ? (Integer) hostSeqObj
+            : Integer.parseInt(hostSeqObj.toString());
 
         MeetingDAO dao = new MeetingDAO();
         int meetingSeq = dao.getLatestMeetingSeqByHostWithParticipants(hostSeq);
