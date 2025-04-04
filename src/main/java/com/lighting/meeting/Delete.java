@@ -25,9 +25,11 @@ public class Delete extends HttpServlet {
         MeetingPostDTO meetingPostdto = dao.getPostInfo(tblMeetingPostSeq);
         MemberDTO memberdto = dao.getMemberInfo(tblMeetingPostSeq);
         List<MemberDTO> list = dao.getParticipantInfo(tblMeetingPostSeq);
+        int checkMeeting = dao.getMeetingInfo(tblMeetingPostSeq);
 
         dao.close();
         
+        req.setAttribute("checkMeeting", checkMeeting);
         req.setAttribute("tblMeetingPostSeq", tblMeetingPostSeq);
         req.setAttribute("list", list);
         req.setAttribute("memberdto", memberdto);

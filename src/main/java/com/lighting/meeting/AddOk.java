@@ -76,7 +76,6 @@ public class AddOk extends HttpServlet {
         
         int result = dao.add(dto); 
         
-        
         if (result == 1) { // meetingpost에 게시글 추가 >> 좌표값도 추가해야함
             //성공
             result = dao.addLocationCoordinate(dto);
@@ -89,7 +88,7 @@ public class AddOk extends HttpServlet {
                 writer.print("""
                         <script>
                             alert('failed');
-                            history.back();
+                            location.href='/lighting/main.do'
                         </script>
                         """);
                 writer.close();
@@ -102,7 +101,7 @@ public class AddOk extends HttpServlet {
             writer.print("""
                     <script>
                         alert('failed');
-                        history.back();
+                        location.href='/lighting/main.do'
                     </script>
                     """);
             writer.close();

@@ -515,7 +515,7 @@
         <!-- 모임 목록 영역 -->
 	    <div id="meetingBox">	
 	        <!-- for문 시작 -->
-	        <c:forEach begin="1" end="12" var="meeting" items="${meetingList}">
+	        <c:forEach begin="0" end="15" var="meeting" items="${meetingList}">
 	            <div>
 	            <div class="photo-container">
 	                <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->

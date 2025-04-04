@@ -19,10 +19,10 @@ public class AddFriend extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         //AddFriend.java
-        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         
         String requestedMemberSeq = req.getParameter("requestedMemberSeq");
+        String requestingMemberSeq = req.getParameter("requestingMemberSeq");
         
         MeetingDAO dao = new MeetingDAO();
         MemberDTO dto = new MemberDTO();
@@ -45,6 +45,7 @@ public class AddFriend extends HttpServlet {
             scoreImage = "마스터.png";
         }
         
+        req.setAttribute("requestingMemberSeq", requestingMemberSeq);
         req.setAttribute("scoreimage", scoreImage);
         req.setAttribute("dto", dto);
         req.getRequestDispatcher("/WEB-INF/views/meeting/addfriend.jsp").forward(req, resp);

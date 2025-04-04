@@ -39,7 +39,7 @@ public class GetPostInfo extends HttpServlet {
             obj.put("PhotoFileName", dto.getPhotoFileName());
             obj.put("Latitude", dto.getLatitude());
             obj.put("Longitude", dto.getLongitude());
-            
+            obj.put("TblCategorySubSeq", dto.getTblCategorySubSeq());
         }
         
         resp.setContentType("application/json; charset=UTF-8");

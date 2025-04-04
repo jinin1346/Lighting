@@ -1,5 +1,6 @@
 package com.lighting.meeting.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ public class MeetingDAO {
     private Statement stat;
     private PreparedStatement pstat;
     private ResultSet rs;
+    private CallableStatement cstat;
     
     public MeetingDAO() {
         
@@ -105,7 +107,35 @@ public class MeetingDAO {
     public int add(MeetingPostDTO dto) {
         
         try {
-            String sql = """
+            
+            String sql = "";
+            String photoFileName = "";
+            
+            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
+                // 중분류 번호를 주고 대분류명||중분류명
+                sql = """
+                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
+                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
+                            where tblCategorySubSeq = ?
+                    """;
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblCategorySubSeq());
+                System.out.println("사진이 없어서 이름 구해오기");
+                rs = pstat.executeQuery();
+                if (rs.next()) {
+                    String mainCategoryName = rs.getString("a");
+                    String subCategoryName = rs.getString("b");
+                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                    photoFileName = photoFileName.replace("/", "&");
+                    System.out.println("사진 이름 :" + photoFileName);
+                
+            } else {//사진 첨부 했을 때
+                photoFileName = dto.getPhotoFileName();
+                }
+            }
+            
+            sql = """
                     insert into tblMeetingPost values (
                         seqMeetingPost.nextval,
                         ?,
@@ -127,14 +157,6 @@ public class MeetingDAO {
             pstat.setString(4, dto.getCapacity());
             pstat.setString(5, dto.getStartTime());
             pstat.setString(6, dto.getStartTime());//FIXME endTime 고쳐야 함 
-            
-            String photoFileName = "";
-            if (dto.getPhotoFileName().equals("") || dto.getPhotoFileName() == null) {
-                photoFileName = "basic스포츠유산소.png";
-            } else {
-                photoFileName = dto.getPhotoFileName();
-            }
-            
             pstat.setString(7, photoFileName);
             pstat.setString(8, dto.getTblMemberSeq());
             pstat.setString(9, dto.getTblCategorySubSeq());
@@ -254,6 +276,9 @@ public class MeetingDAO {
                 dto.setStartTime(rs.getString("StartTime"));
                 dto.setPhotoFileName(rs.getString("PhotoFileName"));
                 dto.setEndTime(rs.getString("EndTime"));
+                dto.setTblMeetingPostSeq(rs.getString("TblMeetingPostSeq"));
+                dto.setTblMemberSeq(rs.getString("TblMemberSeq"));
+                dto.setTblCategorySubSeq(rs.getString("TblCategorySubSeq"));
             }
             
             sql = "select * from tblLocationCoordinate where tblMeetingPostSeq = ?";
@@ -426,10 +451,35 @@ public class MeetingDAO {
             int result = 0;
             
             if (rs.next()) {
-                result = Integer.parseInt(rs.getString("cnt"));
+                result = rs.getInt("cnt");
             }
             
-            return result;
+            if (result == 1) {//레코드가 있음 분기 3개 'Y', 'N', NULL
+                sql = "select approvalStatus from tblParticipationRequest where tblMemberSeq = ? and tblMeetingPostSeq = ?";
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblMemberSeq());
+                pstat.setString(2, dto.getTblMeetingPostSeq());
+                
+                rs = pstat.executeQuery();
+                
+                String approvalStatus;
+                
+                if (rs.next()) {
+                    
+                    if (rs.getString("approvalStatus") == null) {
+                        return 1;
+                    }
+                    approvalStatus = rs.getString("approvalStatus");
+                    
+                    if (approvalStatus.equals("Y")) {
+                        return 2;
+                    } else if (approvalStatus.equals("N")) {
+                        return 3;
+                    } 
+                }
+            }
+            return 0;
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -441,28 +491,22 @@ public class MeetingDAO {
     public int delete(String tblMeetingPostSeq) {
         
         try {
-            //글에 해당하는 좌표 지우기(자식레코드)
+            //글에 해당하는 좌표 지우기(자식레코드) 1차
             String sql = "delete from tblLocationCoordinate where tblMeetingPostseq = ?";
             
             pstat = conn.prepareStatement(sql);
             pstat.setString(1, tblMeetingPostSeq);
             
             int result = pstat.executeUpdate();
-            if(result != 0) {
-                
-                sql = "delete from tblMeetingPost where tblMeetingPostSeq = ?";
-                
-                pstat = conn.prepareStatement(sql);
-                pstat.setString(1, tblMeetingPostSeq);
-                //글 지우기
-                return pstat.executeUpdate();
-                
-            } else {
-                
-                System.err.println("삭제 실패!!");
-            }
             
-            return 0;
+            
+            
+            sql = "delete from tblMeetingPost where tblMeetingPostSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            //글 지우기
+            return pstat.executeUpdate();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -511,7 +555,23 @@ public class MeetingDAO {
         try {
             
             int cnt = 0;
-            String sql = "select count(*) as cnt from tblFriendRequest where requestingMemberSeq = ? and requestedMemberSeq = ?";
+            //이미 친구인가 >>
+            String sql = "select count(*) as cnt from tblFriendList where mainMemberSeq = ? and subMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, dto.getRequestedMemberSeq());    //신청받은 사람
+            pstat.setString(2, dto.getRequestingMemberSeq());   //신청한 사람
+            
+            rs = pstat.executeQuery();
+            
+            if (rs.next()) {
+                if (rs.getInt("cnt") == 1) {
+                    return 3;
+                }
+            }
+            
+            sql = "select count(*) as cnt from tblFriendRequest where requestingMemberSeq = ? and requestedMemberSeq = ?";
             //첫번째 쿼리 내가 신청할 사람이 이미 나에게 신청 했는지?
             pstat = conn.prepareStatement(sql);
             
@@ -536,6 +596,7 @@ public class MeetingDAO {
             
             rs = pstat.executeQuery();
             String approvalStatus;
+            
             
             
             if (rs.next()) {
@@ -642,6 +703,355 @@ public class MeetingDAO {
         }
         
         return 0;
+    }
+
+    public int deleteParticipationRequest(ParticipationRequestDTO dto) {
+        
+        try {
+            
+            String sql = "delete from tblParticipationRequest where tblMeetingPostSeq = ? and tblMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, dto.getTblMeetingPostSeq());
+            pstat.setString(2, dto.getTblMemberSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int acceptFriendRequest(FriendRequestDTO dto) {
+        
+        try {
+            
+            int cnt = 0;
+            
+            String sql = "update tblFriendRequest set approvalStatus = 'Y' where requestingMemberSeq = ? and requestedMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getRequestedMemberSeq());
+            pstat.setString(2, dto.getRequestingMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            sql = "insert into tblFriendList values ( ?, ?, default)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getRequestingMemberSeq());
+            pstat.setString(2, dto.getRequestedMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            sql = "insert into tblFriendList values ( ?, ?, default)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getRequestedMemberSeq());
+            pstat.setString(2, dto.getRequestingMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            return cnt;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int deleteFriendRequest(FriendRequestDTO dto) {
+        
+        try {
+            
+            String sql = "delete from tblFriendRequest where requestingMemberSeq = ? and requestedMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getRequestingMemberSeq());
+            pstat.setString(2, dto.getRequestedMemberSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int deleteFriendList(FriendListDTO dto) {
+        
+        try {
+            int cnt = 0;
+            
+            //친구 목록에서 삭제(나)
+            String sql = "delete from tblFriendList where mainMemberSeq = ? and subMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getMainMemberSeq());
+            pstat.setString(2, dto.getSubMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            //친구 목록에서 삭제(상대방)
+            sql = "delete from tblFriendList where mainMemberSeq = ? and subMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getSubMemberSeq());
+            pstat.setString(2, dto.getMainMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            //친구 신청에서 삭제(나)
+            sql = "delete from tblFriendRequest where requestingMemberSeq = ? and requestedMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getMainMemberSeq());
+            pstat.setString(2, dto.getSubMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            //친구 신청에서 삭제(상대방)
+            sql = "delete from tblFriendRequest where requestingMemberSeq = ? and requestedMemberSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getSubMemberSeq());
+            pstat.setString(2, dto.getMainMemberSeq());
+            
+            cnt += pstat.executeUpdate();
+            
+            return cnt;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int getMeetingInfo(String tblMeetingPostSeq) {
+        
+        try {
+            
+            String sql = "select count(*) as cnt from tblMeeting where tblMeetingPostSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("cnt");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+        
+    }
+
+    public CategoryMainDTO getCategoryMain(String tblCategorySubSeq) {
+        
+        try {
+            
+            String sql = """
+                select * from tblCategoryMain where tblCategoryMainSeq =
+                    (select tblCategoryMainSeq from tblCategorySub where tblCategorySubSeq = ?)
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            
+            pstat.setString(1, tblCategorySubSeq);
+            
+            rs = pstat.executeQuery();
+            
+            if (rs.next()) {
+                CategoryMainDTO categorydto = new CategoryMainDTO();
+                categorydto.setCategoryName(rs.getString("CategoryName"));
+                categorydto.setTblCategoryMainSeq(rs.getString("TblCategoryMainSeq"));
+                
+                return categorydto;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public int update(MeetingPostDTO dto) {
+        
+        try {
+            String sql = "";
+            
+            String photoFileName = "";
+            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
+                // 중분류 번호를 주고 대분류명||중분류명
+                sql = """
+                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
+                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
+                            where tblCategorySubSeq = ?
+                    """;
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblCategorySubSeq());
+                rs = pstat.executeQuery();
+                if (rs.next()) {
+                    String mainCategoryName = rs.getString("a");
+                    String subCategoryName = rs.getString("b");
+                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                    photoFileName = photoFileName.replace("/", "&");
+                
+            } else {//사진 첨부 했을 때
+                
+                photoFileName = dto.getPhotoFileName();
+                
+                }
+            }
+            
+            sql = """
+                    update tblMeetingPost set
+                        title = ?,
+                        content = ?,
+                        location = ?,
+                        capacity = ?,
+                        startTime = TO_DATE(?, 'YYYY-MM-DD HH24:MI'),
+                        endTime = (TO_DATE(?, 'YYYY-MM-DD HH24:MI') + 2/24),
+                        photoFileName = ?,
+                        tblCategorySubSeq = ?
+                        where tblMeetingPostSeq = ?
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getTitle());
+            pstat.setString(2, dto.getContent());
+            pstat.setString(3, dto.getLocation());
+            pstat.setString(4, dto.getCapacity());
+            pstat.setString(5, dto.getStartTime());
+            pstat.setString(6, dto.getStartTime());//FIXME endTime 고쳐야 함 
+            pstat.setString(7, photoFileName);
+            pstat.setString(8, dto.getTblCategorySubSeq());
+            pstat.setString(9, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+    }
+
+    public int updateLocationCoordinate(MeetingPostDTO dto) {
+            
+        try {
+            String sql = """
+                    update tblLocationCoordinate 
+                    set latitude = ?,
+                        longitude = ?
+                        where tblMeetingPostSeq = ?
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, dto.getLatitude());
+            pstat.setString(2, dto.getLongitude());
+            pstat.setString(3, dto.getTblMeetingPostSeq());
+            
+            return pstat.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<MeetingPostDTO> getMeetingInfoList(String tblMemberSeq) {
+        
+        try {
+            
+            String sql = """
+                    select * from tblMeetingPost where tblMemberSeq = ? order by postDate desc
+                    """;
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMemberSeq);
+            
+            rs = pstat.executeQuery();
+            
+            List<MeetingPostDTO> list = new ArrayList<MeetingPostDTO>();
+            
+            int cnt = 1;
+            
+            while(rs.next() && cnt <= 5) {
+                MeetingPostDTO dto = new MeetingPostDTO();
+                
+                dto.setTitle(rs.getString("title"));
+                dto.setTblMeetingPostSeq(rs.getString("TblMeetingPostSeq"));
+                
+                list.add(dto);
+                cnt++;
+            }
+            
+            return list;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+
+    public int finish(String tblMeetingPostSeq) {
+        
+        try {
+            
+            int result = 0;
+            
+            String sql = "update tblMeetingPost set endTime = sysdate where tblMeetingPostSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            result += pstat.executeUpdate();
+            
+            sql = "insert into tblMeeting values (seqMeeting.nextVal, ?)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            result += pstat.executeUpdate();
+            
+            // 프로시저 호출 시 필요한 파라미터
+            String rejectionReason = "모임이 종료되었습니다."; // 예시: 거절 사유
+
+            sql = "{CALL UpdateAndInsertRejectionReason(?, ?)}";
+
+            // CallableStatement 객체 생성
+            cstat = conn.prepareCall(sql);
+            
+            cstat.setString(1, tblMeetingPostSeq); // 첫 번째 파라미터 (tblMeetingPostSeq)
+            cstat.setString(2, rejectionReason); // 두 번째 파라미터 (거절 사유)
+
+            // 프로시저 실행
+            cstat.execute();
+
+            System.out.println("프로시저가 성공적으로 호출되었습니다!");
+            
+            return result;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+        
     }
 
     

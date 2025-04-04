@@ -33,25 +33,3 @@ public class AddFriendRequest extends HttpServlet {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
