@@ -18,6 +18,8 @@ public class LogoutOk extends HttpServlet {
 		//세션 삭제하고 메인으로 보낼것
 		//FIXME
 	    
+	  //싹 삭제하는 방법
+        req.getSession().invalidate();//로그아웃
 	    resp.sendRedirect("/lighting/main.do");
 	}
 
