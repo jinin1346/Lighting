@@ -8,15 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lighting.mypage.model.ActivityRegionDAO;
+import com.lighting.mypage.model.MemberDAO;
+import com.lighting.mypage.model.MemberDTO;
+
 @WebServlet("/mypage/updateinfo.do")
 public class UpdateInfo extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
+	    int userSeq = 1; // 로그인 구현 전 임시
 
-		req.getRequestDispatcher("/WEB-INF/views/mypage/updateinfo.jsp").forward(req, resp);
+	    MemberDAO memberDAO = new MemberDAO();
+	    MemberDTO member = memberDAO.getMemberBySeq(userSeq);
+	    req.setAttribute("member", member);
+
+	    // 활동지역 (시도, 구군) 가져오기
+	    ActivityRegionDAO regionDAO = new ActivityRegionDAO();
+	    String[] region = regionDAO.getSidoGugunByMemberSeq(userSeq); // {"서울특별시", "강남구"}
+	    req.setAttribute("sido", region[0]);
+	    req.setAttribute("gugun", region[1]);
+
+	    req.getRequestDispatcher("/WEB-INF/views/mypage/updateinfo.jsp").forward(req, resp);
 	}
-
 }

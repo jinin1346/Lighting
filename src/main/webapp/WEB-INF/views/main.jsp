@@ -10,7 +10,7 @@
 <style>
 /* container를 flex로 구성하여 footer가 항상 하단에 위치하도록 함 */
     .container {
-    	display: flex;
+        display: flex;
         flex-direction: column;
         min-height: 100vh;
         width: 1300px;
@@ -26,8 +26,8 @@
 
 </head>
 <body>
-	<h1>${auth}</h1>
-	<div class="container">
+    <h1>${auth}</h1>
+    <div class="container">
     <%@ include file="/WEB-INF/views/inc/header.jsp" %>
     <div class="content">
       <%@ include file="/WEB-INF/views/inc/body.jsp" %>
