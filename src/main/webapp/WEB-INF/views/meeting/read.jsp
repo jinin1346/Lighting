@@ -288,7 +288,6 @@
 	</style>
 </head>
 <body>
-<h1>${tblMeetingPostSeq }</h1>
 	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	</div>

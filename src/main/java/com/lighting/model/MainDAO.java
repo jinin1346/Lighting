@@ -61,7 +61,7 @@ public class MainDAO {
             
             String sql = "select mp.tblMeetingPostSeq, mp.title, mp.photoFileName as meetingPhoto, mp.capacity,m.photoFileName as memberPhoto, m.nickname "
                     + "from tblMeetingPost mp "
-                    + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq order by tblMeetingPostSeq desc";
+                    + "join  tblMember m on mp.tblMemberSeq = m.tblMemberSeq where endTime >= sysdate order by tblMeetingPostSeq desc";
             
             rs = stat.executeQuery(sql);
             

@@ -282,7 +282,6 @@
 </style>
 </head>
 <body>
-	<h1>${auth}</h1>
 	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	</div>
@@ -374,6 +373,12 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
     <script>
     
+		let m1 = null;
+		let info = null;
+		let map = null;
+		let tblCategoryMainSeq = "";
+		let tblCategorySubSeq = "";
+    
 	    $('#loadPost').on('click', function () {
         	$('.modal, .overlay').fadeIn();
 	    });
@@ -384,12 +389,6 @@
     
     	let categoryMain = document.getElementById("categoryMain");
 	    let categorySub = document.getElementById("categorySub");
-	    
-		let m1 = null;
-		let info = null;
-		let map = null;
-		let tblCategoryMainSeq = "";
-		let tblCategorySubSeq = "";
 	
 	    categoryMain.addEventListener("change", function() {
 	        let tblCategoryMainSeq = categoryMain.value;
@@ -433,7 +432,6 @@
         }
 	    
         $('#date').attr('min', getToday());
-        
         $.ajax({//작성자 좌표 가져와서 맵 중앙에 띄우고 마커 추가하는 이벤트까지 추가
             url: '/lighting/meeting/getactivityregioncoordinate.do',
             type: 'GET',
@@ -441,20 +439,16 @@
             dataType: 'json',
             success: function(result) {
 
-            	result.forEach(function(latLon) {
-
-            		/* member 활동지역 좌표 가져오기 */
-                    //GetActivityRegionCoordinate
-                    let activityRegionLatitude = latLon.latitude;
-                    let activityRegionLongitude = latLon.longitude;
-                    
-                    const container = document.getElementById('map');
-            		const options = {
-            			center: new kakao.maps.LatLng(activityRegionLatitude, activityRegionLongitude),
-            			level: 4
-            		};
-            	
-            		map = new kakao.maps.Map(container, options); //map 만들기
+       			/* member 활동지역 좌표 가져오기 */
+               	//GetActivityRegionCoordinate
+               	let activityRegionLatitude = result.latitude;
+               	let activityRegionLongitude = result.longitude;
+               	const container = document.getElementById('map');
+       			const options = {
+       			center: new kakao.maps.LatLng(activityRegionLatitude, activityRegionLongitude),
+       			level: 4
+       			}
+       			map = new kakao.maps.Map(container, options);
             		
             		kakao.maps.event.addListener(map, 'click', function(evt) {
 
@@ -491,7 +485,6 @@
             			m1.setMap(map);
             		});//작성자에게는 마커로 보여주고 마커의 위치값 저장
                     
-            	});
             },
             error: function(a, b, c) {
                 console.error(a,b,c);
@@ -606,7 +599,6 @@
                 });
             });
         }
-
         
         function getTblCategorySubSeq(tblCategoryMainSeq) {
             

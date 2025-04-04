@@ -631,7 +631,6 @@
 	    $(document).on('click', '.dropdown li a', function(e) {
 	        e.preventDefault(); // 기본 링크 동작 방지
 	        var categorySubSeq = $(this).data('tblCategorySubSeq'); // 예: 18 (식사)
-	        console.log(categorySubSeq);
 	        
 	        $.ajax({
 	            type: 'GET',
@@ -687,31 +686,21 @@
 	            // 문자열을 숫자로 변환 (온도는 숫자로 비교하기 위해)
 	            var temperature = parseFloat(data.temperature);
 	            var precipitationType = data.precipitationType; // "0": 맑음, "1": 비, 등
-	            console.log(temperature);
-	            console.log(precipitationType);
 	            // 실내 활동 조건 (예: 온도가 5℃ 미만, 30℃ 초과, 또는 비/눈 등)
 	            if(temperature < 5 || temperature > 30 || precipitationType !== "0") {
-	            	console.log(temperature);
 	            	// 실내 활동 추천: 슬라이더 배너 이미지를 실내용 이미지로 변경
 	                $("#event1 img").attr("src", "/lighting/images/indoor_1.jpg");
-	                console.log($("#event1 img").attr("src"));
 	                $("#event2 img").attr("src", "/lighting/images/indoor_2.jpg");
-	                console.log($("#event2 img").attr("src"));
 	                $("#event3 img").attr("src", "/lighting/images/indoor_3.jpg");
 	                $("#event4 img").attr("src", "/lighting/images/indoor_4.jpg");
 	                $("#event5 img").attr("src", "/lighting/images/indoor_1.jpg");
 	            } else {
 	                // 야외 활동 추천: 슬라이더 배너 이미지를 야외용 이미지로 변경
 	                $("#event1 img").attr("src", "/lighting/images/outdoor_1.jpg");
-	                console.log($("#event1 img").attr("src"));
 	                $("#event2 img").attr("src", "/lighting/images/outdoor_2.jpg");
-	                console.log($("#event2 img").attr("src"));
 	                $("#event3 img").attr("src", "/lighting/images/outdoor_3.jpg");
-	                console.log($("#event3 img").attr("src"));
 	                $("#event4 img").attr("src", "/lighting/images/outdoor_4.jpg");
-	                console.log($("#event4 img").attr("src"));
 	                $("#event5 img").attr("src", "/lighting/images/outdoor_1.jpg");
-	                console.log($("#event5 img").attr("src"));
 	            }
 	        },
 	        error: function(error) {

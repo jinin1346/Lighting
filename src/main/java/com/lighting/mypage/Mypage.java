@@ -47,7 +47,7 @@ public class Mypage extends HttpServlet {
         if (session.getAttribute("userNickname") == null) {
             MemberDAO memberDAO = new MemberDAO();
             MemberDTO memberInfo = memberDAO.getMemberBySeq(userSeq);
-
+            memberDAO.close();
             if (memberInfo != null) {
                 session.setAttribute("userNickname", memberInfo.getNickname());
                 session.setAttribute("userId", memberInfo.getId());
@@ -78,6 +78,7 @@ public class Mypage extends HttpServlet {
             default:
                 meetingList = meetingDAO.getJoinedMeetings(userSeq, sort);
         }
+        meetingDAO.close();
 
         req.setAttribute("meetingList", meetingList);
         req.setAttribute("status", status);
@@ -86,21 +87,26 @@ public class Mypage extends HttpServlet {
         // 4. 친구 목록
         FriendDAO friendDAO = new FriendDAO();
         ArrayList<FriendDTO> friendList = friendDAO.getFriendList(userSeq);
+        friendDAO.close();
         req.setAttribute("friendList", friendList);
 
         // 5. 차단 목록
         BlockDAO blockDAO = new BlockDAO();
         ArrayList<BlockDTO> blockList = blockDAO.getBlockList(userSeq);
+        blockDAO.close();
         req.setAttribute("blockList", blockList);
 
         // 6. 회원 기본 정보
         MemberDAO memberDAO = new MemberDAO();
         MemberDTO member = memberDAO.getMemberBySeq(userSeq);
+        memberDAO.close();
+        
         req.setAttribute("member", member);
 
         // 7. 평가 점수 및 등급 아이콘
         EvaluationDAO evaDAO = new EvaluationDAO();
         double avgScore = evaDAO.getAverageScore(userSeq);
+        evaDAO.close();
 
         String gradeIcon = "실버.png";
         if (avgScore >= 4) gradeIcon = "마스터.png";
