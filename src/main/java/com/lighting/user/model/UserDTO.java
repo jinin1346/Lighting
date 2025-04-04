@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 
+
 	private String tblMemberSeq;
 	private String id;
 	private String pw;

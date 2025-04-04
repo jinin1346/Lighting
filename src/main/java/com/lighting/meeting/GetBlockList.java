@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import com.lighting.meeting.model.BlockListDTO;
-import com.lighting.meeting.model.FriendRequestDTO;
 import com.lighting.meeting.model.MeetingDAO;
 
 @WebServlet("/meeting/getblocklist.do")

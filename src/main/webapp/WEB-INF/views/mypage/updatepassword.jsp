@@ -116,6 +116,13 @@
         .margin-bottom-large {
             margin-bottom: 80px; /* 기존 마진의 4배 */
         }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -128,37 +135,45 @@
                 <img alt="로고" src="/lighting/images/logo_가로.png" id="logo">
             </div>
             <div id="infoTitle">비밀번호 변경</div>
-
+            
+            <form method="POST" action="/lighting/mypage/updatepasswordok.do" id="passwordForm">
             <div class="infoContainer">
                 <div class="infoLabel">기존 비밀번호</div>
                 <div class="inputContainer">
-                    <input type="password" id="infoBox" placeholder="기존 비밀번호">
+                    <input type="password" name="currentPassword" id="currentPassword" placeholder="기존 비밀번호" required>
                 </div>
             </div>
 
             <div class="infoContainer">
                 <div class="infoLabel">변경할 비밀번호</div>
                 <div class="inputContainer">
-                    <input type="password" id="infoBox" placeholder="변경할 비밀번호">
+                    <input type="password" name="newPassword" id="newPassword" placeholder="변경할 비밀번호" required>
                 </div>
             </div>
 
             <div class="infoContainer margin-bottom-large">
                 <div class="infoLabel">비밀번호 확인</div>
                 <div class="inputContainer">
-                    <input type="password" id="infoBox" placeholder="비밀번호 확인">
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="비밀번호 확인" required>
                 </div>
             </div>
-
-			<form method="POST" action="/lighting/mypage/updatepasswordok.do">
-            <button class="submitButton">개인 정보 수정 완료</button>
+            
+            <button type="submit" class="submitButton">개인 정보 수정 완료</button>
             </form>
             
         </div>
     </div>
 
     <script>
+    document.getElementById("passwordForm").addEventListener("submit", function(e) {
+        const newPw = document.getElementById("newPassword").value;
+        const confirmPw = document.getElementById("confirmPassword").value;
 
+        if (newPw !== confirmPw) {
+            e.preventDefault();
+            alert("변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
+    });
     </script>
 </body>
 </html>
