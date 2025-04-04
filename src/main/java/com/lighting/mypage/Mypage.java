@@ -5,9 +5,20 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.lighting.mypage.model.*;
+import com.lighting.mypage.model.BlockDAO;
+import com.lighting.mypage.model.BlockDTO;
+import com.lighting.mypage.model.EvaluationDAO;
+import com.lighting.mypage.model.FriendDAO;
+import com.lighting.mypage.model.FriendDTO;
+import com.lighting.mypage.model.MeetingDAO;
+import com.lighting.mypage.model.MeetingDTO;
+import com.lighting.mypage.model.MemberDAO;
+import com.lighting.mypage.model.MemberDTO;
 
 @WebServlet("/mypage/mypage.do")
 public class Mypage extends HttpServlet {
