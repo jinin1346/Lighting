@@ -1,5 +1,6 @@
 package com.lighting.meeting.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ public class MeetingDAO {
     private Statement stat;
     private PreparedStatement pstat;
     private ResultSet rs;
+    private CallableStatement cstat;
     
     public MeetingDAO() {
         
@@ -1004,6 +1006,52 @@ public class MeetingDAO {
         }
         
         return null;
+    }
+
+    public int finish(String tblMeetingPostSeq) {
+        
+        try {
+            
+            int result = 0;
+            
+            String sql = "update tblMeetingPost set endTime = sysdate where tblMeetingPostSeq = ?";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            result += pstat.executeUpdate();
+            
+            sql = "insert into tblMeeting values (seqMeeting.nextVal, ?)";
+            
+            pstat = conn.prepareStatement(sql);
+            pstat.setString(1, tblMeetingPostSeq);
+            
+            result += pstat.executeUpdate();
+            
+            // 프로시저 호출 시 필요한 파라미터
+            String rejectionReason = "모임이 종료되었습니다."; // 예시: 거절 사유
+
+            sql = "{CALL UpdateAndInsertRejectionReason(?, ?)}";
+
+            // CallableStatement 객체 생성
+            cstat = conn.prepareCall(sql);
+            
+            cstat.setString(1, tblMeetingPostSeq); // 첫 번째 파라미터 (tblMeetingPostSeq)
+            cstat.setString(2, rejectionReason); // 두 번째 파라미터 (거절 사유)
+
+            // 프로시저 실행
+            cstat.execute();
+
+            System.out.println("프로시저가 성공적으로 호출되었습니다!");
+            
+            return result;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return 0;
+        
     }
 
     

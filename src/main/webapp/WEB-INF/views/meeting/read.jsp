@@ -272,6 +272,18 @@
 			font-size: 24px;
             display: none;
         }
+        
+        #btnFinish {
+     	    width: 150px;
+			height: 60px;
+			border: none;
+			background-color: #C81E1E;
+			color: white;
+			border-radius: 5px;
+			font-size: 24px;
+            display: none;
+            cursor: pointer;
+        }
 
 	</style>
 </head>
@@ -362,6 +374,7 @@
                 <button type="button" id="btnShare">공유</button>
                 <button type="button" id="btnParticipate">참석하기</button>
                 <button type="button" id="btnDisabled">종료된 모임</button>
+                <button type="button" id="btnFinish">모임종료</button>
             </div>
 		</div>
 	</main>
@@ -383,8 +396,6 @@
 			} else {
 				console.log('비상비상');
 				loginedtblMemberSeq = 0; // 숫자가 아니면 0으로 처리하거나, 다른 로직을 추가
-				// 또는 오류를 발생시키거나, 사용자에게 알림을 줄 수 있습니다.
-				console.error("auth 값이 숫자가 아닙니다.");
 			}
 		}
 		
@@ -583,6 +594,7 @@
 			 	// btnDisabled 요소의 display: none 제거
 			    $('#btnDisabled').css('display', 'block');
 			    $('#btnParticipate').css('display', 'none');
+			    $('#btnFinish').css('display', 'none');
 			    //$('#btnDelete').css('visibility', 'hidden');
 			} else {
 
@@ -630,6 +642,22 @@
 		window.open('/lighting/meeting/delete.do?tblMeetingPostSeq=' + tblMeetingPostSeq, '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
 	});
 	
+	$('#btnFinish').click(()=>{
+		$.ajax({//모임 종료하기
+			url: '/lighting/meeting/finish.do',
+	        type: 'GET',
+	        data: {
+	        	tblMeetingPostSeq: tblMeetingPostSeq
+	        },
+	        success: function(result) {
+				location.reload();
+	        },
+			error: function(a, b, c) {
+	            console.error(a,b,c);
+	        }
+		});
+	});
+	
 	function openServletInNewWindow(servletUrl) {
         window.open(servletUrl, "_blank", "width=780,height=800,scrollbars=no");
     }
@@ -641,6 +669,7 @@
 		    $('#imgWish').css('visibility', 'hidden');
 		    $('#btnShare').css('visibility', 'hidden');
 		    $('#btnParticipate').css('visibility', 'hidden');
+		    $('#btnFinish').css('display', 'block');
 		} else {
 			if (loginedtblMemberSeq == 0) {//비로그인
 				$('#btnDelete').css('visibility', 'hidden');
