@@ -21,18 +21,19 @@ public class Main extends HttpServlet {
 	    
 	    HttpSession session = req.getSession();
         
-        session.setAttribute("auth", "1");
+        //session.setAttribute("auth", "913");
+        //session.setAttribute("auth", result.getTblMemberSeq());
 	    
 	    MainDAO dao = new MainDAO();
 	    String tblMemberSeq = (String) session.getAttribute("auth");
         String categorySubSeq = null;
-        
+                                 
         if(tblMemberSeq != null) {
             categorySubSeq = dao.getHighestInterestCategory(tblMemberSeq);
         }
         
         List<MainDTO> meetingList;
-     // 최고 관심 카테고리가 있으면 해당 카테고리 기준 조회, 없으면 전체 리스트 조회
+        //최고 관심 카테고리가 있으면 해당 카테고리 기준 조회, 없으면 전체 리스트 조회
         if (categorySubSeq != null && !categorySubSeq.trim().isEmpty()) {
             meetingList = dao.getMeetingListByCategory(categorySubSeq);
         } else {

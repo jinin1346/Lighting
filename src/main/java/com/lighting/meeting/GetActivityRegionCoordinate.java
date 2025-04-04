@@ -38,7 +38,7 @@ public class GetActivityRegionCoordinate extends HttpServlet {
             arr.add(obj);
         }
         
-        resp.setContentType("application/json");
+        resp.setContentType("application/json; charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         
         PrintWriter writer = resp.getWriter();

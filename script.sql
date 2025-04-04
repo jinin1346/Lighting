@@ -342,8 +342,7 @@ ALTER TABLE tblChatRoom
 /* 사진게시글 */
 CREATE TABLE tblPhotoPost (
 	tblPhotoPostSeq NUMBER NOT NULL, /* 사진게시글seq */
-	title VARCHAR2(300) NOT NULL, /* 제목 */
-	content VARCHAR2(4000) NOT NULL, /* 내용 */
+	photoFileName VARCHAR2(1020) NOT NULL, /* 내용 */
 	postDate DATE DEFAULT sysdate NOT NULL, /* 게시일 */
 	tblMemberSeq NUMBER NOT NULL /* 회원seq */
 );
@@ -446,32 +445,7 @@ ALTER TABLE tblInterest
 			tblCategorySubSeq
 		);		
 
-/* 첨부사진 */
-CREATE TABLE tblAttachedPhoto (
-	tblAttachedPhotoSeq NUMBER NOT NULL, /* 첨부사진seq */
-	tblPhotoPostSeq NUMBER NOT NULL, /* 사진게시글seq */
-	photoFileName VARCHAR2(1020) NOT NULL /* 사진파일명 */
-);
 
-DROP SEQUENCE seqAttachedPhoto;
-CREATE SEQUENCE seqAttachedPhoto start with 501;
-
-ALTER TABLE tblAttachedPhoto
-	ADD
-		CONSTRAINT PK_tblAttachedPhoto
-		PRIMARY KEY (
-			tblAttachedPhotoSeq
-		);
-
-ALTER TABLE tblAttachedPhoto
-	ADD
-		CONSTRAINT FK_tblPhotoPost_TO_tblAttachedPhoto
-		FOREIGN KEY (
-			tblPhotoPostSeq
-		)
-		REFERENCES tblPhotoPost (
-			tblPhotoPostSeq
-		);
 
 /* 모임게시글 */
 CREATE TABLE tblMeetingPost (
@@ -487,8 +461,6 @@ CREATE TABLE tblMeetingPost (
 	tblMemberSeq NUMBER NOT NULL, /* 회원seq */
 	tblCategorySubSeq NUMBER NOT NULL /* 중분류seq */
 );
-
-select * from tblMeetingPost;
 
 DROP SEQUENCE seqMeetingPost;
 CREATE SEQUENCE seqMeetingPost start with 501;
@@ -674,7 +646,8 @@ ALTER TABLE tblParticipationRequest
 		)
 		REFERENCES tblMeetingPost (
 			tblMeetingPostSeq
-		);
+		)
+	ON DELETE CASCADE;
 
 ALTER TABLE tblParticipationRequest
 	ADD
@@ -711,7 +684,8 @@ ALTER TABLE tblRejectionReason
 		)
 		REFERENCES tblParticipationRequest (
 			tblParticipationRequestSeq
-		);	
+		)
+	ON DELETE CASCADE;	
 		
 /* 평가 */
 CREATE TABLE tblEvaluation (
@@ -772,3 +746,49 @@ ALTER TABLE tblEmail
 		PRIMARY KEY (
 			email
 		);
+
+ALTER TABLE tblParticipationRequest
+	DROP
+		CONSTRAINT FK_tblMeetingPost_TO_tblParticipationRequest;
+		
+ALTER TABLE tblParticipationRequest
+	ADD
+		CONSTRAINT FK_tblMeetingPost_TO_tblParticipationRequest
+		FOREIGN KEY (
+			tblMeetingPostSeq
+		)
+		REFERENCES tblMeetingPost (
+			tblMeetingPostSeq
+		)
+	ON DELETE CASCADE;
+	
+
+ALTER TABLE tblRejectionReason
+	DROP
+		CONSTRAINT FK_tblParticipationRequest_TO_tblRejectionReason;
+
+ALTER TABLE tblRejectionReason
+	ADD
+		CONSTRAINT FK_tblParticipationRequest_TO_tblRejectionReason
+		FOREIGN KEY (
+			tblParticipationRequestSeq
+		)
+		REFERENCES tblParticipationRequest (
+			tblParticipationRequestSeq
+		)
+	ON DELETE CASCADE;
+
+ALTER TABLE tblWishlist
+	DROP
+		CONSTRAINT FK_tblMeetingPost_TO_tblWishlist;
+
+ALTER TABLE tblWishlist
+	ADD
+		CONSTRAINT FK_tblMeetingPost_TO_tblWishlist
+		FOREIGN KEY (
+			tblMeetingPostSeq
+		)
+		REFERENCES tblMeetingPost (
+			tblMeetingPostSeq
+		)
+	ON DELETE CASCADE;

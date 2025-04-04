@@ -12,7 +12,7 @@ public class MeetingPostDTO {
     private String location;
     private String capacity;
     private String startTime; //'YYYY-MM-DD HH24:MM'
-    private String endTime;
+    private String endTime;//FIXME
     private String photoFileName;//FIXME
     private String tblMemberSeq;
     private String tblCategorySubSeq;
