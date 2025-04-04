@@ -269,6 +269,16 @@
 	#content {
 		resize: none;
 	}
+	
+	#location {
+		border: 1px solid #1e62c8;
+		border-radius: 4px;
+		width: 200px;
+		height: 30px;
+		padding-left: 5px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -313,7 +323,7 @@
 		<div class="middle-section">
 			<!-- 왼쪽 중간: 글 내용 텍스트 영역 -->
 			<div class="left-section">
-				<textarea id="content" placeholder="글 내용을 입력하세요." maxlength="2000" name="content"></textarea>
+				<textarea id="content" placeholder="글 내용을 입력하세요." maxlength="2000" name="content" required></textarea>
 			</div>
 
 			<div>
@@ -324,7 +334,7 @@
 					<div class="location-text">
 						<div>
                             장소명 :
-                            <input type="text" maxlength="20" id="location" name="location" required>
+                            <input type="text" maxlength="20" id="location" name="location" required placeholder="모임의 장소명을 적어주세요." value="">
                         </div>
 						<!-- <div>
                             대표사진 :
@@ -363,6 +373,7 @@
 <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
     <script>
+    
 	    $('#loadPost').on('click', function () {
         	$('.modal, .overlay').fadeIn();
 	    });
@@ -373,6 +384,12 @@
     
     	let categoryMain = document.getElementById("categoryMain");
 	    let categorySub = document.getElementById("categorySub");
+	    
+		let m1 = null;
+		let info = null;
+		let map = null;
+		let tblCategoryMainSeq = "";
+		let tblCategorySubSeq = "";
 	
 	    categoryMain.addEventListener("change", function() {
 	        let tblCategoryMainSeq = categoryMain.value;
@@ -417,9 +434,6 @@
 	    
         $('#date').attr('min', getToday());
         
-		let m1 = null;
-		let info = null;
-        
         $.ajax({//작성자 좌표 가져와서 맵 중앙에 띄우고 마커 추가하는 이벤트까지 추가
             url: '/lighting/meeting/getactivityregioncoordinate.do',
             type: 'GET',
@@ -440,12 +454,12 @@
             			level: 4
             		};
             	
-            		const map = new kakao.maps.Map(container, options); //map 만들기
+            		map = new kakao.maps.Map(container, options); //map 만들기
             		
             		kakao.maps.event.addListener(map, 'click', function(evt) {
 
-            			$('#attend').prop('disabled', false);
-            			$('#attend').prop('title', false);
+	        			$('#attend').prop('disabled', false);
+            			$('#attend').removeAttr('title');
             			$('#attend').css('cursor', 'pointer');
             			
             			if (m1 != null) {
@@ -465,13 +479,13 @@
             			});
             			
             			//이미지 마커
-            			const path = '/lighting/images/찜하기버튼.png';
-            			const size = new kakao.maps.Size(32, 32);
-            			const op = {
+            			let path = '/lighting/images/찜하기버튼.png';
+            			let size = new kakao.maps.Size(32, 32);
+            			let op = {
             				offset: new kakao.maps.Point(16, 32)
             			};
             			
-            			const img = new kakao.maps.MarkerImage(path, size, op);
+            			let img = new kakao.maps.MarkerImage(path, size, op);
             			
             			m1.setImage(img);
             			m1.setMap(map);
@@ -511,11 +525,59 @@
 					$('#people').val(result.Capacity);
 					
 					$('#location').val(result.Location);
-                	console.log(result.Location);
+					document.getElementById('location').value = result.Location;
                 	
-                	Latitude = result.Latitude;
-                	Longitude = result.Longitude;
+                	let latitude = result.Latitude;
+                	let longitude = result.Longitude;
+                	tblCategorySubSeq = result.TblCategorySubSeq;
+                	
+                	getTblCategoryMainSeq(tblCategorySubSeq)
+                    .then(result => {
+                        tblCategoryMainSeq = result; // 외부 변수 초기화
+                        $('#categoryMain option[value="' + tblCategoryMainSeq + '"]').attr('selected', 'selected');
+                        getTblCategorySubSeq(tblCategoryMainSeq);
+
+                    })
+                    .catch(error => {
+                        console.error(error); // 에러 처리
+                    });
+                	
                 	EndTime = result.EndTime;
+                	
+                	if (latitude != null) {
+
+	                	if (m1 != null) {
+	        				//기존 마커가 존재O > 삭제
+	        				m1.setMap(null);
+	        				m1.setImage(null);
+	        			}
+	                	
+	                	$('#latitude').val(latitude);
+	                    $('#longitude').val(longitude);
+	
+	        			m1 = new kakao.maps.Marker({
+	        				position: new kakao.maps.LatLng(latitude, longitude)
+	        			});
+	        			
+	        			//이미지 마커
+	        			let path = '/lighting/images/찜하기버튼.png';
+	        			let size = new kakao.maps.Size(32, 32);
+	        			let op = {
+	        				offset: new kakao.maps.Point(16, 32)
+	        			};
+	        			
+	        			let img = new kakao.maps.MarkerImage(path, size, op);
+	        			let moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+	        			map.setCenter(moveLatLon);
+	        			
+	        			m1.setImage(img);
+	        			m1.setMap(map);
+	        			
+	        			$('#attend').prop('disabled', false);
+            			$('#attend').removeAttr('title');
+            			$('#attend').css('cursor', 'pointer');
+	        			
+                	}
                 	
                 	$('.modal, .overlay').fadeOut();
 
@@ -526,6 +588,57 @@
         	});
         	
         });
+        
+        function getTblCategoryMainSeq(tblCategorySubSeq) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '/lighting/meeting/getcategorymain.do',
+                    type: 'GET',
+                    data: 'tblCategorySubSeq=' + tblCategorySubSeq,
+                    dataType: 'json',
+                    success: function(result) {
+                        resolve(result.tblCategoryMainSeq); // Promise 해결
+                    },
+                    error: function(a, b, c) {
+                        console.error(a, b, c);
+                        reject(a); // Promise 실패 처리
+                    }
+                });
+            });
+        }
+
+        
+        function getTblCategorySubSeq(tblCategoryMainSeq) {
+            
+        	$.ajax({
+                url: '/lighting/meeting/getcategorysub.do',
+                type: 'GET',
+                data: 'tblCategoryMainSeq=' + tblCategoryMainSeq,
+                dataType: 'json',
+                success: function(result) {
+                    
+    				while (categorySub.firstChild) {
+                		categorySub.removeChild(categorySub.firstChild);
+            		}
+
+    				result.forEach(function(subcategory) { 
+                        let option = document.createElement('option');
+                        option.value = subcategory.tblCategorySubSeq; 
+                        option.text = subcategory.categoryName;
+                        
+                        categorySub.appendChild(option);
+                    });
+    				
+    				$('#categorySub option[value="' + tblCategorySubSeq + '"]').attr('selected', 'selected');
+    				
+                },
+                error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+            });
+        
+        }
+        
 		
     </script>
 </body>

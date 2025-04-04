@@ -28,7 +28,7 @@ public class Update extends HttpServlet {
         
         MeetingDAO dao = new MeetingDAO();
         MeetingPostDTO postdto = new MeetingPostDTO();
-        List<MemberDTO> list = dao.getParticipantInfo(tblMeetingPostSeq);
+        List<MemberDTO> chekcList = dao.getParticipantInfo(tblMeetingPostSeq);
         int checkMeeting = dao.getMeetingInfo(tblMeetingPostSeq);
         
         if (checkMeeting == 1) {
@@ -44,7 +44,7 @@ public class Update extends HttpServlet {
             return; 
         }
         
-        if (list == null || !list.isEmpty()) {
+        if (chekcList == null || !chekcList.isEmpty()) {
             resp.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = resp.getWriter();
             writer.print("""
@@ -72,6 +72,8 @@ public class Update extends HttpServlet {
         }
         
         CategoryMainDTO categorydto = dao.getCategoryMain(postdto.getTblCategorySubSeq());
+        List<MeetingPostDTO> list = dao.getMeetingInfoList(tblMemberSeq);
+       
         dao.close();
         
         //2025-03-01 11:11:11
@@ -81,6 +83,7 @@ public class Update extends HttpServlet {
         String content = postdto.getContent();
         content = content.replace("\r\n", "\n");
         
+        req.setAttribute("list", list);
         req.setAttribute("content", content);
         req.setAttribute("date", date);
         req.setAttribute("time", time);

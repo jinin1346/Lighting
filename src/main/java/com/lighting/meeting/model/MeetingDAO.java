@@ -105,7 +105,35 @@ public class MeetingDAO {
     public int add(MeetingPostDTO dto) {
         
         try {
-            String sql = """
+            
+            String sql = "";
+            String photoFileName = "";
+            
+            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
+                // 중분류 번호를 주고 대분류명||중분류명
+                sql = """
+                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
+                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
+                            where tblCategorySubSeq = ?
+                    """;
+                pstat = conn.prepareStatement(sql);
+                
+                pstat.setString(1, dto.getTblCategorySubSeq());
+                System.out.println("사진이 없어서 이름 구해오기");
+                rs = pstat.executeQuery();
+                if (rs.next()) {
+                    String mainCategoryName = rs.getString("a");
+                    String subCategoryName = rs.getString("b");
+                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                    photoFileName = photoFileName.replace("/", "&");
+                    System.out.println("사진 이름 :" + photoFileName);
+                
+            } else {//사진 첨부 했을 때
+                photoFileName = dto.getPhotoFileName();
+                }
+            }
+            
+            sql = """
                     insert into tblMeetingPost values (
                         seqMeetingPost.nextval,
                         ?,
@@ -127,33 +155,6 @@ public class MeetingDAO {
             pstat.setString(4, dto.getCapacity());
             pstat.setString(5, dto.getStartTime());
             pstat.setString(6, dto.getStartTime());//FIXME endTime 고쳐야 함 
-            
-            String photoFileName = "";
-            if (dto.getPhotoFileName().trim().equals("") || dto.getPhotoFileName() == null) {
-                // 중분류 번호를 주고 대분류명||중분류명
-                sql = """
-                    select a.categoryName as a, b.categoryName as b from tblCategoryMain a 
-                        join tblCategorySub b on a.tblCategoryMainSeq = b.tblCategoryMainSeq
-                            where tblCategorySubSeq = ?
-                    """;
-                pstat = conn.prepareStatement(sql);
-                
-                pstat.setString(1, dto.getTblCategorySubSeq());
-                System.out.println("사진이 없어서 이름 구해오기");
-                rs = pstat.executeQuery();
-                if (rs.next()) {
-                    String mainCategoryName = rs.getString("a");
-                    String subCategoryName = rs.getString("b");
-                    photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
-                    System.out.println("사진 이름 :" + photoFileName);
-                
-            } else {//사진 첨부 했을 때
-                
-                photoFileName = dto.getPhotoFileName();
-                
-                }
-            }
-            
             pstat.setString(7, photoFileName);
             pstat.setString(8, dto.getTblMemberSeq());
             pstat.setString(9, dto.getTblCategorySubSeq());
@@ -904,6 +905,7 @@ public class MeetingDAO {
                     String mainCategoryName = rs.getString("a");
                     String subCategoryName = rs.getString("b");
                     photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
+                    photoFileName = photoFileName.replace("/", "&");
                 
             } else {//사진 첨부 했을 때
                 

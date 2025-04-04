@@ -8,6 +8,46 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	
 <style>
+	.overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    .close-btn {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #FF0000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .myPostTitle {
+    	margin: 5px auto;
+    	cursor: pointer;
+    	white-space: nowrap;
+    }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -228,6 +268,14 @@ textarea:focus, input:focus, button:focus, #title:focus {
 #content {
 	resize: none;
 }
+
+	#location {
+		border: 1px solid #1e62c8;
+		border-radius: 4px;
+		width: 200px;
+		height: 30px;
+		padding-left: 5px;
+	}
 </style>
 </head>
 <body>
@@ -277,7 +325,7 @@ textarea:focus, input:focus, button:focus, #title:focus {
 					<div class="location-text">
 						<div>
                             장소명 :
-                            <input type="text" maxlength="20" id="location" name="location" value="${postdto.location}">
+                            <input type="text" maxlength="20" id="location" name="location" value="${postdto.location}" placeholder="모임의 장소명을 적어주세요.">
                         </div>
 						<!-- <div>
                             대표사진 :
@@ -303,13 +351,39 @@ textarea:focus, input:focus, button:focus, #title:focus {
         <input type="hidden" name="tblMemberSeq" value="${auth}">
         <input type="hidden" name="tblMeetingPostSeq" value="${postdto.tblMeetingPostSeq}">
 	</form>
+	
+	<div class="overlay"></div>
+  	<div class="modal">
+  		<c:forEach items="${list}" var="item">
+		<div class="myPostTitle" data-tblmeetingpostseq="${item.tblMeetingPostSeq }">
+  			"${item.title}"
+  		</div>
+  		</c:forEach>
+    	<button class="close-btn">닫기</button>
+  	</div>
 <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1697336f6cbeae05fbfbf1920de091c"></script>
     <script>
+    	
     	let categoryMain = document.getElementById("categoryMain");
 	    let categorySub = document.getElementById("categorySub");
 	    let m1 = null;
 		let info = null;
+		let map = null;
+		
+	    $('#loadPost').on('click', function () {
+        	$('.modal, .overlay').fadeIn();
+	    });
+	
+		$('.close-btn, .overlay').on('click', function () {
+	    	$('.modal, .overlay').fadeOut();
+		});
+		
+		$(document).on('click', '.myPostTitle', function(event) {
+		    let tblmeetingpostseq = $(this).data('tblmeetingpostseq'); // .myPostTitle의 data-id 값을 가져옴
+		    console.log("tblmeetingpostseq : " + tblmeetingpostseq);
+		    loadPost(tblmeetingpostseq); // 데이터를 loadPost 함수로 전달
+		});
 	
 	    categoryMain.addEventListener("change", function() {
 	        let tblCategoryMainSeq = categoryMain.value;
@@ -375,7 +449,7 @@ textarea:focus, input:focus, button:focus, #title:focus {
                 			level: 4
                 		};
                 	
-                		const map = new kakao.maps.Map(container, options); //map 만들기
+                		map = new kakao.maps.Map(container, options); //map 만들기
                 		
                 		kakao.maps.event.addListener(map, 'click', function(evt) {
                 			if (m1 != null) {
@@ -405,6 +479,11 @@ textarea:focus, input:focus, button:focus, #title:focus {
                 			
                 			m1.setImage(img);
                 			m1.setMap(map);
+                			
+                		    $('.myPostTitle').on('click', function(event) {
+                		        let tblmeetingpostseq = $(this).data('tblmeetingpostseq'); // .myPostTitle의 data-id 값을 가져옴
+                		        loadPost(tblmeetingpostseq); // 데이터를 loadPost 함수로 전달
+                		    });
                 		});
                 		
                 	});
@@ -425,7 +504,7 @@ textarea:focus, input:focus, button:focus, #title:focus {
     			level: 4
     		};
     	
-    		const map = new kakao.maps.Map(container, options); //map 만들기
+    		map = new kakao.maps.Map(container, options); //map 만들기
     		
             $('#latitude').val(latitude);//위도, 경도 할당
             $('#longitude').val(longitude);
@@ -474,6 +553,11 @@ textarea:focus, input:focus, button:focus, #title:focus {
     			
     			m1.setImage(img);
     			m1.setMap(map);
+    			
+    		    $('.myPostTitle').on('click', function(event) {
+    		        let tblmeetingpostseq = $(this).data('tblmeetingpostseq'); // .myPostTitle의 data-id 값을 가져옴
+    		        loadPost(tblmeetingpostseq); // 데이터를 loadPost 함수로 전달
+    		    });
     		});
 			
         }
@@ -506,6 +590,151 @@ textarea:focus, input:focus, button:focus, #title:focus {
                 console.error(a,b,c);
             }
         });
+        		
+        function loadPost(tblmeetingpostseq) {
+
+        	 let seq = tblmeetingpostseq;
+        	    
+        	    console.log("seq : " + seq);
+        	    
+        	    $.ajax({
+        	        url: '/lighting/meeting/getpostinfo.do',
+        	        type: 'GET',
+        	        data: 'tblMeetingPostSeq=' + seq,
+        	        dataType: 'json',
+        	        success: function(result) {
+        	            //console.log(result.StartTime);
+        	            $('#title').val(result.Title);
+        	            $('#content').val(result.Content);
+        	            let StartTime = result.StartTime;
+        	            let dateStr = result.StartTime;
+        	            // 날짜와 시간을 분리
+        	            let [datePart, timePart] = dateStr.split(' ');
+        	            // 날짜와 시간 각각을 나눔
+        	            let [hour, minute, second] = timePart.split(':');
+        	            
+        	            let date = datePart;
+        	            let time = hour + ':' + minute;
+        	            
+        	            $('#date').val(date);
+        	            $('#time').val(time);
+        	            $('#people').val(result.Capacity);
+        	            
+        	            $('#location').val(result.Location);
+        	            document.getElementById('location').value = result.Location;
+        	            
+        	            let latitude = result.Latitude;
+        	            let longitude = result.Longitude;
+        	            tblCategorySubSeq = result.TblCategorySubSeq;
+        	            
+        	            getTblCategoryMainSeq(tblCategorySubSeq)
+        	            .then(result => {
+        	                tblCategoryMainSeq = result; // 외부 변수 초기화
+        	                $('#categoryMain option[value="' + tblCategoryMainSeq + '"]').attr('selected', 'selected');
+        	                getTblCategorySubSeq(tblCategoryMainSeq);
+        	                
+        	            })
+        	            .catch(error => {
+        	                console.error(error); // 에러 처리
+        	            });
+        	            
+        	            EndTime = result.EndTime;
+        	            
+        	            if (latitude != null) {
+        	                
+        	                if (m1 != null) {
+        	                    //기존 마커가 존재O > 삭제
+        	                    m1.setMap(null);
+        	                    m1.setImage(null);
+        	                }
+        	                
+        	                $('#latitude').val(latitude);
+        	                $('#longitude').val(longitude);
+        	                
+        	                m1 = new kakao.maps.Marker({
+        	                    position: new kakao.maps.LatLng(latitude, longitude)
+        	                });
+        	                
+        	                //이미지 마커
+        	                let path = '/lighting/images/찜하기버튼.png';
+        	                let size = new kakao.maps.Size(32, 32);
+        	                let op = {
+        	                    offset: new kakao.maps.Point(16, 32)
+        	                };
+        	                
+        	                let img = new kakao.maps.MarkerImage(path, size, op);
+        	                let moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+        	                console.log(moveLatLon);
+        	                console.log(map);
+        	                map.setCenter(moveLatLon);
+        	                m1.setImage(img);
+        	                m1.setMap(map);
+        	                
+        	                $('#attend').prop('disabled', false);
+        	                $('#attend').removeAttr('title');
+        	                $('#attend').css('cursor', 'pointer');
+        	                
+        	            }
+        	            
+        	            $('.modal, .overlay').fadeOut();
+        	            
+        	        },
+        	        error: function(a, b, c) {
+        	            console.error(a,b,c);
+        	        }
+        	    });
+        	
+        }
+        
+        function getTblCategoryMainSeq(tblCategorySubSeq) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '/lighting/meeting/getcategorymain.do',
+                    type: 'GET',
+                    data: 'tblCategorySubSeq=' + tblCategorySubSeq,
+                    dataType: 'json',
+                    success: function(result) {
+                        resolve(result.tblCategoryMainSeq); // Promise 해결
+                    },
+                    error: function(a, b, c) {
+                        console.error(a, b, c);
+                        reject(a); // Promise 실패 처리
+                    }
+                });
+            });
+        }
+
+        
+        function getTblCategorySubSeq(tblCategoryMainSeq) {
+            
+        	$.ajax({
+                url: '/lighting/meeting/getcategorysub.do',
+                type: 'GET',
+                data: 'tblCategoryMainSeq=' + tblCategoryMainSeq,
+                dataType: 'json',
+                success: function(result) {
+                    
+    				while (categorySub.firstChild) {
+                		categorySub.removeChild(categorySub.firstChild);
+            		}
+
+    				result.forEach(function(subcategory) { 
+                        let option = document.createElement('option');
+                        option.value = subcategory.tblCategorySubSeq; 
+                        option.text = subcategory.categoryName;
+                        
+                        categorySub.appendChild(option);
+                    });
+    				
+    				$('#categorySub option[value="' + tblCategorySubSeq + '"]').attr('selected', 'selected');
+    				
+                },
+                error: function(a, b, c) {
+                    console.error(a,b,c);
+                }
+            });
+        
+        }
         
     </script>
 </body>
