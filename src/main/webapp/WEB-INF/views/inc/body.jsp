@@ -281,6 +281,7 @@
     bottom: 90px;            /* 메인 버튼 위에 위치하도록 조정 (필요에 따라 값 조정) */
     right: 0;
     /* display: none; */
+    pointer-events: none;
     opacity: 0;
     flex-direction: column;
     align-items: center;
@@ -294,6 +295,7 @@
 	  /* display: flex;
     transition: all 1s; */
 	  opacity: 1;  
+	  pointer-events: auto;
 }
 
 /* 개별 자식 버튼 스타일 */
@@ -555,7 +557,8 @@
       <div class="child-buttons">
         <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임만들기</button>
         <button class="child-button speech-bubble">버튼2</button>
-        <button class="child-button speech-bubble">버튼3</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/chat/chatview.do';">채팅하기</button>
+        
       </div>
       <!-- 메인 버튼 -->
       <button class="main-button">

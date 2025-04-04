@@ -75,7 +75,8 @@ public class WeatherData extends HttpServlet {
         String baseDate = dateFormat.format(cal.getTime());
 
         int hour = cal.get(Calendar.HOUR_OF_DAY);
-        String baseTime = String.format("%02d00", hour);
+        int previousHour = (hour - 1 + 24) % 24;
+        String baseTime = String.format("%02d00", previousHour);
         
         
         String temperature = "";
