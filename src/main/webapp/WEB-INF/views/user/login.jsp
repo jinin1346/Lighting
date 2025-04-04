@@ -155,23 +155,23 @@
       <!-- 개발용 -->
         <div>
         <form action="/lighting/user/loginok.do" method="POST">
-            <input type="hidden" name="id" value="4z3wyacj">
-            <input type="hidden" name="pw" value="h9^v$s9@^7ryc">
+            <input type="hidden" name="id" value="aaaaaaaa">
+            <input type="hidden" name="pw" value="aaaaaa1!">
             <button type="submit" class="in">1로그인</button>
         </form>
         </div>
         <div>
         <form action="/lighting/user/loginok.do" method="POST">
-            <input type="hidden" name="id" value="p60n46w31tx6uisnh">
-            <input type="hidden" name="pw" value="j0!900!d&0!5">
-            <button type="submit" class="in">160로그인</button>
+            <input type="hidden" name="id" value="aaaaaaab">
+            <input type="hidden" name="pw" value="111111a!">
+            <button type="submit" class="in">2로그인</button>
         </form>
         </div>
         <div>
         <form action="/lighting/user/loginok.do" method="POST">
-            <input type="hidden" name="id" value="gm4z">
-            <input type="hidden" name="pw" value="q6(#@*&*)07v8ck1q">
-            <button type="submit" class="in">600로그인</button>
+            <input type="hidden" name="id" value="aaaaaaac">
+            <input type="hidden" name="pw" value="111111a!">
+            <button type="submit" class="in">3로그인</button>
         </form>
         </div>
         

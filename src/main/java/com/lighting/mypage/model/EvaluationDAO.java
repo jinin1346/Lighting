@@ -21,7 +21,7 @@ public class EvaluationDAO {
         }
     }
 
-    private void close() {
+    public void close() {
         try {
             if (rs != null) rs.close();
             if (pstat != null) pstat.close();

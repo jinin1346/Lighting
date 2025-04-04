@@ -23,61 +23,67 @@ public class GalleryOk extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {  
         try {
         	
-        	
-            // 이미지 저장 경로
-            String path = req.getServletContext().getRealPath("/images");  
-            System.out.println("Upload path: " + path);  
-
-            // 최대 파일 크기 설정 (10MB)
-            int size = 5120 * 5120 * 50;  
-
-            // MultipartRequest 객체 생성  
-            MultipartRequest multi = new MultipartRequest(req, path, size, "UTF-8", new DefaultFileRenamePolicy());  
-
-            // 파라미터 가져오기  
-            String tblphotopostseq = multi.getParameter("tblphotopostseq");  
-            String photofilename = multi.getFilesystemName("imageUpload");
-            
-            System.out.println(photofilename);
-
-            // DAO와 DTO 객체 생성  
-            GalleryDAO dao = new GalleryDAO();  
-            GalleryDTO dto = new GalleryDTO();  
-
-            // DTO에 데이터 설정
             HttpSession session = req.getSession();
-            //String tblmemberseq = (String) session.getAttribute("auth");
+            String tblMemberSeq = (String) session.getAttribute("auth");
             
-            //System.out.println(tblmemberseq);
-            String tblmemberseq="100";
-            dto.setTblmemberseq(tblmemberseq);  
-            dto.setPhotofilename(photofilename);  
-
-            // 데이터베이스에 사진 정보 저장  
-            int result = dao.addPhoto(dto);
+            if (tblMemberSeq != null && !tblMemberSeq.equals("")) {
             
-            System.out.println(1); // 확인용  
-
-            // 결과에 따라 리다이렉트 또는 실패 메시지 처리  
-            if (result == 1) {
-				resp.sendRedirect("/lighting/gallery/gallerymain.do");
-			} else {
-				PrintWriter writer = resp.getWriter();
-				writer.print("""
-						<script>
-							alert('failed');
-							history.back();
-						</script>
-						""");
-				writer.close();
-			}
+                // 이미지 저장 경로
+                String path = req.getServletContext().getRealPath("/images");  
+                System.out.println("Upload path: " + path);  
+    
+                // 최대 파일 크기 설정 (10MB)
+                int size = 5120 * 5120 * 50;  
+    
+                // MultipartRequest 객체 생성  
+                MultipartRequest multi = new MultipartRequest(req, path, size, "UTF-8", new DefaultFileRenamePolicy());  
+    
+                // 파라미터 가져오기  
+                String tblphotopostseq = multi.getParameter("tblphotopostseq");  
+                String photofilename = multi.getFilesystemName("imageUpload");
+                
+                System.out.println(photofilename);
+    
+                // DAO와 DTO 객체 생성  
+                GalleryDAO dao = new GalleryDAO();  
+                GalleryDTO dto = new GalleryDTO();  
+    
+                // DTO에 데이터 설정
+                
+                //System.out.println(tblmemberseq);
+                dto.setTblmemberseq(tblMemberSeq);  
+                dto.setPhotofilename(photofilename);  
+    
+                // 데이터베이스에 사진 정보 저장  
+                int result = dao.addPhoto(dto);
+                
+                System.out.println(1); // 확인용  
+    
+                // 결과에 따라 리다이렉트 또는 실패 메시지 처리  
+                if (result == 1) {
+    				resp.sendRedirect("/lighting/gallery/gallerymain.do");
+    			} else {
+    				PrintWriter writer = resp.getWriter();
+    				writer.print("""
+    						<script>
+    							alert('failed');
+    							history.back();
+    						</script>
+    						""");
+    				writer.close();
+    			}
 
            // System.out.println(2); // 확인용  
-
+            } else {
+                req.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(req, resp);
+            }
+            
+            
         } catch (Exception e) {  
             e.printStackTrace();  
             sendFailureResponse(resp);  
         }  
+        
     }  
 
     

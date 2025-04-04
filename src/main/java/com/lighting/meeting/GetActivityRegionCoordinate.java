@@ -23,26 +23,22 @@ public class GetActivityRegionCoordinate extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String tblMemberSeq = req.getParameter("tblMemberSeq");
-        
         MeetingDAO dao = new MeetingDAO();
-        List<ActivityRegionCoordinateDTO> list = dao.getActivityRegionCoordinate(tblMemberSeq);
+        ActivityRegionCoordinateDTO dto = dao.getActivityRegionCoordinate(tblMemberSeq);
         dao.close();
         
-        JSONArray arr = new JSONArray();
+        JSONObject obj = new JSONObject();
         
-        for(ActivityRegionCoordinateDTO dto : list) {
-            JSONObject obj = new JSONObject();
+        if (dto != null) {
             obj.put("latitude", dto.getLatitude());
             obj.put("longitude", dto.getLongitude());
-            
-            arr.add(obj);
         }
         
         resp.setContentType("application/json; charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         
         PrintWriter writer = resp.getWriter();
-        writer.print(arr);
+        writer.print(obj);
         writer.close();
     }
 

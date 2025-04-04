@@ -75,11 +75,9 @@ public class MeetingDAO {
         return null;
     }
 
-    public List<ActivityRegionCoordinateDTO> getActivityRegionCoordinate(String tblMemberSeq) {
+    public ActivityRegionCoordinateDTO getActivityRegionCoordinate(String tblMemberSeq) {
         
         try {
-            List<ActivityRegionCoordinateDTO> list = new ArrayList<ActivityRegionCoordinateDTO>();
-            
             String sql = "select latitude, longitude from tblActivityRegionCoordinate a join tblActivityRegion b on a.tblActivityRegionCoordinateSeq = b.tblActivityRegionCoordinateSeq where b.tblMemberSeq = ?";
             
             pstat = conn.prepareStatement(sql);
@@ -88,14 +86,14 @@ public class MeetingDAO {
             
             rs = pstat.executeQuery();
             
-            while (rs.next()) {
-                ActivityRegionCoordinateDTO dto = new ActivityRegionCoordinateDTO();
+            ActivityRegionCoordinateDTO dto = new ActivityRegionCoordinateDTO();
+            
+            if (rs.next()) {
                 dto.setLatitude(rs.getString("latitude"));
                 dto.setLongitude(rs.getString("longitude"));
-                list.add(dto);
             }
             
-            return list;
+            return dto;
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,14 +119,12 @@ public class MeetingDAO {
                 pstat = conn.prepareStatement(sql);
                 
                 pstat.setString(1, dto.getTblCategorySubSeq());
-                System.out.println("사진이 없어서 이름 구해오기");
                 rs = pstat.executeQuery();
                 if (rs.next()) {
                     String mainCategoryName = rs.getString("a");
                     String subCategoryName = rs.getString("b");
                     photoFileName = "basic" + mainCategoryName + subCategoryName + ".png";
                     photoFileName = photoFileName.replace("/", "&");
-                    System.out.println("사진 이름 :" + photoFileName);
                 
             } else {//사진 첨부 했을 때
                 photoFileName = dto.getPhotoFileName();
@@ -1042,8 +1038,6 @@ public class MeetingDAO {
             // 프로시저 실행
             cstat.execute();
 
-            System.out.println("프로시저가 성공적으로 호출되었습니다!");
-            
             return result;
             
         } catch (Exception e) {

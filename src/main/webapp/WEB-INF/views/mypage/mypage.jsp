@@ -49,6 +49,9 @@
 	    <!-- 전체 박스 -->
     <style> 
 
+		body {
+			margin: 0;
+		}
 
         #mypageLogo {
             display: inline-block;

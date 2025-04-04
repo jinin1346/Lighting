@@ -350,7 +350,7 @@ to {
             <p>삭제된 이미지는<br>복구가 불가능합니다.</p>  
             <div class="btn-group">  
                 <button class="btn btn-secondary" onclick="closeModal()">취소</button>  
-                <button class="btn btn-primary" type="submit" onclick="confirmDelete()">삭제하기</button>  
+                <button class="btn btn-primary" type="button" onclick="confirmDelete()">삭제하기</button>  
             </div>  
         </div>  
     </div>  
