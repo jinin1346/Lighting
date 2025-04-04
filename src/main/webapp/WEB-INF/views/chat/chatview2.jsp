@@ -4,60 +4,199 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>실시간 채팅 애플리케이션</title>
+<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>오늘어때?</title>
 <style>
-    .button-group {
-        margin-bottom: 10px;
-    }
-    .button-group button {
-        padding: 8px 12px;
-        margin-right: 5px;
-        cursor: pointer;
-    }
-    .button-group button.active {
-        background-color: #007BFF;
-        color: #fff;
-    }
+  body {
+    background-color: #fff;
+    font-family: 'Pretendard-Regular';
+  }
+
+  .container {
+    width: 1300px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #f9f7ff;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  #logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 250px;
+    cursor: pointer;
+  }
+
+  .chatTitle {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+
+  .chat-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+  }
+
+  .toggle-btn {
+    width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background-color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+  }
+
+  .toggle-btn.active {
+    background-color: #007BFF;
+    color: #fff;
+  }
+
+  #nickname {
+    width: 100%;
+    height : 40px;
+    box-sizing: border-box;
+    border-radius: 6px 6px 0 0;
+    margin-bottom: 0;
+    border: 1px solid #1e62c8;
+  }
+  
+  #createChatRoomBtn {
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 0;
+    padding: 10px 14px;
+    border-radius: 0 0 6px 6px;
+    background-color: #1e62c8;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+
+  #chatBox {
+    width: 700px;
+    height: 400px;
+    border: 1px solid #000;
+    overflow-y: scroll;
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  #chatBox p {
+    margin: 6px 0;
+  }
+
+  #chatBox .mine {
+    color: #000;
+  }
+
+  #chatBox .other {
+    color: #1e62c8;
+  }
+
+  .chat-input {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+
+  #content {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+
+  #chatForm button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #1e62c8;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
-    <h2>실시간 채팅방</h2>
-    
-    <!-- 회원 시퀀스를 숨겨서 전달 (session 또는 request에서 받아온 값) -->
-    <input type="hidden" id="tblMemberSeq" value="${tblMemberSeq}" />
-    
-    <div class="button-group">
-    <c:forEach var="room" items="${chatRooms}">
-        <button type="button" class="toggle-btn" 
-                data-chatroom="${room.tblChatRoomSeq}" 
-                data-nickname="${room.nickname}">
-            ${room.nickname}와 채팅하기
-        </button>
-    </c:forEach>
-</div>
+    <div class="container">
+    <img src="/lighting/images/logo_가로.png" id="logo" alt="로고" />
 
-    <!-- 채팅 메시지가 출력되는 영역 -->
-    <div id="chatBox" style="width:500px; height:300px; border:1px solid #000; overflow-y:scroll; padding:5px;">
+    <div class="chatTitle"><br><br></div> 
+
+    <div class="chat-wrapper">
+      <div class="button-group">
+        <input type="text" id="nickname" name="nickname" placeholder="닉네임" />
+        <button type="button" id="createChatRoomBtn">채팅방 생성</button>
+        <c:forEach var="room" items="${chatRooms}">
+          <button type="button" class="toggle-btn" 
+                  data-chatroom="${room.tblChatRoomSeq}" 
+                  data-nickname="${room.nickname}">
+            ${room.nickname}와 채팅하기
+          </button>
+        </c:forEach>
+      </div>
+
+      <div>
+        <div id="chatBox"></div>
+        <form id="chatForm" class="chat-input">
+          <textarea id="content" name="content" rows="2" placeholder="메시지를 입력하세요..."></textarea>
+          <button type="submit">전송</button>
+        </form>
+      </div>
     </div>
-    
-    
-    <!-- 메시지 전송 폼 -->
-    <form id="chatForm">
-        <input type="text" id="nickname" name="nickname" placeholder="닉네임"  /><br/><br/>
-        <!-- 채팅방 생성 버튼 -->
-        <button type="button" id="createChatRoomBtn">채팅방 생성</button><br/><br/>
-        <textarea id="content" name="content" placeholder="메시지를 입력하세요..." rows="3" cols="50" required></textarea><br/><br/>
-        <button type="submit">전송</button>
-    </form>
+  </div>
     
     <script>
+    
+    
     var ws;
     var currentRoom = "";
+    
+    //엔ㅌ터 : 전송 , 쉬프트 엔터 : 줄바꿈
+    $('#content').keydown(function(e){
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();  // 줄바꿈 방지
+            $('#chatForm').submit();  // 폼 전송 
+        }
+    });
     
     // 버튼 클릭 시 채팅방 선택 및 WebSocket 연결 설정
     $('.toggle-btn').click(function(){
         // 버튼 활성화 처리
+       //$('.toggle-btn').removeClass('active');
+        //$(this).addClass('active');
+        var isActive = $(this).hasClass('active');
+        
+        
+     // 이미 눌린 상태면 해제 처리
+        if (isActive) {
+            $(this).removeClass('active');
+            $('#chatBox').empty();
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.close();
+            }
+
+            return; 
+        }
+
+        // 나머지는 새로운 채팅방 클릭 시 동작
         $('.toggle-btn').removeClass('active');
         $(this).addClass('active');
         
@@ -105,10 +244,16 @@
         ws.onmessage = function(event) {
             var data = JSON.parse(event.data);
             var currentNickname = $('#nickname').val();
-            var senderDisplay = (data.sender === currentNickname) ? "나" : data.sender;
-            var chatBox = document.getElementById("chatBox");
-            chatBox.innerHTML += "<p><strong>" + senderDisplay + " : </strong> " + data.content + " <em>(" + new Date(data.timestamp).toLocaleTimeString() + ")</em></p>";
-            chatBox.scrollTop = chatBox.scrollHeight;
+            var isMine = (data.sender === currentNickname);
+            var senderDisplay = isMine ? "나" : data.sender;
+            var cssClass = isMine ? "mine" : "other";
+
+            $('#chatBox').append(
+            	    `<p class="${cssClass}"><strong>\${senderDisplay} :</strong> \${data.content} 
+            	    <em>(\${new Date(data.timestamp).toLocaleTimeString()})</em></p>`
+            	  );
+
+            $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
         };
         
         ws.onclose = function() {
@@ -178,6 +323,10 @@
             });
         }
     });
+ 
+    $('#logo').click(() => { 
+        window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+      });
  
     </script>
 </body>
