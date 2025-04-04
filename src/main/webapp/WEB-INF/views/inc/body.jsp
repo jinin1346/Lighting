@@ -3,7 +3,7 @@
 
 <style>
     body {
-    	margin: 0;
+        margin: 0;
     }
     
     .category {  
@@ -29,7 +29,7 @@
         opacity: 0.9;  
         z-index: 10;  
         width: 1100px;
-        height:auto;
+        height:50px;
         font-size: 18px;  
         text-align: center;
         position: absolute; /* Changed to absolute positioning */  
@@ -39,7 +39,8 @@
     }  
     
     .category .dropdown ul {
-        display: flex;  
+        display: flex;
+        margin-top: 15px;
         justify-content: center; /* 중앙 정렬 */
         gap: 20px; /* 항목 간격 */
         padding: 0;
@@ -68,6 +69,8 @@
         display: block;  
     }
 </style>
+
+
 
 <style>
     #slider { 
@@ -125,6 +128,7 @@
         width: 1100px;
         height: auto;
         position: relative;
+        top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -141,32 +145,33 @@
     
 </style>
 
+
 <style>
 
-	#meetingContainer {
-	  width: 100%;
-	  max-width: 1000px; /* 필요에 따라 너비 조절 */
-	  margin: 0 auto;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;  /* 자식 요소들을 가로로 중앙 정렬 */
-	}
-	
-	#noResultMessage {
-	  text-align: center;
-	  font-size: 18px;
-	  color: #555;
-	  margin-top: 20px;
-	}
-	
-	#meetingBox {
-	  display: grid;
-	  grid-template-columns: repeat(4, 1fr);
-	  gap: 40px;
-	  width: 100%;
-	  margin-top: 20px;
-	  justify-items: center; /* 각 그리드 아이템을 가운데 정렬 */
-	}
+    #meetingContainer {
+      width: 100%;
+      max-width: 1000px; /* 필요에 따라 너비 조절 */
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* 자식 요소들을 가로로 중앙 정렬 */
+    }
+    
+    #noResultMessage {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      margin-top: 20px;
+    }
+    
+    #meetingBox {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      width: 100%;
+      margin-top: 20px;
+      justify-items: center; /* 각 그리드 아이템을 가운데 정렬 */
+    }
     /* #meetingBox {
         display: grid; 
         grid-template-columns: repeat(4, 1fr); 
@@ -192,14 +197,12 @@
         border-radius: 15px;
     }
 
-
-
-
     .title {
         font-size: 22px;  
         font-weight: bold;  
         color: #0d0143;  
-        margin: 8px 0; /* 텍스트 사이의 여백 */
+        margin: 5px; /* 텍스트 사이의 여백 */
+        margin-bottom: 15px;
         cursor: pointer;
         text-align : center;
         overflow: hidden;
@@ -210,10 +213,10 @@
     
     .meeting-info {
         padding : 0px 10px 10px 15px;
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	}
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     .nameAndCap {
         font-size: 15px;  
@@ -225,6 +228,8 @@
     }
 
     .icon {
+    position: relative;
+    bottom: 18px;
         width: 23px;
         height: 23px;
     }
@@ -238,10 +243,12 @@
     }
 
     .capBox {
-    	display: block;
+        display: block;
         text-align: right;
     }
 </style>
+    
+
     
 <style>
     /* 오른쪽 아래 고정 컨테이너 */
@@ -257,15 +264,15 @@
 
 /* 메인 버튼 스타일 */
 #floatingAdd .main-button {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   border: none; 
   background: transparent; 
   cursor: pointer;
   padding: 0;
   outline: none;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /*  그림자 효과 */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4); /*  그림자 효과 */
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -300,15 +307,16 @@
 
 /* 개별 자식 버튼 스타일 */
 #floatingAdd .child-button {
-  width: 80px;
-  height: 40px;
+  width: 120px;
+  height: 50px;
   border-radius: .4em;
   background-color: #4285F4;
   color: #fff;
   border: none;
   margin-bottom: 25px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
   outline: none;
   opacity: 0;
   transform: translateY(20px);
@@ -555,10 +563,9 @@
     <div id="floatingAdd">
       <!-- 노출될 동그란 버튼들 (기본 hidden) -->
       <div class="child-buttons">
-        <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임만들기</button>
-        <button class="child-button speech-bubble">버튼2</button>
-        <button class="child-button speech-bubble" onclick="location.href='/lighting/chat/chatview.do';">채팅하기</button>
-        
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임 만들기 ✉️</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/gallery/gallerymain.do';">포토 갤러리 🖼️</button>
+        <button class="child-button speech-bubble">친구와 채팅 🔈</button>
       </div>
       <!-- 메인 버튼 -->
       <button class="main-button">
