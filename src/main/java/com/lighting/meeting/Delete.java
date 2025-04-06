@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.lighting.meeting.model.MeetingDAO;
 import com.lighting.meeting.model.MeetingPostDTO;
 import com.lighting.meeting.model.MemberDTO;
@@ -27,9 +25,11 @@ public class Delete extends HttpServlet {
         MeetingPostDTO meetingPostdto = dao.getPostInfo(tblMeetingPostSeq);
         MemberDTO memberdto = dao.getMemberInfo(tblMeetingPostSeq);
         List<MemberDTO> list = dao.getParticipantInfo(tblMeetingPostSeq);
+        int checkMeeting = dao.getMeetingInfo(tblMeetingPostSeq);
 
         dao.close();
         
+        req.setAttribute("checkMeeting", checkMeeting);
         req.setAttribute("tblMeetingPostSeq", tblMeetingPostSeq);
         req.setAttribute("list", list);
         req.setAttribute("memberdto", memberdto);

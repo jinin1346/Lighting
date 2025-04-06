@@ -18,6 +18,7 @@
         #logo2 {
             width: 250px;
             margin: 30px 0;
+            cursor: pointer;
         }
 
         .modal-overlay {
@@ -92,7 +93,12 @@
 		    </div>
             <button class="close-btn">&times;</button>
             <div class="content">
-                <p>찾으신 비밀번호는 <span>hong123!!</span> 입니다.</p>
+                <c:if test="${not empty userPassword}">
+                    <p>찾으신 비밀번호는 <strong>${userPassword}</strong> 입니다.</p>
+                </c:if>
+                <c:if test="${empty userPassword}">
+                    <p>입력하신 정보와 일치하는 비밀번호가 없습니다.</p>
+                </c:if>
             </div>
             <button id="loginBtn">로그인</button>
         </div>
@@ -116,6 +122,10 @@
                 }
             });
         });
+        
+        $('#logo2').click(() => { 
+            window.location.href =  '/lighting/main.do'; // 메인페이지로 이동
+          });
     </script>
 
 </body>

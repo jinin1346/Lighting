@@ -3,7 +3,7 @@
 
 <style>
     body {
-    	margin: 0;
+        margin: 0;
     }
     
     .category {  
@@ -29,7 +29,7 @@
         opacity: 0.9;  
         z-index: 10;  
         width: 1100px;
-        height:auto;
+        height:50px;
         font-size: 18px;  
         text-align: center;
         position: absolute; /* Changed to absolute positioning */  
@@ -39,7 +39,8 @@
     }  
     
     .category .dropdown ul {
-        display: flex;  
+        display: flex;
+        margin-top: 15px;
         justify-content: center; /* 중앙 정렬 */
         gap: 20px; /* 항목 간격 */
         padding: 0;
@@ -69,6 +70,8 @@
     }
 </style>
 
+
+
 <style>
     #slider { 
         margin: 0 auto;
@@ -83,7 +86,7 @@
     #slides { 
         display: flex; /* 이미지를 가로로 나열 */
         width: 500%;
-        animation: slide 16s linear infinite; /* 애니메이션 적용 */
+        animation: slide 16s ease-in-out infinite; /* 애니메이션 적용 */
         height: 100%;
     }
     
@@ -94,11 +97,11 @@
     }  
     
     #slides img {  
-        width: 100%; /* 이미지 너비를 부모 요소에 맞춤 */
-        height: 100%; /* 이미지 높이 자동 조절 */
-        display: block; /* 이미지 아래 여백 제거 */
+        width: 100%; 
+        height: 100%; 
+        display: block; 
         /* flex-shrink: 0;  */
-        object-fit: cover;      /* 이미지 비율 유지하며, 컨테이너에 꽉 채우되 여분은 잘라냄 */
+        object-fit: cover;      
       object-position: center;
     }
 
@@ -125,6 +128,7 @@
         width: 1100px;
         height: auto;
         position: relative;
+        top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -141,32 +145,33 @@
     
 </style>
 
+
 <style>
 
-	#meetingContainer {
-	  width: 100%;
-	  max-width: 1000px; /* 필요에 따라 너비 조절 */
-	  margin: 0 auto;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;  /* 자식 요소들을 가로로 중앙 정렬 */
-	}
-	
-	#noResultMessage {
-	  text-align: center;
-	  font-size: 18px;
-	  color: #555;
-	  margin-top: 20px;
-	}
-	
-	#meetingBox {
-	  display: grid;
-	  grid-template-columns: repeat(4, 1fr);
-	  gap: 40px;
-	  width: 100%;
-	  margin-top: 20px;
-	  justify-items: center; /* 각 그리드 아이템을 가운데 정렬 */
-	}
+    #meetingContainer {
+      width: 100%;
+      max-width: 1000px; /* 필요에 따라 너비 조절 */
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* 자식 요소들을 가로로 중앙 정렬 */
+    }
+    
+    #noResultMessage {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      margin-top: 20px;
+    }
+    
+    #meetingBox {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      width: 100%;
+      margin-top: 20px;
+      justify-items: center; /* 각 그리드 아이템을 가운데 정렬 */
+    }
     /* #meetingBox {
         display: grid; 
         grid-template-columns: repeat(4, 1fr); 
@@ -192,14 +197,12 @@
         border-radius: 15px;
     }
 
-
-
-
     .title {
         font-size: 22px;  
         font-weight: bold;  
         color: #0d0143;  
-        margin: 8px 0; /* 텍스트 사이의 여백 */
+        margin: 5px; /* 텍스트 사이의 여백 */
+        margin-bottom: 15px;
         cursor: pointer;
         text-align : center;
         overflow: hidden;
@@ -210,10 +213,10 @@
     
     .meeting-info {
         padding : 0px 10px 10px 15px;
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	}
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     .nameAndCap {
         font-size: 15px;  
@@ -225,6 +228,8 @@
     }
 
     .icon {
+    position: relative;
+    bottom: 18px;
         width: 23px;
         height: 23px;
     }
@@ -238,10 +243,12 @@
     }
 
     .capBox {
-    	display: block;
+        display: block;
         text-align: right;
     }
 </style>
+    
+
     
 <style>
     /* 오른쪽 아래 고정 컨테이너 */
@@ -257,15 +264,15 @@
 
 /* 메인 버튼 스타일 */
 #floatingAdd .main-button {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   border: none; 
   background: transparent; 
   cursor: pointer;
   padding: 0;
   outline: none;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /*  그림자 효과 */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4); /*  그림자 효과 */
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -281,6 +288,7 @@
     bottom: 90px;            /* 메인 버튼 위에 위치하도록 조정 (필요에 따라 값 조정) */
     right: 0;
     /* display: none; */
+    pointer-events: none;
     opacity: 0;
     flex-direction: column;
     align-items: center;
@@ -294,19 +302,21 @@
 	  /* display: flex;
     transition: all 1s; */
 	  opacity: 1;  
+	  pointer-events: auto;
 }
 
 /* 개별 자식 버튼 스타일 */
 #floatingAdd .child-button {
-  width: 80px;
-  height: 40px;
+  width: 120px;
+  height: 50px;
   border-radius: .4em;
   background-color: #4285F4;
   color: #fff;
   border: none;
   margin-bottom: 25px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
   outline: none;
   opacity: 0;
   transform: translateY(20px);
@@ -472,7 +482,7 @@
                 <!-- data-tblCategorySubSeq >> 중분류 pk -->
                 <!-- 예시) data-tblCategorySubSeq="" -->
                 
-                <img alt="event1" src="" data-tblCategorySubSeq="">
+                <img alt="event1" src="" onerror="this.onerror=null; this.src='/lighting/images/event_1.jpg';">
             </div>
             <div id="event2">
             	<!-- event_2.jpg >> 두번째 변수명 -->
@@ -505,7 +515,7 @@
         <!-- 모임 목록 영역 -->
 	    <div id="meetingBox">	
 	        <!-- for문 시작 -->
-	        <c:forEach begin="0" end="11" var="meeting" items="${meetingList}">
+	        <c:forEach begin="0" end="15" var="meeting" items="${meetingList}">
 	            <div>
 	            <div class="photo-container">
 	                <!-- 쿼리 작성할때 mp.photoFileName as meetingPhoto 별칭 붙이기!! -->
@@ -553,9 +563,9 @@
     <div id="floatingAdd">
       <!-- 노출될 동그란 버튼들 (기본 hidden) -->
       <div class="child-buttons">
-        <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임만들기</button>
-        <button class="child-button speech-bubble">버튼2</button>
-        <button class="child-button speech-bubble">버튼3</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/meeting/add.do';">모임 만들기 ✉️</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/gallery/gallerymain.do';">포토 갤러리 🖼️</button>
+        <button class="child-button speech-bubble" onclick="location.href='/lighting/chat/chatview.do';">친구와 채팅 🔈</button>
       </div>
       <!-- 메인 버튼 -->
       <button class="main-button">
@@ -621,7 +631,6 @@
 	    $(document).on('click', '.dropdown li a', function(e) {
 	        e.preventDefault(); // 기본 링크 동작 방지
 	        var categorySubSeq = $(this).data('tblCategorySubSeq'); // 예: 18 (식사)
-	        console.log(categorySubSeq);
 	        
 	        $.ajax({
 	            type: 'GET',
@@ -677,31 +686,21 @@
 	            // 문자열을 숫자로 변환 (온도는 숫자로 비교하기 위해)
 	            var temperature = parseFloat(data.temperature);
 	            var precipitationType = data.precipitationType; // "0": 맑음, "1": 비, 등
-	            console.log(temperature);
-	            console.log(precipitationType);
 	            // 실내 활동 조건 (예: 온도가 5℃ 미만, 30℃ 초과, 또는 비/눈 등)
 	            if(temperature < 5 || temperature > 30 || precipitationType !== "0") {
-	            	console.log(temperature);
 	            	// 실내 활동 추천: 슬라이더 배너 이미지를 실내용 이미지로 변경
 	                $("#event1 img").attr("src", "/lighting/images/indoor_1.jpg");
-	                console.log($("#event1 img").attr("src"));
 	                $("#event2 img").attr("src", "/lighting/images/indoor_2.jpg");
-	                console.log($("#event2 img").attr("src"));
 	                $("#event3 img").attr("src", "/lighting/images/indoor_3.jpg");
 	                $("#event4 img").attr("src", "/lighting/images/indoor_4.jpg");
 	                $("#event5 img").attr("src", "/lighting/images/indoor_1.jpg");
 	            } else {
 	                // 야외 활동 추천: 슬라이더 배너 이미지를 야외용 이미지로 변경
 	                $("#event1 img").attr("src", "/lighting/images/outdoor_1.jpg");
-	                console.log($("#event1 img").attr("src"));
 	                $("#event2 img").attr("src", "/lighting/images/outdoor_2.jpg");
-	                console.log($("#event2 img").attr("src"));
 	                $("#event3 img").attr("src", "/lighting/images/outdoor_3.jpg");
-	                console.log($("#event3 img").attr("src"));
 	                $("#event4 img").attr("src", "/lighting/images/outdoor_4.jpg");
-	                console.log($("#event4 img").attr("src"));
 	                $("#event5 img").attr("src", "/lighting/images/outdoor_1.jpg");
-	                console.log($("#event5 img").attr("src"));
 	            }
 	        },
 	        error: function(error) {

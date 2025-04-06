@@ -5,7 +5,7 @@
     width: 1300px;
     margin: 0 auto;
       background-color: #fff;
-      padding: 40px 0;
+      padding: 25px 0;
       font-family: 'Pretendard-Regular', sans-serif;
     }
     /* footer 내부 컨테이너 및 영역 스타일 */
@@ -27,6 +27,7 @@
     .footer-links .right-links {
       display: flex;
       gap: 30px;
+      margin: 10px;
     }
     .footer-links .right-links {
       gap: 20px;
@@ -40,15 +41,18 @@
       padding-top: 20px;
       font-size: 13px;
       color: #999;
-      line-height: 1.6;
-    }
+      line-height: 2;
+      margin: 5px;
+     
+     }
     .footer-info strong {
       color: #333;
     }
     .footer-social {
       display: flex;
       gap: 15px;
-      margin-top: 10px;
+      margin-top: 5px;
+      margin: 10px;
     }
     .footer-social a {
       text-decoration: none;
@@ -56,6 +60,7 @@
       font-size: 14px;
     }
 </style>
+
 
 <footer class="fixed-footer">
   <div class="footer-container">

@@ -1,4 +1,4 @@
-package com.lighting.mypage.model;
+    package com.lighting.mypage.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,4 +12,6 @@ public class MeetingDTO {
     private String location;   // 장소명
     private int capacity;      // 정원
     private String startTime;  // 모임 시작 시간
+    private String approvalStatus;
+    private int requestSeq;
 }

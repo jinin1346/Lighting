@@ -21,13 +21,13 @@ public class Main extends HttpServlet {
 	    
 	    HttpSession session = req.getSession();
         
-        session.setAttribute("auth", "913");
+        //session.setAttribute("auth", "913");
         //session.setAttribute("auth", result.getTblMemberSeq());
 	    
 	    MainDAO dao = new MainDAO();
 	    String tblMemberSeq = (String) session.getAttribute("auth");
         String categorySubSeq = null;
-        
+                                 
         if(tblMemberSeq != null) {
             categorySubSeq = dao.getHighestInterestCategory(tblMemberSeq);
         }

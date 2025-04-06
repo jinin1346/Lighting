@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,14 +13,14 @@
         .modal {
             display: flex; /* 모달 창을 페이지 로드 시 바로 표시 */
             justify-content: center; /* 가로 중앙 정렬 */
-    		align-items: center; /* 세로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5); /* 배경 어두운 색 */
-			z-index: 1000; /* 다른 요소들이 모달 위에 오지 않게 함 */
+            z-index: 1000; /* 다른 요소들이 모달 위에 오지 않게 함 */
         }
 
         .modal-content {
@@ -43,12 +44,12 @@
 
             position: relative;
         }
- 			/* 로고 이미지 위치 조정 */
+            /* 로고 이미지 위치 조정 */
         #logo {
             width: 150px; /* 로고 이미지 크기 */
             /* height: 50px; */
             /* position: absolute; */ /* 상단 왼쪽에 배치 */
-          	/* top: -40px;
+            /* top: -40px;
             left: -10px; */ /* 모달 왼쪽 */
 
             display: block;
@@ -63,14 +64,14 @@
         #close-btn {
             position: absolute;
             top:10px;
-           	right: 10px; /* 오른쪽 끝 */
+            right: 10px; /* 오른쪽 끝 */
             width: 30px; /* 이미지 크기 조정 */
             height: 30px; /* 이미지 크기 조정 */
             cursor: pointer; /* 클릭할 수 있음을 나타내는 커서 */
             /* margin-right: 690px;
             margin-top:180px; */
         }
-   			/* 강남 스터디 모임과 날짜 텍스트 위치 및 색상 변경 */
+            /* 강남 스터디 모임과 날짜 텍스트 위치 및 색상 변경 */
         .modal-header div {
             color: black; /* 텍스트 색상 변경 */
             /* margin-top: 30px; */ /* 텍스트를 아래로 내리기 위한 간격 */
@@ -81,16 +82,46 @@
             font-weight: normal; /* 볼드체 제거 */
              color: rgb(97, 96, 103);
               margin-bottom: 20px; /* 간격을 넓히기 위해 여백 추가 */
-   			 display: block; /* 필요한 경우 텍스트를 블록 요소로 설정 */
-   			 
+             display: block; /* 필요한 경우 텍스트를 블록 요소로 설정 */
+             
              
         }
         /* 별 스타일 */
         .stars {
-            color: #ffcc00; /* 노란색 별 */
+            color: #ccc; /* 기본 회색 별 */
             font-size: 30px;
             margin-left: auto;
-            
+            transition: color 0.3s ease; /* 색상 변경에 트랜지션 효과 추가 */
+            cursor: pointer;
+        }
+        
+        /* 별점 컨테이너 스타일 */
+        .rating {
+            display: flex;
+            flex-direction: row-reverse; /* 별을 오른쪽부터 왼쪽으로 배치 */
+            margin-left: auto;
+        }
+        
+        /* 별점 스타일 */
+        .rating input {
+		    position: absolute;
+		    opacity: 0;
+		    pointer-events: none;
+		}
+        
+        .rating label {
+            color: #ccc;
+            font-size: 30px;
+            padding: 0 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* 호버 효과: 현재 별과 그 왼쪽의 모든 별 */
+        .rating label:hover,
+        .rating label:hover ~ label,
+        .rating input:checked ~ label {
+            color: #ffcc00;
         }
 
         .user-img {
@@ -106,9 +137,9 @@
             align-items: center;
             margin-bottom: 10px;
              border: 2px solid #1e62c8; /* 사용자 정보 박스 테두리 추가 */
-        padding: 10px; /* 여백 추가 */
-        border-radius: 15px; /* 둥근 테두리 */
-        margin-bottom:20px;
+            padding: 10px; /* 여백 추가 */
+            border-radius: 15px; /* 둥근 테두리 */
+            margin-bottom:20px;
         }
 
         .user-name {
@@ -123,7 +154,7 @@
             align-items: center;
         }
 
-        .modal-footer button {
+        #btnSubmit {
             background-color: #1e62c8;
             color: white;
             border: none;
@@ -135,21 +166,21 @@
             margin-top: 10px;
         }
 
-        .modal-footer button:hover {
-          
+        #btnSubmit:hover {
+            background-color: #154a96;
         }
         
-                .badge-icon {
+        .badge-icon {
             width: 40px;
             height: 40px;
-          	margin-left: 20px;
+            margin-left: 20px;
         }
 </style>
 <script>
-	//닫기 버튼 클릭 시 모달 창 닫기
-	function closeModal() {
-    document.querySelector('.modal').style.display = 'none';
-	}	
+    //닫기 버튼 클릭 시 모달 창 닫기
+    function closeModal() {
+        document.querySelector('.modal').style.display = 'none';
+    }
 </script>
 </head>
 <body>
@@ -157,9 +188,9 @@
     <div class="modal">
         <div class="modal-content">
             <div class="modal-header">
-            	<img src="/lighting/images/logo_가로.png" alt="로고" id="logo">
-            	<div class="modal-header-text">
-            	
+                <img src="/lighting/images/logo_가로.png" alt="로고" id="logo">
+                <div class="modal-header-text">
+                
                 강남 스터디 모임
                 <br>
                 <span class="date">2025년 3월 31일 18:00</span>
@@ -169,39 +200,106 @@
             
             <img src="/lighting/images/닫기.png" alt="닫기" id="close-btn" onclick="closeModal()">
 
-            <!-- 사용자 정보 리스트 -->
-            <div class="user-info">
-                <!-- 이미지 삽입 부분 -->
-                <img src="/lighting/images/icon.png" alt="홍길동" class="user-img"> 
-                <img src="/lighting/images/마스터.png" alt="Master" class="badge-icon">
-                <span class="user-name">홍길동 (hong123)</span>
-                <div class="stars">★★★★★</div>
-            </div>
-
-            <div class="user-info">
-                <img src="/lighting/images/icon.png" alt="치킨중독자" class="user-img">
-                <img src="/lighting/images/다이아.png" alt="Diamond" class="badge-icon">
-                <span class="user-name">치킨중독자 (chchi0)</span>
-                <div class="stars">★★★★★</div>
-            </div>
-
-            <div class="user-info">
-                <img src="/lighting/images/icon.png" alt="여미새인줄" class="user-img">
-                <img src="/lighting/images/실버.png" alt="Silver" class="badge-icon">
-                <span class="user-name">여미새인줄 (mansh88)</span>
-                <div class="stars">★★★★★</div>
-            </div>
-
-			<form method="POST" action="/lighting/mypage/evaluationok.do">
-            <!-- 평가 완료 버튼 -->
-            <div class="modal-footer">
-                <button onclick="alert('평가가 완료되었습니다');" id="btnSubmit">평가 완료</button>
-            </div>
-            </form>
-            
+            <form method="POST" action="/lighting/mypage/evaluationok.do" id="evalForm">
+            <!-- 평가할 사람이 없을 때 메시지 출력 -->
+		  <c:if test="${empty attendees}">
+		      <p style="text-align:center; font-size:16px; color:gray; margin-top:20px;">평가할 사용자가 없습니다.</p>
+		  </c:if>
+			  <c:forEach var="attendee" items="${attendees}" varStatus="status">
+			    <div class="user-info">
+			        <img src="/lighting/images/${attendee.photoFileName}" class="user-img">
+			        <img src="/lighting/images/실버.png" class="badge-icon">
+			        <span class="user-name">${attendee.nickname} (${attendee.id})</span>
+			        <div class="rating">
+					       <input type="radio" id="star5_${status.index}" name="rating_${status.index}" value="5" />
+						   <label for="star5_${status.index}">★</label>
+						   <input type="radio" id="star4_${status.index}" name="rating_${status.index}" value="4" />
+						   <label for="star4_${status.index}">★</label>
+						   <input type="radio" id="star3_${status.index}" name="rating_${status.index}" value="3" />
+						   <label for="star3_${status.index}">★</label>
+						   <input type="radio" id="star2_${status.index}" name="rating_${status.index}" value="2" />
+					       <label for="star2_${status.index}">★</label>
+						   <input type="radio" id="star1_${status.index}" name="rating_${status.index}" value="1" />
+						   <label for="star1_${status.index}">★</label>
+					<input type="hidden" name="userId_${status.index}" value="${attendee.id}" />
+					
+				    </div>
+			    </div>
+			  </c:forEach>
+			  <input type="hidden" name="meetingSeq" value="${meetingSeq}" />
+			  <input type="hidden" name="evaluationCount" value="${evaluationCount}" />
+			  <button type="submit" id="btnSubmit">평가 완료</button>
+			</form>
         </div>
     </div>
     <script>
+ // 모달 닫기 함수
+    function closeModal() {
+        document.querySelector('.modal').style.display = 'none';
+    }
+
+    // 평가 제출 처리
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById('evalForm');
+            /* e.preventDefault(); // 기본 제출 방지 */
+
+        form.addEventListener('submit', function (e) {
+
+            const userCount = parseInt(document.querySelector('input[name="evaluationCount"]').value);
+            console.log("사용자 수:", userCount);
+
+            let allRated = true;
+
+            for (let i = 0; i < userCount; i++) {
+            	const selected = document.querySelector(`input[name="rating_${i}"]:checked`);
+                const name = `rating_${i}`;
+                console.log(`radio name: ${name}, 선택된 값:`, selected ? selected.value : "선택 안됨");
+
+                
+
+                if (!selected) {
+                    allRated = false;
+                    break;
+                }
+            }
+
+            if (!allRated) {
+                alert('모든 사용자를 평가해주세요.');
+                return;
+            }
+
+            const formData = new FormData(this);
+
+            fetch('/lighting/mypage/evaluationok.do', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error("서버 오류 발생");
+                return response.json();
+            })
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('평가가 완료되었습니다.');
+
+                    // 부모창 새로고침
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.location.href = '/lighting/mypage/mypage.do?status=joined';
+                    }
+
+                    // 팝업창 닫기
+                    window.close();
+                } else {
+                    alert('평가 제출 중 오류가 발생했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert('평가 제출 중 오류가 발생했습니다.');
+            });
+        });
+    });
+
     </script>
 </body>
 </html>

@@ -7,16 +7,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/mypage/unregister.do")
 public class Unregister extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//Unregister.java
+        HttpSession session = req.getSession();
+        Object userSeqObj = session.getAttribute("auth");
 
-		req.getRequestDispatcher("/WEB-INF/views/mypage/unregister.jsp").forward(req, resp);
-	}
+        if (userSeqObj == null) {
+            resp.sendRedirect("/lighting/user/login.do");
+            return;
+        }
+
+        int userSeq = (userSeqObj instanceof Integer)
+            ? (Integer) userSeqObj
+            : Integer.parseInt(userSeqObj.toString());
+
+        req.getRequestDispatcher("/WEB-INF/views/mypage/unregister.jsp").forward(req, resp);
+    }
+
 
 }
