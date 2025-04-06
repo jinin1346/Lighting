@@ -279,7 +279,6 @@ textarea:focus, input:focus, button:focus, #title:focus {
 </style>
 </head>
 <body>
-	<h1>${auth}</h1>
 	<div id="headerContainer">
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 	</div>

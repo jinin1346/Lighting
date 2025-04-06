@@ -879,7 +879,7 @@
                             <!-- 글 작성자의 활동지역 가져오기 -->
                             ${meeting.location}
                         </td>
-                        <td class="col3 title">
+                        <td class="col3 title" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                             <!-- 게시글의 제목 가져오기 -->
                             ${meeting.title}
                         </td>
@@ -924,15 +924,15 @@
                             <!-- 모임시작시간 가져와서 파싱해서 값 넣기 -->
                             ${meeting.startTime}
                         </td>
-                        <td class="col2 title">
+                        <td class="col2 title" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                             <!-- 게시글의 제목 가져오기 -->
                             ${meeting.title}
                         </td>
                         <td class="col3">
-                            <button class="btnUpdatePost">
+                            <button class="btnUpdatePost" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                                 수정
                             </button>
-                            <button class="btnDeletePost">
+                            <button class="btnDeletePost" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                                 삭제
                             </button>
                         </td>
@@ -977,7 +977,7 @@
                             <!-- 글 작성자의 활동지역 가져오기 -->
                             서울/강남구${meeting.location}
                         </td>
-                        <td class="col3 title">
+                        <td class="col3 title" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                             <!-- 게시글의 제목 가져오기 -->
                             ${meeting.title}
                         </td>
@@ -1025,7 +1025,7 @@
 				    <tr>
 				        <td class="col1">${meeting.startTime}</td>
 				        <td class="col2">서울/강남구 ${meeting.location}</td>
-				        <td class="col3 title">${meeting.title}</td>
+				        <td class="col3 title" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">${meeting.title}</td>
 				        <td class="col4"><span>${meeting.capacity}</span>명</td>
 				        <td class="col5">
 				            <c:choose>
@@ -1086,7 +1086,7 @@
                             <!-- 글 작성자의 활동지역 가져오기 -->
                             ${meeting.location}
                         </td>
-                        <td class="col3 title">
+                        <td class="col3 title" data-tblmeetingpostseq="${meeting.tblMeetingPostSeq}">
                             <!-- 게시글의 제목 가져오기 -->
                             ${meeting.title}
                         </td>
@@ -1209,10 +1209,6 @@
     	openServletInNewWindow("/lighting/mypage/updatepassword.do");
     });
 	
-	$('.btnDeletePost').click(()=>{
-    	openServletInNewWindow("/lighting/meeting/delete.do");
-    });
-	
 	$('#btnUpdateProfile').click(()=>{
     	openServletInNewWindow("/lighting/mypage/updateprofile.do");
     });
@@ -1230,7 +1226,12 @@
     }
     
     $('#list .title').click(()=>{
-    	location.href='/lighting/meeting/read.do';
+    	const tdElement = document.querySelector('.col3.title'); // 첫 번째 요소만 가져옴
+    	const postSeq = tdElement.dataset.tblmeetingpostseq;
+
+    	console.log(postSeq);
+
+         location.href = '/lighting/meeting/read.do?tblMeetingPostSeq=' + postSeq;
     });
     
     //셀렉트 박스 정렬
@@ -1405,6 +1406,17 @@
     function openServletInNewWindow(servletUrl) {
         window.open(servletUrl, "_blank", "width=600,height=400,scrollbars=yes");
     }
+    
+    $(document).on('click', '.btnUpdatePost', function() {
+        let tblMeetingPostSeq = this.dataset.tblmeetingpostseq;
+        location.href = '/lighting/meeting/update.do?tblMeetingPostSeq=' + tblMeetingPostSeq;
+    });
+    
+    $(document).on('click', '.btnDeletePost', function() {
+    	let tblMeetingPostSeq = this.dataset.tblmeetingpostseq;
+        window.open('/lighting/meeting/delete.do?tblMeetingPostSeq=' + tblMeetingPostSeq, '_blank', 'width=780,height=800,resizable=no,menubar=no,toolbar=no,location=no,status=no');
+    });
+    
     </script>
     
 

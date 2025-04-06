@@ -174,6 +174,11 @@
             alert("변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
     });
-    </script>
+
+    // ⭐ 팝업 닫기 기능 추가 (닫기 버튼 클릭 시)
+    document.querySelector(".close-button").addEventListener("click", function () {
+        window.close(); // 팝업 창 닫기
+    });
+	</script>
 </body>
 </html>

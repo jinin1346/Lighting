@@ -35,7 +35,7 @@ public class LoginOk extends HttpServlet {
         dto.setPw(pw);
         
         UserDTO result = dao.login(dto);
-        
+        dao.close();
         if (result != null) {
             //로그인 성공
             //인증 티켓 발급
@@ -65,6 +65,6 @@ public class LoginOk extends HttpServlet {
             
         
         }
-        dao.close();
+        
     }
 }

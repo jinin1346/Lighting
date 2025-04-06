@@ -112,21 +112,26 @@
         }
     </style>
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const closeModalButton = document.getElementById('closeModalButton');
-            const modalElement = document.getElementById('modalElement');
-            const submitButton = document.querySelector('.submitButton');
+    	window.addEventListener('DOMContentLoaded', () => {
+        	const closeModalButton = document.getElementById('closeModalButton');
+        	const submitButton = document.querySelector('.submitButton');
 
-
-            // '공개 여부 설정 완료' 버튼 클릭 시
-            submitButton.addEventListener('click', () => {
-                const selectedOption = document.querySelector('input[name="publicOption"]:checked').value;
-                alert(`선택된 옵션: ${selectedOption}`);
-                // 선택된 옵션에 따라 서버 전송 등의 로직 추가 가능
-                modalElement.style.display = 'none';
-            });
+        // 닫기 버튼 클릭 시 팝업 닫기
+        closeModalButton.addEventListener('click', () => {
+            window.close(); // 팝업 창 닫기
         });
-    </script>
+
+        // '공개 여부 설정 완료' 버튼 클릭 시
+        submitButton.addEventListener('click', (e) => {
+            const selectedOption = document.querySelector('input[name="status"]:checked').value;
+            alert(`선택된 옵션: ${selectedOption}`);
+
+            // 서버로 폼 제출은 기본 동작으로 두고, 성공 응답 처리 후 창 닫기하거나 새로고침 등은 별도 처리 가능
+            // 여기서 window.close()를 바로 호출하면 폼이 전송되지 않으니 주의!
+        });
+    });
+</script>
+
 </head>
 <body>
 

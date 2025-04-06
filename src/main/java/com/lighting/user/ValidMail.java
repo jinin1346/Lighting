@@ -50,7 +50,7 @@ public class ValidMail extends HttpServlet {
         if (result == 1) {
             dao.delEmail(email);  // 인증 성공 후 이메일 삭제
         }
-        
+        dao.close();
         // 5. 결과 응답
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

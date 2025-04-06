@@ -212,21 +212,21 @@
         </div>
     </div>
     <script>
-        $(".close-button").click(function() {
-            $("#myModal").css("display", "none");
-        });
-
-        $("#sido").change(function() {
-            if ($(this).val() === "서울특별시") {
-                $("#gugun").prop("disabled", false);
-            } else {
-                $("#gugun").prop("disabled", true).val("");
-            }
-        });
-
-        function handleSubmit() {
-            return true;
-        }
-    </script>
+	    $(".close-button").click(function() {
+	        window.close(); // 팝업 창 닫기
+	    });
+	
+	    $("#sido").change(function() {
+	        if ($(this).val() === "서울특별시") {
+	            $("#gugun").prop("disabled", false);
+	        } else {
+	            $("#gugun").prop("disabled", true).val("");
+	        }
+	    });
+	
+	    function handleSubmit() {
+	        return true;
+	    }
+	</script>
 </body>
 </html>

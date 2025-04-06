@@ -191,11 +191,11 @@
                 <img src="/lighting/images/logo_가로.png" alt="로고" id="logo">
                 <div class="modal-header-text">
                 
-                강남 스터디 모임
+                ${meetingInfo.title}
                 <br>
-                <span class="date">2025년 3월 31일 18:00</span>
+                <span class="date">${meetingInfo.startTime}</span>
             
-            </div>
+            	</div>
             </div>
             
             <img src="/lighting/images/닫기.png" alt="닫기" id="close-btn" onclick="closeModal()">
@@ -208,7 +208,7 @@
 			  <c:forEach var="attendee" items="${attendees}" varStatus="status">
 			    <div class="user-info">
 			        <img src="/lighting/images/${attendee.photoFileName}" class="user-img">
-			        <img src="/lighting/images/실버.png" class="badge-icon">
+			        <img src="/lighting/images/${attendee.grade}.png" class="badge-icon">
 			        <span class="user-name">${attendee.nickname} (${attendee.id})</span>
 			        <div class="rating">
 					       <input type="radio" id="star5_${status.index}" name="rating_${status.index}" value="5" />
@@ -233,10 +233,10 @@
         </div>
     </div>
     <script>
- // 모달 닫기 함수
+ 	// 모달 닫기 함수
     function closeModal() {
-        document.querySelector('.modal').style.display = 'none';
-    }
+    window.close(); // 팝업창 닫기
+	}	
 
     // 평가 제출 처리
     document.addEventListener("DOMContentLoaded", function () {

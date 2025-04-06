@@ -140,31 +140,25 @@
 <script>
     // 모달 닫기 기능
     function closeModal() {
-    	document.getElementById('modalOverlay').style.display = 'none';
-        // 또는 모달을 숨기는 방식: document.querySelector('.modal').style.display = 'none';
+        window.close(); // 팝업창 닫기
     }
     
     // 탈퇴 확인 기능
     function confirmDelete() {
         if(confirm("정말로 탈퇴하시겠습니까?\n이 작업은 되돌릴 수 없습니다.")) {
-            // 실제 탈퇴 처리 로직 (AJAX 호출 등)
             performDelete();
         }
     }
     
     // 실제 탈퇴 처리 함수
     function performDelete() {
-        // 여기에 서버로 탈퇴 요청을 보내는 코드 작성
-        // 예: fetch API 사용 또는 form submit
-        
-        // 완료 후 리디렉션
-        window.location.href = "/lighting/mypage/unregisterok.do"; // 홈페이지로 이동
+        window.location.href = "/lighting/mypage/unregisterok.do";
     }
-    
- // 모달 외부 클릭 시 닫기
+
+    // 모달 외부 클릭 시 창 닫기
     document.getElementById('modalOverlay').addEventListener('click', function(e) {
         if (e.target === this) {
-            closeModal();
+            window.close();
         }
     });
 </script>

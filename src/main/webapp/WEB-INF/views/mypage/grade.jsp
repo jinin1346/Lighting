@@ -162,30 +162,36 @@
         </div>
     </div>
 
-    <script>
-    // 모달 열기
-    function openModal() {
-        document.getElementById('modalOverlay').style.display = 'flex';
-        
-        // ESC 키로 모달 닫기 이벤트 등록
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-    }
+<script>
+	// 모달 열기
+	function openModal() {
+	    document.getElementById('modalOverlay').style.display = 'flex';
+	
+	    // ESC 키로 모달 닫기 이벤트 등록
+	    document.addEventListener('keydown', function(e) {
+	        if (e.key === 'Escape') {
+	            closeModal();
+	        }
+	    });
+	}
+	
+	// 모달 닫기
+	function closeModal() {
+	    document.getElementById('modalOverlay').style.display = 'none';
+	
+	    // 팝업으로 열린 경우 창 자체 닫기
+	    if (window.opener && !window.opener.closed) {
+	        window.close();
+	    }
+	}
+	
+	// 모달 외부 클릭 시 닫기
+	document.getElementById('modalOverlay').addEventListener('click', function(e) {
+	    if (e.target === this) {
+	        closeModal();
+	    }
+	});
+</script>
 
-    // 모달 닫기
-    function closeModal() {
-        document.getElementById('modalOverlay').style.display = 'none';
-    }
-    
-    // 모달 외부 클릭 시 닫기
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
-        }
-    });
-    </script>
 </body>
 </html>

@@ -313,19 +313,22 @@ public class MeetingDAO {
             List<MemberDTO> list = new ArrayList<MemberDTO>();
             
             String sql = """
-    select 
+  select 
         b.tblMemberSeq as tblMemberSeq,
         b.nickname as nickname,
         b.photoFileName as photoFileName,
         (select nvl(avg(score), 0) as score from tblEvaluation where evaluatedMemberSeq = b.tblMemberSeq) as score
     from tblParticipationRequest a 
         join tblMember b on a.tblMemberSeq = b.tblMemberSeq 
-            where a.tblMeetingPostSeq = ? and a.approvalStatus = 'Y'
+            where a.tblMeetingPostSeq = ? 
+			and a.approvalStatus = 'Y' 
+			and b.tblMemberSeq != (select tblMemberSeq from tblMeetingPost where tblMeetingPostSeq = ?)
             """;
             
             pstat = conn.prepareStatement(sql);
             
             pstat.setString(1, tblMeetingPostSeq);
+            pstat.setString(2, tblMeetingPostSeq);
             
             rs = pstat.executeQuery();
             

@@ -44,7 +44,7 @@ public class Update extends HttpServlet {
             return; 
         }
         
-        if (chekcList == null || !chekcList.isEmpty()) {
+        if (!chekcList.isEmpty()) {
             resp.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = resp.getWriter();
             writer.print("""
