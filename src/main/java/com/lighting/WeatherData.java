@@ -34,7 +34,7 @@ public class WeatherData extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //WeatherData.java
-        String location = "서울특별시 강남구"; // 기본값
+        String location = "서울특별시 서초구"; // 기본값
         double latitude = 37.5;  // 기본 위도
         double longitude = 127.0; // 기본 경도
         
