@@ -25,7 +25,6 @@ public class FindIdOk extends HttpServlet {
         
         // 수정된 findUserIdByNameAndContact 메서드를 사용하여 아이디 조회
         String userId = dao.findUserIdByNameAndTel(name, tel); // 'contact'가 아닌 'tel' 사용
-        dao.close();
         if (userId != null) {
             request.setAttribute("userId", userId);
             request.getRequestDispatcher("/WEB-INF/views/user/findidok.jsp").forward(request, response); // 아이디 결과 페이지로 포워드

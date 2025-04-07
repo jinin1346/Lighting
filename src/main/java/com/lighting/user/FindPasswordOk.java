@@ -26,7 +26,6 @@ public class FindPasswordOk extends HttpServlet {
         
         // 수정된 findUserPasswordByNameAndIdTel 메서드를 사용하여 비밀번호 조회
         String userPassword = dao.findUserPasswordByNameAndIdTel(name, id, tel); // 비밀번호 반환
-        dao.close();
         if (userPassword != null) {
             request.setAttribute("userPassword", userPassword);
             request.getRequestDispatcher("/WEB-INF/views/user/findpasswordok.jsp").forward(request, response); // 비밀번호 결과 페이지로 포워드

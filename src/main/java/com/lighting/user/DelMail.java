@@ -19,7 +19,6 @@ public class DelMail extends HttpServlet {
         
         UserDAO dao = new UserDAO();
         dao.delEmail(email);
-        dao.close();
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

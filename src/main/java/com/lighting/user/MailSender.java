@@ -50,7 +50,6 @@ public class MailSender {
             // DB에 이메일과 인증번호 삽입
             UserDAO dao = new UserDAO();
             dao.addEmail(map);  // 이메일과 인증번호를 DB에 저장
-            dao.close();
 
         } catch (Exception e) {
             e.printStackTrace();

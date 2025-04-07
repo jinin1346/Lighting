@@ -20,7 +20,6 @@ public class CheckId extends HttpServlet {
 
         UserDAO dao = new UserDAO();
         boolean isDuplicate = dao.isDuplicateId(id); // 중복 여부 체크
-        dao.close();
         // 응답을 JSON 형식으로 반환
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
