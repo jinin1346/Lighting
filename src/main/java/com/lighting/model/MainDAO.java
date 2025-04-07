@@ -228,7 +228,7 @@ public class MainDAO {
     }
 
     public String getUserLocation(String tblMemberSeq) {
-        String location = "서울특별시 강남구";
+        String location = "서울특별시 서초구";
         try {
             
             String sql = "select arc.tblActivityRegionCoordinateseq, arc.sido, arc.gugun "
